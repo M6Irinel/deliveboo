@@ -14,13 +14,13 @@ class CreateRestaurantTypologyTable extends Migration
     public function up()
     {
         Schema::create('restaurant_typology', function (Blueprint $b) {
-            $b->unsignedBigInteger('user_id');
+            $b->unsignedBigInteger('restaurant_id');
             $b->unsignedBigInteger('typology_id');
 
-            $b->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $b->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $b->foreign('typology_id')->references('id')->on('typologies')->onDelete('cascade');
 
-            $b->primary(['user_id', 'typology_id']);
+            $b->primary(['restaurant_id', 'typology_id']);
         });
     }
 

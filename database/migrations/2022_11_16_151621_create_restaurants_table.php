@@ -17,6 +17,12 @@ class CreateRestaurantsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('restaurant_address');
+            $table->unsignedBigInteger('p_iva');
+            $table->text('restaurant_description');
+            $table->string('restaurant_phone_number', 15);
+            $table->string('restaurant_website');
+            $table->string('restaurant_image');
             $table->timestamps();
         });
     }

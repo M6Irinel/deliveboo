@@ -17,10 +17,10 @@ class CreatePlatesTable extends Migration
             $table->id();
             $table->string('plate_name');
             $table->text('ingredients');
-            $table->text('plate_description');
+            $table->text('plate_description')->nullable();
             $table->smallInteger('plate_price')->unsigned();
-            $table->tinyInteger('visibility');
-            $table->string('plate_image');
+            $table->tinyInteger('visibility')->nullable();
+            $table->string('plate_image')->nullable();
             $table->timestamps();
         });
     }

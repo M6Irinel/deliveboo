@@ -15,8 +15,6 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $restaurants = Restaurant::where('user_id', $user->id);
         $restaurants = Restaurant::where('user_id', auth()->user()->id)->get();
 
         return view('admin.restaurants.index', compact('restaurants'));
@@ -29,7 +27,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -40,7 +38,21 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $params = $request->validate([
+            'restaurant_address' => 'required|min:3|max:255',
+            'p_iva' => 'required|size:13',
+            'restaurant_description' => 'required',
+            'restaurant_phone_number' => 'required|min:10|max:15'
+
+        ]);
+
+        // $params['user_id'] = Restaurant::orderBy('id', 'desc')->get()->all()[0]->id + 1;
+        $params['user_id'] = ++Restaurant::orderBy('id', 'desc')->get()->all()[0]->id;
+
+        $restaurant = Restaurant::create($params);
+
+        return redirect()->route('admin.restaurants.show', $restaurant);
     }
 
     /**
@@ -51,7 +63,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('admin.restaurants.show', compact('restaurant'));
     }
 
     /**

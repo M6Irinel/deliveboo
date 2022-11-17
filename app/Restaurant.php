@@ -14,11 +14,16 @@ class Restaurant extends Model
         return $this->hasMany('App\Plate');
     }
 
+    public function typologies(){
+        return $this->belongsToMany('App\Typology');
+    }
+
     protected $fillable=[
        'restaurant_address',
         'p_iva',
         'restaurant_description',
         'restaurant_phone_number',
-        'user_id'
+        'user_id',
+        'typologies'
     ];
 }

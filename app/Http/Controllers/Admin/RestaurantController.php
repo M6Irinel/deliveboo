@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Plate;
+use App\Http\Controllers\Controller;
+use App\Restaurant;
 use Illuminate\Http\Request;
 
-class PlateController extends Controller
+class RestaurantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,11 @@ class PlateController extends Controller
      */
     public function index()
     {
-        //
+        // $user = Auth::user();
+        // $restaurants = Restaurant::where('user_id', $user->id);
+        $restaurants = Restaurant::where('user_id', auth()->user()->id)->get();
+
+        return view('admin.restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -41,10 +46,10 @@ class PlateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Plate  $plate
+     * @param  \App\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function show(Plate $plate)
+    public function show(Restaurant $restaurant)
     {
         //
     }
@@ -52,10 +57,10 @@ class PlateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Plate  $plate
+     * @param  \App\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plate $plate)
+    public function edit(Restaurant $restaurant)
     {
         //
     }
@@ -64,10 +69,10 @@ class PlateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Plate  $plate
+     * @param  \App\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plate $plate)
+    public function update(Request $request, Restaurant $restaurant)
     {
         //
     }
@@ -75,10 +80,10 @@ class PlateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Plate  $plate
+     * @param  \App\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plate $plate)
+    public function destroy(Restaurant $restaurant)
     {
         //
     }

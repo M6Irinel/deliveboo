@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Restaurant;
+use App\Http\Controllers\Controller;
+use App\Plate;
 use Illuminate\Http\Request;
 
-class RestaurantController extends Controller
+class PlateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class RestaurantController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show(Plate $plate)
     {
         //
     }
@@ -52,10 +53,10 @@ class RestaurantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurant $restaurant)
+    public function edit(Plate $plate)
     {
         //
     }
@@ -64,10 +65,10 @@ class RestaurantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, Plate $plate)
     {
         //
     }
@@ -75,10 +76,10 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Restaurant  $restaurant
+     * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(Plate $plate)
     {
         //
     }

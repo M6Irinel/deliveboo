@@ -29,7 +29,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -40,7 +40,20 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+       $params= $request->validate([
+        'restaurant_address'=>'required|min:3|max:255',
+        'p_iva'=>'required|size:13',
+        'restaurant_description'=>'required',
+        'restaurant_phone_number'=>'required|min:10|max:15'
+
+       ]);
+
+       $params['user_id']= intval(Restaurant::orderBy('id','desc')->find(1)->id) +1;
+    //    Restaurant::where('user_id', auth()->user()->id)->get();
+
+       $restaurant= Restaurant::create($params);
+       return redirect()->route('admin.restaurants.show',$restaurant);
     }
 
     /**

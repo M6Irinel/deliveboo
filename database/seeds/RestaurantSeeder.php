@@ -14,7 +14,6 @@ class RestaurantSeeder extends Seeder
     {
         $restaurants = [
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -23,7 +22,14 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
+                'restaurant_address' => '',
+                'p_iva' => '',
+                'restaurant_description' => '',
+                'restaurant_phone_number' => '',
+                'restaurant_website' => '',
+                'restaurant_image' => '',
+            ],
+            [,
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -32,7 +38,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -41,7 +46,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -50,7 +54,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -59,7 +62,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -68,7 +70,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -77,7 +78,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -86,16 +86,6 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
             ],
             [
-                // 'restaurant_name' => '',
-                'restaurant_address' => '',
-                'p_iva' => '',
-                'restaurant_description' => '',
-                'restaurant_phone_number' => '',
-                'restaurant_website' => '',
-                'restaurant_image' => '',
-            ],
-            [
-                // // 'restaurant_name' => '',
                 'restaurant_address' => '',
                 'p_iva' => '',
                 'restaurant_description' => '',
@@ -107,7 +97,6 @@ class RestaurantSeeder extends Seeder
 
         foreach ($restaurants as $restaurant) {
             Restaurant::create([
-                // 'restaurant_name'           => $restaurant['restaurant_name'],
                 'restaurant_address'        => $restaurant['restaurant_address'],
                 'p_iva'                     => $restaurant['p_iva'],
                 'restaurant_description'    => $restaurant['restaurant_description'],

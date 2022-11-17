@@ -8,5 +8,17 @@
 
     <div style="margin-top: 15px;">
         <a href="{{ route('admin.restaurants.index') }}">VAI AL INDEX</a>
+
+        <ul>
+            Tipologie:
+            @forelse ($restaurant->typologies as $t)
+                {{-- @foreach ($post->tags as $tag) --}}
+
+                <li> {{ $t->name }}</li>
+            @empty
+                <li>nessuno</li>
+            @endforelse
+            {{-- @endforeach --}}
+        </ul>
     </div>
 @endsection

@@ -40,6 +40,17 @@
             @enderror
         </div>
 
+        <div>
+            @foreach ($typologies as $t)
+                <div style="display: inline-block;">
+                    <label for="t-{{ $t->id }}">{{ $t->name }}</label>
+
+                    <input type="checkbox" name="typologies[]" id="t-{{ $t->id }}"
+                        @if (in_Array($t->id, old('typologies', []))) checked @endif value="{{ $t->id }}">
+                </div>
+            @endforeach
+        </div>
+
         <input type="submit" value="Crea il tuo ristorante">
     </form>
 @endsection

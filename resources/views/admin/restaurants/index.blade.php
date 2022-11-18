@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-primary">DA {{strtoupper($restaurants[0]->user->name)}}</h1>
+        <h1 class="text-primary">DA {{strtoupper($name)}}</h1>
 
         @if ($restaurants->all())
             <ul style="list-style: none; padding: 0;">

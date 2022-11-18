@@ -18,7 +18,7 @@
                 </div>
 
                 <div style="margin-top: 15px;">
-                    <a href="{{route('admin.restaurants.index')}}">VAI AL INDEX</a>
+                    <a class="btn btn-primary d-block" href="{{route('admin.restaurants.index')}}">VAI AL RISTORANTE</a>
                 </div>
             </div>
         </div>

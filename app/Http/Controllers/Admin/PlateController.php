@@ -47,10 +47,17 @@ class PlateController extends Controller
             'plate_description' => 'nullable',
             'plate_price' => 'numeric|between:0,999.99',
             'visibility' => 'nullable|min:0|max:1',
-            'plate_image' => 'nullable|max:255',
+            'plate_image' => 'nullable|image|max:2048',
         ]);
 
         $params['restaurant_id'] = Restaurant::where('user_id', auth()->user()->id)->get()->all()[0]->id;
+
+        if (array_key_exists('plate_image', $params)) {
+
+            $img_path = Storage::put('plate_img',  $request->file('plate_image'));
+
+            $params['plate_image'] = $img_path;
+        }
 
 
         $plate = Plate::create($params);
@@ -95,8 +102,16 @@ class PlateController extends Controller
             'plate_description' => 'nullable',
             'plate_price' => 'numeric|between:0,999.99',
             'visibility' => 'nullable|min:0|max:1',
-            'plate_image' => 'nullable|max:255'
+            'plate_image' => 'nullable|image|max:2048'
         ]);
+
+        if (array_key_exists('plate_image', $params)) {
+
+            $img_path = Storage::put('plate_img', $request->file('plate_image'));
+
+            $params['plate_image'] = $img_path;
+        }
+
 
         $plate->update($params);
 

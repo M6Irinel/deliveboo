@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Plate;
+use App\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,14 +40,18 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
+        
         $params = $request->validate([
             'plate_name' => 'required|max:255',
             'ingredients' => 'required',
             'plate_description' => 'nullable',
             'plate_price' => 'numeric|between:0,999.99',
             'visibility' => 'nullable|min:0|max:1',
-            'plate_image' => 'nullable|max:255'
+            'plate_image' => 'nullable|max:255',
         ]);
+
+        $params['restaurant_id'] = Restaurant::where('user_id', auth()->user()->id)->get()->all()[0]->id;
+
 
         $plate = Plate::create($params);
 

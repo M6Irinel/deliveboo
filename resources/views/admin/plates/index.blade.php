@@ -9,7 +9,7 @@
         </div>
 
         <div class="mt-2">
-            <a class="btn btn-warning d-block" href="{{ route('admin.restaurants.index') }}">VAI AL INDEX DEI PIATTI</a>
+            <a class="btn btn-warning d-block" href="{{ route('admin.restaurants.index') }}">VAI ALL' INDEX DEL RISTORANTE</a>
         </div>
 
         <div class="mt-2">

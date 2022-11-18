@@ -6,6 +6,7 @@
 
         <p>Partita Iva : <strong>{{ $restaurant->p_iva }}</strong></p>
         <p>Indirizzo : <strong>{{ $restaurant->restaurant_address }}</strong></p>
+        <img src="{{asset('storage/'.$restaurant->restaurant_image)}} " height="300" alt="Nessuna Foto Del Ristorante">
 
         <div style="margin-top: 15px;">
             <ul>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Plate;
 use Illuminate\Database\Seeder;
 
 class PlateSeeder extends Seeder
@@ -12,11 +13,28 @@ class PlateSeeder extends Seeder
     public function run()
     {
         $plates = [
+            //PIZZERIA
             [
-                'plate_name' => 'Pasta alla carbonara',
-                'ingridients' => 'Uova, pecorino, guanciale, pasta all\'uovo',
-                'plate_description' => 'Piatto della tradizione romana',
-                'plate_price' => 15,
+                'plate_name' => 'Pizza margherita',
+                'ingridients' => 'Impasto tradizionale, pomodoro, mozzarella, basilico',
+                'plate_description' => 'Pizza margherita',
+                'plate_price' => 5.50,
+                'visibility' => true,
+                'plate_image' => '',
+            ],
+            [
+                'plate_name' => 'Pizza tonno e cipolla',
+                'ingridients' => 'impasto tradizionale, pomodoro, mozzarella, tonno, cipolla',
+                'plate_description' => 'Pizza tonno e cipolla',
+                'plate_price' => 7,
+                'visibility' => true,
+                'plate_image' => '',
+            ],
+            [
+                'plate_name' => 'Pizza ai 4 formaggi',
+                'ingridients' => 'Impasto tradizionale, quattro tipi di formaggio',
+                'plate_description' => 'Pizza ai 4 formaggi',
+                'plate_price' => 10,
                 'visibility' => true,
                 'plate_image' => '',
             ]

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Plate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PlateController extends Controller
 {
@@ -16,8 +17,6 @@ class PlateController extends Controller
     public function index()
     {
         $plates = Plate::where('restaurant_id', auth()->user()->id)->get();
-
-        //   dd($plates[0]->restaurant->user->name);
 
         return view('admin.plates.index', compact('plates'));
     }
@@ -40,7 +39,18 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->validate([
+            'plate_name' => 'required|max:255',
+            'ingredients' => 'required',
+            'plate_description' => 'nullable',
+            'plate_price' => 'numeric|between:0,999.99',
+            'visibility' => 'nullable|min:0|max:1',
+            'plate_image' => 'nullable|max:255'
+        ]);
+
+        $plate = Plate::create($params);
+
+        return redirect()->route('admin.plates.show', $plate);
     }
 
     /**
@@ -74,7 +84,18 @@ class PlateController extends Controller
      */
     public function update(Request $request, Plate $plate)
     {
-        //
+        $params = $request->validate([
+            'plate_name' => 'required|max:255',
+            'ingredients' => 'required',
+            'plate_description' => 'nullable',
+            'plate_price' => 'numeric|between:0,999.99',
+            'visibility' => 'nullable|min:0|max:1',
+            'plate_image' => 'nullable|max:255'
+        ]);
+
+        $plate->update($params);
+
+        return redirect()->route('admin.plates.show', $plate);
     }
 
     /**
@@ -85,6 +106,15 @@ class PlateController extends Controller
      */
     public function destroy(Plate $plate)
     {
-        //
+        // BASTA SCOMENTARE PER IL DELETE
+        // $img = $plate->plate_image;
+
+        // $plate->delete();
+
+        // if ($img && Storage::exists($img)) {
+        //     Storage::delete($img);
+        // }
+
+        // return redirect()->route('admin.plates.index');
     }
 }

@@ -18,7 +18,7 @@ class CreatePlatesTable extends Migration
             $table->string('plate_name');
             $table->text('ingredients');
             $table->text('plate_description')->nullable();
-            $table->smallInteger('plate_price')->unsigned();
+            $table->float('plate_price', 5, 2)->unsigned();
             $table->tinyInteger('visibility')->nullable();
             $table->string('plate_image')->nullable();
             $table->timestamps();

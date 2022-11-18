@@ -21,4 +21,6 @@
             {{-- @endforeach --}}
         </ul>
     </div>
+
+    <a href="{{route('admin.plates.create')}}">Crea un piatto</a>
 @endsection

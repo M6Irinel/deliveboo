@@ -49,15 +49,13 @@ class TypologySeeder extends Seeder
                 "Tipologia" => "Carne",
                 "Immagine" => "carne.png",
             ],
-     
-          
             [
                 "Tipologia" => "Indiano",
                 "Immagine" => "indiano.png",
             ],
             [
-                "Tipologia" => "Gourmet",
-                "Immagine" => "gourmet.png",
+                "Tipologia" => "Messicano",
+                "Immagine" => "messicano.png",
             ],
             [
                 "Tipologia" => "Dolci",

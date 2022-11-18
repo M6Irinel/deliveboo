@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Restaurant;
 use App\Typology;
 use Illuminate\Http\Request;
-use TypologySeeder;
 
 class RestaurantController extends Controller
 {
@@ -29,8 +28,8 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // $typologies = Typology::all();
         $typologies = Typology::orderBy('name', 'asc')->get();
+
         return view('admin.restaurants.create', compact('typologies'));
     }
 
@@ -42,8 +41,6 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $params = $request->validate([
             'restaurant_address' => 'required|min:3|max:255',
             'p_iva' => 'required|size:13',
@@ -52,26 +49,14 @@ class RestaurantController extends Controller
             'typologies.*' => 'exists:typologies,id',
         ]);
 
-
-       
         $typologies = $params['typologies'];
-        // dd($typologies);
-
-
-       
-
 
         // $params['user_id'] = Restaurant::orderBy('id', 'desc')->get()->all()[0]->id + 1;
         $params['user_id'] = ++Restaurant::orderBy('id', 'desc')->get()->all()[0]->id;
 
         $restaurant = Restaurant::create($params);
 
-       
         $restaurant->typologies()->sync($typologies);
-       
-
-        // dd($restaurant);
-
 
         return redirect()->route('admin.restaurants.show', $restaurant);
     }

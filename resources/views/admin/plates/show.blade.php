@@ -9,7 +9,7 @@
         <p>Prezzo : <strong>{{ $plate->plate_price }} €</strong></p>
         <p>Ingredienti : <strong>{{ $plate->ingredients }}</strong></p>
     
-        <img src="{{asset('storage/'.$plate->plate_image)}} " height="500px" alt="">
+        <img src="{{asset('storage/'.$plate->plate_image)}} " height="250" alt="">
 
         <div class="mt-2">
             <a class="btn btn-primary d-block" href="{{ route('admin.plates.index') }}">VAI AL INDEX DEI PIATTI</a>

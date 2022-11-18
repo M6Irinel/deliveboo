@@ -51,6 +51,18 @@
                     </div>
                 @endforeach
             </div>
+            <div class="form-group">
+                <label for="restaurant_image" aria-describedby="inputGroupFileAddon02">
+                    Scegli la del tuo Ristorante
+                </label>
+                <div>
+                    <img id="blah" alt="your image" height="300" />
+                </div>
+                <input class="form-control-file" type="file" id="restaurant_image" name="restaurant_image"
+                    value="{{ old('restaurant_image') }}"
+                    onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                {{-- <img id="blah"  /> ADAMO PRENDI CODICE ANTEPRIMA IMMAGINE --}}
+            </div>
 
             <input type="submit" value="Crea il tuo ristorante">
         </form>

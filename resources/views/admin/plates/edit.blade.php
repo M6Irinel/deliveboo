@@ -61,12 +61,16 @@
                 <label for="plate_image" aria-describedby="inputGroupFileAddon02">
                     Scegli l'immagine del piatto
                 </label>
+                <div>
+                    <img id="blah" alt="your image" height="250" src="{{asset('storage/'.$plate->plate_image)}} " />
+                </div>
                 <input class="form-control-file" type="file" id="plate_image" name="plate_image"
-                    value="{{ old('plate_image', $plate->plate_image) }}">
+                    value="{{ old('plate_image', $plate->plate_image) }}"
+                    onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                 {{-- <img id="blah"  /> `````ADAMO PRENDI CODICE ANTEPRIMA IMMAGINE`````` --}}
             </div>
 
-            <input class="btn btn-primary" type="submit" value="Crea il tuo piatto">
+            <input class="btn btn-primary" type="submit" value="Modifica il tuo piatto">
         </form>
     </div>
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="my-2">
-            <a class="btn btn-secondary" href="{{route('admin.plates.index')}}">TORNA AL INDEX DEI PIATTI</a>
+            <a class="btn btn-secondary" href="{{ route('admin.plates.index') }}">TORNA AL INDEX DEI PIATTI</a>
         </div>
 
         <h1>CREARE NUOVO PIATTO</h1>
@@ -59,10 +59,18 @@
                 <label for="plate_image" aria-describedby="inputGroupFileAddon02">
                     Scegli l'immagine del piatto
                 </label>
+                <div>
+                    <img id="blah" alt="your image" height="250" />
+                </div>
                 <input class="form-control-file" type="file" id="plate_image" name="plate_image"
-                    value="{{ old('plate_image') }}">
+                    value="{{ old('plate_image') }}"
+                    onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                 {{-- <img id="blah"  /> ADAMO PRENDI CODICE ANTEPRIMA IMMAGINE --}}
             </div>
+
+         
+
+         
 
             <div class="mt-2">
                 <input class="btn btn-primary" type="submit" value="Crea il tuo piatto">

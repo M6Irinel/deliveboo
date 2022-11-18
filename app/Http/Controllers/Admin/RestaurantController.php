@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Restaurant;
 use App\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
@@ -48,12 +49,21 @@ class RestaurantController extends Controller
             'restaurant_description' => 'required',
             'restaurant_phone_number' => 'required|min:10|max:15',
             'typologies.*' => 'exists:typologies,id',
+            'restaurant_image' => 'nullable|image|max:2048'
         ]);
 
         $typologies = $params['typologies'];
 
         // $params['user_id'] = Restaurant::orderBy('id', 'desc')->get()->all()[0]->id + 1;
         $params['user_id'] = ++Restaurant::orderBy('id', 'desc')->get()->all()[0]->id;
+
+        if (array_key_exists('restaurant_image', $params)) {
+
+            $img_path = Storage::put('restaurant_img',  $request->file('restaurant_image'));
+
+            $params['restaurant_image'] = $img_path;
+        }
+
 
         $restaurant = Restaurant::create($params);
 

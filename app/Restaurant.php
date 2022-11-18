@@ -23,6 +23,7 @@ class Restaurant extends Model
         'p_iva',
         'restaurant_description',
         'restaurant_phone_number',
-        'user_id'
+        'user_id',
+        'restaurant_image'
     ];
 }

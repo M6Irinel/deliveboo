@@ -54,7 +54,7 @@ class PlateController extends Controller
 
         if (array_key_exists('plate_image', $params)) {
 
-            $img_path = Storage::put('plate_img',  $request->file('cover'));
+            $img_path = Storage::put('plate_img',  $request->file('plate_image'));
 
             $params['plate_image'] = $img_path;
         }
@@ -104,6 +104,14 @@ class PlateController extends Controller
             'visibility' => 'nullable|min:0|max:1',
             'plate_image' => 'nullable|image|max:2048'
         ]);
+
+        if (array_key_exists('plate_image', $params)) {
+
+            $img_path = Storage::put('plate_img', $request->file('plate_image'));
+
+            $params['plate_image'] = $img_path;
+        }
+
 
         $plate->update($params);
 

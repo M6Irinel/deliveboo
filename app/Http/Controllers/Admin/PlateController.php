@@ -18,8 +18,9 @@ class PlateController extends Controller
     public function index()
     {
         $plates = Plate::where('restaurant_id', auth()->user()->id)->get();
+        $name = auth()->user()->name;
 
-        return view('admin.plates.index', compact('plates'));
+        return view('admin.plates.index', compact('plates', 'name'));
     }
 
     /**
@@ -40,7 +41,7 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $params = $request->validate([
             'plate_name' => 'required|max:255',
             'ingredients' => 'required',

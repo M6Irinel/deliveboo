@@ -15,15 +15,25 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Gianluca',
-                'email' => 'giangi@bool.it',
+                'name' => 'Ristorante da Gianluca',
+                'email' => 'primo@ristorante.it',
                 'password' => 'pippo123'
             ],
             [
-                'name' => 'Mauro',
-                'email' => 'mauro@bool.it',
-                'password' => 'giangi123'
-            ]
+                'name' => 'Ristorante da Mauro',
+                'email' => 'secondo@ristorante.it',
+                'password' => 'pippo123'
+            ],
+            [
+                'name' => 'Ristorante da Alessandro',
+                'email' => 'terzo@ristorante.it',
+                'password' => 'pippo123'
+            ],
+            [
+                'name' => 'Ristorante da Massimo',
+                'email' => 'quarto@ristorante.it',
+                'password' => 'pippo123'
+            ],
         ];
 
         foreach ($users as $user) {

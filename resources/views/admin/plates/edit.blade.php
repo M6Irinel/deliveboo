@@ -3,8 +3,14 @@
 @section('content')
     <div class="container">
 
-        <div class="my-2">
-            <a class="btn btn-secondary" href="{{ route('admin.plates.show', $plate) }}">TORNA ALLO SHOW DEL PIATTO</a>
+        <div class="d-flex justify-content-center">
+            <div class="my-2 mx-3">
+                <a class="btn btn-secondary" href="{{ route('admin.plates.index') }}">TORNA ALL'INDEX DEI PIATTI</a>
+            </div>
+
+            <div class="my-2 mx-3">
+                <a class="btn btn-success" href="{{ route('admin.plates.show', $plate) }}">TORNA ALLO SHOW DEL PIATTO</a>
+            </div>
         </div>
 
         <h1>MODIFICA IL PIATTO</h1>
@@ -95,8 +101,9 @@
                 @enderror
             </div>
 
-
-            <input class="btn btn-primary" type="submit" value="Modifica il tuo piatto">
+            <div class="d-flex justify-content-center">
+                <input class="btn btn-primary" type="submit" value="Modifica il tuo piatto">
+            </div>
 
         </form>
     </div>

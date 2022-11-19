@@ -14,13 +14,24 @@
 
         <div class="d-flex justify-content-center">
             <div class="mt-2 mx-3">
-                <a class="btn btn-primary d-block button" href="{{ route('admin.plates.index') }}">VAI AL INDEX DEI PIATTI</a>
+                <a class="btn btn-primary d-block button" href="{{ route('admin.plates.index') }}">
+                    VAI AL INDEX DEI PIATTI
+                </a>
             </div>
 
             <div class="mt-2 mx-3">
-                <a class="btn btn-secondary d-block button" href="{{ route('admin.plates.edit', $plate) }}">MODIFICA IL
-                    PIATTO
-                    <strong>{{ $plate->id }}</strong></a>
+                <a class="btn btn-secondary d-block button" href="{{ route('admin.plates.edit', $plate) }}">
+                    MODIFICA
+                </a>
+            </div>
+
+            <div class="mt-2 mx-3">
+                <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <input class="btn btn-danger d-block button" type="submit" value="ELIMINA">
+                </form>
             </div>
         </div>
 

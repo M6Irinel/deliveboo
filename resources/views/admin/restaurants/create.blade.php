@@ -55,6 +55,18 @@
             </div>
 
 
+            <div class="form-group">
+                <label for="restaurant_website">Sito Web (Optional)</label>
+
+                <input class="form-control" type="text" name="restaurant_website" id="restaurant_website"
+                    value="{{ old('restaurant_website') }}">
+
+                @error('restaurant_website')
+                    <p class="valid-feedback">{{ $message }}</p>
+                @enderror
+            </div>
+
+
             <div>
                 <p>Tipologie</p>
                 @foreach ($typologies as $t)

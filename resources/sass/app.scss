@@ -7,5 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import 'card';
-@import 'button';
+@import 'parts/card';
+@import 'parts/button';
+@import 'parts/badge';
+@import 'parts/rest';
+@import 'parts/scroll-bar';
+@import 'parts/show-restaurant';

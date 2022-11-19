@@ -1,0 +1,12 @@
+.list-n {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    align-items: center;
+
+    .list-item-n {
+        border: 1px solid #c0c0c0;
+        border-radius: 5px;
+        padding: 5px 7px;
+    }
+}

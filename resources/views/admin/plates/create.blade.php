@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <div class="my-2">
+        <div class="my-2 d-flex justify-content-center">
             <a class="btn btn-secondary" href="{{ route('admin.plates.index') }}">TORNA AL INDEX DEI PIATTI</a>
         </div>
 
@@ -83,7 +83,7 @@
                     <img id="blah" alt="your image" height="250" />
                 </div>
 
-                <input class="form-control-file" type="file" id="plate_image" name="plate_image"
+                <input class="form-control-file btn btn-secondary" type="file" id="plate_image" name="plate_image"
                     value="{{ old('plate_image') }}"
                     onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 
@@ -93,7 +93,7 @@
             </div>
 
 
-            <div class="mt-2">
+            <div class="mt-2 d-flex justify-content-center">
                 <input class="btn btn-primary" type="submit" value="Crea il tuo piatto">
             </div>
 

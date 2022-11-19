@@ -30,9 +30,15 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $typologies = Typology::orderBy('name', 'asc')->get();
+        $exist = Restaurant::where('id', auth()->user()->id)->get()->all();
 
-        return view('admin.restaurants.create', compact('typologies'));
+        if ($exist == []) {
+            $typologies = Typology::orderBy('name', 'asc')->get();
+
+            return view('admin.restaurants.create', compact('typologies'));
+        } else {
+            return redirect()->route('admin.restaurants.index');
+        }
     }
 
     /**
@@ -41,33 +47,19 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Restaurant $restaurant)
     {
-        $params = $request->validate([
-            'restaurant_address' => 'required|min:3|max:255',
-            'p_iva' => 'required|size:13',
-            'restaurant_description' => 'required',
-            'restaurant_phone_number' => 'required|min:10|max:15',
-            'typologies.*' => 'exists:typologies,id',
-            'restaurant_image' => 'nullable|image|max:2048'
-        ]);
+        $params = $restaurant->validateStore($request);
 
-        $typologies = $params['typologies'];
-
-        // $params['user_id'] = Restaurant::orderBy('id', 'desc')->get()->all()[0]->id + 1;
         $params['user_id'] = ++Restaurant::orderBy('id', 'desc')->get()->all()[0]->id;
 
         if (array_key_exists('restaurant_image', $params)) {
-
-            $img_path = Storage::put('restaurant_img',  $request->file('restaurant_image'));
-
-            $params['restaurant_image'] = $img_path;
+            $params['restaurant_image'] = Storage::put('restaurant_img',  $params['restaurant_image']);
         }
-
 
         $restaurant = Restaurant::create($params);
 
-        $restaurant->typologies()->sync($typologies);
+        $restaurant->typologies()->sync($params['typologies']);
 
         return redirect()->route('admin.restaurants.show', $restaurant);
     }

@@ -67,7 +67,10 @@
                 <input class="form-control-file" type="file" id="plate_image" name="plate_image"
                     value="{{ old('plate_image', $plate->plate_image) }}"
                     onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-                {{-- <img id="blah"  /> `````ADAMO PRENDI CODICE ANTEPRIMA IMMAGINE`````` --}}
+                    @error('plate_image')
+                    <p style="color: red;">{{ $message }}</p>
+                    @enderror
+                
             </div>
 
             <input class="btn btn-primary" type="submit" value="Modifica il tuo piatto">

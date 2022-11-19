@@ -55,11 +55,8 @@ class PlateController extends Controller
 
         if (array_key_exists('plate_image', $params)) {
 
-            $img_path = Storage::put('plate_img',  $request->file('plate_image'));
-
-            $params['plate_image'] = $img_path;
+            $params['plate_image'] = Storage::put('plate_img',  $params['plate_image']);
         }
-
 
         $plate = Plate::create($params);
 
@@ -108,11 +105,8 @@ class PlateController extends Controller
 
         if (array_key_exists('plate_image', $params)) {
 
-            $img_path = Storage::put('plate_img', $request->file('plate_image'));
-
-            $params['plate_image'] = $img_path;
+            $params['plate_image'] = Storage::put('plate_img', $params['plate_image']);
         }
-
 
         $plate->update($params);
 

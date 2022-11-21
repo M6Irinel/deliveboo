@@ -9,7 +9,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="restaurant_address">Indirizzo</label>
+                <label for="restaurant_address">Indirizzo <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="restaurant_address" id="restaurant_address"
                     value="{{ old('restaurant_address') }}">
@@ -21,7 +21,7 @@
 
 
             <div class="form-group">
-                <label for="p_iva">Partita iva</label>
+                <label for="p_iva">Partita iva <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="p_iva" id="p_iva" value="{{ old('p_iva') }}">
 
@@ -32,7 +32,7 @@
 
 
             <div class="form-group">
-                <label for="restaurant_description">Descrivi il tuo ristorante</label>
+                <label for="restaurant_description">Descrivi il tuo ristorante <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="restaurant_description" id="restaurant_description"
                     value="{{ old('restaurant_description') }}">
@@ -44,7 +44,7 @@
 
 
             <div class="form-group">
-                <label for="restaurant_phone_number">Numero di telefono</label>
+                <label for="restaurant_phone_number">Numero di telefono <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="restaurant_phone_number" id="restaurant_phone_number"
                     value="{{ old('restaurant_phone_number') }}">
@@ -68,7 +68,7 @@
 
 
             <div>
-                <p>Tipologie</p>
+                <p>Tipologie <strong>*</strong></p>
                 @foreach ($typologies as $t)
                     <div class="d-inline-block mr-3">
                         <label class="btn btn-secondary" for="t-{{ $t->id }}">

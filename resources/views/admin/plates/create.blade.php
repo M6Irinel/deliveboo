@@ -13,7 +13,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="plate_name">Nome del Piatto</label>
+                <label for="plate_name">Nome del Piatto *</label>
 
                 <input class="form-control" type="text" name="plate_name" id="plate_name" value="{{ old('plate_name') }}">
 
@@ -24,7 +24,7 @@
 
 
             <div class="form-group">
-                <label for="ingredients">Ingredienti</label>
+                <label for="ingredients">Ingredienti strong <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="ingredients" id="ingredients"
                     value="{{ old('ingredients') }}">
@@ -36,7 +36,7 @@
 
 
             <div class="form-group">
-                <label for="plate_description">Descivi il tuo piatto</label>
+                <label for="plate_description">Descrivi il tuo piatto <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_description" id="plate_description"
                     value="{{ old('plate_description') }}">
@@ -48,7 +48,7 @@
 
 
             <div class="form-group">
-                <label for="plate_price">Prezzo del piatto</label>
+                <label for="plate_price">Prezzo del piatto <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_price" id="plate_price"
                     value="{{ old('plate_price') }}">
@@ -60,7 +60,7 @@
 
 
             <div class="form-group">
-                <label for="visibility">Visibilità del piatto</label>
+                <label for="visibility">Visibilità del piatto <strong>*</strong></label>
 
                 <select class="form-control" name="visibility" id="visibility">
                     <option value="">--Scegli la disponibilità del piatto--</option>

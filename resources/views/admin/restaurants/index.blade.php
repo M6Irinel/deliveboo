@@ -15,7 +15,7 @@
                                     alt="NON HAI MESSO UNA IMMAGINE DEL RISTORANTE!">
                             </div>
                         @else
-                            <h3 class="text-danger">NON HAI VOLUTO INSERIRE UNA IMMAGINE DEL RISTORANTE!?</h3>
+                            <h3 class="text-danger">NON HAI ANCORA INSERITO UN LOGO PER IL TUO RISTORANTE!</h3>
                         @endif
 
                         <p>Indirizzo : <strong>{{ $restaurant->restaurant_address }}</strong></p>

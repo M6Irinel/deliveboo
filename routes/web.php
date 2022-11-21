@@ -26,6 +26,6 @@ Route::middleware('auth')
     ->namespace('Admin')  //toglie Admin\
     ->group(function () {
         Route::get('/home', 'HomeController@index')->name('home');
-        Route::resource('restaurants', 'RestaurantController')->only('index', 'create', 'show', 'store');
+        Route::resource('restaurants', 'RestaurantController')->only('index', 'create', 'store');
         Route::resource('plates', 'PlateController');
     });

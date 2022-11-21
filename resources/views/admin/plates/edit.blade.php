@@ -20,7 +20,7 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="plate_name">Nome del Piatto</label>
+                <label for="plate_name">Nome del Piatto <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_name" id="plate_name"
                     value="{{ old('plate_name', $plate->plate_name) }}">
@@ -32,7 +32,7 @@
 
 
             <div class="form-group">
-                <label for="ingredients">Ingredienti</label>
+                <label for="ingredients">Ingredienti <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="ingredients" id="ingredients"
                     value="{{ old('ingredients', $plate->ingredients) }}">
@@ -44,7 +44,7 @@
 
 
             <div class="form-group">
-                <label for="plate_description">descivi il tuo</label>
+                <label for="plate_description">descivi il tuo <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_description" id="plate_description"
                     value="{{ old('plate_description', $plate->plate_description) }}">
@@ -56,7 +56,7 @@
 
 
             <div class="form-group">
-                <label for="plate_price">Prezzo</label>
+                <label for="plate_price">Prezzo <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_price" id="plate_price"
                     value="{{ old('plate_price', $plate->plate_price) }}">
@@ -68,7 +68,7 @@
 
 
             <div class="form-group">
-                <label for="visibility">Visibilità</label>
+                <label for="visibility">Visibilità <strong>*</strong></label>
 
                 <select class="form-control" name="visibility" id="visibility">
                     <option value="">--Scegli la disponibilità del piatto--</option>

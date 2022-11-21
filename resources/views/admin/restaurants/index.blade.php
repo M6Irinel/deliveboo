@@ -15,7 +15,7 @@
                                     alt="NON HAI MESSO UNA IMMAGINE DEL RISTORANTE!">
                             </div>
                         @else
-                            <h3 class="text-danger">NON HAI VOLUTO INSERIRE UNA IMMAGINE DEL RISTORANTE!?</h3>
+                            <h3 class="text-danger">NON HAI ANCORA INSERITO UN LOGO PER IL TUO RISTORANTE!</h3>
                         @endif
 
                         <p>Indirizzo : <strong>{{ $restaurant->restaurant_address }}</strong></p>
@@ -31,8 +31,8 @@
 
                             <div class="mt-3 mx-3">
                                 <a class="btn btn-primary d-block button" href="{{ route('admin.plates.index') }}">VAI AL
-                                    INDEX DEI
-                                    PIATTI</a>
+                                    INDEX DEI PIATTI
+                                </a>
                             </div>
                         </div>
                     </li>

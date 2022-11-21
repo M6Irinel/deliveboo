@@ -15,7 +15,7 @@ class RestaurantSeeder extends Seeder
         $restaurants = [
             [
                 'restaurant_address'        => 'Via Dante 212',
-                'p_iva'                     => 'IT564623181',
+                'p_iva'                     => 'IT56462331181',
                 'restaurant_description'    => 'Qui al ristorante da Gianluca potrai trovare un ambiente riservato e diversi tipi di cucina',
                 'restaurant_phone_number'   => '3254445876',
                 'restaurant_website'        => 'http//:ristorante-da-gianluca',
@@ -23,7 +23,7 @@ class RestaurantSeeder extends Seeder
             ],
             [
                 'restaurant_address'        => 'Via Milano 11/A',
-                'p_iva'                     => 'IT457895764',
+                'p_iva'                     => 'IT45789576334',
                 'restaurant_description'    => 'Qui al ristorante da Mauro potrai trovare piatti che variano da quelli tipici della tradizione alla cucina fusion',
                 'restaurant_phone_number'   => '9876543210',
                 'restaurant_website'        => 'http//:ristorante-da-mauro',
@@ -31,7 +31,7 @@ class RestaurantSeeder extends Seeder
             ],
             [
                 'restaurant_address'        => 'Viale Bonaria 153',
-                'p_iva'                     => 'IT961735498',
+                'p_iva'                     => 'IT96173549822',
                 'restaurant_description'    => 'Ristorante da Alessandro propone un menù variegato per soddisfare ogni tipo di palato',
                 'restaurant_phone_number'   => '3405430191',
                 'restaurant_website'        => 'http//:ristorante-da-alessandro',
@@ -39,7 +39,7 @@ class RestaurantSeeder extends Seeder
             ],
             [
                 'restaurant_address'        => 'Corso Vittorio Emanuele II 15',
-                'p_iva'                     => 'IT457295745',
+                'p_iva'                     => 'IT45729574511',
                 'restaurant_description'    => 'Da Massimo, ristorante di nuova apertura vi invita ad assaggiare le specialità della casa!',
                 'restaurant_phone_number'   => '3320985821',
                 'restaurant_website'        => 'http//:ristorante-da-massimo',

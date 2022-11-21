@@ -15,7 +15,7 @@
                     value="{{ old('restaurant_address') }}">
 
                 @error('restaurant_address')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -26,7 +26,7 @@
                 <input class="form-control" type="text" name="p_iva" id="p_iva" value="{{ old('p_iva') }}">
 
                 @error('p_iva')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -38,7 +38,7 @@
                     value="{{ old('restaurant_description') }}">
 
                 @error('restaurant_description')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -50,7 +50,7 @@
                     value="{{ old('restaurant_phone_number') }}">
 
                 @error('restaurant_phone_number')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -62,7 +62,7 @@
                     value="{{ old('restaurant_website') }}">
 
                 @error('restaurant_website')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -76,8 +76,12 @@
                                 @if (in_Array($t->id, old('typologies', []))) checked @endif value="{{ $t->id }}">
                             {{ $t->name }}
                         </label>
+                        
                     </div>
                 @endforeach
+                @error('typologies')
+                <p class="invalid-feedback error__mess">{{ $message }}</p>
+            @enderror
             </div>
 
 
@@ -95,7 +99,7 @@
                     onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 
                 @error('restaurant_image')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 

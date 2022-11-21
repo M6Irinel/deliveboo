@@ -6,7 +6,37 @@
 
 require('./bootstrap');
 
-// window.Vue = require('vue');
+window.Vue = require('vue');
+// import modal from './modal';
+
+
+
+// MODAL DA IMPORTARE 
+const modal = document.querySelector('#modal');
+const buttonModal = document.querySelector('#bmodal');
+const noModal = document.querySelector('#nomodal');
+modal.style.display = 'none';
+console.log(buttonModal,noModal)
+buttonModal.addEventListener('click', function () {
+    modal.style.display = 'block';
+    console.log('click')
+})
+
+noModal.addEventListener('click', function () {
+    modal.style.display = 'none';
+    console.log('click')
+})
+
+buttonModal.onclick=function(){
+    modal.style.display = 'block';
+}
+
+console.log('click')
+
+
+
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +49,7 @@ require('./bootstrap');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +57,6 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// const app = new Vue({
-//     el: '#app',
-// });
+const app = new Vue({
+    el: '#app',
+});

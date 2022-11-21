@@ -50,15 +50,22 @@
                                 </a>
                             </div>
 
-                            <div class="mt-2">
-                                <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
+                            {{-- <div class="mt-2">
+                                <button class="btn btn-danger" id="bmodal">Elimina</button>
 
-                                    <input class="btn btn-danger d-block button w-100" type="submit"
-                                        value="ELIMINA">
-                                </form>
                             </div>
+                            <div id="modal">
+                                <p>Vuoi cancelare il piatto?</p>
+                                <div>
+                                    <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+    
+                                        <input class="btn btn-danger" type="submit" value="SI">
+                                    </form>
+                                    <button class="btn btn-success" id="nomodal">No</button>
+                                </div>
+                            </div> --}}
                         </div>
                     </li>
                 @endforeach

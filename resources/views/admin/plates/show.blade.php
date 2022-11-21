@@ -26,12 +26,23 @@
             </div>
 
             <div class="mt-2 mx-3">
-                <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
+                <div>
+                    <button class="btn btn-danger" id="openModal">Elimina</button>
+                </div>
 
-                    <input class="btn btn-danger d-block button" type="submit" value="ELIMINA">
-                </form>
+                <div id="modal">
+                    <p>Vuoi cancelare il piatto?</p>
+                    <div>
+                        <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <input class="btn btn-danger" type="submit" value="SI">
+                        </form>
+
+                        <button class="btn btn-success" id="closeModal">No</button>
+                    </div>
+                </div>
             </div>
         </div>
 

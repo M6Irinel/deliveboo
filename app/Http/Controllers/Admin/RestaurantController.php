@@ -20,6 +20,7 @@ class RestaurantController extends Controller
     {
         $restaurants = Restaurant::where('user_id', auth()->user()->id)->get();
         $name = auth()->user()->name;
+        // dd(auth()->user()->id);
 
         return view('admin.restaurants.index', compact('restaurants', 'name'));
     }
@@ -52,7 +53,7 @@ class RestaurantController extends Controller
     {
         $params = $restaurant->validateStore($request);
 
-        $params['user_id'] = ++Restaurant::orderBy('id', 'desc')->get()->all()[0]->id;
+        $params['user_id'] = ++Restaurant::orderBy('user_id', 'desc')->get()->all()[0]->id;
 
         if (array_key_exists('restaurant_image', $params)) {
             $params['restaurant_image'] = Storage::put('restaurant_img',  $params['restaurant_image']);
@@ -62,7 +63,7 @@ class RestaurantController extends Controller
 
         $restaurant->typologies()->sync($params['typologies']);
 
-        return redirect()->route('admin.restaurants.show', $restaurant);
+        return redirect()->route('admin.restaurants.index');
     }
 
     /**

@@ -27,18 +27,20 @@ class Restaurant extends Model
         'restaurant_description',
         'restaurant_phone_number',
         'user_id',
-        'restaurant_image'
+        'restaurant_image',
+        'restaurant_website'
     ];
 
     public function validateStore($request)
     {
         return $request->validate([
             'restaurant_address' => 'required|min:3|max:255',
-            'p_iva' => 'required|size:13',
+            'p_iva' => 'required|size:13|unique:restaurants',
             'restaurant_description' => 'required',
-            'restaurant_phone_number' => 'required|min:10|max:15',
-            'typologies.*' => 'exists:typologies,id',
-            'restaurant_image' => 'nullable|image|max:2048'
+            'restaurant_phone_number' => 'required|min:10|max:15|unique:restaurants',
+            'typologies' => 'required|exists:typologies,id',
+            'restaurant_image' => 'nullable|image|max:2048',
+            'restaurant_website'=>'nullable|max:255'
         ]);
     }
 }

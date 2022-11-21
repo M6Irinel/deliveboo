@@ -35287,6 +35287,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+// @ts-nocheck
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -35295,7 +35297,7 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-// window.Vue = require('vue');
+// window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -35308,7 +35310,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component("example-component", require("./components/ExampleComponent.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35317,8 +35319,19 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 // const app = new Vue({
-//     el: '#app',
-// });
+//     el: "#app",
+// } );
+
+var modal = document.querySelector("#modal");
+var openModal = document.querySelector("#openModal");
+var closeModal = document.querySelector("#closeModal");
+modal.style.display = "none";
+openModal.addEventListener("click", function () {
+  modal.style.display = "block";
+});
+closeModal.addEventListener("click", function () {
+  modal.style.display = "none";
+});
 
 /***/ }),
 
@@ -35328,6 +35341,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
   \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
+
+// @ts-nocheck
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
@@ -35390,8 +35405,8 @@ try {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/deliveboo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/deliveboo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

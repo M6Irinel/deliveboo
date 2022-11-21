@@ -26,7 +26,7 @@
                     value="{{ old('plate_name', $plate->plate_name) }}">
 
                 @error('plate_name')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -38,19 +38,19 @@
                     value="{{ old('ingredients', $plate->ingredients) }}">
 
                 @error('ingredients')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
 
             <div class="form-group">
-                <label for="plate_description">descivi il tuo <strong>*</strong></label>
+                <label for="plate_description">descivi il tuo </label>
 
                 <input class="form-control" type="text" name="plate_description" id="plate_description"
                     value="{{ old('plate_description', $plate->plate_description) }}">
 
                 @error('plate_description')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -62,13 +62,13 @@
                     value="{{ old('plate_price', $plate->plate_price) }}">
 
                 @error('plate_price')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
 
             <div class="form-group">
-                <label for="visibility">Visibilità <strong>*</strong></label>
+                <label for="visibility">Visibilità</label>
 
                 <select class="form-control" name="visibility" id="visibility">
                     <option value="">--Scegli la disponibilità del piatto--</option>
@@ -77,7 +77,7 @@
                 </select>
 
                 @error('visibility')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -97,7 +97,7 @@
                     onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 
                 @error('plate_image')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 

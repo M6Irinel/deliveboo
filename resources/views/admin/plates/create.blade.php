@@ -13,36 +13,36 @@
             @csrf
 
             <div class="form-group">
-                <label for="plate_name">Nome del Piatto *</label>
+                <label for="plate_name">Nome del Piatto <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="plate_name" id="plate_name" value="{{ old('plate_name') }}">
 
                 @error('plate_name')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
 
             <div class="form-group">
-                <label for="ingredients">Ingredienti strong <strong>*</strong></label>
+                <label for="ingredients">Ingredienti <strong>*</strong></label>
 
                 <input class="form-control" type="text" name="ingredients" id="ingredients"
                     value="{{ old('ingredients') }}">
 
                 @error('ingredients')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
 
             <div class="form-group">
-                <label for="plate_description">Descrivi il tuo piatto <strong>*</strong></label>
+                <label for="plate_description">Descrivi il tuo piatto </label>
 
                 <input class="form-control" type="text" name="plate_description" id="plate_description"
                     value="{{ old('plate_description') }}">
 
                 @error('plate_description')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -54,13 +54,13 @@
                     value="{{ old('plate_price') }}">
 
                 @error('plate_price')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
 
             <div class="form-group">
-                <label for="visibility">Visibilità del piatto <strong>*</strong></label>
+                <label for="visibility">Visibilità del piatto</label>
 
                 <select class="form-control" name="visibility" id="visibility">
                     <option value="">--Scegli la disponibilità del piatto--</option>
@@ -69,7 +69,7 @@
                 </select>
 
                 @error('visibility')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -88,7 +88,7 @@
                     onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
 
                 @error('plate_image')
-                    <p class="valid-feedback">{{ $message }}</p>
+                    <p class="invalid-feedback error__mess">{{ $message }}</p>
                 @enderror
             </div>
 

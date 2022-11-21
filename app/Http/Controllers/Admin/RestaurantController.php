@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Restaurant;
+use App\Plate;
 use App\Typology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,12 +16,14 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Plate $plate)
     {
         $restaurants = Restaurant::where('user_id', auth()->user()->id)->get();
         $name = auth()->user()->name;
+        $include = $plate->include;
+        dd($include);
 
-        return view('admin.restaurants.index', compact('restaurants', 'name'));
+        return view('admin.restaurants.index', compact('restaurants', 'name', 'include'));
     }
 
     /**

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+@if (!$include)
+non è roba tua
+    
+@endif
     <div class="container">
 
         <h1 class="text-primary">{{ strtoupper($name) }}</h1>

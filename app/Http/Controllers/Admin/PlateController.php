@@ -73,24 +73,15 @@ class PlateController extends Controller
      */
     public function edit(Plate $plate)
     {
-
         $isYours = Restaurant::where('user_id', auth()->user()->id)->get()->all()[0]->plates->all();
-        // $include= in_array($plate, $isYours);
-        $plate->getIncludeAttribute(in_array($plate, $isYours));
-        // dd($plate->include);
-        dd($plate->getIncludeAttribute);
-        if ($plate->getIncludeAttribute) {
-            return view('admin.plates.edit', compact('plate'));   
-        } else{
-            
-            return redirect()->route('admin.restaurants.index');
+
+        $include = in_array($plate, $isYours);
+
+        if ($include) {
+            return view('admin.plates.edit', compact('plate'));
+        } else {
+            return redirect()->back();
         }
-
-
-        
-
-
-        
     }
 
     /**

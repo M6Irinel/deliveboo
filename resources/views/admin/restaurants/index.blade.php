@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@if (!$include)
-non è roba tua
-    
-@endif
     <div class="container">
 
         <h1 class="text-primary">{{ strtoupper($name) }}</h1>
@@ -35,8 +31,8 @@ non è roba tua
 
                             <div class="mt-3 mx-3">
                                 <a class="btn btn-primary d-block button" href="{{ route('admin.plates.index') }}">VAI AL
-                                    INDEX DEI
-                                    PIATTI</a>
+                                    INDEX DEI PIATTI
+                                </a>
                             </div>
                         </div>
                     </li>

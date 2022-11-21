@@ -16,14 +16,12 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Plate $plate)
+    public function index()
     {
         $restaurants = Restaurant::where('user_id', auth()->user()->id)->get();
         $name = auth()->user()->name;
-        $include = $plate->include;
-        dd($include);
 
-        return view('admin.restaurants.index', compact('restaurants', 'name', 'include'));
+        return view('admin.restaurants.index', compact('restaurants', 'name'));
     }
 
     /**

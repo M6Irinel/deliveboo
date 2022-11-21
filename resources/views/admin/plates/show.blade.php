@@ -1,24 +1,5 @@
 @extends('layouts.app')
-@section('script')
-    function showModal(id){
-    const modal = document.getElementById("modal");
-    modal.classList.replace("d-none", "d-flex");
-    }
 
-    function hideModal(id){
-    const modal = document.getElementById("modal");
-    modal.classList.replace("d-flex","d-none");
-    }
-
-    function showSuccess(id){
-    const form = document.getElementById("form-delete-" + id);
-    const modal = document.getElementById("success-modal");
-    modal.classList.replace("d-none", "d-flex");
-    setTimeout(function (){
-    form.submit();
-    },1000);
-    }
-@endsection
 @section('content')
     <div class="container">
 
@@ -45,10 +26,10 @@
             </div>
 
             <div class="mt-2 mx-3">
-                <div class="mt-2">
-                    <button class="btn btn-danger" onclick="showModal({{$plate->id}})" class="modal">Elimina</button>
-
+                <div>
+                    <button class="btn btn-danger" id="openModal">Elimina</button>
                 </div>
+
                 <div id="modal">
                     <p>Vuoi cancelare il piatto?</p>
                     <div>
@@ -58,7 +39,8 @@
 
                             <input class="btn btn-danger" type="submit" value="SI">
                         </form>
-                        <button class="btn btn-success" onclick="hideModal()" id="nomodal">No</button>
+
+                        <button class="btn btn-success" id="closeModal">No</button>
                     </div>
                 </div>
             </div>

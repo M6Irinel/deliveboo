@@ -1,4 +1,6 @@
-window._ = require('lodash');
+// @ts-nocheck
+
+window._ = require( 'lodash' );
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

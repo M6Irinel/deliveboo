@@ -1,42 +1,14 @@
+// @ts-nocheck
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
-// import modal from './modal';
-
-
-
-// MODAL DA IMPORTARE 
-const modal = document.querySelector('#modal');
-const buttonModal = document.querySelector('#bmodal');
-const noModal = document.querySelector('#nomodal');
-modal.style.display = 'none';
-console.log(buttonModal,noModal)
-buttonModal.addEventListener('click', function () {
-    modal.style.display = 'block';
-    console.log('click')
-})
-
-noModal.addEventListener('click', function () {
-    modal.style.display = 'none';
-    console.log('click')
-})
-
-buttonModal.onclick=function(){
-    modal.style.display = 'block';
-}
-
-console.log('click')
-
-
-
-
-
+// window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -49,7 +21,7 @@ console.log('click')
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component("example-component", require("./components/ExampleComponent.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -57,6 +29,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+// const app = new Vue({
+//     el: "#app",
+// } );
+
+
+const modal = document.querySelector("#modal");
+const openModal = document.querySelector("#openModal");
+const closeModal = document.querySelector("#closeModal");
+
+modal.style.display = "none";
+
+openModal.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
 });

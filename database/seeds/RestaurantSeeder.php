@@ -53,7 +53,7 @@ class RestaurantSeeder extends Seeder
         $tags = Typology::all()->pluck('id');
   
         foreach ($restaurants as $restaurant) {
-            Restaurant::create([
+           $r= Restaurant::create([
                 'restaurant_address'        => $restaurant['restaurant_address'],
                 'user_id'                   => $i++,
                 'p_iva'                     => $restaurant['p_iva'],
@@ -64,7 +64,7 @@ class RestaurantSeeder extends Seeder
 
             ]);
             $tagIds = $tags->shuffle()->take(4)->all();
-            $restaurant->tags()->sync($tagIds);
+            $r->typologies()->sync($tagIds);
         }
     }
 }

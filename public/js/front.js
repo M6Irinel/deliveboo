@@ -18035,7 +18035,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "Home",
   component: _pages_restaurants_index_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: "/plates",
+  path: "/plates/{id}",
   name: "Plates",
   component: _pages_plates_index_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {

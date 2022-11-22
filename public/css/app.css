@@ -10970,6 +10970,10 @@ a.text-dark:focus {
   box-shadow: 3px 3px 7px gray;
 }
 
+.layout-card .card-n .card-default {
+  overflow: hidden;
+}
+
 .layout-card .card-n .card-d {
   height: 6rem;
   overflow-y: auto;
@@ -10998,6 +11002,22 @@ a.text-dark:focus {
 
 .error__mess {
   display: block !important;
+}
+
+#modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(186, 186, 186, 0.5176470588);
+}
+
+#modal .body-modal {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ::-webkit-scrollbar {

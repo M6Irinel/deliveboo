@@ -1936,10 +1936,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     restaurants: function restaurants() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants;
-    } // restaurant_Id () {
-    //     store.restaurant_Id = this.$route.params.id;
-    //     return parseInt( this.$route.params.id );
-    // }
+    },
+    vai: function vai() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].vai;
+    },
+    restaurant_Id: function restaurant_Id() {
+      return this.$route.params.id;
+    }
   }
 });
 
@@ -1967,11 +1970,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     restaurants: function restaurants() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants;
-    }
-  },
-  methods: {
-    setRestaurantId: function setRestaurantId(id) {
-      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurant_Id = id;
     }
   }
 });
@@ -2001,8 +1999,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchRestaurants: function fetchRestaurants() {
       axios.get('/api/restaurants').then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants;
-        console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants);
-        console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurant_Id);
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].vai = true;
       });
     }
   },
@@ -2059,11 +2056,11 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Piatti")]), _vm._v(" "), _c("div", _vm._l(_vm.restaurants[this.$route.params.id].plates, function (plate, i) {
+  }, [_c("h1", [_vm._v("Piatti")]), _vm._v(" "), _vm.vai ? _c("div", _vm._l(_vm.restaurants[_vm.restaurant_Id].plates, function (plate, i) {
     return _c("p", {
       key: i
     }, [_vm._v(_vm._s(plate.plate_name))]);
-  }), 0)])]);
+  }), 0) : _vm._e()])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2102,13 +2099,7 @@ var render = function render() {
           }
         }
       }
-    }, [_c("li", {
-      on: {
-        click: function click($event) {
-          return _vm.setRestaurantId(i);
-        }
-      }
-    }, [_c("strong", [_vm._v(" Nome Ristorante:- " + _vm._s(restaurant.user.name) + " ")])])]);
+    }, [_c("li", [_c("strong", [_vm._v(" Nome Ristorante:- " + _vm._s(restaurant.user.name) + " ")])])]);
   }), 1)])]);
 };
 var staticRenderFns = [];
@@ -18065,7 +18056,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   restaurants: null,
-  restaurant_Id: null
+  vai: false
 }));
 
 /***/ }),

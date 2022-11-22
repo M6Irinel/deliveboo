@@ -7,7 +7,7 @@
             <ul>
                 <router-link v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'id': i } }">
-                    <li @click="setRestaurantId(i)">
+                    <li>
                         <strong> Nome Ristorante:- {{ restaurant.user.name }} </strong>
                     </li>
                 </router-link>
@@ -33,12 +33,6 @@ export default {
     computed: {
         restaurants () { return store.restaurants }
     },
-
-    methods: {
-        setRestaurantId ( id ) {
-            store.restaurant_Id = id;
-        }
-    }
 }
 </script>
 

@@ -3,7 +3,7 @@
         <router-view />
         <!-- {{restaurants}} -->
         <!-- <pre>{{restaurants}}</pre> -->
-      
+
     </div>
 </template>
 
@@ -15,24 +15,22 @@ import store from '../store/store';
 export default {
     name: 'AppVue',
 
-    data() {
+    data () {
         return {
             restaurants: [],
         }
     },
 
     methods: {
-        fetchRestaurants() {
-            axios.get('/api/restaurants').then(r => {
+        fetchRestaurants () {
+            axios.get( '/api/restaurants' ).then( r => {
                 store.restaurants = r.data.restaurants;
-                console.log(store.restaurants)
-                console.log(store.restaurant_Id)
-              
-            })
+                store.vai = true;
+            } )
         }
     },
 
-    created() {
+    created () {
         this.fetchRestaurants();
     }
 }

@@ -3,8 +3,8 @@
         <div v-html="forLogin" />
         <div class="container">
             <h1>Piatti</h1>
-            <div>
-                <p v-for="(plate, i) in restaurants[this.$route.params.id].plates" :key="i">{{ plate.plate_name }}</p>
+            <div v-if="vai">
+                <p v-for="(plate, i) in restaurants[restaurant_Id].plates" :key="i">{{ plate.plate_name }}</p>
             </div>
         </div>
     </div>
@@ -26,11 +26,8 @@ export default {
 
     computed: {
         restaurants () { return store.restaurants },
-        // restaurant_Id () {
-        //     store.restaurant_Id = this.$route.params.id;
-
-        //     return parseInt( this.$route.params.id );
-        // }
+        vai () { return store.vai },
+        restaurant_Id () { return this.$route.params.id }
     },
 }
 </script>

@@ -4,7 +4,7 @@
         <div class="container">
             <h1>Ristoranti belli</h1>
 
-            <ul>
+            <ul v-if="!caricamento">
                 <router-link v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'id': i } }">
                     <li>
@@ -12,6 +12,9 @@
                     </li>
                 </router-link>
             </ul>
+            <div v-else>
+                caricamento...
+            </div>
         </div>
     </div>
 </template>
@@ -31,7 +34,8 @@ export default {
     },
 
     computed: {
-        restaurants () { return store.restaurants }
+        restaurants () { return store.restaurants },
+        caricamento () { return store.caricamento },
     },
 }
 </script>

@@ -1,9 +1,6 @@
 <template>
     <div>
         <router-view />
-        <!-- {{restaurants}} -->
-        <!-- <pre>{{restaurants}}</pre> -->
-
     </div>
 </template>
 
@@ -23,9 +20,11 @@ export default {
 
     methods: {
         fetchRestaurants () {
+            store.caricamento = true;
             axios.get( '/api/restaurants' ).then( r => {
                 store.restaurants = r.data.restaurants;
                 store.vai = true;
+                store.caricamento = false;
             } )
         }
     },

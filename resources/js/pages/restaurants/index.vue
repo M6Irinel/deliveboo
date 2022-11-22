@@ -5,7 +5,8 @@
             <h1>Ristoranti belli</h1>
 
             <ul>
-                <router-link v-for="(restaurant, i) in restaurants" :key="i" :to="{ name: 'Plates' }">
+                <router-link v-for="(restaurant, i) in restaurants" :key="i"
+                    :to="{ name: 'Plates', params: { 'id': i } }">
                     <li @click="setRestaurantId(i)">
                         <strong> Nome Ristorante:- {{ restaurant.user.name }} </strong>
                     </li>

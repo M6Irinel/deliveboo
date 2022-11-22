@@ -11,6 +11,24 @@
 
 export default {
     name: 'AppVue',
+
+    data() {
+        return {
+            // restaurants
+        }
+    },
+
+    methods: {
+        fetchRestaurants () {
+            axios.get( '/api/restaurants' ).then( r => {
+                console.log(r);
+            })
+        }
+    },
+
+    created () {
+        this.fetchRestaurants();
+    }
 }
 </script>
 

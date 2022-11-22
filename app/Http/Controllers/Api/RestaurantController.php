@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Restaurant;
+use App\User;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -16,6 +17,8 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::orderBy('created_at', 'desc')->with('typologies')->get();
+        // $restaurants = User::;
+
         $status = true;
 
         return response()->json(compact('restaurants', 'status'));

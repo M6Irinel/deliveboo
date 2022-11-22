@@ -1923,8 +1923,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+// @ts-nocheck
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PlatesIndex'
+  name: 'PlatesIndex',
+  data: function data() {
+    return {
+      forLogin: forLogin
+    };
+  }
 });
 
 /***/ }),
@@ -1964,7 +1971,22 @@ __webpack_require__.r(__webpack_exports__);
 // import store from '../store/store';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'AppVue'
+  name: 'AppVue',
+  data: function data() {
+    return {
+      // restaurants
+    };
+  },
+  methods: {
+    fetchRestaurants: function fetchRestaurants() {
+      axios.get('/api/restaurants').then(function (r) {
+        console.log(r);
+      });
+    }
+  },
+  created: function created() {
+    this.fetchRestaurants();
+  }
 });
 
 /***/ }),
@@ -1988,7 +2010,7 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Paggina non trovata")])]);
+  return _c("div", [_c("h1", [_vm._v("Pagina non trovata")])]);
 }];
 render._withStripped = true;
 
@@ -2009,12 +2031,18 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", [_c("div", {
+    domProps: {
+      innerHTML: _vm._s(_vm.forLogin)
+    }
+  }), _vm._v(" "), _vm._m(0)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Piatti")])]);
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("h1", [_vm._v("Piatti")])]);
 }];
 render._withStripped = true;
 
@@ -2039,13 +2067,15 @@ var render = function render() {
     domProps: {
       innerHTML: _vm._s(_vm.forLogin)
     }
-  }), _vm._v(" "), _c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("router-link", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, [_c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
         name: "Plates"
       }
     }
-  }, [_vm._v("piatti")])], 1);
+  }, [_vm._v("piatti")])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -2039,7 +2039,13 @@ var render = function render() {
     domProps: {
       innerHTML: _vm._s(_vm.forLogin)
     }
-  }), _vm._v(" "), _c("h1", [_vm._v("Ristoranti belli")])]);
+  }), _vm._v(" "), _c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "Plates"
+      }
+    }
+  }, [_vm._v("piatti")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

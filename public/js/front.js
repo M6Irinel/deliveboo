@@ -1923,6 +1923,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
 // @ts-nocheck
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1931,6 +1932,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       forLogin: forLogin
     };
+  },
+  computed: {
+    restaurants: function restaurants() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants;
+    },
+    restaurant_Id: function restaurant_Id() {
+      console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurant_Id);
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurant_Id;
+    }
   }
 });
 
@@ -1945,6 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
 // @ts-nocheck
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1953,6 +1964,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       forLogin: forLogin
     };
+  },
+  computed: {
+    restaurants: function restaurants() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants;
+    }
   }
 });
 
@@ -1967,20 +1983,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
 // @ts-nocheck
-// import store from '../store/store';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'AppVue',
   data: function data() {
     return {
-      // restaurants
+      restaurants: []
     };
   },
   methods: {
     fetchRestaurants: function fetchRestaurants() {
       axios.get('/api/restaurants').then(function (r) {
-        console.log(r);
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants;
+        console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants);
+        console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurant_Id);
       });
     }
   },
@@ -2035,15 +2053,15 @@ var render = function render() {
     domProps: {
       innerHTML: _vm._s(_vm.forLogin)
     }
-  }), _vm._v(" "), _vm._m(0)]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Piatti")])]);
-}];
+  }, [_c("h1", [_vm._v("Piatti")]), _vm._v(" "), _c("div", _vm._l(_vm.restaurants[1].plates, function (plate, i) {
+    return _c("p", {
+      key: i
+    }, [_vm._v(_vm._s(plate.plate_name))]);
+  }), 0)])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -2075,7 +2093,21 @@ var render = function render() {
         name: "Plates"
       }
     }
-  }, [_vm._v("piatti")])], 1)]);
+  }, [_vm._v("piatti")]), _vm._v(" "), _c("ul", _vm._l(_vm.restaurants, function (restaurant, i) {
+    return _c("router-link", {
+      key: i,
+      attrs: {
+        to: {
+          name: "Plates"
+        }
+      },
+      on: {
+        click: function click($event) {
+          _vm.store.restaurants_id = i;
+        }
+      }
+    }, [_c("li", [_c("strong", [_vm._v(" Nome Ristorante:- " + _vm._s(restaurant.user.name) + " ")])])]);
+  }), 1)], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18015,6 +18047,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/store.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/store.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+// @ts-nocheck
+
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
+  restaurants: [],
+  restaurant_Id: null
+}));
+
+/***/ }),
+
 /***/ "./resources/js/views/App.vue":
 /*!************************************!*\
   !*** ./resources/js/views/App.vue ***!
@@ -18091,7 +18144,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

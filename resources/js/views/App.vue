@@ -1,32 +1,38 @@
 <template>
     <div>
         <router-view />
+        <!-- {{restaurants}} -->
+        <!-- <pre>{{restaurants}}</pre> -->
+      
     </div>
 </template>
 
 
 <script>
 // @ts-nocheck
-// import store from '../store/store';
+import store from '../store/store';
 
 export default {
     name: 'AppVue',
 
     data() {
         return {
-            // restaurants
+            restaurants: [],
         }
     },
 
     methods: {
-        fetchRestaurants () {
-            axios.get( '/api/restaurants' ).then( r => {
-                console.log(r);
+        fetchRestaurants() {
+            axios.get('/api/restaurants').then(r => {
+                store.restaurants = r.data.restaurants;
+                console.log(store.restaurants)
+                console.log(store.restaurant_Id)
+              
             })
         }
     },
 
-    created () {
+    created() {
         this.fetchRestaurants();
     }
 }

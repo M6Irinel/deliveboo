@@ -1,15 +1,18 @@
 // @ts-nocheck
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+window.axios = require("axios");
+import Vue from "vue";
 
-window.axios = require('axios');
+import router from "./router/router";
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
-Vue.use(VueRouter)
+import AppVue from "./views/App.vue";
 
-const app = new Vue({
-    el: '#app',
+new Vue({
+    el: "#app",
+    render(h) {
+        return h(AppVue);
+    },
+    router,
 });
-

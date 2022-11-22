@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front/home');
 });
 
 Auth::routes();
@@ -29,3 +29,7 @@ Route::middleware('auth')
         Route::resource('restaurants', 'RestaurantController')->only('index', 'create', 'store');
         Route::resource('plates', 'PlateController');
     });
+
+Route::get('{any?}', function () {
+    return view('front.home');
+})->where('any', '.*');

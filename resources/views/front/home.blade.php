@@ -50,7 +50,7 @@
                                         @endif
                                     @else
                                         <li class="nav-item">
-                                            <a class="nav-link bg-gray-1-H py-2" href="{{ route('admin.posts.index') }}">POSTS</a>
+                                            <a class="nav-link bg-gray-1-H py-2" href="{{ route('admin.restaurants.index') }}">Restaurants</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

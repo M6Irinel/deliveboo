@@ -1938,11 +1938,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+// @ts-nocheck
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RestaurantsIndex',
   data: function data() {
     return {
-      // forLogin
+      forLogin: forLogin
     };
   }
 });
@@ -1962,10 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
 // import store from '../store/store';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'AppVue',
-  components: {
-    RestaurantsIndex: RestaurantsIndex
-  }
+  name: 'AppVue'
 });
 
 /***/ }),
@@ -2036,13 +2035,13 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", [_c("div", {
+    domProps: {
+      innerHTML: _vm._s(_vm.forLogin)
+    }
+  }), _vm._v(" "), _c("h1", [_vm._v("Ristoranti belli")])]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Ristoranti")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import RestaurantsIndex from "../pages/restaurants/index.vue";
-import PlatessIndex from "../pages/plates/index.vue";
+import PlatesIndex from "../pages/plates/index.vue";
 import NotFound from '../pages/not-found.vue';
 
 export default [
@@ -13,7 +13,7 @@ export default [
     {
         path: "/plates",
         name: "Plates",
-        component: PlatessIndex,
+        component: PlatesIndex,
     },
     {
         path: '*',

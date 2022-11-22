@@ -1,18 +1,20 @@
 <template>
     <div>
-        <!-- <p>{{forLogin}}</p> -->
-        <h1>Ristoranti</h1>
+        <div v-html="forLogin" />
+        <h1>Ristoranti belli</h1>
     </div>
 </template>
 
 
 <script>
+// @ts-nocheck
+
 export default {
     name: 'RestaurantsIndex',
 
     data() {
         return {
-            // forLogin
+            forLogin
         }
     },
 }

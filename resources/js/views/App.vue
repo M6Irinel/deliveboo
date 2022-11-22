@@ -11,7 +11,6 @@
 
 export default {
     name: 'AppVue',
-    components: { RestaurantsIndex }
 }
 </script>
 

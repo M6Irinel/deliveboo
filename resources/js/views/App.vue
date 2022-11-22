@@ -7,22 +7,25 @@
 
 <script>
 // @ts-nocheck
-// import store from '../store/store';
+import store from '../store/store';
 
 export default {
     name: 'AppVue',
 
-    data() {
+    data () {
         return {
-            // restaurants
+            restaurants: [],
         }
     },
 
     methods: {
         fetchRestaurants () {
+            store.caricamento = true;
             axios.get( '/api/restaurants' ).then( r => {
-                console.log(r);
-            })
+                store.restaurants = r.data.restaurants;
+                store.vai = true;
+                store.caricamento = false;
+            } )
         }
     },
 

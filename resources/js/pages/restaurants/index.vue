@@ -3,7 +3,18 @@
         <div v-html="forLogin" />
         <div class="container">
             <h1>Ristoranti belli</h1>
-            <router-link :to="{name: 'Plates'}">piatti</router-link>
+
+            <ul v-if="!caricamento">
+                <router-link v-for="(restaurant, i) in restaurants" :key="i"
+                    :to="{ name: 'Plates', params: { 'id': i } }">
+                    <li>
+                        <strong> Nome Ristorante:- {{ restaurant.user.name }} </strong>
+                    </li>
+                </router-link>
+            </ul>
+            <div v-else>
+                caricamento...
+            </div>
         </div>
     </div>
 </template>
@@ -11,14 +22,20 @@
 
 <script>
 // @ts-nocheck
+import store from '../../store/store';
 
 export default {
     name: 'RestaurantsIndex',
 
-    data() {
+    data () {
         return {
             forLogin
         }
+    },
+
+    computed: {
+        restaurants () { return store.restaurants },
+        caricamento () { return store.caricamento },
     },
 }
 </script>

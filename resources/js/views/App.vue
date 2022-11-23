@@ -25,6 +25,7 @@ export default {
                 store.restaurants = r.data.restaurants;
                 store.vai = true;
                 store.caricamento = false;
+            
             } )
         }
     },

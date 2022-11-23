@@ -41,6 +41,7 @@ class UserSeeder extends Seeder
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make($user['password']),
+                'slug' => strtolower(str_replace(' ', '-', $user['name'])),
             ]);
         }
     }

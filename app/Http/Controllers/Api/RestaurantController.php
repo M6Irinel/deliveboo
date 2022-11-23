@@ -39,9 +39,24 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $plates = User::where('slug', $slug)->with('restaurant', 'plates')->get();
+      
+
+        if ($plates) {
+            return response()->json([
+                'plates' => $plates,
+                'status' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => false
+
+            ],404);
+        }
+
+        
     }
 
     /**

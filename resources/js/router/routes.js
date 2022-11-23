@@ -11,7 +11,7 @@ export default [
         component: Restaurants,
     },
     {
-        path: "/restaurant/:id",
+        path: "/restaurant/:slug",
         name: "Plates",
         component: Plates,
     },

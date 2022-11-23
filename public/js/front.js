@@ -7082,15 +7082,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchPlates: function fetchPlates() {
       var _this = this;
-      axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (res) {
-        var plates = res.data.plates;
-        console.log(res.data);
-        _this.plates = plates;
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
+      axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (r) {
+        _this.plates = r.data.plates;
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
       });
     }
-  },
-  beforeMount: function beforeMount() {
-    this.fetchPlates();
   },
   computed: {
     restaurants: function restaurants() {
@@ -7105,6 +7102,9 @@ __webpack_require__.r(__webpack_exports__);
     restaurant_Id: function restaurant_Id() {
       return this.$route.params.id;
     }
+  },
+  created: function created() {
+    this.fetchPlates();
   }
 });
 
@@ -7282,7 +7282,7 @@ var render = function render() {
   }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
     return _c("p", {
       key: i
-    }, [_vm._v("\n          " + _vm._s(plate.plate_name) + "\n        ")]);
+    }, [_vm._v("\n                    " + _vm._s(plate.plate_name) + "\n                ")]);
   }), 0) : _vm._e()]) : _c("div", [_c("LoaderC")], 1)], 1)]);
 };
 var staticRenderFns = [];
@@ -24147,7 +24147,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

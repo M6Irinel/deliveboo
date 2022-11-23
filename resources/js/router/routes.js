@@ -1,20 +1,19 @@
 // @ts-nocheck
-
-import RestaurantsIndex from "../pages/restaurants/index.vue";
-import PlatesIndex from "../pages/plates/index.vue";
-import NotFound from '../pages/not-found.vue';
+import Restaurants from "../pages/Restaurants.vue";
+import Plates from "../pages/Plates.vue";
+import NotFound from '../pages/NotFound.vue';
 
 export default [
 
     {
         path: "/",
         name: "Home",
-        component: RestaurantsIndex,
+        component: Restaurants,
     },
     {
-        path: "/plates/:id",
+        path: "/restaurant/:id",
         name: "Plates",
-        component: PlatesIndex,
+        component: Plates,
     },
     {
         path: '*',

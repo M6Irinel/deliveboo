@@ -4,6 +4,7 @@ import Vue from "vue";
 
 export default Vue.observable({
     restaurants: null,
-    vai: false,
-    caricamento: false
+    typologies: null,
+    hasPlates: false,
+    loading: false,
 });

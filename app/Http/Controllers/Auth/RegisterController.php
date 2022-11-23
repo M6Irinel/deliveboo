@@ -65,30 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
-
         $slug_base = strtolower(str_replace(' ', '-', $data['name']));
         $slug = $slug_base;
-        $ristorante_esistente = User::where('slug', $slug_base)->first();
-        $counter = 1;
-        while ($ristorante_esistente) {
-            $slug = $slug_base . '-' . $counter;
-            $ristorante_esistente = User::where('slug', $slug)->first();
-            $counter++;
+        $user_exist = User::where('slug', $slug_base)->first();
+
+        $i = 1;
+        while ($user_exist) {
+            $slug = $slug_base . '-' . $i++;
+            $user_exist = User::where('slug', $slug)->first();
         }
-
-
-
-
-        // $params = $data;
-        // $user = User::where('name', $params['name'])->first();
-
-        // $i = 1;
-        // while($user !== null){
-        //     $params['name'] = strtolower(str_replace(' ', '-', ($user['name'] . '-' . $i++)));
-        //     $user = User::where('name', $params['name'])->first();
-        // }
 
         return User::create([
             'name' => $data['name'],

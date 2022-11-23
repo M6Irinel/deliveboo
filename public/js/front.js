@@ -7114,12 +7114,16 @@ __webpack_require__.r(__webpack_exports__);
   name: "RestaurantsIndex",
   data: function data() {
     return {
-      forLogin: forLogin
+      forLogin: forLogin,
+      type: ""
     };
   },
   computed: {
     restaurants: function restaurants() {
       return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].restaurants;
+    },
+    typologies: function typologies() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].typologies;
     },
     caricamento: function caricamento() {
       return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].caricamento;
@@ -7127,6 +7131,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     LoadComp: _components_LoadComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    prova: function prova(t) {
+      console.log(t);
+    }
   }
 });
 
@@ -7159,10 +7168,17 @@ __webpack_require__.r(__webpack_exports__);
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].vai = true;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].caricamento = false;
       });
+    },
+    fetchTypologies: function fetchTypologies() {
+      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].caricamento = true;
+      axios.get('/api/typologies').then(function (r) {
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].typologies = r.data.typologies;
+      });
     }
   },
   created: function created() {
     this.fetchRestaurants();
+    this.fetchTypologies();
   }
 });
 
@@ -7276,7 +7292,23 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), !_vm.caricamento ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, i) {
+  }, [_c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("ul", [_vm._v("Tutte le tipologie:\n            "), _vm._l(_vm.typologies, function (t, i) {
+    return _c("li", {
+      key: i
+    }, [_c("input", {
+      attrs: {
+        type: "checkbox"
+      },
+      domProps: {
+        value: t.name
+      },
+      on: {
+        click: function click($event) {
+          return _vm.prova(t.name);
+        }
+      }
+    }), _vm._v(" "), _c("strong", [_vm._v(" " + _vm._s(t.name) + " ")])]);
+  })], 2), _vm._v(" "), !_vm.caricamento ? _c("ul", _vm._l(_vm.restaurants, function (restaurant, i) {
     return _c("router-link", {
       key: i,
       attrs: {
@@ -23986,6 +24018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   restaurants: null,
+  typologies: null,
   vai: false,
   caricamento: false
 }));
@@ -24068,7 +24101,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

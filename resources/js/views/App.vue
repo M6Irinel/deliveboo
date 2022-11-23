@@ -27,11 +27,20 @@ export default {
                 store.caricamento = false;
             
             } )
+        },
+
+        fetchTypologies () {
+            store.caricamento = true;
+            axios.get( '/api/typologies' ).then( r => {
+                store.typologies = r.data.typologies;
+                       
+            } )
         }
     },
 
     created () {
         this.fetchRestaurants();
+        this.fetchTypologies();
     }
 }
 </script>

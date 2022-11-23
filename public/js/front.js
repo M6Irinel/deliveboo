@@ -7127,7 +7127,7 @@ __webpack_require__.r(__webpack_exports__);
       var r = _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].restaurants;
       if (!this.types.length) return r;
       return r.filter(function (e) {
-        return _this.types.find(function (f) {
+        return _this.types.every(function (f) {
           return e.typologies.map(function (m) {
             return m.name;
           }).includes(f);
@@ -24132,7 +24132,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

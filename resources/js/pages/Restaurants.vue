@@ -51,7 +51,7 @@ export default {
         restaurants () {
             let r = store.restaurants;
             if ( !this.types.length ) return r;
-            return r.filter( e => this.types.find( f => e.typologies.map( m => m.name ).includes( f ) ) );
+            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
         },
         typologies () { return store.typologies; },
         loading () { return store.loading; },

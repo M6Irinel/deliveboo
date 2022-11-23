@@ -7075,8 +7075,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      forLogin: forLogin
+      forLogin: forLogin,
+      plates: null
     };
+  },
+  methods: {
+    fetchPlates: function fetchPlates() {
+      var _this = this;
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
+      axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (r) {
+        _this.plates = r.data.plates;
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
+      });
+    }
   },
   computed: {
     restaurants: function restaurants() {
@@ -7091,6 +7102,9 @@ __webpack_require__.r(__webpack_exports__);
     restaurant_Id: function restaurant_Id() {
       return this.$route.params.id;
     }
+  },
+  created: function created() {
+    this.fetchPlates();
   }
 });
 
@@ -7111,6 +7125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // props: ['slug'],
   name: "RestaurantsIndex",
   components: {
     LoaderC: _components_Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -7264,7 +7279,7 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.restaurants[_vm.restaurant_Id].plates, function (plate, i) {
+  }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
     return _c("p", {
       key: i
     }, [_vm._v("\n                    " + _vm._s(plate.plate_name) + "\n                ")]);
@@ -7347,7 +7362,7 @@ var render = function render() {
         to: {
           name: "Plates",
           params: {
-            id: i
+            slug: restaurant.user.slug
           }
         }
       }
@@ -24022,7 +24037,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "Home",
   component: _pages_Restaurants_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: "/restaurant/:id",
+  path: "/restaurant/:slug",
   name: "Plates",
   component: _pages_Plates_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
@@ -24132,7 +24147,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

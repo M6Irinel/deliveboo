@@ -61,6 +61,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => $restaurant['restaurant_phone_number'],
                 'restaurant_website'        => $restaurant['restaurant_website'],
                 'restaurant_image'          => $restaurant['restaurant_image'],
+                
 
             ]);
             $tagIds = $tags->shuffle()->take(4)->all();

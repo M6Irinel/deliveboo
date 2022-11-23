@@ -16,7 +16,7 @@
 
             <ul class="list-style-none grid-12 gap-5" v-if="!loading">
                 <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow" v-for="(restaurant, i) in restaurants" :key="i"
-                    :to="{ name: 'Plates', params: { 'id': i } }">
+                    :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
                     <li>
                         <strong>{{ restaurant.user.name }}</strong>
                     </li>
@@ -36,6 +36,7 @@ import LoaderC from '../components/Loader.vue';
 import store from '../store/store';
 
 export default {
+    // props: ['slug'],
     name: "RestaurantsIndex",
 
     components: { LoaderC },

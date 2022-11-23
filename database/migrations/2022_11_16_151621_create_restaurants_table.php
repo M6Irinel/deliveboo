@@ -23,6 +23,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('restaurant_phone_number', 15)->unique();
             $table->string('restaurant_website')->unique()->nullable();
             $table->string('restaurant_image')->nullable();
+            
             $table->timestamps();
         });
     }

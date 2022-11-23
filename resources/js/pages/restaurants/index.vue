@@ -13,7 +13,7 @@
                 </router-link>
             </ul>
             <div v-else>
-                caricamento...
+                <LoadComp />
             </div>
         </div>
     </div>
@@ -22,21 +22,21 @@
 
 <script>
 // @ts-nocheck
+import LoadComp from '../../components/LoadComp.vue';
 import store from '../../store/store';
 
 export default {
-    name: 'RestaurantsIndex',
-
-    data () {
+    name: "RestaurantsIndex",
+    data() {
         return {
             forLogin
-        }
+        };
     },
-
     computed: {
-        restaurants () { return store.restaurants },
-        caricamento () { return store.caricamento },
+        restaurants() { return store.restaurants; },
+        caricamento() { return store.caricamento; },
     },
+    components: { LoadComp }
 }
 </script>
 

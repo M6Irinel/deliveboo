@@ -1,6 +1,6 @@
 <template>
-    <div class="load__back">
-        <div class="load__class">
+    <div class="load_back">
+        <div class="load_class">
             <font-awesome-icon icon="fa-regular fa-hourglass-half" />
         </div>
     </div>
@@ -15,7 +15,7 @@ export default {
 
 
 <style scoped lang="scss">
-.load__back {
+.load_back {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,10 +28,9 @@ export default {
     left: 0;
     z-index: 99;
 
-    .load__class {
+    .load_class {
         border-radius: 50%;
         font-size: 5rem;
-
         animation: spin 3s linear infinite;
 
         @keyframes spin {

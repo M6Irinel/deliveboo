@@ -7115,7 +7115,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       forLogin: forLogin,
-      type: []
+      type: [],
+      filteredRestaurants: []
     };
   },
   computed: {
@@ -7133,9 +7134,25 @@ __webpack_require__.r(__webpack_exports__);
     LoadComp: _components_LoadComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    prova: function prova() {
-      // console.log(this.type)
-      // console.log(this.type)
+    filterRestaurants: function filterRestaurants() {
+      var _this = this;
+      var array = [];
+      if (this.type.length === 0) {
+        return this.restaurants;
+      } else {
+        array = [];
+        this.restaurants.forEach(function (item) {
+          item.typologies.forEach(function (elem) {
+            if (_this.filterTypologies.includes(elem.name)) {
+              if (!array.includes(item)) {
+                array.push(item);
+              }
+            } else {}
+          });
+        });
+        console.log(array);
+        return array;
+      }
     },
     stampa: function stampa() {
       console.log(this.type);
@@ -7321,7 +7338,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.prova();
+          return _vm.filterRestaurants();
         },
         change: function change($event) {
           var $$a = _vm.type,

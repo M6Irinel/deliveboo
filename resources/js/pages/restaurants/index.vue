@@ -6,12 +6,12 @@
             <h1 @click="stampa()">Stampa array</h1>
             <ul>Tutte le tipologie:
                 <li v-for="(t, i) in typologies" :key="i">
-                    <input type="checkbox" v-bind:value="t.name" @click="prova()"  v-model="type">
+                    <input type="checkbox" v-bind:value="t.name" @click="filterRestaurants()" v-model="type">
 
                     <strong> {{ t.name }} </strong>
                 </li>
             </ul>
-            
+
             <ul v-if="!caricamento">
                 <router-link v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'id': i } }">
@@ -20,7 +20,7 @@
                     </li>
                 </router-link>
             </ul>
-          
+
             <div v-else>
                 <LoadComp />
             </div>
@@ -39,24 +39,48 @@ export default {
     data() {
         return {
             forLogin,
-            type:[]
+            type: [],
+            filteredRestaurants: []
         };
     },
     computed: {
         restaurants() { return store.restaurants; },
         typologies() { return store.typologies; },
         caricamento() { return store.caricamento; },
+       
+
+
+
+
     },
     components: { LoadComp },
-methods:{
-    prova(){
-        // console.log(this.type)
-        // console.log(this.type)
-    },
-    stampa(){
-        console.log(this.type)
+    methods: {
+
+        filterRestaurants: function () {
+            let array = [];
+            if (this.type.length === 0) {
+                return this.restaurants;
+            } else {
+                array = [];
+                this.restaurants.forEach((item) => {
+                    item.typologies.forEach((elem) => {
+                        if (this.filterTypologies.includes(elem.name)) {
+                            if (!array.includes(item)) {
+                                array.push(item);
+                            }
+                        } else {
+                        }
+                    });
+                });
+                console.log(array)
+                return array;
+            }
+        },
+
+        stampa() {
+            console.log(this.type)
+        }
     }
-}
 
 }
 </script>

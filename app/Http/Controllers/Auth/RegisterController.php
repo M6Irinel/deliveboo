@@ -64,10 +64,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $params = $data;
+        $user = User::where('name', $params['name'])->first();
+
+        $i = 1;
+        while($user !== null){
+            $params['name'] = strtolower(str_replace(' ', '-', ($user['name'] . '-' . $i++)));
+            $user = User::where('name', $params['name'])->first();
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'slug' => strtolower(str_replace(' ', '-', $data['name'])),
         ]);
     }
 }

@@ -7115,7 +7115,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       forLogin: forLogin,
-      type: ""
+      type: []
     };
   },
   computed: {
@@ -7133,8 +7133,12 @@ __webpack_require__.r(__webpack_exports__);
     LoadComp: _components_LoadComp_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    prova: function prova(t) {
-      console.log(t);
+    prova: function prova() {
+      // console.log(this.type)
+      // console.log(this.type)
+    },
+    stampa: function stampa() {
+      console.log(this.type);
     }
   }
 });
@@ -7292,19 +7296,48 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("ul", [_vm._v("Tutte le tipologie:\n            "), _vm._l(_vm.typologies, function (t, i) {
+  }, [_c("h1", [_vm._v("Ristoranti belli")]), _vm._v(" "), _c("h1", {
+    on: {
+      click: function click($event) {
+        return _vm.stampa();
+      }
+    }
+  }, [_vm._v("Stampa array")]), _vm._v(" "), _c("ul", [_vm._v("Tutte le tipologie:\n            "), _vm._l(_vm.typologies, function (t, i) {
     return _c("li", {
       key: i
     }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.type,
+        expression: "type"
+      }],
       attrs: {
         type: "checkbox"
       },
       domProps: {
-        value: t.name
+        value: t.name,
+        checked: Array.isArray(_vm.type) ? _vm._i(_vm.type, t.name) > -1 : _vm.type
       },
       on: {
         click: function click($event) {
-          return _vm.prova(t.name);
+          return _vm.prova();
+        },
+        change: function change($event) {
+          var $$a = _vm.type,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false;
+          if (Array.isArray($$a)) {
+            var $$v = t.name,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.type = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.type = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.type = $$c;
+          }
         }
       }
     }), _vm._v(" "), _c("strong", [_vm._v(" " + _vm._s(t.name) + " ")])]);

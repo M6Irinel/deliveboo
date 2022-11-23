@@ -3,10 +3,12 @@
         <div v-html="forLogin" />
         <div class="container">
             <h1>Ristoranti belli</h1>
+            <h1 @click="stampa()">Stampa array</h1>
             <ul>Tutte le tipologie:
                 <li v-for="(t, i) in typologies" :key="i">
-                    <input type="checkbox" :value="t.name" @click="prova(t.name)">
-                     <strong> {{ t.name }} </strong>
+                    <input type="checkbox" v-bind:value="t.name" @click="prova()"  v-model="type">
+
+                    <strong> {{ t.name }} </strong>
                 </li>
             </ul>
             
@@ -37,7 +39,7 @@ export default {
     data() {
         return {
             forLogin,
-            type:""
+            type:[]
         };
     },
     computed: {
@@ -47,8 +49,12 @@ export default {
     },
     components: { LoadComp },
 methods:{
-    prova(t){
-        console.log(t)
+    prova(){
+        // console.log(this.type)
+        // console.log(this.type)
+    },
+    stampa(){
+        console.log(this.type)
     }
 }
 

@@ -1,20 +1,24 @@
 <template>
     <div class="load__back">
         <div class="load__class">
-            <!-- <font-awesome-icon icon="fa-regular fa-hourglass-half" /> -->
-            Arriviamo
+            <font-awesome-icon icon="fa-regular fa-hourglass-half" />
         </div>
     </div>
 </template>
 
+
 <script>
 export default {
-
+    name: 'LoadComp',
 }
 </script>
 
+
 <style scoped lang="scss">
 .load__back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: black;
     background-color: gray;
     position: absolute;
@@ -24,16 +28,9 @@ export default {
     left: 0;
     z-index: 99;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     .load__class {
-
-
         border-radius: 50%;
         font-size: 5rem;
-
 
         animation: spin 3s linear infinite;
 
@@ -42,9 +39,6 @@ export default {
                 transform: rotate(1turn);
             }
         }
-
     }
-
-
 }
 </style>

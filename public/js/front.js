@@ -7077,14 +7077,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       forLogin: forLogin,
       plates: null,
-      nome: '',
-      i: 1
+      quantita: 1
     };
-  },
-  watch: {
-    nome: function nome(newName) {
-      localStorage.name = newName;
-    }
   },
   methods: {
     fetchPlates: function fetchPlates() {
@@ -7096,17 +7090,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addPlateLocalstorage: function addPlateLocalstorage(nome) {
-      if (!localStorage.name) {
-        nome = localStorage.name;
-        this.i = 1;
+      if (localStorage.getItem(nome) == null) {
+        this.quantita = 1;
+        localStorage.setItem(nome, "".concat(nome, "-").concat(this.quantita));
+      } else {
+        var t = localStorage.getItem(nome);
+        var ar = t.split('-');
+        this.quantita = Number(ar[ar.length - 1]);
+        localStorage.removeItem(nome);
+        localStorage.setItem(nome, "".concat(nome, "-").concat(++this.quantita));
       }
-      localStorage.setItem(nome, nome);
-      localStorage.setItem(nome + ' ' + this.i, this.i++);
-    }
-  },
-  mounted: function mounted() {
-    if (localStorage.name) {
-      this.nome = localStorage.name;
     }
   },
   computed: {

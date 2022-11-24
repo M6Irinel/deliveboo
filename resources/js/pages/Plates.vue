@@ -8,8 +8,7 @@
 
             <div v-if="!loading">
                 <div v-if="hasPlates">
-                    <button @click="addPlateLocalstorage(plate.plate_name)"
-                        v-for="(plate, i) in plates" :key="i">
+                    <button v-for="(plate, i) in plates" :key="i" @click="addPlateLocalstorage(plate.plate_name)">
                         {{ plate.plate_name }}
                     </button>
                 </div>
@@ -36,13 +35,8 @@ export default {
         return {
             forLogin,
             plates: null,
-            nome: '',
-            i: 1
+            quantita: 1
         };
-    },
-
-    watch: {
-        nome ( newName ) { localStorage.name = newName }
     },
 
     methods: {
@@ -55,21 +49,19 @@ export default {
         },
 
         addPlateLocalstorage ( nome ) {
-            if ( !localStorage.name ) {
-                nome = localStorage.name
-                this.i = 1;
+            if ( localStorage.getItem( nome ) == null ) {
+                this.quantita = 1;
+                localStorage.setItem( nome, `${ nome }-${ this.quantita }` );
+            } else {
+                const t = localStorage.getItem( nome );
+                let ar = t.split( '-' );
+                this.quantita = Number( ar[ ar.length - 1 ] );
+                localStorage.removeItem( nome );
+                localStorage.setItem( nome, `${ nome }-${ ++this.quantita }` );
             }
-            localStorage.setItem( nome, nome );
-            localStorage.setItem( ( nome + ' ' + this.i ), this.i++ );
         },
 
 
-    },
-
-    mounted () {
-        if ( localStorage.name ) {
-            this.nome = localStorage.name;
-        }
     },
 
     computed: {

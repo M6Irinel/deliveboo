@@ -15,9 +15,10 @@
             </div>
 
             <ul class="list-style-none grid-12 gap-5" v-if="!loading">
-                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow" v-for="(restaurant, i) in restaurants" :key="i"
+                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
+                    v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                    <li>
+                    <li @click="addRestaurant(restaurant.user.slug)">
                         <strong>{{ restaurant.user.name }}</strong>
                     </li>
                 </router-link>
@@ -41,21 +42,45 @@ export default {
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
             types: [],
         };
     },
+    methods: {
+        addRestaurant(r) {
+           
+
+            if (typeof (Storage)) {
+                if (localStorage.rName) {
+                    console.log('già preso')
+                  
+
+
+
+                } else {
+                    localStorage.setItem("rName", r);
+
+
+                   
+
+                }
+            }
+            else {
+                alert('hai il pc vecchio, vai a piedi')
+            }
+        }
+    },
 
     computed: {
-        restaurants () {
+        restaurants() {
             let r = store.restaurants;
-            if ( !this.types.length ) return r;
-            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
+            if (!this.types.length) return r;
+            return r.filter(e => this.types.every(f => e.typologies.map(m => m.name).includes(f)));
         },
-        typologies () { return store.typologies; },
-        loading () { return store.loading; },
+        typologies() { return store.typologies; },
+        loading() { return store.loading; },
     },
 }
 </script>

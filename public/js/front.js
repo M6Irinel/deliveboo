@@ -7157,6 +7157,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 // @ts-nocheck
 
 
@@ -7171,6 +7172,19 @@ __webpack_require__.r(__webpack_exports__);
       forLogin: forLogin,
       types: []
     };
+  },
+  methods: {
+    addRestaurant: function addRestaurant(r) {
+      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        if (localStorage.rName) {
+          console.log('già preso');
+        } else {
+          localStorage.setItem("rName", r);
+        }
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
+      }
+    }
   },
   computed: {
     restaurants: function restaurants() {
@@ -7420,7 +7434,13 @@ var render = function render() {
           }
         }
       }
-    }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
+    }, [_c("li", {
+      on: {
+        click: function click($event) {
+          return _vm.addRestaurant(restaurant.user.slug);
+        }
+      }
+    }, [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
   }), 1) : _c("div", [_c("LoaderC")], 1)])]);
 };
 var staticRenderFns = [];

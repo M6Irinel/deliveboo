@@ -7054,7 +7054,8 @@ __webpack_require__.r(__webpack_exports__);
   name: 'CartVue',
   data: function data() {
     return {
-      forLogin: forLogin
+      forLogin: forLogin,
+      o: localStorage
     };
   }
 });
@@ -7111,41 +7112,52 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
       });
     },
-    addPlate: function addPlate(plate_name) {
-      var plateCounter = plate_name + '-counter';
+    addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
         //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
 
-        if (localStorage.rId) {
-          console.log('qui');
-          console.log(localStorage.getItem("rId"));
+        if (localStorage.resId) {
+          if (localStorage.getItem("resId") == plate.restaurant_id) {
+            this.plateLocalStore(plate);
+            return;
+          } else {
+            alert('non puoi ordinare da più ristoranti');
+            return;
+          }
         } else {
-          console.log('id vuoto');
+          localStorage.setItem("resId", plate.restaurant_id);
         }
-        if (localStorage.getItem(plate_name) == plate_name) {
-          var c = localStorage.getItem(plateCounter);
-          localStorage.setItem(plateCounter, ++c);
-        } else {
-          localStorage.setItem(plate_name, plate_name);
-          localStorage.setItem(plateCounter, 1);
-        }
+        this.plateLocalStore(plate);
       } else {
         alert('hai il pc vecchio, vai a piedi');
       }
     },
-    removePlate: function removePlate(plate_name) {
-      var plateCounter = plate_name + '-counter';
+    plateLocalStore: function plateLocalStore(plate) {
+      var plateCounter = plate.plate_name + '-counter';
+      if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+        var c = localStorage.getItem(plateCounter);
+        localStorage.setItem(plateCounter, ++c);
+      } else {
+        localStorage.setItem(plate.plate_name, plate.plate_name);
+        localStorage.setItem(plateCounter, 1);
+      }
+    },
+    removePlate: function removePlate(plate) {
+      var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.getItem(plate_name) == plate_name) {
+        if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
           var c = localStorage.getItem(plateCounter);
           localStorage.setItem(plateCounter, --c);
           if (c === 0) {
             localStorage.removeItem(plateCounter);
-            localStorage.removeItem(plate_name);
+            localStorage.removeItem(plate.plate_name);
           }
         }
       } else {
         alert('hai il pc vecchio, vai a piedi');
+      }
+      if (localStorage.length <= 1) {
+        this.pulisciStorage();
       }
     },
     pulisciStorage: function pulisciStorage() {
@@ -7184,7 +7196,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 // @ts-nocheck
 
 
@@ -7200,19 +7211,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       types: []
     };
   },
-  methods: {
-    addRestaurant: function addRestaurant(i) {
-      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.rId) {
-          console.log('già preso');
-        } else {
-          localStorage.setItem("rId", i);
-        }
-      } else {
-        alert('hai il pc vecchio, vai a piedi');
-      }
-    }
-  },
+  methods: {},
   computed: {
     restaurants: function restaurants() {
       var _this = this;
@@ -7330,7 +7329,11 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")])])]);
+  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _c("ul", _vm._l(_vm.o, function (value, key, index) {
+    return key != value ? _c("li", {
+      key: index
+    }, [_c("div", [_vm._v("\n                    " + _vm._s(key) + ": " + _vm._s(value) + "\n                ")])]) : _vm._e();
+  }), 0)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7404,13 +7407,13 @@ var render = function render() {
     }, [_c("button", {
       on: {
         click: function click($event) {
-          return _vm.addPlate(plate.plate_name);
+          return _vm.addPlate(plate);
         }
       }
     }, [_vm._v("\n                        " + _vm._s(plate.plate_name) + "\n                    ")]), _vm._v(" "), _c("button", {
       on: {
         click: function click($event) {
-          return _vm.removePlate(plate.plate_name);
+          return _vm.removePlate(plate);
         }
       }
     }, [_vm._v("Togli 1")])]);
@@ -7420,7 +7423,7 @@ var render = function render() {
         return _vm.pulisciStorage();
       }
     }
-  }, [_vm._v("pulisci tutto Storage")])]) : _c("div", [_c("LoaderC")], 1)])]);
+  }, [_vm._v("Svuota il Carello")])]) : _c("div", [_c("LoaderC")], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7511,13 +7514,7 @@ var render = function render() {
           }
         }
       }
-    }, [_c("li", {
-      on: {
-        click: function click($event) {
-          return _vm.addRestaurant(restaurant.id);
-        }
-      }
-    }, [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
+    }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
   }), 1) : _c("div", [_c("LoaderC")], 1)])]);
 };
 var staticRenderFns = [];

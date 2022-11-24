@@ -12,14 +12,14 @@
             <div v-if="!loading">
                 <div v-if="hasPlates">
                     <div v-for="(plate, i) in plates" :key="i">
-                        <button @click="addPlate(plate.plate_name)">
+                        <button @click="addPlate(plate)">
                             {{ plate.plate_name }}
                         </button>
-                        <button @click="removePlate(plate.plate_name)">Togli 1</button>
+                        <button @click="removePlate(plate)">Togli 1</button>
                     </div>
                 </div>
 
-                <button @click="pulisciStorage()">pulisci tutto Storage</button>
+                <button @click="pulisciStorage()">Svuota il Carello</button>
             </div>
             <div v-else>
                 <LoaderC />
@@ -55,50 +55,70 @@ export default {
             });
         },
 
-        addPlate(plate_name) {
-            let plateCounter = plate_name + '-counter'
-
+        addPlate(plate) {
+       
             if (typeof (Storage)) {
+          
 
                 //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
-               
-                if (localStorage.rId) {
-                    console.log('qui')
-                    console.log(localStorage.getItem("rId"))
-                }else{
-                    console.log('id vuoto')
-                }
 
-                
-                if (localStorage.getItem(plate_name) == plate_name) {
-                    let c = localStorage.getItem(plateCounter);
-                    localStorage.setItem(plateCounter, ++c);
+                if (localStorage.resId) {
+
+                    if (localStorage.getItem("resId") == plate.restaurant_id) {
+
+                        this.plateLocalStore(plate)
+                        return
+                    } else {
+
+                        alert('non puoi ordinare da più ristoranti')
+                        return
+                    }
                 } else {
-                    localStorage.setItem(plate_name, plate_name);
-                    localStorage.setItem(plateCounter, 1);
+
+                    localStorage.setItem("resId", plate.restaurant_id);
+
                 }
+                this.plateLocalStore(plate)
+
+
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
             }
         },
 
-        removePlate(plate_name) {
-            let plateCounter = plate_name + '-counter'
+        plateLocalStore(plate) {
+            let plateCounter = plate.plate_name + '-counter'
+            if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+                let c = localStorage.getItem(plateCounter);
+                localStorage.setItem(plateCounter, ++c);
+            } else {
+                localStorage.setItem(plate.plate_name, plate.plate_name);
+                localStorage.setItem(plateCounter, 1);
+            }
+
+        },
+
+        removePlate(plate) {
+            let plateCounter = plate.plate_name + '-counter'
 
             if (typeof (Storage)) {
-                if (localStorage.getItem(plate_name) == plate_name) {
+                if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
                     let c = localStorage.getItem(plateCounter);
                     localStorage.setItem(plateCounter, --c);
 
                     if (c === 0) {
                         localStorage.removeItem(plateCounter);
-                        localStorage.removeItem(plate_name);
+                        localStorage.removeItem(plate.plate_name);
                     }
                 }
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
+            }
+
+            if(localStorage.length<=1){
+                this.pulisciStorage()
             }
         },
 

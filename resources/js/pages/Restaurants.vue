@@ -22,7 +22,7 @@
                 <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
                     v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                    <li @click="addRestaurant(restaurant.id)">
+                    <li>
                         <strong>{{ restaurant.user.name }}</strong>
                     </li>
                 </router-link>
@@ -46,45 +46,24 @@ export default {
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
             types: [],
         };
     },
     methods: {
-        addRestaurant ( i ) {
 
-
-            if ( typeof ( Storage ) ) {
-                if ( localStorage.rId ) {
-                    console.log( 'già preso' )
-
-
-
-
-                } else {
-                    localStorage.setItem( "rId", i );
-
-
-
-
-                }
-            }
-            else {
-                alert( 'hai il pc vecchio, vai a piedi' )
-            }
-        }
     },
 
     computed: {
-        restaurants () {
+        restaurants() {
             let r = store.restaurants;
-            if ( !this.types.length ) return r;
-            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
+            if (!this.types.length) return r;
+            return r.filter(e => this.types.every(f => e.typologies.map(m => m.name).includes(f)));
         },
-        typologies () { return store.typologies; },
-        loading () { return store.loading; },
+        typologies() { return store.typologies; },
+        loading() { return store.loading; },
     },
 }
 </script>

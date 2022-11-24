@@ -7,6 +7,16 @@
             </div>
 
             <h1>Cart</h1>
+            <ul>
+              
+
+                <li v-for="(value, key, index) in o" v-if="key!=value" :key="index">
+                    <div >
+                        {{ key }}: {{ value }}
+                    </div>
+                </li>
+
+            </ul>
         </main>
     </div>
 </template>
@@ -20,7 +30,8 @@ export default {
 
     data() {
         return {
-            forLogin
+            forLogin,
+            o: localStorage
         }
     },
 }

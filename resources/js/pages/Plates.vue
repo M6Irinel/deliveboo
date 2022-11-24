@@ -1,15 +1,17 @@
 <template>
     <div>
-        <div v-html="forLogin" />
-        <div class="container">
-            <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
+        <header v-html="forLogin" />
+        <main class="container">
+            <div class="flex between">
+                <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
+                <router-link :to="{ name: 'Cart' }">Carello</router-link>
+            </div>
 
             <h1>Piatti</h1>
 
             <div v-if="!loading">
                 <div v-if="hasPlates">
                     <div v-for="(plate, i) in plates" :key="i">
-
                         <button @click="addPlate(plate.plate_name)">
                             {{ plate.plate_name }}
                         </button>
@@ -22,7 +24,7 @@
             <div v-else>
                 <LoaderC />
             </div>
-        </div>
+        </main>
     </div>
 </template>
 
@@ -37,96 +39,79 @@ export default {
 
     components: { LoaderC },
 
-    data() {
+    data () {
         return {
             forLogin,
             plates: null,
-
-            i: 1
         };
     },
 
-
-
     methods: {
-        fetchPlates() {
+        fetchPlates () {
             store.loading = true;
-            axios.get(`/api/restaurants/${this.$route.params.slug}`).then(r => {
+            axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
                 store.loading = false;
-            });
+            } );
         },
 
-        addPlate(plate_name) {
+        addPlate ( plate_name ) {
             let plateCounter = plate_name + '-counter'
 
-            if (typeof (Storage)) {
-                if (localStorage.getItem(plate_name) == plate_name) {
-                    let c = localStorage.getItem(plateCounter)
-                    c++
-                    localStorage.setItem(plateCounter, c)
-
-
-
+            if ( typeof ( Storage ) ) {
+                if ( localStorage.getItem( plate_name ) == plate_name ) {
+                    let c = localStorage.getItem( plateCounter );
+                    localStorage.setItem( plateCounter, ++c );
                 } else {
-                    localStorage.setItem(plate_name, plate_name);
-
-
-                    localStorage.setItem(plateCounter, 1);
-
+                    localStorage.setItem( plate_name, plate_name );
+                    localStorage.setItem( plateCounter, 1 );
                 }
             }
             else {
-                alert('hai il pc vecchio, vai a piedi')
+                alert( 'hai il pc vecchio, vai a piedi' )
             }
         },
-        removePlate(plate_name) {
+
+        removePlate ( plate_name ) {
             let plateCounter = plate_name + '-counter'
 
-            if (typeof (Storage)) {
-                if (localStorage.getItem(plate_name) == plate_name) {
-                    let c = localStorage.getItem(plateCounter)
-                    c--
-                    localStorage.setItem(plateCounter, c)
+            if ( typeof ( Storage ) ) {
+                if ( localStorage.getItem( plate_name ) == plate_name ) {
+                    let c = localStorage.getItem( plateCounter );
+                    localStorage.setItem( plateCounter, --c );
 
-                    if (c === 0) {
-                        localStorage.removeItem(plateCounter)
-                        localStorage.removeItem(plate_name)
-
+                    if ( c === 0 ) {
+                        localStorage.removeItem( plateCounter );
+                        localStorage.removeItem( plate_name );
                     }
-
                 }
             }
             else {
-                alert('hai il pc vecchio, vai a piedi')
+                alert( 'hai il pc vecchio, vai a piedi' )
             }
-
         },
-        pulisciStorage() {
+
+        pulisciStorage () {
             localStorage.clear();
         }
-
-
     },
 
-
-
     computed: {
-        restaurants() {
+        restaurants () {
             return store.restaurants;
         },
-        hasPlates() {
+        hasPlates () {
             return store.hasPlates;
         },
-        loading() {
+        loading () {
             return store.loading;
         },
-        restaurant_Id() {
+        restaurant_Id () {
             return this.$route.params.id;
         },
     },
 
-    created() {
+    created () {
         this.fetchPlates();
     },
 };

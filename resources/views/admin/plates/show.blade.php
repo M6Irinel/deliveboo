@@ -35,16 +35,16 @@
 
     <div id="modal">
         <div class="body-modal">
-            <p>Vuoi cancelare il piatto?</p>
+            <p>Vuoi cancellare il piatto?</p>
             <div>
                 <form action="{{ route('admin.plates.destroy', $plate) }}" method="POST">
                     @csrf
                     @method('DELETE')
 
-                    <input class="btn btn-danger" type="submit" value="SI">
+                    <input class="btn btn-danger btn-si" type="submit" value="SI">
                 </form>
 
-                <button class="btn btn-success" id="closeModal">No</button>
+                <button class="btn btn-success btn-no" id="closeModal">No</button>
             </div>
         </div>
     </div>

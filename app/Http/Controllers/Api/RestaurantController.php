@@ -41,7 +41,7 @@ class RestaurantController extends Controller
      */
     public function show($slug)
     {
-        $plates = User::where('slug', $slug)->get()->all()[0]->restaurant->plates;
+        $plates = User::where('slug', $slug)->first()->restaurant->plates;
 
         if ($plates) {
             return response()->json([

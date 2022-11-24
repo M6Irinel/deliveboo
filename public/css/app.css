@@ -11016,8 +11016,70 @@ a.text-dark:focus {
 #modal .body-modal {
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#modal .body-modal p {
+  font-size: 2rem;
+}
+
+#modal .body-modal div {
+  display: flex;
+  gap: 2rem;
+}
+
+#modal .body-modal div .btn {
+  padding: 1rem 2rem !important;
+  border-radius: 20px !important;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  transition: transform 0.2s ease-in-out;
+}
+
+#modal .body-modal div .btn:hover {
+  transform: scale(1.1);
+}
+
+#modal .body-modal div .btn:active {
+  transform: scale(1);
+}
+
+#modal .body-modal div .btn-si:hover {
+  animation: pulsazione-si 1s infinite;
+}
+
+#modal .body-modal div .btn-no:hover {
+  animation: pulsazione-no 1s infinite;
+}
+
+@keyframes pulsazione-si {
+  0% {
+    box-shadow: 0 0 0 red;
+  }
+
+  50% {
+    box-shadow: 0 0 30px red;
+  }
+
+  100% {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0);
+  }
+}
+
+@keyframes pulsazione-no {
+  0% {
+    box-shadow: 0 0 0 green;
+  }
+
+  50% {
+    box-shadow: 0 0 30px green;
+  }
+
+  100% {
+    box-shadow: 0 0 30px rgba(0, 128, 0, 0);
+  }
 }
 
 ::-webkit-scrollbar {

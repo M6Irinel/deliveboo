@@ -41,7 +41,7 @@ class RestaurantController extends Controller
      */
     public function show($slug)
     {
-        if (gettype(intval($slug)) == 'integer') {
+        if (is_numeric($slug)) {
             $plates = User::where('id', $slug)->first()->restaurant->plates;
 
             if ($plates) {

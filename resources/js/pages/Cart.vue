@@ -1,16 +1,19 @@
 <template>
     <div>
         <header v-html="forLogin" />
-        <main v-if="store.loading" class="container">
+        <main v-if="!loading" class="container">
             <div>
                 <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
             </div>
 
             <h1>Cart</h1>
-            <ul v-if="plates">
-                <li v-for="(v, i) in plates" :key="i">
+            <ul class="list-style-none grid-12 gap-5" v-if="plates">
+                <li class="g-col-3 card p-2" v-for="(v, i) in plates" :key="i">
+                    <div v-if="v.plate_image">
+                        <img height="200" :src="'./storage/' + v.plate_image" alt="">
+                    </div>
                     <p>{{ v.plate_name }}</p>
-                    <p>{{ v.plate_price }}</p>
+                    <p>Price: {{ v.plate_price }}€</p>
                 </li>
             </ul>
             <div v-else>
@@ -46,7 +49,10 @@ export default {
                 return store.plates.filter( e => localStorage[ e.plate_name ] );
             else
                 return null
-        }
+        },
+        loading() {
+            return store.loading;
+        },
     },
 
     methods: {

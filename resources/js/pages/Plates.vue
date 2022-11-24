@@ -57,7 +57,6 @@ export default {
 
         addPlate(plate) {
             if (typeof (Storage)) {
-                //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
                 if (localStorage.resId) {
                     if (localStorage.getItem("resId") == plate.restaurant_id) {
                         this.plateLocalStore( plate );

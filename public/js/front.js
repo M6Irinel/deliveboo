@@ -7068,6 +7068,9 @@ __webpack_require__.r(__webpack_exports__);
       if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates) return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.filter(function (e) {
         return localStorage[e.plate_name];
       });else return null;
+    },
+    loading: function loading() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading;
     }
   },
   methods: {
@@ -7138,7 +7141,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
         if (localStorage.resId) {
           if (localStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
@@ -7343,7 +7345,7 @@ var render = function render() {
     domProps: {
       innerHTML: _vm._s(_vm.forLogin)
     }
-  }), _vm._v(" "), _vm.store.loading ? _c("main", {
+  }), _vm._v(" "), !_vm.loading ? _c("main", {
     staticClass: "container"
   }, [_c("div", [_c("router-link", {
     attrs: {
@@ -7351,10 +7353,19 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("ul", _vm._l(_vm.plates, function (v, i) {
+  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("ul", {
+    staticClass: "list-style-none grid-12 gap-5"
+  }, _vm._l(_vm.plates, function (v, i) {
     return _c("li", {
-      key: i
-    }, [_c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_price))])]);
+      key: i,
+      staticClass: "g-col-3 card p-2"
+    }, [v.plate_image ? _c("div", [_c("img", {
+      attrs: {
+        height: "200",
+        src: "./storage/" + v.plate_image,
+        alt: ""
+      }
+    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v("Price: " + _vm._s(v.plate_price) + "€")])]);
   }), 0) : _c("div", [_c("p", [_vm._v("carello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
 };
 var staticRenderFns = [];

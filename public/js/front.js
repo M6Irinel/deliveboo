@@ -7134,18 +7134,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     plateLocalStore: function plateLocalStore(plate) {
       var plateCounter = plate.plate_name + '-counter';
-      if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+      if (localStorage.getItem(plate.plate_name) == plate.id) {
         var c = localStorage.getItem(plateCounter);
         localStorage.setItem(plateCounter, ++c);
       } else {
-        localStorage.setItem(plate.plate_name, plate.plate_name);
+        localStorage.setItem(plate.plate_name, plate.id);
         localStorage.setItem(plateCounter, 1);
       }
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+        if (localStorage.getItem(plate.plate_name) == plate.id) {
           var c = localStorage.getItem(plateCounter);
           localStorage.setItem(plateCounter, --c);
           if (c === 0) {

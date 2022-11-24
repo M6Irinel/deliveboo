@@ -89,11 +89,11 @@ export default {
 
         plateLocalStore(plate) {
             let plateCounter = plate.plate_name + '-counter'
-            if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+            if (localStorage.getItem(plate.plate_name) == plate.id) {
                 let c = localStorage.getItem(plateCounter);
                 localStorage.setItem(plateCounter, ++c);
             } else {
-                localStorage.setItem(plate.plate_name, plate.plate_name);
+                localStorage.setItem(plate.plate_name, plate.id);
                 localStorage.setItem(plateCounter, 1);
             }
 
@@ -103,7 +103,7 @@ export default {
             let plateCounter = plate.plate_name + '-counter'
 
             if (typeof (Storage)) {
-                if (localStorage.getItem(plate.plate_name) == plate.plate_name) {
+                if (localStorage.getItem(plate.plate_name) == plate.id) {
                     let c = localStorage.getItem(plateCounter);
                     localStorage.setItem(plateCounter, --c);
 

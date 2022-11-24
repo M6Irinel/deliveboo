@@ -7048,15 +7048,39 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
+/* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
 // @ts-nocheck
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CartVue',
+  components: {
+    LoaderC: _components_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      forLogin: forLogin,
-      o: localStorage
+      forLogin: forLogin
     };
+  },
+  computed: {
+    plates: function plates() {
+      if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates) return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.filter(function (e) {
+        return localStorage[e.plate_name];
+      });else return null;
+    }
+  },
+  methods: {
+    fetchPlates: function fetchPlates() {
+      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = true;
+      axios.get("/api/restaurants/".concat(localStorage.getItem('resId'))).then(function (r) {
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
+      });
+    }
+  },
+  created: function created() {
+    this.fetchPlates();
   }
 });
 
@@ -7115,7 +7139,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
         //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
-
         if (localStorage.resId) {
           if (localStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
@@ -7211,7 +7234,6 @@ __webpack_require__.r(__webpack_exports__);
       types: []
     };
   },
-  methods: {},
   computed: {
     restaurants: function restaurants() {
       var _this = this;
@@ -7321,7 +7343,7 @@ var render = function render() {
     domProps: {
       innerHTML: _vm._s(_vm.forLogin)
     }
-  }), _vm._v(" "), _c("main", {
+  }), _vm._v(" "), _vm.store.loading ? _c("main", {
     staticClass: "container"
   }, [_c("div", [_c("router-link", {
     attrs: {
@@ -7329,11 +7351,11 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _c("ul", _vm._l(_vm.o, function (value, key, index) {
-    return key != value ? _c("li", {
-      key: index
-    }, [_c("div", [_vm._v("\n                    " + _vm._s(key) + ": " + _vm._s(value) + "\n                ")])]) : _vm._e();
-  }), 0)])]);
+  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("ul", _vm._l(_vm.plates, function (v, i) {
+    return _c("li", {
+      key: i
+    }, [_c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_price))])]);
+  }), 0) : _c("div", [_c("p", [_vm._v("carello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -24289,7 +24311,8 @@ __webpack_require__.r(__webpack_exports__);
   restaurants: null,
   typologies: null,
   hasPlates: false,
-  loading: false
+  loading: false,
+  plates: null
 }));
 
 /***/ }),
@@ -24370,7 +24393,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

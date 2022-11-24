@@ -7,4 +7,5 @@ export default Vue.observable({
     typologies: null,
     hasPlates: false,
     loading: false,
+    plates: null
 });

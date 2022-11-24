@@ -41,17 +41,32 @@ class RestaurantController extends Controller
      */
     public function show($slug)
     {
-        $plates = User::where('slug', $slug)->first()->restaurant->plates;
+        if (gettype(intval($slug)) == 'integer') {
+            $plates = User::where('id', $slug)->first()->restaurant->plates;
 
-        if ($plates) {
-            return response()->json([
-                'plates' => $plates,
-                'status' => true
-            ]);
+            if ($plates) {
+                return response()->json([
+                    'plates' => $plates,
+                    'status' => true
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false
+                ], 404);
+            }
         } else {
-            return response()->json([
-                'status' => false
-            ], 404);
+            $plates = User::where('slug', $slug)->first()->restaurant->plates;
+
+            if ($plates) {
+                return response()->json([
+                    'plates' => $plates,
+                    'status' => true
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false
+                ], 404);
+            }
         }
     }
 

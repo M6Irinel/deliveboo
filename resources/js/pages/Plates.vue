@@ -49,38 +49,27 @@ export default {
     methods: {
         fetchPlates() {
             store.loading = true;
-            axios.get(`/api/restaurants/${this.$route.params.slug}`).then(r => {
+            axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
                 store.loading = false;
             });
         },
 
         addPlate(plate) {
-       
             if (typeof (Storage)) {
-          
-
                 //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
-
                 if (localStorage.resId) {
-
                     if (localStorage.getItem("resId") == plate.restaurant_id) {
-
-                        this.plateLocalStore(plate)
+                        this.plateLocalStore( plate );
                         return
                     } else {
-
-                        alert('non puoi ordinare da più ristoranti')
+                        alert( 'non puoi ordinare da più ristoranti' );
                         return
                     }
                 } else {
-
                     localStorage.setItem("resId", plate.restaurant_id);
-
                 }
-                this.plateLocalStore(plate)
-
-
+                this.plateLocalStore( plate );
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')

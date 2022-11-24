@@ -52,9 +52,6 @@ export default {
             types: [],
         };
     },
-    methods: {
-
-    },
 
     computed: {
         restaurants() {

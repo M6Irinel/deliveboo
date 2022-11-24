@@ -88,7 +88,7 @@
                 </label>
 
                 <div>
-                    <img id="blah" alt="your image" height="250"
+                    <img id="blah" alt="" height="250"
                         src="{{ asset('storage/' . $plate->plate_image) }} " />
                 </div>
 

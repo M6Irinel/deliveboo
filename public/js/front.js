@@ -7059,9 +7059,90 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Plates.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\BooleanClasse70\\progetto finale\\deliveboo\\resources\\js\\pages\\Plates.vue: Unexpected token (15:0)\n\n\u001b[0m \u001b[90m 13 |\u001b[39m             forLogin\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 |\u001b[39m             plates\u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 16 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m             i\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m         }\u001b[33m;\u001b[39m\u001b[0m\n    at instantiate (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:67:32)\n    at constructor (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:364:12)\n    at Parser.raise (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:3364:19)\n    at Parser.unexpected (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:3397:16)\n    at Parser.parsePropertyName (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12202:24)\n    at Parser.parsePropertyDefinition (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12059:22)\n    at Parser.parseObjectLike (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11993:21)\n    at Parser.parseExprAtom (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11464:23)\n    at Parser.parseExprSubscripts (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11171:23)\n    at Parser.parseUpdate (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11153:21)\n    at Parser.parseMaybeUnary (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10956:61)\n    at Parser.parseExprOps (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10962:23)\n    at Parser.parseMaybeConditional (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10937:23)\n    at Parser.parseMaybeAssign (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10895:21)\n    at Parser.parseExpressionBase (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10845:23)\n    at C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10840:39\n    at Parser.allowInAnd (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12635:16)\n    at Parser.parseExpression (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10840:17)\n    at Parser.parseReturnStatement (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13296:28)\n    at Parser.parseStatementContent (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12954:21)\n    at Parser.parseStatement (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12917:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13497:25)\n    at Parser.parseBlockBody (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13489:10)\n    at Parser.parseBlock (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13477:10)\n    at Parser.parseFunctionBody (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12287:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12271:10)\n    at Parser.parseMethod (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12226:31)\n    at Parser.parseObjectMethod (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12120:19)\n    at Parser.parseObjPropValue (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12154:23)\n    at Parser.parsePropertyDefinition (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12083:17)\n    at Parser.parseObjectLike (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11993:21)\n    at Parser.parseExprAtom (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11464:23)\n    at Parser.parseExprSubscripts (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11171:23)\n    at Parser.parseUpdate (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11153:21)\n    at Parser.parseMaybeUnary (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10956:61)\n    at Parser.parseExprOps (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10962:23)\n    at Parser.parseMaybeConditional (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10937:23)\n    at Parser.parseMaybeAssign (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10895:21)\n    at C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10863:39\n    at Parser.allowInAnd (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12635:16)\n    at Parser.parseMaybeAssignAllowIn (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:10863:17)\n    at Parser.parseExportDefaultExpression (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:14171:22)\n    at Parser.parseExport (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:14075:25)\n    at Parser.parseStatementContent (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13020:27)\n    at Parser.parseStatement (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12917:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13497:25)\n    at Parser.parseBlockBody (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:13489:10)\n    at Parser.parseProgram (C:\\BooleanClasse70\\progetto finale\\deliveboo\\node_modules\\@babel\\parser\\lib\\index.js:12832:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+// @ts-nocheck
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "PlatesIndex",
+  components: {
+    LoaderC: _components_Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      forLogin: forLogin,
+      plates: null,
+      i: 1
+    };
+  },
+  methods: {
+    fetchPlates: function fetchPlates() {
+      var _this = this;
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
+      axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (r) {
+        _this.plates = r.data.plates;
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
+      });
+    },
+    addPlate: function addPlate(plate_name) {
+      var plateCounter = plate_name + '-counter';
+      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        if (localStorage.getItem(plate_name) == plate_name) {
+          var c = localStorage.getItem(plateCounter);
+          c++;
+          localStorage.setItem(plateCounter, c);
+        } else {
+          localStorage.setItem(plate_name, plate_name);
+          localStorage.setItem(plateCounter, 1);
+        }
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
+      }
+    },
+    removePlate: function removePlate(plate_name) {
+      var plateCounter = plate_name + '-counter';
+      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        if (localStorage.getItem(plate_name) == plate_name) {
+          var c = localStorage.getItem(plateCounter);
+          c--;
+          localStorage.setItem(plateCounter, c);
+          if (c === 0) {
+            localStorage.removeItem(plateCounter);
+            localStorage.removeItem(plate_name);
+          }
+        }
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
+      }
+    },
+    pulisciStorage: function pulisciStorage() {
+      localStorage.clear();
+    }
+  },
+  computed: {
+    restaurants: function restaurants() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].restaurants;
+    },
+    hasPlates: function hasPlates() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].hasPlates;
+    },
+    loading: function loading() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading;
+    },
+    restaurant_Id: function restaurant_Id() {
+      return this.$route.params.id;
+    }
+  },
+  created: function created() {
+    this.fetchPlates();
+  }
+});
 
 /***/ }),
 
@@ -7234,7 +7315,7 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", [_vm._v("\n<<<<<<< HEAD\n                    "), _vm._l(_vm.plates, function (plate, i) {
+  }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
     return _c("div", {
       key: i
     }, [_c("button", {
@@ -7243,23 +7324,14 @@ var render = function render() {
           return _vm.addPlate(plate.plate_name);
         }
       }
-    }, [_vm._v("\n                            " + _vm._s(plate.plate_name) + "\n                        ")]), _vm._v(" "), _c("button", {
+    }, [_vm._v("\n                        " + _vm._s(plate.plate_name) + "\n                    ")]), _vm._v(" "), _c("button", {
       on: {
         click: function click($event) {
           return _vm.removePlate(plate.plate_name);
         }
       }
     }, [_vm._v("Togli 1")])]);
-  }), _vm._v("\n=======\n                    "), _vm._l(_vm.plates, function (plate, i) {
-    return _c("button", {
-      key: i,
-      on: {
-        click: function click($event) {
-          return _vm.addPlateLocalstorage(plate.plate_name);
-        }
-      }
-    }, [_vm._v("\n                        " + _vm._s(plate.plate_name) + "\n                    ")]);
-  }), _vm._v("\n>>>>>>> 251ae779b6c7a7d70f4f39066f4794015a497bf5\n                ")], 2) : _vm._e(), _vm._v(" "), _c("button", {
+  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
     on: {
       click: function click($event) {
         return _vm.pulisciStorage();

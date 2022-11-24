@@ -60,7 +60,7 @@ export default {
         addPlate(plate_name) {
             let plateCounter = plate_name + '-counter'
 
-            if (typeof (Storage) !== "undefined") {
+            if (typeof (Storage)) {
                 if (localStorage.getItem(plate_name) == plate_name) {
                     let c = localStorage.getItem(plateCounter)
                     c++
@@ -83,23 +83,22 @@ export default {
         removePlate(plate_name) {
             let plateCounter = plate_name + '-counter'
 
-            if (typeof (Storage) !== "undefined") {
+            if (typeof (Storage)) {
                 if (localStorage.getItem(plate_name) == plate_name) {
                     let c = localStorage.getItem(plateCounter)
                     c--
-                    if (c === 0)
+                    localStorage.setItem(plateCounter, c)
+
+                    if (c === 0) {
                         localStorage.removeItem(plateCounter)
-                    localStorage.removeItem(plate_name)
+                        localStorage.removeItem(plate_name)
 
-
-
-                    // } else {
-                    //     localStorage.setItem(plate_name, plate_name);
-
-
-                    //     localStorage.setItem(plateCounter, 1);
+                    }
 
                 }
+            }
+            else {
+                alert('hai il pc vecchio, vai a piedi')
             }
 
         },

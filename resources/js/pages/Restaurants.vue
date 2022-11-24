@@ -1,7 +1,11 @@
 <template>
     <div>
-        <div v-html="forLogin" />
-        <div class="container">
+        <header v-html="forLogin" />
+        <main class="container">
+            <div class="flex j-flex-end">
+                <router-link :to="{ name: 'Cart' }">Carello</router-link>
+            </div>
+
             <h1>Ristoranti</h1>
 
             <div class="shadow p-2 mb-5">
@@ -15,7 +19,8 @@
             </div>
 
             <ul class="list-style-none grid-12 gap-5" v-if="!loading">
-                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow" v-for="(restaurant, i) in restaurants" :key="i"
+                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
+                    v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
                     <li>
                         <strong>{{ restaurant.user.name }}</strong>
@@ -25,7 +30,7 @@
             <div v-else>
                 <LoaderC />
             </div>
-        </div>
+        </main>
     </div>
 </template>
 
@@ -41,7 +46,7 @@ export default {
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
             types: [],
@@ -49,13 +54,13 @@ export default {
     },
 
     computed: {
-        restaurants () {
+        restaurants() {
             let r = store.restaurants;
-            if ( !this.types.length ) return r;
-            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
+            if (!this.types.length) return r;
+            return r.filter(e => this.types.every(f => e.typologies.map(m => m.name).includes(f)));
         },
-        typologies () { return store.typologies; },
-        loading () { return store.loading; },
+        typologies() { return store.typologies; },
+        loading() { return store.loading; },
     },
 }
 </script>

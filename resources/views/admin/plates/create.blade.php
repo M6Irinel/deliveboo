@@ -80,7 +80,7 @@
                 </label>
 
                 <div>
-                    <img id="blah" alt="your image" height="250" />
+                    <img id="blah" src="{{ asset('./img/default/plate-empty.png') }}" alt="" height="250" />
                 </div>
 
                 <input class="form-control-file btn btn-secondary" type="file" id="plate_image" name="plate_image"

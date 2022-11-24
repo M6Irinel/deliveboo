@@ -7114,6 +7114,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     addPlate: function addPlate(plate_name) {
       var plateCounter = plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
+
+        if (localStorage.rId) {
+          console.log('qui');
+          console.log(localStorage.getItem("rId"));
+        } else {
+          console.log('id vuoto');
+        }
         if (localStorage.getItem(plate_name) == plate_name) {
           var c = localStorage.getItem(plateCounter);
           localStorage.setItem(plateCounter, ++c);
@@ -7193,12 +7201,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     };
   },
   methods: {
-    addRestaurant: function addRestaurant(r) {
+    addRestaurant: function addRestaurant(i) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.rName) {
+        if (localStorage.rId) {
           console.log('già preso');
         } else {
-          localStorage.setItem("rName", r);
+          localStorage.setItem("rId", i);
         }
       } else {
         alert('hai il pc vecchio, vai a piedi');
@@ -7506,7 +7514,7 @@ var render = function render() {
     }, [_c("li", {
       on: {
         click: function click($event) {
-          return _vm.addRestaurant(restaurant.user.slug);
+          return _vm.addRestaurant(restaurant.id);
         }
       }
     }, [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
@@ -24365,7 +24373,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

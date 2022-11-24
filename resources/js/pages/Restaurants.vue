@@ -22,7 +22,7 @@
                 <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
                     v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                    <li @click="addRestaurant(restaurant.user.slug)">
+                    <li @click="addRestaurant(restaurant.id)">
                         <strong>{{ restaurant.user.name }}</strong>
                     </li>
                 </router-link>
@@ -53,18 +53,18 @@ export default {
         };
     },
     methods: {
-        addRestaurant ( r ) {
+        addRestaurant ( i ) {
 
 
             if ( typeof ( Storage ) ) {
-                if ( localStorage.rName ) {
+                if ( localStorage.rId ) {
                     console.log( 'già preso' )
 
 
 
 
                 } else {
-                    localStorage.setItem( "rName", r );
+                    localStorage.setItem( "rId", i );
 
 
 

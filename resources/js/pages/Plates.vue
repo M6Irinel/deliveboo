@@ -39,7 +39,7 @@ export default {
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
             plates: null,
@@ -47,73 +47,85 @@ export default {
     },
 
     methods: {
-        fetchPlates () {
+        fetchPlates() {
             store.loading = true;
-            axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
+            axios.get(`/api/restaurants/${this.$route.params.slug}`).then(r => {
                 this.plates = r.data.plates;
                 store.loading = false;
-            } );
+            });
         },
 
-        addPlate ( plate_name ) {
+        addPlate(plate_name) {
             let plateCounter = plate_name + '-counter'
 
-            if ( typeof ( Storage ) ) {
-                if ( localStorage.getItem( plate_name ) == plate_name ) {
-                    let c = localStorage.getItem( plateCounter );
-                    localStorage.setItem( plateCounter, ++c );
+            if (typeof (Storage)) {
+
+                //controllo se id rest è presente, se non lo è lo salvo, se lo è lo paragono, se diverso alert, se uguale vai avanti
+               
+                if (localStorage.rId) {
+                    console.log('qui')
+                    console.log(localStorage.getItem("rId"))
+                }else{
+                    console.log('id vuoto')
+                }
+
+                
+                if (localStorage.getItem(plate_name) == plate_name) {
+                    let c = localStorage.getItem(plateCounter);
+                    localStorage.setItem(plateCounter, ++c);
                 } else {
-                    localStorage.setItem( plate_name, plate_name );
-                    localStorage.setItem( plateCounter, 1 );
+                    localStorage.setItem(plate_name, plate_name);
+                    localStorage.setItem(plateCounter, 1);
                 }
             }
             else {
-                alert( 'hai il pc vecchio, vai a piedi' )
+                alert('hai il pc vecchio, vai a piedi')
             }
         },
 
-        removePlate ( plate_name ) {
+        removePlate(plate_name) {
             let plateCounter = plate_name + '-counter'
 
-            if ( typeof ( Storage ) ) {
-                if ( localStorage.getItem( plate_name ) == plate_name ) {
-                    let c = localStorage.getItem( plateCounter );
-                    localStorage.setItem( plateCounter, --c );
+            if (typeof (Storage)) {
+                if (localStorage.getItem(plate_name) == plate_name) {
+                    let c = localStorage.getItem(plateCounter);
+                    localStorage.setItem(plateCounter, --c);
 
-                    if ( c === 0 ) {
-                        localStorage.removeItem( plateCounter );
-                        localStorage.removeItem( plate_name );
+                    if (c === 0) {
+                        localStorage.removeItem(plateCounter);
+                        localStorage.removeItem(plate_name);
                     }
                 }
             }
             else {
-                alert( 'hai il pc vecchio, vai a piedi' )
+                alert('hai il pc vecchio, vai a piedi')
             }
         },
 
-        pulisciStorage () {
+        pulisciStorage() {
             localStorage.clear();
         }
     },
 
     computed: {
-        restaurants () {
+        restaurants() {
             return store.restaurants;
         },
-        hasPlates () {
+        hasPlates() {
             return store.hasPlates;
         },
-        loading () {
+        loading() {
             return store.loading;
         },
-        restaurant_Id () {
+        restaurant_Id() {
             return this.$route.params.id;
         },
     },
 
-    created () {
+    created() {
         this.fetchPlates();
     },
+
 };
 </script>
 

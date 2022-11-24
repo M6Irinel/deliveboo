@@ -8,11 +8,16 @@
 
             <div v-if="!loading">
                 <div v-if="hasPlates">
-                    <button @click="addPlateLocalstorage(plate.plate_name)"
-                        v-for="(plate, i) in plates" :key="i">
-                        {{ plate.plate_name }}
-                    </button>
+                    <div v-for="(plate, i) in plates" :key="i">
+
+                        <button @click="addPlate(plate.plate_name)">
+                            {{ plate.plate_name }}
+                        </button>
+                        <button @click="removePlate(plate.plate_name)">Togli 1</button>
+                    </div>
                 </div>
+
+                <button @click="pulisciStorage()">pulisci tutto Storage</button>
             </div>
             <div v-else>
                 <LoaderC />
@@ -32,62 +37,97 @@ export default {
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
             plates: null,
-            nome: '',
+
             i: 1
         };
     },
 
-    watch: {
-        nome ( newName ) { localStorage.name = newName }
-    },
+
 
     methods: {
-        fetchPlates () {
+        fetchPlates() {
             store.loading = true;
-            axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
+            axios.get(`/api/restaurants/${this.$route.params.slug}`).then(r => {
                 this.plates = r.data.plates;
                 store.loading = false;
-            } );
+            });
         },
 
-        addPlateLocalstorage ( nome ) {
-            if ( !localStorage.name ) {
-                nome = localStorage.name
-                this.i = 1;
+        addPlate(plate_name) {
+            let plateCounter = plate_name + '-counter'
+
+            if (typeof (Storage) !== "undefined") {
+                if (localStorage.getItem(plate_name) == plate_name) {
+                    let c = localStorage.getItem(plateCounter)
+                    c++
+                    localStorage.setItem(plateCounter, c)
+
+
+
+                } else {
+                    localStorage.setItem(plate_name, plate_name);
+
+
+                    localStorage.setItem(plateCounter, 1);
+
+                }
             }
-            localStorage.setItem( nome, nome );
-            localStorage.setItem( ( nome + ' ' + this.i ), this.i++ );
+            else {
+                alert('hai il pc vecchio, vai a piedi')
+            }
         },
+        removePlate(plate_name) {
+            let plateCounter = plate_name + '-counter'
+
+            if (typeof (Storage) !== "undefined") {
+                if (localStorage.getItem(plate_name) == plate_name) {
+                    let c = localStorage.getItem(plateCounter)
+                    c--
+                    if (c === 0)
+                        localStorage.removeItem(plateCounter)
+                    localStorage.removeItem(plate_name)
 
 
-    },
 
-    mounted () {
-        if ( localStorage.name ) {
-            this.nome = localStorage.name;
+                    // } else {
+                    //     localStorage.setItem(plate_name, plate_name);
+
+
+                    //     localStorage.setItem(plateCounter, 1);
+
+                }
+            }
+
+        },
+        pulisciStorage() {
+            localStorage.clear();
         }
+
+
     },
+
+
 
     computed: {
-        restaurants () {
+        restaurants() {
             return store.restaurants;
         },
-        hasPlates () {
+        hasPlates() {
             return store.hasPlates;
         },
-        loading () {
+        loading() {
             return store.loading;
         },
-        restaurant_Id () {
+        restaurant_Id() {
             return this.$route.params.id;
         },
     },
 
-    created () {
+    created() {
         this.fetchPlates();
     },
 };

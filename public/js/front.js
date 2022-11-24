@@ -7077,14 +7077,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       forLogin: forLogin,
       plates: null,
-      nome: '',
       i: 1
     };
-  },
-  watch: {
-    nome: function nome(newName) {
-      localStorage.name = newName;
-    }
   },
   methods: {
     fetchPlates: function fetchPlates() {
@@ -7095,18 +7089,39 @@ __webpack_require__.r(__webpack_exports__);
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
       });
     },
-    addPlateLocalstorage: function addPlateLocalstorage(nome) {
-      if (!localStorage.name) {
-        nome = localStorage.name;
-        this.i = 1;
+    addPlate: function addPlate(plate_name) {
+      var plateCounter = plate_name + '-counter';
+      if (typeof Storage !== "undefined") {
+        if (localStorage.getItem(plate_name) == plate_name) {
+          var c = localStorage.getItem(plateCounter);
+          c++;
+          localStorage.setItem(plateCounter, c);
+        } else {
+          localStorage.setItem(plate_name, plate_name);
+          localStorage.setItem(plateCounter, 1);
+        }
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
       }
-      localStorage.setItem(nome, nome);
-      localStorage.setItem(nome + ' ' + this.i, this.i++);
-    }
-  },
-  mounted: function mounted() {
-    if (localStorage.name) {
-      this.nome = localStorage.name;
+    },
+    removePlate: function removePlate(plate_name) {
+      var plateCounter = plate_name + '-counter';
+      if (typeof Storage !== "undefined") {
+        if (localStorage.getItem(plate_name) == plate_name) {
+          var c = localStorage.getItem(plateCounter);
+          c--;
+          if (c === 0) localStorage.removeItem(plateCounter);
+          localStorage.removeItem(plate_name);
+
+          // } else {
+          //     localStorage.setItem(plate_name, plate_name);
+
+          //     localStorage.setItem(plateCounter, 1);
+        }
+      }
+    },
+    pulisciStorage: function pulisciStorage() {
+      localStorage.clear();
     }
   },
   computed: {
@@ -7300,15 +7315,28 @@ var render = function render() {
       }
     }
   }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
-    return _c("button", {
-      key: i,
+    return _c("div", {
+      key: i
+    }, [_c("button", {
       on: {
         click: function click($event) {
-          return _vm.addPlateLocalstorage(plate.plate_name);
+          return _vm.addPlate(plate.plate_name);
         }
       }
-    }, [_vm._v("\n                    " + _vm._s(plate.plate_name) + "\n                ")]);
-  }), 0) : _vm._e()]) : _c("div", [_c("LoaderC")], 1)], 1)]);
+    }, [_vm._v("\n                        " + _vm._s(plate.plate_name) + "\n                    ")]), _vm._v(" "), _c("button", {
+      on: {
+        click: function click($event) {
+          return _vm.removePlate(plate.plate_name);
+        }
+      }
+    }, [_vm._v("Togli 1")])]);
+  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.pulisciStorage();
+      }
+    }
+  }, [_vm._v("pulisci tutto Storage")])]) : _c("div", [_c("LoaderC")], 1)], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -24172,7 +24200,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

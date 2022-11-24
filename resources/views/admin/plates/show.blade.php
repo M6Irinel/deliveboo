@@ -24,7 +24,15 @@
 
         <h1>SHOW DEL PIATTO</h1>
 
-        <img src="{{ asset('./img/default/plate-empty.png') }} " height="250" alt="">
+        @if ($plate->plate_image)
+            <div class="card-img">
+                <img height="250" src="{{ asset('storage/' . $plate->plate_image) }} " alt="Nessuna Foto Del Piatto">
+            </div>
+        @else
+            <div class="card-default">
+                <img height="250" src="{{ asset('./img/default/plate-empty.png') }}" alt="Nessuna Foto Del Piatto">
+            </div>
+        @endif
 
         <p>Nome piatto : <strong>{{ $plate->plate_name }}</strong></p>
         <p>descrizione : <strong>{{ $plate->plate_description }}</strong></p>

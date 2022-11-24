@@ -7076,8 +7076,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       forLogin: forLogin,
-      plates: null
+      plates: null,
+      nome: '',
+      i: 1
     };
+  },
+  watch: {
+    nome: function nome(newName) {
+      localStorage.name = newName;
+    }
   },
   methods: {
     fetchPlates: function fetchPlates() {
@@ -7087,6 +7094,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
       });
+    },
+    addPlateLocalstorage: function addPlateLocalstorage(nome) {
+      if (!localStorage.name) {
+        nome = localStorage.name;
+        this.i = 1;
+      }
+      localStorage.setItem(nome, nome);
+      localStorage.setItem(nome + ' ' + this.i, this.i++);
+    }
+  },
+  mounted: function mounted() {
+    if (localStorage.name) {
+      this.nome = localStorage.name;
     }
   },
   computed: {
@@ -7280,8 +7300,13 @@ var render = function render() {
       }
     }
   }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
-    return _c("p", {
-      key: i
+    return _c("button", {
+      key: i,
+      on: {
+        click: function click($event) {
+          return _vm.addPlateLocalstorage(plate.plate_name);
+        }
+      }
     }, [_vm._v("\n                    " + _vm._s(plate.plate_name) + "\n                ")]);
   }), 0) : _vm._e()]) : _c("div", [_c("LoaderC")], 1)], 1)]);
 };

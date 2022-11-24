@@ -8,9 +8,10 @@
 
             <div v-if="!loading">
                 <div v-if="hasPlates">
-                    <p v-for="(plate, i) in plates" :key="i">
+                    <button @click="addPlateLocalstorage(plate.plate_name)"
+                        v-for="(plate, i) in plates" :key="i">
                         {{ plate.plate_name }}
-                    </p>
+                    </button>
                 </div>
             </div>
             <div v-else>
@@ -35,7 +36,13 @@ export default {
         return {
             forLogin,
             plates: null,
+            nome: '',
+            i: 1
         };
+    },
+
+    watch: {
+        nome ( newName ) { localStorage.name = newName }
     },
 
     methods: {
@@ -46,6 +53,23 @@ export default {
                 store.loading = false;
             } );
         },
+
+        addPlateLocalstorage ( nome ) {
+            if ( !localStorage.name ) {
+                nome = localStorage.name
+                this.i = 1;
+            }
+            localStorage.setItem( nome, nome );
+            localStorage.setItem( ( nome + ' ' + this.i ), this.i++ );
+        },
+
+
+    },
+
+    mounted () {
+        if ( localStorage.name ) {
+            this.nome = localStorage.name;
+        }
     },
 
     computed: {

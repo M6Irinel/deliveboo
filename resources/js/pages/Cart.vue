@@ -46,7 +46,7 @@ export default {
     computed: {
         plates () {
             if ( store.plates )
-                return store.plates.filter( e => localStorage[ e.plate_name ] );
+                return store.plates.filter( e => sessionStorage[ e.plate_name ] );
             else
                 return null
         },
@@ -58,7 +58,7 @@ export default {
     methods: {
         fetchPlates () {
             store.loading = true;
-            axios.get( `/api/restaurants/${ localStorage.getItem( 'resId' ) }` ).then( r => {
+            axios.get( `/api/restaurants/${ sessionStorage.getItem( 'resId' ) }` ).then( r => {
                 store.plates = r.data.plates;
                 store.loading = false;
             } );

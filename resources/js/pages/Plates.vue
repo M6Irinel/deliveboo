@@ -57,8 +57,8 @@ export default {
 
         addPlate(plate) {
             if (typeof (Storage)) {
-                if (localStorage.resId) {
-                    if (localStorage.getItem("resId") == plate.restaurant_id) {
+                if (sessionStorage.resId) {
+                    if (sessionStorage.getItem("resId") == plate.restaurant_id) {
                         this.plateLocalStore( plate );
                         return
                     } else {
@@ -66,7 +66,7 @@ export default {
                         return
                     }
                 } else {
-                    localStorage.setItem("resId", plate.restaurant_id);
+                    sessionStorage.setItem("resId", plate.restaurant_id);
                 }
                 this.plateLocalStore( plate );
             }
@@ -77,12 +77,13 @@ export default {
 
         plateLocalStore(plate) {
             let plateCounter = plate.plate_name + '-counter'
-            if (localStorage.getItem(plate.plate_name) == plate.id) {
-                let c = localStorage.getItem(plateCounter);
-                localStorage.setItem(plateCounter, ++c);
+      
+            if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+                let c = sessionStorage.getItem(plateCounter);
+                sessionStorage.setItem(plateCounter, ++c);
             } else {
-                localStorage.setItem(plate.plate_name, plate.id);
-                localStorage.setItem(plateCounter, 1);
+                sessionStorage.setItem(plate.plate_name, plate.id);
+                sessionStorage.setItem(plateCounter, 1);
             }
 
         },
@@ -91,13 +92,13 @@ export default {
             let plateCounter = plate.plate_name + '-counter'
 
             if (typeof (Storage)) {
-                if (localStorage.getItem(plate.plate_name) == plate.id) {
-                    let c = localStorage.getItem(plateCounter);
-                    localStorage.setItem(plateCounter, --c);
+                if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+                    let c = sessionStorage.getItem(plateCounter);
+                    sessionStorage.setItem(plateCounter, --c);
 
                     if (c === 0) {
-                        localStorage.removeItem(plateCounter);
-                        localStorage.removeItem(plate.plate_name);
+                        sessionStorage.removeItem(plateCounter);
+                        sessionStorage.removeItem(plate.plate_name);
                     }
                 }
             }
@@ -105,13 +106,13 @@ export default {
                 alert('hai il pc vecchio, vai a piedi')
             }
 
-            if(localStorage.length<=1){
+            if(sessionStorage.length<=1){
                 this.pulisciStorage()
             }
         },
 
         pulisciStorage() {
-            localStorage.clear();
+            sessionStorage.clear();
         }
     },
 

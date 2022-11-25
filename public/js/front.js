@@ -7066,7 +7066,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     plates: function plates() {
       if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates) return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.filter(function (e) {
-        return localStorage[e.plate_name];
+        return sessionStorage[e.plate_name];
       });else return null;
     },
     loading: function loading() {
@@ -7076,7 +7076,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchPlates: function fetchPlates() {
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = true;
-      axios.get("/api/restaurants/".concat(localStorage.getItem('resId'))).then(function (r) {
+      axios.get("/api/restaurants/".concat(sessionStorage.getItem('resId'))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
       });
@@ -7141,8 +7141,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.resId) {
-          if (localStorage.getItem("resId") == plate.restaurant_id) {
+        if (sessionStorage.resId) {
+          if (sessionStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
             return;
           } else {
@@ -7150,7 +7150,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             return;
           }
         } else {
-          localStorage.setItem("resId", plate.restaurant_id);
+          sessionStorage.setItem("resId", plate.restaurant_id);
         }
         this.plateLocalStore(plate);
       } else {
@@ -7159,34 +7159,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     plateLocalStore: function plateLocalStore(plate) {
       var plateCounter = plate.plate_name + '-counter';
-      if (localStorage.getItem(plate.plate_name) == plate.id) {
-        var c = localStorage.getItem(plateCounter);
-        localStorage.setItem(plateCounter, ++c);
+      if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+        var c = sessionStorage.getItem(plateCounter);
+        sessionStorage.setItem(plateCounter, ++c);
       } else {
-        localStorage.setItem(plate.plate_name, plate.id);
-        localStorage.setItem(plateCounter, 1);
+        sessionStorage.setItem(plate.plate_name, plate.id);
+        sessionStorage.setItem(plateCounter, 1);
       }
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (localStorage.getItem(plate.plate_name) == plate.id) {
-          var c = localStorage.getItem(plateCounter);
-          localStorage.setItem(plateCounter, --c);
+        if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+          var c = sessionStorage.getItem(plateCounter);
+          sessionStorage.setItem(plateCounter, --c);
           if (c === 0) {
-            localStorage.removeItem(plateCounter);
-            localStorage.removeItem(plate.plate_name);
+            sessionStorage.removeItem(plateCounter);
+            sessionStorage.removeItem(plate.plate_name);
           }
         }
       } else {
         alert('hai il pc vecchio, vai a piedi');
       }
-      if (localStorage.length <= 1) {
+      if (sessionStorage.length <= 1) {
         this.pulisciStorage();
       }
     },
     pulisciStorage: function pulisciStorage() {
-      localStorage.clear();
+      sessionStorage.clear();
     }
   },
   computed: {
@@ -24404,7 +24404,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

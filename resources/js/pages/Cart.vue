@@ -187,6 +187,7 @@ export default {
                     if ( c === 0 ) {
                         sessionStorage.removeItem( plateCounter );
                         sessionStorage.removeItem( plate.plate_name );
+                        store.plates.splice( store.plates.indexOf( plate ), 1 );
                     }
                 }
             }

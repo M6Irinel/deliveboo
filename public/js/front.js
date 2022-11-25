@@ -18583,6 +18583,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
           if (c === 0) {
             sessionStorage.removeItem(plateCounter);
             sessionStorage.removeItem(plate.plate_name);
+            _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.splice(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.indexOf(plate), 1);
           }
         }
       } else {
@@ -19121,15 +19122,8 @@ var render = function render() {
   }), _vm._v(" "), _c("main", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "flex between mt-2"
-  }, [_c("div", [_c("button", {
-    staticClass: "btn btn-secondary px-1",
-    on: {
-      click: function click($event) {
-        return _vm.$router.go(-1);
-      }
-    }
-  }, [_vm._v("←")])]), _vm._v(" "), _c("div", [_c("router-link", {
+    staticClass: "flex j-flex-end mt-2"
+  }, [_c("div", [_c("router-link", {
     staticClass: "btn btn-success px-1",
     attrs: {
       to: {

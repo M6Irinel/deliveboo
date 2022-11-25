@@ -2,10 +2,7 @@
     <div>
         <header v-html="forLogin" />
         <main class="container">
-            <div class="flex between mt-2">
-                <div>
-                    <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
-                </div>
+            <div class="flex j-flex-end mt-2">
                 <div>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{parseFloat(total).toFixed(2)}}€</span>

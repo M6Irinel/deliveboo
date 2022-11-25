@@ -7,22 +7,32 @@
             </div>
 
             <h1>Cart</h1>
+            <div v-if="plates">
+                <ul class="list-style-none grid-12 gap-5">
+                    <li class="g-col-3 card p-2" v-for="(v, i) in plates" :key="i">
+                        <div v-if="v.plate_image">
+                            <img height="200" :src="'./storage/' + v.plate_image" alt="" />
+                        </div>
+                        <p>{{ v.plate_name }} <span v-if="quantity(v.plate_name) > 1"> &Cross;{{
+                                quantity(v.plate_name)
+                        }}</span> </p>
+                        <p>Prezzo: {{ v.plate_price }}€</p>
+                        <div v-if="quantity(v.plate_name) > 1">
+                            <p>Quantità: {{ quantity(v.plate_name) }}</p>
+                            <p>Totale del Piatto: {{ parseFloat(v.plate_price * quantity(v.plate_name,v.plate_price)).toFixed(2) }}€
 
-            <ul class="list-style-none grid-12 gap-5" v-if="plates">
-                <li class="g-col-3 card p-2" v-for="(v, i) in plates" :key="i">
-                    <div v-if="v.plate_image">
-                        <img height="200" :src="'./storage/' + v.plate_image" alt="" />
-                    </div>
-                    <p>{{ v.plate_name }}</p>
-                    <p>Price: {{ v.plate_price }}€</p>
-                    <p>Quantità: {{ quantity(v.plate_name) }}</p>
-                </li>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <h2>Totale di tutto: {{ totale }} €</h2>
                 <button @click="pulisciStorage()">Svuota il Carello</button>
-            </ul>
 
+            </div>
             <div v-else>
                 <p>carrello vuoto</p>
             </div>
+
         </main>
         <div v-else>
             <LoaderC />
@@ -36,47 +46,69 @@
 import store from "../store/store";
 import LoaderC from "../components/Loader.vue";
 
+
 export default {
     name: "CartVue",
 
     components: { LoaderC },
 
-    data () {
+    data() {
         return {
             forLogin,
+            totale:0
         };
     },
 
     computed: {
-        plates () {
-            if ( store.plates )
-                return store.plates.filter( ( e ) => sessionStorage[ e.plate_name ] );
+        plates() {
+            if (store.plates)
+                return store.plates.filter((e) => sessionStorage[e.plate_name]);
             else return null;
         },
-        loading () {
+        loading() {
             return store.loading;
         },
     },
 
     methods: {
-        fetchPlates () {
+        fetchPlates() {
+            if (!sessionStorage.resId) {
+                return
+            }
+
             store.loading = true;
             axios
-                .get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
-                .then( ( r ) => {
+                .get(`/api/restaurants/${sessionStorage.getItem("resId")}`)
+                .then((r) => {
                     store.plates = r.data.plates;
                     store.loading = false;
-                } );
+                });
         },
-        pulisciStorage () {
+        pulisciStorage() {
             sessionStorage.clear();
+            location.reload();
         },
-        quantity ( v ) {
-            return sessionStorage.getItem( v + '-counter' );
+        quantity(v,p=1) {
+            let q= sessionStorage.getItem(v + '-counter')
+            this.totale+=(q*p)
+            return sessionStorage.getItem(v + '-counter');
+        },
+        total() {
+            if (!sessionStorage.resId) {
+                return
+            }
+            let s = 0
+            this.plates.forEach(e=>{
+                s+=e.plate_price
+            })
+            return s
+
         }
+
+
     },
 
-    created () {
+    created() {
         this.fetchPlates();
     },
 

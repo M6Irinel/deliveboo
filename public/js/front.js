@@ -7163,10 +7163,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     totalprice: function totalprice() {
       var s = 0;
-      this.platesF.forEach(function (e) {
+      this.plates.forEach(function (e) {
         var q = sessionStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s);
+        sessionStorage.setItem("spesaTotale", s.toFixed(2));
       });
       return s;
     },
@@ -7205,6 +7205,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         if (sessionStorage.getItem(plate.plate_name) == plate.id) {
           var c = sessionStorage.getItem(plateCounter);
           sessionStorage.setItem(plateCounter, --c);
+          this.totalprice();
           if (c === 0) {
             sessionStorage.removeItem(plateCounter);
             sessionStorage.removeItem(plate.plate_name);
@@ -7213,7 +7214,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       } else {
         alert('hai il pc vecchio, vai a piedi');
       }
-      if (sessionStorage.length <= 1) {
+      if (sessionStorage.length <= 2) {
         this.pulisciStorage();
       }
     },
@@ -7233,11 +7234,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     restaurant_Id: function restaurant_Id() {
       return this.$route.params.id;
-    },
-    platesF: function platesF() {
-      if (this.plates) return this.plates.filter(function (e) {
-        return sessionStorage[e.plate_name];
-      });else return null;
     }
   },
   created: function created() {
@@ -24447,7 +24443,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

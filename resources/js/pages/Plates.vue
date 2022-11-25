@@ -58,10 +58,10 @@ export default {
         totalprice(){
           
             let s = 0
-            this.platesF.forEach(e=>{
+            this.plates.forEach(e=>{
                 let q=(sessionStorage.getItem(e.plate_name + '-counter'))
-                s+=(e.plate_price*q)
-                sessionStorage.setItem("spesaTotale",s);
+                s+=(e.plate_price*q);
+                sessionStorage.setItem("spesaTotale",s.toFixed(2));
             })
             return s
         },
@@ -114,18 +114,21 @@ export default {
                 if (sessionStorage.getItem(plate.plate_name) == plate.id) {
                     let c = sessionStorage.getItem(plateCounter);
                     sessionStorage.setItem(plateCounter, --c);
+                    this.totalprice();
+                    
 
                     if (c === 0) {
                         sessionStorage.removeItem(plateCounter);
                         sessionStorage.removeItem(plate.plate_name);
-                    }
-                }
+                        
+                    } 
+                } 
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
             }
 
-            if(sessionStorage.length<=1){
+            if(sessionStorage.length<=2){
                 this.pulisciStorage()
             }
         },
@@ -147,11 +150,6 @@ export default {
         },
         restaurant_Id() {
             return this.$route.params.id;
-        },
-        platesF() {
-            if (this.plates)
-                return this.plates.filter((e) => sessionStorage[e.plate_name]);
-            else return null;
         },
     },
 

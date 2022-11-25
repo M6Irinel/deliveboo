@@ -7060,8 +7060,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      forLogin: forLogin,
-      totale: 0
+      forLogin: forLogin
     };
   },
   computed: {
@@ -7090,9 +7089,6 @@ __webpack_require__.r(__webpack_exports__);
       location.reload();
     },
     quantity: function quantity(v) {
-      var p = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var q = sessionStorage.getItem(v + '-counter');
-      this.totale += q * p;
       return sessionStorage.getItem(v + '-counter');
     },
     total: function total() {
@@ -7101,7 +7097,8 @@ __webpack_require__.r(__webpack_exports__);
       }
       var s = 0;
       this.plates.forEach(function (e) {
-        s += e.plate_price;
+        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        s += e.plate_price * q;
       });
       return s;
     }
@@ -7389,8 +7386,8 @@ var render = function render() {
         src: "./storage/" + v.plate_image,
         alt: ""
       }
-    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name) + " "), _vm.quantity(v.plate_name) > 1 ? _c("span", [_vm._v(" ⨯" + _vm._s(_vm.quantity(v.plate_name)))]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("Totale del Piatto: " + _vm._s(parseFloat(v.plate_price * _vm.quantity(v.plate_name, v.plate_price)).toFixed(2)) + "€\n\n                        ")])]) : _vm._e()]);
-  }), 0), _vm._v(" "), _c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.totale) + " €")]), _vm._v(" "), _c("button", {
+    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name) + " "), _vm.quantity(v.plate_name) > 1 ? _c("span", [_vm._v(" ⨯" + _vm._s(_vm.quantity(v.plate_name)))]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("Totale del Piatto: " + _vm._s(parseFloat(v.plate_price * _vm.quantity(v.plate_name)).toFixed(2)) + "€\n\n                        ")])]) : _vm._e()]);
+  }), 0), _vm._v(" "), _c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.total().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
     on: {
       click: function click($event) {
         return _vm.pulisciStorage();

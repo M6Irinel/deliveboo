@@ -19,13 +19,13 @@
                         <p>Prezzo: {{ v.plate_price }}€</p>
                         <div v-if="quantity(v.plate_name) > 1">
                             <p>Quantità: {{ quantity(v.plate_name) }}</p>
-                            <p>Totale del Piatto: {{ parseFloat(v.plate_price * quantity(v.plate_name,v.plate_price)).toFixed(2) }}€
+                            <p>Totale del Piatto: {{ parseFloat(v.plate_price * quantity(v.plate_name)).toFixed(2) }}€
 
                             </p>
                         </div>
                     </li>
                 </ul>
-                <h2>Totale di tutto: {{ totale }} €</h2>
+                <h2>Totale di tutto: {{ total().toFixed(2) }} €</h2>
                 <button @click="pulisciStorage()">Svuota il Carello</button>
 
             </div>
@@ -55,7 +55,8 @@ export default {
     data() {
         return {
             forLogin,
-            totale:0
+            
+          
         };
     },
 
@@ -88,9 +89,8 @@ export default {
             sessionStorage.clear();
             location.reload();
         },
-        quantity(v,p=1) {
-            let q= sessionStorage.getItem(v + '-counter')
-            this.totale+=(q*p)
+        quantity(v) {
+           
             return sessionStorage.getItem(v + '-counter');
         },
         total() {
@@ -99,7 +99,8 @@ export default {
             }
             let s = 0
             this.plates.forEach(e=>{
-                s+=e.plate_price
+                let q=(sessionStorage.getItem(e.plate_name + '-counter'))
+                s+=(e.plate_price*q)
             })
             return s
 

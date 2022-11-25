@@ -4,7 +4,9 @@
         <main class="container">
             <div class="flex between">
                 <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
-                <router-link :to="{ name: 'Cart' }">Carello</router-link>
+                <router-link :to="{ name: 'Cart' }">
+                    Carello <span v-if="total">{{total}}€</span>
+                </router-link>
             </div>
 
             <h1>Piatti</h1>
@@ -20,7 +22,6 @@
                 </div>
 
                 <button @click="pulisciStorage()">Svuota il Carello</button>
-                <!-- <p v-if="sessionStorage.spesaTotale">{{()=>{sessionStorage.getItem('spesaTotale')}}}</p> -->
             </div>
             <div v-else>
                 <LoaderC />
@@ -44,7 +45,7 @@ export default {
         return {
             forLogin,
             plates: null,
-            total:0
+            total: sessionStorage.getItem('spesaTotale')
         };
     },
 
@@ -54,11 +55,9 @@ export default {
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
                 store.loading = false;
-              
             });
         },
         totalprice(){
-          
             let s = 0
             this.plates.forEach(e=>{
                 let q=(sessionStorage.getItem(e.plate_name + '-counter'))
@@ -73,7 +72,7 @@ export default {
                 if (sessionStorage.resId) {
                     if (sessionStorage.getItem("resId") == plate.restaurant_id) {
                         this.plateLocalStore( plate );
-                      
+
                         return
                     } else {
                         alert( 'non puoi ordinare da più ristoranti' );
@@ -83,21 +82,16 @@ export default {
                     sessionStorage.setItem("resId", plate.restaurant_id);
                 }
                 this.plateLocalStore( plate );
-               
+
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
             }
-
-          
-          
-     
         },
 
         plateLocalStore(plate) {
             let plateCounter = plate.plate_name + '-counter'
-          
-      
+
             if (sessionStorage.getItem(plate.plate_name) == plate.id) {
                 let c = sessionStorage.getItem(plateCounter);
                 sessionStorage.setItem(plateCounter, ++c);
@@ -117,14 +111,11 @@ export default {
                     let c = sessionStorage.getItem(plateCounter);
                     sessionStorage.setItem(plateCounter, --c);
                     this.totalprice();
-                    
-
                     if (c === 0) {
                         sessionStorage.removeItem(plateCounter);
                         sessionStorage.removeItem(plate.plate_name);
-                        
-                    } 
-                } 
+                    }
+                }
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
@@ -137,6 +128,7 @@ export default {
 
         pulisciStorage() {
             sessionStorage.clear();
+            this.total = 0
         }
     },
 
@@ -152,7 +144,7 @@ export default {
         },
         restaurant_Id() {
             return this.$route.params.id;
-        },
+        }
     },
 
     created() {

@@ -7150,7 +7150,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     return {
       forLogin: forLogin,
       plates: null,
-      total: 0
+      total: sessionStorage.getItem('spesaTotale')
     };
   },
   methods: {
@@ -7221,6 +7221,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     pulisciStorage: function pulisciStorage() {
       sessionStorage.clear();
+      this.total = 0;
     }
   },
   computed: {
@@ -7475,7 +7476,7 @@ var render = function render() {
         name: "Cart"
       }
     }
-  }, [_vm._v("Carello")])], 1), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
+  }, [_vm._v("\n                Carello "), _vm.total ? _c("span", [_vm._v(_vm._s(_vm.total) + "€")]) : _vm._e()])], 1), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
     return _c("div", {
       key: i
     }, [_c("button", {
@@ -24445,7 +24446,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

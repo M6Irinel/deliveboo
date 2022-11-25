@@ -5,7 +5,7 @@
             <div class="flex between">
                 <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
                 <router-link :to="{ name: 'Cart' }">
-                    Carello <span v-if="total">{{total}}€</span>
+                    <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{total}}€</span>
                 </router-link>
             </div>
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <button @click="pulisciStorage()">Svuota il Carello</button>
+                <button @click="pulisciStorage()">Svuota il Carrello </button>
             </div>
             <div v-else>
                 <LoaderC />

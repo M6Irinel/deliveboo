@@ -23,10 +23,10 @@
                     <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2" v-for="(plate, i) in plates" :key="i">
 
                         <div v-if="plate.plate_image">
-                            <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
+                            <img class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />
                         </div>
                         <div v-else>
-                            <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                            <img class="img-fluid" :src="'../img/default/plate-empty.png'" alt="" />
                         </div>
 
                         <div>

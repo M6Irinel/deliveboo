@@ -19052,13 +19052,13 @@ var render = function render() {
     }, [plate.plate_image ? _c("div", [_c("img", {
       staticClass: "img-fluid",
       attrs: {
-        src: "./storage/" + plate.plate_image,
+        src: "../storage/" + plate.plate_image,
         alt: ""
       }
     })]) : _c("div", [_c("img", {
       staticClass: "img-fluid",
       attrs: {
-        src: "./img/default/plate-empty.png",
+        src: "../img/default/plate-empty.png",
         alt: ""
       }
     })]), _vm._v(" "), _c("div", [_c("p", {
@@ -36048,7 +36048,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

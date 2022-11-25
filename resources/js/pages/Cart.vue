@@ -31,6 +31,7 @@
             </div>
             <div v-else>
                 <p>carrello vuoto</p>
+                
             </div>
 
         </main>
@@ -101,9 +102,9 @@ export default {
             this.plates.forEach(e=>{
                 let q=(sessionStorage.getItem(e.plate_name + '-counter'))
                 s+=(e.plate_price*q)
+                sessionStorage.setItem("spesaTotale",s);
             })
             return s
-
         }
 
 

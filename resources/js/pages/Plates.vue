@@ -52,7 +52,18 @@ export default {
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
                 store.loading = false;
+              
             });
+        },
+        totalprice(){
+          
+            let s = 0
+            this.platesF.forEach(e=>{
+                let q=(sessionStorage.getItem(e.plate_name + '-counter'))
+                s+=(e.plate_price*q)
+                sessionStorage.setItem("spesaTotale",s);
+            })
+            return s
         },
 
         addPlate(plate) {
@@ -60,6 +71,7 @@ export default {
                 if (sessionStorage.resId) {
                     if (sessionStorage.getItem("resId") == plate.restaurant_id) {
                         this.plateLocalStore( plate );
+                      
                         return
                     } else {
                         alert( 'non puoi ordinare da più ristoranti' );
@@ -69,14 +81,20 @@ export default {
                     sessionStorage.setItem("resId", plate.restaurant_id);
                 }
                 this.plateLocalStore( plate );
+               
             }
             else {
                 alert('hai il pc vecchio, vai a piedi')
             }
+
+          
+          
+     
         },
 
         plateLocalStore(plate) {
             let plateCounter = plate.plate_name + '-counter'
+          
       
             if (sessionStorage.getItem(plate.plate_name) == plate.id) {
                 let c = sessionStorage.getItem(plateCounter);
@@ -85,6 +103,7 @@ export default {
                 sessionStorage.setItem(plate.plate_name, plate.id);
                 sessionStorage.setItem(plateCounter, 1);
             }
+            this.totalprice()
 
         },
 
@@ -128,6 +147,11 @@ export default {
         },
         restaurant_Id() {
             return this.$route.params.id;
+        },
+        platesF() {
+            if (this.plates)
+                return this.plates.filter((e) => sessionStorage[e.plate_name]);
+            else return null;
         },
     },
 

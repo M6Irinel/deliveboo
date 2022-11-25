@@ -7099,6 +7099,7 @@ __webpack_require__.r(__webpack_exports__);
       this.plates.forEach(function (e) {
         var q = sessionStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
+        sessionStorage.setItem("spesaTotale", s);
       });
       return s;
     }
@@ -7160,6 +7161,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
       });
     },
+    totalprice: function totalprice() {
+      var s = 0;
+      this.platesF.forEach(function (e) {
+        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        s += e.plate_price * q;
+        sessionStorage.setItem("spesaTotale", s);
+      });
+      return s;
+    },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
         if (sessionStorage.resId) {
@@ -7187,6 +7197,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         sessionStorage.setItem(plate.plate_name, plate.id);
         sessionStorage.setItem(plateCounter, 1);
       }
+      this.totalprice();
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
@@ -7222,6 +7233,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     restaurant_Id: function restaurant_Id() {
       return this.$route.params.id;
+    },
+    platesF: function platesF() {
+      if (this.plates) return this.plates.filter(function (e) {
+        return sessionStorage[e.plate_name];
+      });else return null;
     }
   },
   created: function created() {

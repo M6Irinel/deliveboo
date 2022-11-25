@@ -19,8 +19,9 @@
             <h1>Piatti</h1>
 
             <div v-if="!loading">
-                <div class="grid-12 grid-10-lg grid-12-xl gap-5" v-if="hasPlates">
-                    <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2" v-for="(plate, i) in plates" :key="i">
+                <div class="grid-12 grid-10-lg grid-12-xl gap-5">
+                    <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        v-for="(plate, i) in plates" :key="i">
 
                         <div v-if="plate.plate_image">
                             <img class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />
@@ -39,7 +40,9 @@
 
                             <p class="flex between">
                                 <strong>Prezzo: </strong>
-                                <span>{{ parseFloat(plate.plate_price).toFixed(2) }}€</span>
+                                <span>
+                                    {{ parseFloat(plate.plate_price).toFixed(2) }}€
+                                </span>
                             </p>
                         </div>
 
@@ -97,10 +100,10 @@ export default {
         },
 
         totalprice () {
-            let s = 0
+            let s = 0;
             this.plates.forEach( e => {
-                let q = ( sessionStorage.getItem( e.plate_name + '-counter' ) );
-                s += ( e.plate_price * q );
+                let q = sessionStorage.getItem( e.plate_name + '-counter' );
+                s += e.plate_price * q;
                 sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
             } )
             this.total = sessionStorage.getItem( 'spesaTotale' );
@@ -120,13 +123,11 @@ export default {
                 sessionStorage.setItem( "resId", plate.restaurant_id );
                 this.plateLocalStore( plate );
             }
-            else {
-                alert( 'hai il pc vecchio, vai a piedi' );
-            }
+            else alert( 'hai il pc vecchio, vai a piedi' );
         },
 
         plateLocalStore ( plate ) {
-            let plateCounter = plate.plate_name + '-counter'
+            let plateCounter = plate.plate_name + '-counter';
 
             if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
                 let c = sessionStorage.getItem( plateCounter );
@@ -135,6 +136,7 @@ export default {
                 sessionStorage.setItem( plate.plate_name, plate.id );
                 sessionStorage.setItem( plateCounter, 1 );
             }
+
             this.totalprice();
         },
 
@@ -152,13 +154,9 @@ export default {
                     }
                 }
             }
-            else {
-                alert( 'hai il pc vecchio, vai a piedi' )
-            }
+            else alert( 'hai il pc vecchio, vai a piedi' );
 
-            if ( sessionStorage.length <= 2 ) {
-                this.pulisciStorage();
-            }
+            if ( sessionStorage.length <= 2 ) this.pulisciStorage();
         },
 
         pulisciStorage () {
@@ -175,15 +173,14 @@ export default {
         restaurants () {
             return store.restaurants;
         },
-        hasPlates () {
-            return store.hasPlates;
-        },
+
         loading () {
             return store.loading;
         },
+
         restaurant_Id () {
             return this.$route.params.id;
-        }
+        },
     },
 
     created () {

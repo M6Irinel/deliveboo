@@ -5,7 +5,8 @@
             <div class="flex j-flex-end mt-2">
                 <div>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{parseFloat(total).toFixed(2)}}€</span>
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
                     </router-link>
                 </div>
             </div>
@@ -45,27 +46,26 @@ import LoaderC from '../components/Loader.vue';
 import store from '../store/store';
 
 export default {
-    // props: ['slug'],
     name: "RestaurantsIndex",
 
     components: { LoaderC },
 
-    data() {
+    data () {
         return {
             forLogin,
             types: [],
-            total: sessionStorage.getItem('spesaTotale')
+            total: sessionStorage.getItem( 'spesaTotale' ),
         };
     },
 
     computed: {
-        restaurants() {
+        restaurants () {
             let r = store.restaurants;
-            if (!this.types.length) return r;
-            return r.filter(e => this.types.every(f => e.typologies.map(m => m.name).includes(f)));
+            if ( !this.types.length ) return r;
+            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
         },
-        typologies() { return store.typologies; },
-        loading() { return store.loading; },
+        typologies () { return store.typologies; },
+        loading () { return store.loading; },
     },
 }
 </script>

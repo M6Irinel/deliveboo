@@ -7054,7 +7054,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'CartVue',
+  name: "CartVue",
   components: {
     LoaderC: _components_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -7076,10 +7076,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchPlates: function fetchPlates() {
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = true;
-      axios.get("/api/restaurants/".concat(sessionStorage.getItem('resId'))).then(function (r) {
+      axios.get("/api/restaurants/".concat(sessionStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
       });
+    },
+    pulisciStorage: function pulisciStorage() {
+      sessionStorage.clear();
     }
   },
   created: function created() {
@@ -7355,7 +7358,7 @@ var render = function render() {
     }
   }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("ul", {
     staticClass: "list-style-none grid-12 gap-5"
-  }, _vm._l(_vm.plates, function (v, i) {
+  }, [_vm._l(_vm.plates, function (v, i) {
     return _c("li", {
       key: i,
       staticClass: "g-col-3 card p-2"
@@ -7366,7 +7369,13 @@ var render = function render() {
         alt: ""
       }
     })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v("Price: " + _vm._s(v.plate_price) + "€")])]);
-  }), 0) : _c("div", [_c("p", [_vm._v("carello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
+  }), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.pulisciStorage();
+      }
+    }
+  }, [_vm._v("Svuota il Carello")])], 2) : _c("div", [_c("p", [_vm._v("carrello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -24404,7 +24413,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

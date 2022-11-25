@@ -7149,7 +7149,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       forLogin: forLogin,
-      plates: null
+      plates: null,
+      total: 0
     };
   },
   methods: {
@@ -7168,7 +7169,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         s += e.plate_price * q;
         sessionStorage.setItem("spesaTotale", s.toFixed(2));
       });
-      return s;
+      this.total = sessionStorage.getItem('spesaTotale');
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
@@ -7238,6 +7239,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   created: function created() {
     this.fetchPlates();
+    this.total = sessionStorage.getItem('spesaTotale');
   }
 });
 

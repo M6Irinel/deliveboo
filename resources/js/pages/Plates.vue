@@ -20,6 +20,7 @@
                 </div>
 
                 <button @click="pulisciStorage()">Svuota il Carello</button>
+                <!-- <p v-if="sessionStorage.spesaTotale">{{()=>{sessionStorage.getItem('spesaTotale')}}}</p> -->
             </div>
             <div v-else>
                 <LoaderC />
@@ -43,6 +44,7 @@ export default {
         return {
             forLogin,
             plates: null,
+            total:0
         };
     },
 
@@ -63,7 +65,7 @@ export default {
                 s+=(e.plate_price*q);
                 sessionStorage.setItem("spesaTotale",s.toFixed(2));
             })
-            return s
+            this.total= sessionStorage.getItem('spesaTotale');
         },
 
         addPlate(plate) {
@@ -155,6 +157,7 @@ export default {
 
     created() {
         this.fetchPlates();
+        this.total= sessionStorage.getItem('spesaTotale');
     },
 
 };

@@ -2,8 +2,12 @@
     <div>
         <header v-html="forLogin" />
         <main class="container">
-            <div class="flex j-flex-end">
-                <router-link :to="{ name: 'Cart' }">Carello</router-link>
+            <div class="flex j-flex-end mt-2">
+                <div>
+                    <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{parseFloat(total).toFixed(2)}}€</span>
+                    </router-link>
+                </div>
             </div>
 
             <h1>Ristoranti</h1>
@@ -50,6 +54,7 @@ export default {
         return {
             forLogin,
             types: [],
+            total: sessionStorage.getItem('spesaTotale')
         };
     },
 

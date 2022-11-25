@@ -7083,6 +7083,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     pulisciStorage: function pulisciStorage() {
       sessionStorage.clear();
+    },
+    quantity: function quantity(v) {
+      return sessionStorage.getItem(v + '-counter');
     }
   },
   created: function created() {
@@ -7368,7 +7371,7 @@ var render = function render() {
         src: "./storage/" + v.plate_image,
         alt: ""
       }
-    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v("Price: " + _vm._s(v.plate_price) + "€")])]);
+    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _c("p", [_vm._v("Price: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))])]);
   }), _vm._v(" "), _c("button", {
     on: {
       click: function click($event) {
@@ -24413,7 +24416,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

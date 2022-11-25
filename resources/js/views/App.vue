@@ -1,0 +1,42 @@
+<template>
+    <div>
+        <router-view />
+    </div>
+</template>
+
+
+<script>
+// @ts-nocheck
+import store from '../store/store';
+
+export default {
+    name: 'AppVue',
+
+    methods: {
+        fetchRestaurants () {
+            axios.get( '/api/restaurants' ).then( r => {
+                store.restaurants = r.data.restaurants;
+                store.hasPlates = true;
+            } );
+        },
+
+        fetchTypologies () {
+            axios.get( '/api/typologies' ).then( r => {
+                store.typologies = r.data.typologies;
+                store.loading = false;
+            } );
+        }
+    },
+
+    created () {
+        store.loading = true;
+        this.fetchRestaurants();
+        this.fetchTypologies();
+    }
+}
+</script>
+
+
+<style lang="scss">
+
+</style>

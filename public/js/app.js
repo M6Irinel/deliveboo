@@ -35325,13 +35325,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var modal = document.querySelector("#modal");
 var openModal = document.querySelector("#openModal");
 var closeModal = document.querySelector("#closeModal");
-modal.style.display = "none";
-openModal.addEventListener("click", function () {
-  modal.style.display = "block";
-});
-closeModal.addEventListener("click", function () {
+if (modal) {
   modal.style.display = "none";
-});
+  openModal.addEventListener("click", function () {
+    modal.style.display = "block";
+  });
+  closeModal.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+}
 
 /***/ }),
 

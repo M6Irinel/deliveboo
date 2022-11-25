@@ -1,6 +1,7 @@
 <?php
 
 use App\Restaurant;
+use App\Typology;
 use Illuminate\Database\Seeder;
 
 class RestaurantSeeder extends Seeder
@@ -49,8 +50,10 @@ class RestaurantSeeder extends Seeder
         ];
 
         $i = 1;
+        $tags = Typology::all()->pluck('id');
+  
         foreach ($restaurants as $restaurant) {
-            Restaurant::create([
+           $r= Restaurant::create([
                 'restaurant_address'        => $restaurant['restaurant_address'],
                 'user_id'                   => $i++,
                 'p_iva'                     => $restaurant['p_iva'],
@@ -58,7 +61,11 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => $restaurant['restaurant_phone_number'],
                 'restaurant_website'        => $restaurant['restaurant_website'],
                 'restaurant_image'          => $restaurant['restaurant_image'],
+                
+
             ]);
+            $tagIds = $tags->shuffle()->take(4)->all();
+            $r->typologies()->sync($tagIds);
         }
     }
 }

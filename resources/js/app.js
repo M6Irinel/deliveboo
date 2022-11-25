@@ -33,17 +33,18 @@ require("./bootstrap");
 //     el: "#app",
 // } );
 
-
 const modal = document.querySelector("#modal");
 const openModal = document.querySelector("#openModal");
 const closeModal = document.querySelector("#closeModal");
 
-modal.style.display = "none";
-
-openModal.addEventListener("click", () => {
-    modal.style.display = "block";
-});
-
-closeModal.addEventListener("click", () => {
+if (modal) {
     modal.style.display = "none";
-});
+
+    openModal.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}

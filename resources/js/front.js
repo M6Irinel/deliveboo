@@ -1,15 +1,25 @@
 // @ts-nocheck
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+window.axios = require("axios");
+window.axios.defaults.headers.common[ "X-Requested-With" ] = "XMLHttpRequest";
 
-window.axios = require('axios');
+import Vue from "vue";
+import router from "./router/router";
+import AppVue from "./views/App.vue";
+import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faHatWizard } from '@fortawesome/free-solid-svg-icons';
+import { faHourglassHalf } from '@fortawesome/free-regular-svg-icons';
+// import { faHatWizard } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+library.add(
+    faHourglassHalf,
+);
+Vue.component( 'font-awesome-icon', FontAwesomeIcon );
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-Vue.use(VueRouter)
-
-const app = new Vue({
-    el: '#app',
+new Vue({
+    el: "#app",
+    render(h) {
+        return h(AppVue);
+    },
+    router,
 });
-

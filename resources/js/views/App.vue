@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div class="max">
+        <NavBar />
+
         <router-view />
     </div>
 </template>
@@ -8,10 +10,13 @@
 <script>
 // @ts-nocheck
 import store from '../store/store';
-
+import NavBar from '../components/NavBar.vue';
 export default {
     name: 'AppVue',
 
+    components: {
+        NavBar,
+    },
     methods: {
         fetchRestaurants () {
             axios.get( '/api/restaurants' ).then( r => {
@@ -38,5 +43,8 @@ export default {
 
 
 <style lang="scss">
-
+    .max{
+        height: 100vh;
+        background-color: magenta;
+    }
 </style>

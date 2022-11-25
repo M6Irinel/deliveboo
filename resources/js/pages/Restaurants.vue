@@ -1,8 +1,9 @@
 <template>
     <div>
-        <header v-html="forLogin" />
+        <!-- <header v-html="forLogin" /> -->
         <main class="container">
-            <div class="flex j-flex-end mt-2">
+            <div class="flex between align-items-center py-3 mt-2">
+                <h1>Ristoranti</h1>
                 <div>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{parseFloat(total).toFixed(2)}}€</span>
@@ -10,29 +11,31 @@
                 </div>
             </div>
 
-            <h1>Ristoranti</h1>
+            <div class="d-flex">
 
-            <div class="shadow p-2 mb-5">
-                <h4>Filtra per tipologie</h4>
-                <div class="list-style-none flex gap-3 wrap center">
-                    <label class="px-2 py-1 border rounded-3 flex gap-6 pointer" v-for="(t, i) in typologies" :key="i">
-                        <input type="checkbox" :value="t.name" v-model="types">
-                        <div>{{ t.name }}</div>
-                    </label>
+                <div class="shadow p-2 mb-5 tag-wrapper">
+                    <h4>Filtra per tipologie</h4>
+                    <div class="list-style-none flex-column center">
+                        <label class="px-2 py-1 border rounded-3 flex gap-6 pointer" v-for="(t, i) in typologies" :key="i">
+                            <input type="checkbox" :value="t.name" v-model="types">
+                            <div>{{ t.name }}</div>
+                        </label>
+                    </div>
                 </div>
-            </div>
-
-            <ul class="list-style-none grid-12 gap-5" v-if="!loading">
-                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
-                    v-for="(restaurant, i) in restaurants" :key="i"
-                    :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                    <li>
-                        <strong>{{ restaurant.user.name }}</strong>
-                    </li>
-                </router-link>
-            </ul>
-            <div v-else>
-                <LoaderC />
+    
+                <ul class="list-style-none grid-12 gap-5 " v-if="!loading">
+                    <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
+                        v-for="(restaurant, i) in restaurants" :key="i"
+                        :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
+                        <li>
+                            <strong>{{ restaurant.user.name }}</strong>
+                        </li>
+                    </router-link>
+                </ul>
+                <div v-else>
+                    <LoaderC />
+                
+                </div>
             </div>
         </main>
     </div>
@@ -70,7 +73,13 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
+.tag-wrapper{
+    flex-basis: 15%;
+}
+
+.tag-distance{
+    gap: 2rem;
+}
 
 </style>

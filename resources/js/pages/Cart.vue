@@ -2,36 +2,68 @@
     <div>
         <header v-html="forLogin" />
         <main v-if="!loading" class="container">
-            <div class="mt-2">
-                <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
-                <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
+            <div class="flex between mt-2">
+                <div class="mt-2">
+                    <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
+                    <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
+                </div>
+                <div>
+                    <div class="badge badge-warning p-2 fs-3">
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                        <span v-if="total">{{
+                                parseFloat(total).toFixed(2)
+                        }}€</span>
+                    </div>
+                </div>
             </div>
 
             <h1>Cart</h1>
             <div v-if="plates">
-                <ul class="list-style-none grid-12 gap-5">
-                    <li class="g-col-3 card p-2 relative" v-for="(v, i) in plates" :key="i">
-                        <div v-if="v.plate_image">
-                            <img height="200" :src="'./storage/' + v.plate_image" alt="" />
+                <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+                    <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        v-for="(plate, i) in plates" :key="i">
+
+                        <div v-if="plate.plate_image">
+                            <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
                         </div>
-                        <div>
-                            <p>{{ v.plate_name }}</p>
-                            <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(v.plate_name) > 1">
+                        <div v-else>
+                            <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                        </div>
+
+                        <div class="mt-auto">
+                            <p>{{ plate.plate_name }}</p>
+                            <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(plate.plate_name) > 1">
                                 &Cross;
-                                {{ quantity(v.plate_name) }}
+                                {{ quantity(plate.plate_name) }}
                             </div>
                         </div>
-                        <p>Prezzo: {{ v.plate_price }}€</p>
-                        <div v-if="quantity(v.plate_name) > 1">
-                            <p>Quantità: {{ quantity(v.plate_name) }}</p>
-                            <p>Totale del Piatto: {{ parseFloat(v.plate_price * quantity(v.plate_name)).toFixed(2) }}€
 
+                        <p>Prezzo: {{ plate.plate_price }}€</p>
+
+                        <div v-if="quantity(plate.plate_name) > 1">
+                            <p>Quantità: {{ quantity(plate.plate_name) }}</p>
+                            <p>
+                                Totale del Piatto:
+                                {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
+                                €
                             </p>
+                        </div>
+
+                        <div :class="[
+                            'flex mt-auto',
+                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        ]">
+                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                                @click="removePlate(plate)">-</button>
+
+                            <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+
+                            <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
                         </div>
                     </li>
                 </ul>
                 <div class="flex between">
-                    <h2>Totale di tutto: {{ total().toFixed(2) }} €</h2>
+                    <h2>Totale di tutto: {{ totalF().toFixed(2) }} €</h2>
                     <button class="btn btn-danger" @click="pulisciStorage()">Svuota il Carello</button>
                 </div>
 
@@ -63,8 +95,7 @@ export default {
     data () {
         return {
             forLogin,
-
-
+            total: sessionStorage.getItem( 'spesaTotale' )
         };
     },
 
@@ -93,15 +124,14 @@ export default {
                     store.loading = false;
                 } );
         },
+
         pulisciStorage () {
             sessionStorage.clear();
             location.reload();
+            this.total = 0;
         },
-        quantity ( v ) {
 
-            return sessionStorage.getItem( v + '-counter' );
-        },
-        total () {
+        totalF () {
             if ( !sessionStorage.resId ) {
                 return
             }
@@ -112,9 +142,76 @@ export default {
                 sessionStorage.setItem( "spesaTotale", s );
             } )
             return s
-        }
+        },
 
+        addPlate ( plate ) {
+            if ( typeof ( Storage ) ) {
+                if ( sessionStorage.resId ) {
+                    if ( sessionStorage.getItem( "resId" ) == plate.restaurant_id ) {
+                        this.plateLocalStore( plate );
+                        return;
+                    } else {
+                        alert( 'non puoi ordinare da più ristoranti' );
+                        return;
+                    }
+                }
+                sessionStorage.setItem( "resId", plate.restaurant_id );
+                this.plateLocalStore( plate );
+            }
+            else {
+                alert( 'hai il pc vecchio, vai a piedi' );
+            }
+        },
 
+        plateLocalStore ( plate ) {
+            let plateCounter = plate.plate_name + '-counter';
+
+            if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
+                let c = sessionStorage.getItem( plateCounter );
+                sessionStorage.setItem( plateCounter, ++c );
+            } else {
+                sessionStorage.setItem( plate.plate_name, plate.id );
+                sessionStorage.setItem( plateCounter, 1 );
+            }
+            this.totalprice();
+        },
+
+        removePlate ( plate ) {
+            let plateCounter = plate.plate_name + '-counter';
+
+            if ( typeof ( Storage ) ) {
+                if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
+                    let c = sessionStorage.getItem( plateCounter );
+                    sessionStorage.setItem( plateCounter, --c );
+                    this.totalprice();
+                    if ( c === 0 ) {
+                        sessionStorage.removeItem( plateCounter );
+                        sessionStorage.removeItem( plate.plate_name );
+                    }
+                }
+            }
+            else {
+                alert( 'hai il pc vecchio, vai a piedi' )
+            }
+
+            if ( sessionStorage.length <= 2 ) {
+                this.pulisciStorage();
+            }
+        },
+
+        totalprice () {
+            let s = 0
+            this.plates.forEach( e => {
+                let q = ( sessionStorage.getItem( e.plate_name + '-counter' ) );
+                s += ( e.plate_price * q );
+                sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+            } )
+            this.total = sessionStorage.getItem( 'spesaTotale' );
+        },
+
+        quantity ( v ) {
+            return sessionStorage.getItem( v + '-counter' );
+        },
     },
 
     created () {

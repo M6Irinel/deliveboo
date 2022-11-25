@@ -19,19 +19,39 @@
             <h1>Piatti</h1>
 
             <div v-if="!loading">
-                <div class="grid-12 gap-5" v-if="hasPlates">
-                    <div class="card flex f-column g-col-3 p-2" v-for="(plate, i) in plates" :key="i">
+                <div class="grid-12 grid-10-lg grid-12-xl gap-5" v-if="hasPlates">
+                    <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2" v-for="(plate, i) in plates" :key="i">
+
                         <div v-if="plate.plate_image">
-                            <img height="200" :src="'./storage/' + plate.plate_image" alt="" />
+                            <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
                         </div>
+                        <div v-else>
+                            <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                        </div>
+
                         <div>
-                            <p>{{ plate.plate_name }}</p>
-                            <p>{{ plate.ingredients }}</p>
-                            <p>{{ plate.plate_price }}€</p>
+                            <p class="t-center">{{ plate.plate_name }}</p>
+
+                            <p>
+                                <strong>Ingredienti: </strong>
+                                <span>{{ plate.ingredients }}</span>
+                            </p>
+
+                            <p class="flex between">
+                                <strong>Prezzo: </strong>
+                                <span>{{ parseFloat(plate.plate_price).toFixed(2) }}€</span>
+                            </p>
                         </div>
-                        <div class="flex between mt-auto">
-                            <button class="btn btn-danger px-3" @click="removePlate(plate)">-</button>
-                            <div>{{ quantity(plate.plate_name) }}</div>
+
+                        <div :class="[
+                            'flex mt-auto',
+                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        ]">
+                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                                @click="removePlate(plate)">-</button>
+
+                            <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+
                             <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
                         </div>
                     </div>
@@ -68,10 +88,6 @@ export default {
     },
 
     methods: {
-        clog (v) {
-            console.log(v);
-        },
-
         fetchPlates () {
             store.loading = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
@@ -152,7 +168,7 @@ export default {
 
         quantity ( v ) {
             return sessionStorage.getItem( v + '-counter' );
-        }
+        },
     },
 
     computed: {

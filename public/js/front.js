@@ -18492,6 +18492,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
 /* harmony import */ var _components_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Loader.vue */ "./resources/js/components/Loader.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 // @ts-nocheck
 
 
@@ -18502,7 +18503,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      forLogin: forLogin
+      forLogin: forLogin,
+      total: sessionStorage.getItem('spesaTotale')
     };
   },
   computed: {
@@ -18529,11 +18531,9 @@ __webpack_require__.r(__webpack_exports__);
     pulisciStorage: function pulisciStorage() {
       sessionStorage.clear();
       location.reload();
+      this.total = 0;
     },
-    quantity: function quantity(v) {
-      return sessionStorage.getItem(v + '-counter');
-    },
-    total: function total() {
+    totalF: function totalF() {
       if (!sessionStorage.resId) {
         return;
       }
@@ -18544,6 +18544,65 @@ __webpack_require__.r(__webpack_exports__);
         sessionStorage.setItem("spesaTotale", s);
       });
       return s;
+    },
+    addPlate: function addPlate(plate) {
+      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        if (sessionStorage.resId) {
+          if (sessionStorage.getItem("resId") == plate.restaurant_id) {
+            this.plateLocalStore(plate);
+            return;
+          } else {
+            alert('non puoi ordinare da più ristoranti');
+            return;
+          }
+        }
+        sessionStorage.setItem("resId", plate.restaurant_id);
+        this.plateLocalStore(plate);
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
+      }
+    },
+    plateLocalStore: function plateLocalStore(plate) {
+      var plateCounter = plate.plate_name + '-counter';
+      if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+        var c = sessionStorage.getItem(plateCounter);
+        sessionStorage.setItem(plateCounter, ++c);
+      } else {
+        sessionStorage.setItem(plate.plate_name, plate.id);
+        sessionStorage.setItem(plateCounter, 1);
+      }
+      this.totalprice();
+    },
+    removePlate: function removePlate(plate) {
+      var plateCounter = plate.plate_name + '-counter';
+      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+        if (sessionStorage.getItem(plate.plate_name) == plate.id) {
+          var c = sessionStorage.getItem(plateCounter);
+          sessionStorage.setItem(plateCounter, --c);
+          this.totalprice();
+          if (c === 0) {
+            sessionStorage.removeItem(plateCounter);
+            sessionStorage.removeItem(plate.plate_name);
+          }
+        }
+      } else {
+        alert('hai il pc vecchio, vai a piedi');
+      }
+      if (sessionStorage.length <= 2) {
+        this.pulisciStorage();
+      }
+    },
+    totalprice: function totalprice() {
+      var s = 0;
+      this.plates.forEach(function (e) {
+        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        s += e.plate_price * q;
+        sessionStorage.setItem("spesaTotale", s.toFixed(2));
+      });
+      this.total = sessionStorage.getItem('spesaTotale');
+    },
+    quantity: function quantity(v) {
+      return sessionStorage.getItem(v + '-counter');
     }
   },
   created: function created() {
@@ -18596,9 +18655,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     };
   },
   methods: {
-    clog: function clog(v) {
-      console.log(v);
-    },
     fetchPlates: function fetchPlates() {
       var _this = this;
       _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
@@ -18832,6 +18888,8 @@ var render = function render() {
   }), _vm._v(" "), !_vm.loading ? _c("main", {
     staticClass: "container"
   }, [_c("div", {
+    staticClass: "flex between mt-2"
+  }, [_c("div", {
     staticClass: "mt-2"
   }, [_c("button", {
     staticClass: "btn btn-secondary px-1",
@@ -18847,24 +18905,56 @@ var render = function render() {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("div", [_c("ul", {
-    staticClass: "list-style-none grid-12 gap-5"
-  }, _vm._l(_vm.plates, function (v, i) {
+  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("div", [_c("div", {
+    staticClass: "badge badge-warning p-2 fs-3"
+  }, [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-basket-shopping"
+    }
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)])]), _vm._v(" "), _c("h1", [_vm._v("Cart")]), _vm._v(" "), _vm.plates ? _c("div", [_c("ul", {
+    staticClass: "list-style-none grid-12 grid-10-lg grid-12-xl gap-5"
+  }, _vm._l(_vm.plates, function (plate, i) {
     return _c("li", {
       key: i,
-      staticClass: "g-col-3 card p-2 relative"
-    }, [v.plate_image ? _c("div", [_c("img", {
+      staticClass: "card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+    }, [plate.plate_image ? _c("div", [_c("img", {
+      staticClass: "img-fluid",
       attrs: {
-        height: "200",
-        src: "./storage/" + v.plate_image,
+        src: "./storage/" + plate.plate_image,
         alt: ""
       }
-    })]) : _vm._e(), _vm._v(" "), _c("div", [_c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", {
+    })]) : _c("div", [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: "./img/default/plate-empty.png",
+        alt: ""
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "mt-auto"
+    }, [_c("p", [_vm._v(_vm._s(plate.plate_name))]), _vm._v(" "), _vm.quantity(plate.plate_name) > 1 ? _c("div", {
       staticClass: "absolute badge badge-primary p-1 badge-n"
-    }, [_vm._v("\n                            ⨯\n                            " + _vm._s(_vm.quantity(v.plate_name)) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("Totale del Piatto: " + _vm._s(parseFloat(v.plate_price * _vm.quantity(v.plate_name)).toFixed(2)) + "€\n\n                        ")])]) : _vm._e()]);
+    }, [_vm._v("\n                            ⨯\n                            " + _vm._s(_vm.quantity(plate.plate_name)) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(plate.plate_price) + "€")]), _vm._v(" "), _vm.quantity(plate.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(plate.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("\n                            Totale del Piatto:\n                            " + _vm._s(parseFloat(plate.plate_price * _vm.quantity(plate.plate_name)).toFixed(2)) + "\n                            €\n                        ")])]) : _vm._e(), _vm._v(" "), _c("div", {
+      "class": ["flex mt-auto", _vm.quantity(plate.plate_name) ? "between" : "j-flex-end"]
+    }, [_vm.quantity(plate.plate_name) ? _c("button", {
+      staticClass: "btn btn-danger px-3",
+      on: {
+        click: function click($event) {
+          return _vm.removePlate(plate);
+        }
+      }
+    }, [_vm._v("-")]) : _vm._e(), _vm._v(" "), _c("div", {
+      staticClass: "badge badge-primary badge-n py-1 px-2"
+    }, [_vm._v(_vm._s(_vm.quantity(plate.plate_name)))]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-success px-3",
+      on: {
+        click: function click($event) {
+          return _vm.addPlate(plate);
+        }
+      }
+    }, [_vm._v("+")])])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "flex between"
-  }, [_c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.total().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
+  }, [_c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.totalF().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-danger",
     on: {
       click: function click($event) {
@@ -18953,27 +19043,39 @@ var render = function render() {
       icon: "fa-solid fa-basket-shopping"
     }
   }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", {
-    staticClass: "grid-12 gap-5"
+    staticClass: "grid-12 grid-10-lg grid-12-xl gap-5"
   }, _vm._l(_vm.plates, function (plate, i) {
     return _c("div", {
       key: i,
-      staticClass: "card flex f-column g-col-3 p-2"
+      staticClass: "card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
     }, [plate.plate_image ? _c("div", [_c("img", {
+      staticClass: "img-fluid",
       attrs: {
-        height: "200",
         src: "./storage/" + plate.plate_image,
         alt: ""
       }
-    })]) : _vm._e(), _vm._v(" "), _c("div", [_c("p", [_vm._v(_vm._s(plate.plate_name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(plate.ingredients))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(plate.plate_price) + "€")])]), _vm._v(" "), _c("div", {
-      staticClass: "flex between mt-auto"
-    }, [_c("button", {
+    })]) : _c("div", [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: "./img/default/plate-empty.png",
+        alt: ""
+      }
+    })]), _vm._v(" "), _c("div", [_c("p", {
+      staticClass: "t-center"
+    }, [_vm._v(_vm._s(plate.plate_name))]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Ingredienti: ")]), _vm._v(" "), _c("span", [_vm._v(_vm._s(plate.ingredients))])]), _vm._v(" "), _c("p", {
+      staticClass: "flex between"
+    }, [_c("strong", [_vm._v("Prezzo: ")]), _vm._v(" "), _c("span", [_vm._v(_vm._s(parseFloat(plate.plate_price).toFixed(2)) + "€")])])]), _vm._v(" "), _c("div", {
+      "class": ["flex mt-auto", _vm.quantity(plate.plate_name) ? "between" : "j-flex-end"]
+    }, [_vm.quantity(plate.plate_name) ? _c("button", {
       staticClass: "btn btn-danger px-3",
       on: {
         click: function click($event) {
           return _vm.removePlate(plate);
         }
       }
-    }, [_vm._v("-")]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.quantity(plate.plate_name)))]), _vm._v(" "), _c("button", {
+    }, [_vm._v("-")]) : _vm._e(), _vm._v(" "), _c("div", {
+      staticClass: "badge badge-primary badge-n py-1 px-2"
+    }, [_vm._v(_vm._s(_vm.quantity(plate.plate_name)))]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-success px-3",
       on: {
         click: function click($event) {

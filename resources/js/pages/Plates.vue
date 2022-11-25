@@ -2,26 +2,44 @@
     <div>
         <header v-html="forLogin" />
         <main class="container">
-            <div class="flex between">
-                <router-link :to="{ name: 'Home' }">Ristoranti</router-link>
-                <router-link :to="{ name: 'Cart' }">
-                    <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{total}}€</span>
-                </router-link>
+            <div class="flex between mt-2">
+                <div>
+                    <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
+                    <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
+                </div>
+                <div>
+                    <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{
+                                parseFloat(total).toFixed(2)
+                        }}€</span>
+                    </router-link>
+                </div>
             </div>
 
             <h1>Piatti</h1>
 
             <div v-if="!loading">
-                <div v-if="hasPlates">
-                    <div v-for="(plate, i) in plates" :key="i">
-                        <button @click="addPlate(plate)">
-                            {{ plate.plate_name }}
-                        </button>
-                        <button @click="removePlate(plate)">Togli 1</button>
+                <div class="grid-12 gap-5" v-if="hasPlates">
+                    <div class="card flex f-column g-col-3 p-2" v-for="(plate, i) in plates" :key="i">
+                        <div v-if="plate.plate_image">
+                            <img height="200" :src="'./storage/' + plate.plate_image" alt="" />
+                        </div>
+                        <div>
+                            <p>{{ plate.plate_name }}</p>
+                            <p>{{ plate.ingredients }}</p>
+                            <p>{{ plate.plate_price }}€</p>
+                        </div>
+                        <div class="flex between mt-auto">
+                            <button class="btn btn-danger px-3" @click="removePlate(plate)">-</button>
+                            <div>{{ quantity(plate.plate_name) }}</div>
+                            <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
+                        </div>
                     </div>
                 </div>
 
-                <button @click="pulisciStorage()">Svuota il Carrello </button>
+                <div class="flex j-flex-end">
+                    <button class="btn btn-danger px-1" @click="pulisciStorage()">Svuota il Carrello </button>
+                </div>
             </div>
             <div v-else>
                 <LoaderC />
@@ -41,115 +59,120 @@ export default {
 
     components: { LoaderC },
 
-    data() {
+    data () {
         return {
             forLogin,
             plates: null,
-            total: sessionStorage.getItem('spesaTotale')
+            total: sessionStorage.getItem( 'spesaTotale' )
         };
     },
 
     methods: {
-        fetchPlates() {
+        clog (v) {
+            console.log(v);
+        },
+
+        fetchPlates () {
             store.loading = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
                 store.loading = false;
-            });
+            } );
         },
-        totalprice(){
+
+        totalprice () {
             let s = 0
-            this.plates.forEach(e=>{
-                let q=(sessionStorage.getItem(e.plate_name + '-counter'))
-                s+=(e.plate_price*q);
-                sessionStorage.setItem("spesaTotale",s.toFixed(2));
-            })
-            this.total= sessionStorage.getItem('spesaTotale');
+            this.plates.forEach( e => {
+                let q = ( sessionStorage.getItem( e.plate_name + '-counter' ) );
+                s += ( e.plate_price * q );
+                sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+            } )
+            this.total = sessionStorage.getItem( 'spesaTotale' );
         },
 
-        addPlate(plate) {
-            if (typeof (Storage)) {
-                if (sessionStorage.resId) {
-                    if (sessionStorage.getItem("resId") == plate.restaurant_id) {
+        addPlate ( plate ) {
+            if ( typeof ( Storage ) ) {
+                if ( sessionStorage.resId ) {
+                    if ( sessionStorage.getItem( "resId" ) == plate.restaurant_id ) {
                         this.plateLocalStore( plate );
-
-                        return
+                        return;
                     } else {
                         alert( 'non puoi ordinare da più ristoranti' );
-                        return
+                        return;
                     }
-                } else {
-                    sessionStorage.setItem("resId", plate.restaurant_id);
                 }
+                sessionStorage.setItem( "resId", plate.restaurant_id );
                 this.plateLocalStore( plate );
-
             }
             else {
-                alert('hai il pc vecchio, vai a piedi')
+                alert( 'hai il pc vecchio, vai a piedi' );
             }
         },
 
-        plateLocalStore(plate) {
+        plateLocalStore ( plate ) {
             let plateCounter = plate.plate_name + '-counter'
 
-            if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-                let c = sessionStorage.getItem(plateCounter);
-                sessionStorage.setItem(plateCounter, ++c);
+            if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
+                let c = sessionStorage.getItem( plateCounter );
+                sessionStorage.setItem( plateCounter, ++c );
             } else {
-                sessionStorage.setItem(plate.plate_name, plate.id);
-                sessionStorage.setItem(plateCounter, 1);
+                sessionStorage.setItem( plate.plate_name, plate.id );
+                sessionStorage.setItem( plateCounter, 1 );
             }
-            this.totalprice()
-
+            this.totalprice();
         },
 
-        removePlate(plate) {
-            let plateCounter = plate.plate_name + '-counter'
+        removePlate ( plate ) {
+            let plateCounter = plate.plate_name + '-counter';
 
-            if (typeof (Storage)) {
-                if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-                    let c = sessionStorage.getItem(plateCounter);
-                    sessionStorage.setItem(plateCounter, --c);
+            if ( typeof ( Storage ) ) {
+                if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
+                    let c = sessionStorage.getItem( plateCounter );
+                    sessionStorage.setItem( plateCounter, --c );
                     this.totalprice();
-                    if (c === 0) {
-                        sessionStorage.removeItem(plateCounter);
-                        sessionStorage.removeItem(plate.plate_name);
+                    if ( c === 0 ) {
+                        sessionStorage.removeItem( plateCounter );
+                        sessionStorage.removeItem( plate.plate_name );
                     }
                 }
             }
             else {
-                alert('hai il pc vecchio, vai a piedi')
+                alert( 'hai il pc vecchio, vai a piedi' )
             }
 
-            if(sessionStorage.length<=2){
-                this.pulisciStorage()
+            if ( sessionStorage.length <= 2 ) {
+                this.pulisciStorage();
             }
         },
 
-        pulisciStorage() {
+        pulisciStorage () {
             sessionStorage.clear();
-            this.total = 0
+            this.total = 0;
+        },
+
+        quantity ( v ) {
+            return sessionStorage.getItem( v + '-counter' );
         }
     },
 
     computed: {
-        restaurants() {
+        restaurants () {
             return store.restaurants;
         },
-        hasPlates() {
+        hasPlates () {
             return store.hasPlates;
         },
-        loading() {
+        loading () {
             return store.loading;
         },
-        restaurant_Id() {
+        restaurant_Id () {
             return this.$route.params.id;
         }
     },
 
-    created() {
+    created () {
         this.fetchPlates();
-        this.total= sessionStorage.getItem('spesaTotale');
+        this.total = sessionStorage.getItem( 'spesaTotale' );
     },
 
 };

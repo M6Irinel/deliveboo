@@ -18596,6 +18596,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     };
   },
   methods: {
+    clog: function clog(v) {
+      console.log(v);
+    },
     fetchPlates: function fetchPlates() {
       var _this = this;
       _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
@@ -18623,9 +18626,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             alert('non puoi ordinare da più ristoranti');
             return;
           }
-        } else {
-          sessionStorage.setItem("resId", plate.restaurant_id);
         }
+        sessionStorage.setItem("resId", plate.restaurant_id);
         this.plateLocalStore(plate);
       } else {
         alert('hai il pc vecchio, vai a piedi');
@@ -18664,6 +18666,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     pulisciStorage: function pulisciStorage() {
       sessionStorage.clear();
       this.total = 0;
+    },
+    quantity: function quantity(v) {
+      return sessionStorage.getItem(v + '-counter');
     }
   },
   computed: {
@@ -18711,7 +18716,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       forLogin: forLogin,
-      types: []
+      types: [],
+      total: sessionStorage.getItem('spesaTotale')
     };
   },
   computed: {
@@ -18825,7 +18831,17 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.loading ? _c("main", {
     staticClass: "container"
-  }, [_c("div", [_c("router-link", {
+  }, [_c("div", {
+    staticClass: "mt-2"
+  }, [_c("button", {
+    staticClass: "btn btn-secondary px-1",
+    on: {
+      click: function click($event) {
+        return _vm.$router.go(-1);
+      }
+    }
+  }, [_vm._v("←")]), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary px-1",
     attrs: {
       to: {
         name: "Home"
@@ -18836,21 +18852,26 @@ var render = function render() {
   }, _vm._l(_vm.plates, function (v, i) {
     return _c("li", {
       key: i,
-      staticClass: "g-col-3 card p-2"
+      staticClass: "g-col-3 card p-2 relative"
     }, [v.plate_image ? _c("div", [_c("img", {
       attrs: {
         height: "200",
         src: "./storage/" + v.plate_image,
         alt: ""
       }
-    })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v(_vm._s(v.plate_name) + " "), _vm.quantity(v.plate_name) > 1 ? _c("span", [_vm._v(" ⨯" + _vm._s(_vm.quantity(v.plate_name)))]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("Totale del Piatto: " + _vm._s(parseFloat(v.plate_price * _vm.quantity(v.plate_name)).toFixed(2)) + "€\n\n                        ")])]) : _vm._e()]);
-  }), 0), _vm._v(" "), _c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.total().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
+    })]) : _vm._e(), _vm._v(" "), _c("div", [_c("p", [_vm._v(_vm._s(v.plate_name))]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", {
+      staticClass: "absolute badge badge-primary p-1 badge-n"
+    }, [_vm._v("\n                            ⨯\n                            " + _vm._s(_vm.quantity(v.plate_name)) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("p", [_vm._v("Prezzo: " + _vm._s(v.plate_price) + "€")]), _vm._v(" "), _vm.quantity(v.plate_name) > 1 ? _c("div", [_c("p", [_vm._v("Quantità: " + _vm._s(_vm.quantity(v.plate_name)))]), _vm._v(" "), _c("p", [_vm._v("Totale del Piatto: " + _vm._s(parseFloat(v.plate_price * _vm.quantity(v.plate_name)).toFixed(2)) + "€\n\n                        ")])]) : _vm._e()]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "flex between"
+  }, [_c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.total().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-danger",
     on: {
       click: function click($event) {
         return _vm.pulisciStorage();
       }
     }
-  }, [_vm._v("Svuota il Carello")])]) : _c("div", [_c("p", [_vm._v("carrello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
+  }, [_vm._v("Svuota il Carello")])])]) : _c("div", [_c("p", [_vm._v("carrello vuoto")])])]) : _c("div", [_c("LoaderC")], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18905,14 +18926,23 @@ var render = function render() {
   }), _vm._v(" "), _c("main", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "flex between"
-  }, [_c("router-link", {
+    staticClass: "flex between mt-2"
+  }, [_c("div", [_c("button", {
+    staticClass: "btn btn-secondary px-1",
+    on: {
+      click: function click($event) {
+        return _vm.$router.go(-1);
+      }
+    }
+  }, [_vm._v("←")]), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary px-1",
     attrs: {
       to: {
         name: "Home"
       }
     }
-  }, [_vm._v("Ristoranti")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Ristoranti")])], 1), _vm._v(" "), _c("div", [_c("router-link", {
+    staticClass: "btn btn-success px-1",
     attrs: {
       to: {
         name: "Cart"
@@ -18922,29 +18952,45 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-basket-shopping"
     }
-  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(_vm.total) + "€")]) : _vm._e()], 1)], 1), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", _vm._l(_vm.plates, function (plate, i) {
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_vm.hasPlates ? _c("div", {
+    staticClass: "grid-12 gap-5"
+  }, _vm._l(_vm.plates, function (plate, i) {
     return _c("div", {
-      key: i
-    }, [_c("button", {
-      on: {
-        click: function click($event) {
-          return _vm.addPlate(plate);
-        }
+      key: i,
+      staticClass: "card flex f-column g-col-3 p-2"
+    }, [plate.plate_image ? _c("div", [_c("img", {
+      attrs: {
+        height: "200",
+        src: "./storage/" + plate.plate_image,
+        alt: ""
       }
-    }, [_vm._v("\n                        " + _vm._s(plate.plate_name) + "\n                    ")]), _vm._v(" "), _c("button", {
+    })]) : _vm._e(), _vm._v(" "), _c("div", [_c("p", [_vm._v(_vm._s(plate.plate_name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(plate.ingredients))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(plate.plate_price) + "€")])]), _vm._v(" "), _c("div", {
+      staticClass: "flex between mt-auto"
+    }, [_c("button", {
+      staticClass: "btn btn-danger px-3",
       on: {
         click: function click($event) {
           return _vm.removePlate(plate);
         }
       }
-    }, [_vm._v("Togli 1")])]);
-  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
+    }, [_vm._v("-")]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.quantity(plate.plate_name)))]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-success px-3",
+      on: {
+        click: function click($event) {
+          return _vm.addPlate(plate);
+        }
+      }
+    }, [_vm._v("+")])])]);
+  }), 0) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "flex j-flex-end"
+  }, [_c("button", {
+    staticClass: "btn btn-danger px-1",
     on: {
       click: function click($event) {
         return _vm.pulisciStorage();
       }
     }
-  }, [_vm._v("Svuota il Carrello ")])]) : _c("div", [_c("LoaderC")], 1)])]);
+  }, [_vm._v("Svuota il Carrello ")])])]) : _c("div", [_c("LoaderC")], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18973,14 +19019,26 @@ var render = function render() {
   }), _vm._v(" "), _c("main", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "flex j-flex-end"
-  }, [_c("router-link", {
+    staticClass: "flex between mt-2"
+  }, [_c("div", [_c("button", {
+    staticClass: "btn btn-secondary px-1",
+    on: {
+      click: function click($event) {
+        return _vm.$router.go(-1);
+      }
+    }
+  }, [_vm._v("←")])]), _vm._v(" "), _c("div", [_c("router-link", {
+    staticClass: "btn btn-success px-1",
     attrs: {
       to: {
         name: "Cart"
       }
     }
-  }, [_vm._v("Carello")])], 1), _vm._v(" "), _c("h1", [_vm._v("Ristoranti")]), _vm._v(" "), _c("div", {
+  }, [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-basket-shopping"
+    }
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Ristoranti")]), _vm._v(" "), _c("div", {
     staticClass: "shadow p-2 mb-5"
   }, [_c("h4", [_vm._v("Filtra per tipologie")]), _vm._v(" "), _c("div", {
     staticClass: "list-style-none flex gap-3 wrap center"
@@ -35894,7 +35952,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/deliveboo/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

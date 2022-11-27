@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-success">
+  <header class="">
     <div class="container d-flex justify-content-between align-items-center">
       <div class="logo">
         <p>LOGO</p>
@@ -26,6 +26,10 @@
 
 </script>
 
-<style>
+<style scoped lang="scss">
+header{
+background-color: bisque;
+opacity: 0.9;
+}
 
 </style>

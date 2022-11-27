@@ -6,35 +6,46 @@
                 <h1>Ristoranti</h1>
                 <div>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{parseFloat(total).toFixed(2)}}€</span>
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{
+                                parseFloat(total).toFixed(2)
+                        }}€</span>
                     </router-link>
                 </div>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex gap-5">
 
                 <div class="shadow p-2 mb-5 tag-wrapper">
                     <h4>Filtra per tipologie</h4>
                     <div class="list-style-none flex-column center">
-                        <label class="px-2 py-1 border rounded-3 flex gap-6 pointer" v-for="(t, i) in typologies" :key="i">
+                        <label class="px-2 py-1 border rounded-3 flex gap-6 pointer card__typology"
+                            v-for="(t, i) in typologies" :key="i">
                             <input type="checkbox" :value="t.name" v-model="types">
                             <div>{{ t.name }}</div>
                         </label>
                     </div>
                 </div>
-    
-                <ul class="list-style-none grid-12 gap-5 " v-if="!loading">
-                    <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
+
+                <ul class="list-style-none grid-12 gap-5" v-if="!loading">
+                    <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow  card__restaurant "
                         v-for="(restaurant, i) in restaurants" :key="i"
                         :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
                         <li>
                             <strong>{{ restaurant.user.name }}</strong>
                         </li>
+                        <li>
+                            {{ restaurant.restaurant_address }}
+                        </li>
+                        <li>
+                            <div v-if="restaurant.restaurant_image">
+                                <img class="img-fluid" :src="'../storage/' + restaurant.restaurant_image" alt="" />
+                            </div>
+                        </li>
                     </router-link>
                 </ul>
                 <div v-else>
                     <LoaderC />
-                
+
                 </div>
             </div>
         </main>
@@ -74,12 +85,39 @@ export default {
 </script>
 
 <style lang="scss">
-.tag-wrapper{
+.tag-wrapper {
     flex-basis: 15%;
 }
 
-.tag-distance{
+.tag-distance {
     gap: 2rem;
 }
 
+.card__typology {
+    &:hover {
+        background-color: rgb(249, 242, 242);
+        color: red;
+
+    }
+   }
+
+.card__restaurant {
+    background-color: rgb(249, 242, 242);
+
+    img {
+        border-radius: 50px;
+        overflow: hidden;
+        max-width: 90%;
+    }
+
+    &:hover {
+        color: red;
+
+        img {
+            opacity: 0.5;
+            scale: 1.1;
+            border-radius: 150px;
+        }
+    }
+}
 </style>

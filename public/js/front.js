@@ -19318,7 +19318,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".max {\n  height: 100vh;\n  background-color: magenta;\n}", ""]);
+exports.push([module.i, ".max {\n  min-height: 100vh;\n}", ""]);
 
 // exports
 
@@ -36302,7 +36302,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\Deliveboo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -44,7 +44,7 @@ export default {
 
 <style lang="scss">
     .max{
-        height: 100vh;
-        background-color: magenta;
+        min-height: 100vh;
+       
     }
 </style>

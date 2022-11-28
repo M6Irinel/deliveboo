@@ -18789,10 +18789,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   methods: {
     fetchPlates: function fetchPlates() {
       var _this = this;
-      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = true;
+      _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loadingPlates = true;
       axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (r) {
         _this.plates = r.data.plates;
-        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading = false;
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loadingPlates = false;
       });
     },
     totalprice: function totalprice() {
@@ -18857,8 +18857,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     restaurants: function restaurants() {
       return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].restaurants;
     },
-    loading: function loading() {
-      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loading;
+    loadingPlates: function loadingPlates() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].loadingPlates;
     },
     restaurant_Id: function restaurant_Id() {
       return this.$route.params.id;
@@ -19296,7 +19296,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-basket-shopping"
     }
-  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loading ? _c("div", [_c("div", {
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loadingPlates ? _c("div", [_c("div", {
     staticClass: "grid-12 grid-10-lg grid-12-xl gap-5"
   }, _vm._l(_vm.plates, function (plate, i) {
     return _c("div", {
@@ -36440,6 +36440,7 @@ __webpack_require__.r(__webpack_exports__);
   typologies: null,
   loadingRestaurant: false,
   loadingCart: false,
+  loadingPlates: false,
   plates: null,
   totalCart: null
 }));

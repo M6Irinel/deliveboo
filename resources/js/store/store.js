@@ -6,6 +6,7 @@ export default Vue.observable({
     typologies: null,
     loadingRestaurant: false,
     loadingCart: false,
+    loadingPlates: false,
     plates: null,
     totalCart: null
 });

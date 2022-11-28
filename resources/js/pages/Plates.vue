@@ -17,7 +17,7 @@
 
             <h1>Piatti</h1>
 
-            <div v-if="!loading">
+            <div v-if="!loadingPlates">
                 <div class="grid-12 grid-10-lg grid-12-xl gap-5">
                     <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
                         v-for="(plate, i) in plates" :key="i">
@@ -91,10 +91,10 @@ export default {
 
     methods: {
         fetchPlates () {
-            store.loading = true;
+            store.loadingPlates = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.plates = r.data.plates;
-                store.loading = false;
+                store.loadingPlates = false;
             } );
         },
 
@@ -173,8 +173,8 @@ export default {
             return store.restaurants;
         },
 
-        loading () {
-            return store.loading;
+        loadingPlates () {
+            return store.loadingPlates;
         },
 
         restaurant_Id () {

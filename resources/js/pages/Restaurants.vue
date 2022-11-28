@@ -38,7 +38,7 @@
                     <cart-modal />
                 </div>
             </div>
-            <div class="sticky right top z-index-full bg-white shadow p-2 tag-wrapper t-center">
+            <div class="sticky right top z-index-3 bg-white shadow p-2 tag-wrapper t-center">
                 <div>Filtra per tipologie</div>
 
                 <ul class="list-style-none flex gap-5 f-column center">

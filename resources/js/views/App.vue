@@ -44,4 +44,10 @@ export default {
 
 
 <style lang="scss">
+.grow-1 {
+    flex-grow: 1;
+}
+.grow-2 {
+    flex-grow: 2;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main v-if="!loading" class="container">
+        <main v-if="!loadingCart" class="container">
             <div class="flex between mt-2">
 
                 <div class="mt-2">
@@ -107,8 +107,9 @@ export default {
                 return store.plates.filter( ( e ) => sessionStorage[ e.plate_name ] );
             else return null;
         },
-        loading () {
-            return store.loading;
+
+        loadingCart () {
+            return store.loadingCart;
         },
     },
 
@@ -116,11 +117,11 @@ export default {
         fetchPlates () {
             if ( !sessionStorage.resId ) return;
 
-            store.loading = true;
+            store.loadingCart = true;
             axios.get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loading = false;
+                    store.loadingCart = false;
                 } );
         },
 

@@ -18652,17 +18652,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return sessionStorage[e.plate_name];
       });else return null;
     },
-    loading: function loading() {
-      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading;
+    loadingCart: function loadingCart() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart;
     }
   },
   methods: {
     fetchPlates: function fetchPlates() {
       if (!sessionStorage.resId) return;
-      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = true;
+      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
       axios.get("/api/restaurants/".concat(sessionStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
       });
     },
     pulisciStorage: function pulisciStorage() {
@@ -19143,7 +19143,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [!_vm.loading ? _c("main", {
+  return _c("div", [!_vm.loadingCart ? _c("main", {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "flex between mt-2"

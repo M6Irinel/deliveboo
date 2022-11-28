@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="!loading">
+        <template v-if="!loadingCart">
             <main class="container">
                 <h1>Cart Modal</h1>
                 <div>
@@ -92,8 +92,8 @@ export default {
             else return null;
         },
 
-        loading () {
-            return store.loading;
+        loadingCart () {
+            return store.loadingCart;
         },
     },
 
@@ -101,11 +101,11 @@ export default {
         fetchPlates () {
             if ( !sessionStorage.resId ) return;
 
-            store.loading = true;
+            store.loadingCart = true;
             axios.get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loading = false;
+                    store.loadingCart = false;
                 } );
         },
 
@@ -196,7 +196,6 @@ export default {
 
     created () {
         this.fetchPlates();
-        console.log('crea componente loding')
     },
 };
 </script>

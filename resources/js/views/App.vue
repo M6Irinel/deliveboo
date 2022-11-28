@@ -10,6 +10,7 @@
 // @ts-nocheck
 import store from '../store/store';
 import NavBar from '../components/NavBar.vue';
+
 export default {
     name: 'AppVue',
 
@@ -28,7 +29,7 @@ export default {
         fetchTypologies () {
             axios.get( '/api/typologies' ).then( r => {
                 store.typologies = r.data.typologies;
-                store.loading = false;
+                store.loadingRestaurant = false;
             } );
         }
     },

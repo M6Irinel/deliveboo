@@ -11,50 +11,52 @@
             </div>
         </div>
 
-        <div v-if="!loading">
-            <div class="flex j-flex-end relative gap-5">
-                <div class="flex f-column">
-                    <div class="grid-12 gap-5">
-                        <router-link
-                            class="g-col-3 border border-azure p-2 rounded t-center shadow btn bg-gray-1-H red-H"
-                            v-for="(restaurant, i) in restaurants" :key="i"
-                            :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
+        <div class="flex j-flex-end relative gap-5">
+            <div style="flex-grow: 1;">
+                <div v-if="!loadingRestaurant">
+                    <div class="flex f-column">
+                        <div class="grid-12 gap-5">
+                            <router-link
+                                class="g-col-3 border border-azure p-2 rounded t-center shadow btn bg-gray-1-H red-H"
+                                v-for="(restaurant, i) in restaurants" :key="i"
+                                :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
 
-                            <h4>{{ restaurant.user.name }}</h4>
-                            <address>{{ restaurant.restaurant_address }}</address>
-                            <p v-for="(t, i) in restaurant.typologies" :key="i">
-                                {{ t.name }}
-                            </p>
-                        </router-link>
-                    </div>
-
-                    <div v-if="visibilityCart">
-                        <CartModal />
+                                <h4>{{ restaurant.user.name }}</h4>
+                                <address>{{ restaurant.restaurant_address }}</address>
+                                <p v-for="(t, i) in restaurant.typologies" :key="i">
+                                    {{ t.name }}
+                                </p>
+                            </router-link>
+                        </div>
                     </div>
                 </div>
-
-                <div class="sticky right top z-index-full bg-white shadow p-2 tag-wrapper t-center">
-                    <div>Filtra per tipologie</div>
-
-                    <ul class="list-style-none flex gap-5 f-column center">
-                        <li v-for="(t, i) in typologies" :key="i">
-
-                            <input class="d-none checkTrue" type="checkbox" :id="'typology-' + i" :value="t.name"
-                                v-model="types">
-
-                            <label :for="'typology-' + i"
-                                class="d-block rounded-3 border pointer px-2 py-1 red-H bg-gray-1-H">
-                                {{ t.name }}
-                            </label>
-                        </li>
-                    </ul>
+                <div v-else>
+                    <LoaderC />
                 </div>
+
+                <div v-if="visibilityCart">
+                    <cart-modal />
+                </div>
+            </div>
+            <div class="sticky right top z-index-full bg-white shadow p-2 tag-wrapper t-center">
+                <div>Filtra per tipologie</div>
+
+                <ul class="list-style-none flex gap-5 f-column center">
+                    <li v-for="(t, i) in typologies" :key="i">
+
+                        <input class="d-none checkTrue" type="checkbox" :id="'typology-' + i" :value="t.name"
+                            v-model="types">
+
+                        <label :for="'typology-' + i"
+                            class="d-block rounded-3 border pointer px-2 py-1 red-H bg-gray-1-H">
+                            {{ t.name }}
+                        </label>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div v-else>
-            <LoaderC />
-        </div>
+
     </main>
 </template>
 
@@ -91,7 +93,7 @@ export default {
             return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
         },
         typologies () { return store.typologies; },
-        loading () { return store.loading; },
+        loadingRestaurant () { return store.loadingRestaurant; },
         total () {
             if ( !store.totalCart )
                 return sessionStorage.getItem( 'spesaTotale' );

@@ -18498,17 +18498,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return sessionStorage[e.plate_name];
       });else return null;
     },
-    loading: function loading() {
-      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading;
+    loadingCart: function loadingCart() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart;
     }
   },
   methods: {
     fetchPlates: function fetchPlates() {
       if (!sessionStorage.resId) return;
-      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = true;
+      _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
       axios.get("/api/restaurants/".concat(sessionStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
       });
     },
     pulisciStorage: function pulisciStorage() {
@@ -18585,7 +18585,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   created: function created() {
     this.fetchPlates();
-    console.log('crea componente loding');
   }
 });
 
@@ -18923,8 +18922,8 @@ __webpack_require__.r(__webpack_exports__);
     typologies: function typologies() {
       return _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].typologies;
     },
-    loading: function loading() {
-      return _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].loading;
+    loadingRestaurant: function loadingRestaurant() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].loadingRestaurant;
     },
     total: function total() {
       if (!_store_store__WEBPACK_IMPORTED_MODULE_2__["default"].totalCart) return sessionStorage.getItem('spesaTotale');
@@ -18964,7 +18963,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchTypologies: function fetchTypologies() {
       axios.get('/api/typologies').then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].typologies = r.data.typologies;
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loading = false;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingRestaurant = false;
       });
     }
   },
@@ -18991,7 +18990,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [!_vm.loading ? [_c("main", {
+  return _c("div", [!_vm.loadingCart ? [_c("main", {
     staticClass: "container"
   }, [_c("h1", [_vm._v("Cart Modal")]), _vm._v(" "), _c("div", [_c("router-link", {
     staticClass: "btn btn-success px-1",
@@ -19384,9 +19383,13 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-basket-shopping"
     }
-  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)])]), _vm._v(" "), !_vm.loading ? _c("div", [_c("div", {
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "flex j-flex-end relative gap-5"
   }, [_c("div", {
+    staticStyle: {
+      "flex-grow": "1"
+    }
+  }, [!_vm.loadingRestaurant ? _c("div", [_c("div", {
     staticClass: "flex f-column"
   }, [_c("div", {
     staticClass: "grid-12 gap-5"
@@ -19405,9 +19408,9 @@ var render = function render() {
     }, [_c("h4", [_vm._v(_vm._s(restaurant.user.name))]), _vm._v(" "), _c("address", [_vm._v(_vm._s(restaurant.restaurant_address))]), _vm._v(" "), _vm._l(restaurant.typologies, function (t, i) {
       return _c("p", {
         key: i
-      }, [_vm._v("\n                            " + _vm._s(t.name) + "\n                        ")]);
+      }, [_vm._v("\n                                " + _vm._s(t.name) + "\n                            ")]);
     })], 2);
-  }), 1), _vm._v(" "), _vm.visibilityCart ? _c("div", [_c("CartModal")], 1) : _vm._e()]), _vm._v(" "), _c("div", {
+  }), 1)])]) : _c("div", [_c("LoaderC")], 1), _vm._v(" "), _vm.visibilityCart ? _c("div", [_c("cart-modal")], 1) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "sticky right top z-index-full bg-white shadow p-2 tag-wrapper t-center"
   }, [_c("div", [_vm._v("Filtra per tipologie")]), _vm._v(" "), _c("ul", {
     staticClass: "list-style-none flex gap-5 f-column center"
@@ -19453,8 +19456,8 @@ var render = function render() {
       attrs: {
         "for": "typology-" + i
       }
-    }, [_vm._v("\n                            " + _vm._s(t.name) + "\n                        ")])]);
-  }), 0)])])]) : _c("div", [_c("LoaderC")], 1)]);
+    }, [_vm._v("\n                        " + _vm._s(t.name) + "\n                    ")])]);
+  }), 0)])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -35954,15 +35957,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/components/NavBar.vue ***!
   \********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NavBar_vue_vue_type_template_id_5dd24bca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavBar.vue?vue&type=template&id=5dd24bca&scoped=true& */ "./resources/js/components/NavBar.vue?vue&type=template&id=5dd24bca&scoped=true&");
 /* harmony import */ var _NavBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavBar.vue?vue&type=script&lang=js& */ "./resources/js/components/NavBar.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _NavBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _NavBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -35992,7 +35994,7 @@ component.options.__file = "resources/js/components/NavBar.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/NavBar.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36436,10 +36438,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   restaurants: null,
   typologies: null,
-  loading: false,
+  loadingRestaurant: false,
+  loadingCart: false,
   plates: null,
-  totalCart: null,
-  types: []
+  totalCart: null
 }));
 
 /***/ }),

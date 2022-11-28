@@ -6,14 +6,8 @@
                 <h1>Ristoranti</h1>
                 <div>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-<<<<<<< HEAD
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
-=======
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{
-                                parseFloat(total).toFixed(2)
-                        }}€</span>
->>>>>>> origin/feature/add-style-2
                     </router-link>
                 </div>
             </div>
@@ -30,43 +24,20 @@
                         </label>
                     </div>
                 </div>
+            </div>
 
-<<<<<<< HEAD
             <ul class="list-style-none grid-12 gap-5" v-if="!loading">
                 <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
                     v-for="(restaurant, i) in restaurants" :key="i"
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
                     <li>
                         <strong>{{ restaurant.user.name }}</strong>
-                        <p>{{restaurant.restaurant_address}}</p>
+                        <p>{{ restaurant.restaurant_address }}</p>
                     </li>
                 </router-link>
             </ul>
             <div v-else>
                 <LoaderC />
-=======
-                <ul class="list-style-none grid-12 gap-5" v-if="!loading">
-                    <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow  card__restaurant "
-                        v-for="(restaurant, i) in restaurants" :key="i"
-                        :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                        <li>
-                            <strong>{{ restaurant.user.name }}</strong>
-                        </li>
-                        <li>
-                            {{ restaurant.restaurant_address }}
-                        </li>
-                        <li>
-                            <div v-if="restaurant.restaurant_image">
-                                <img class="img-fluid" :src="'../storage/' + restaurant.restaurant_image" alt="" />
-                            </div>
-                        </li>
-                    </router-link>
-                </ul>
-                <div v-else>
-                    <LoaderC />
-
-                </div>
->>>>>>> origin/feature/add-style-2
             </div>
         </main>
     </div>
@@ -118,7 +89,7 @@ export default {
         color: red;
 
     }
-   }
+}
 
 .card__restaurant {
     background-color: rgb(249, 242, 242);

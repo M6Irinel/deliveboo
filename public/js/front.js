@@ -19199,12 +19199,12 @@ var render = function render() {
         }
       }
     }), _vm._v(" "), _c("div", [_vm._v(_vm._s(t.name))])]);
-  }), 0)]), _vm._v(" "), !_vm.loading ? _c("ul", {
+  }), 0)])]), _vm._v(" "), !_vm.loading ? _c("ul", {
     staticClass: "list-style-none grid-12 gap-5"
   }, _vm._l(_vm.restaurants, function (restaurant, i) {
     return _c("router-link", {
       key: i,
-      staticClass: "g-col-3 border border-azure p-2 rounded t-center shadow card__restaurant",
+      staticClass: "g-col-3 border border-azure p-2 rounded t-center shadow",
       attrs: {
         to: {
           name: "Plates",
@@ -19213,19 +19213,8 @@ var render = function render() {
           }
         }
       }
-<<<<<<< HEAD
     }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(restaurant.restaurant_address))])])]);
   }), 1) : _c("div", [_c("LoaderC")], 1)])]);
-=======
-    }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])]), _vm._v(" "), _c("li", [_vm._v("\n                        " + _vm._s(restaurant.restaurant_address) + "\n                    ")]), _vm._v(" "), _c("li", [restaurant.restaurant_image ? _c("div", [_c("img", {
-      staticClass: "img-fluid",
-      attrs: {
-        src: "../storage/" + restaurant.restaurant_image,
-        alt: ""
-      }
-    })]) : _vm._e()])]);
-  }), 1) : _c("div", [_c("LoaderC")], 1)])])]);
->>>>>>> origin/feature/add-style-2
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -36356,11 +36345,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
-=======
 module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
->>>>>>> feature/layout
 
 
 /***/ })

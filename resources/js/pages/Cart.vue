@@ -3,21 +3,25 @@
         <header v-html="forLogin" />
         <main v-if="!loading" class="container">
             <div class="flex between mt-2">
+
                 <div class="mt-2">
                     <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
                     <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
                 </div>
+
                 <div>
                     <div class="badge badge-warning p-2 fs-3">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                        <span v-if="total">{{
-                                parseFloat(total).toFixed(2)
-                        }}€</span>
+
+                        <span v-if="total">
+                            {{ parseFloat(total).toFixed(2) }}€
+                        </span>
                     </div>
                 </div>
             </div>
 
             <h1>Cart</h1>
+
             <div v-if="plates">
                 <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                     <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
@@ -70,7 +74,6 @@
             </div>
             <div v-else>
                 <p>carrello vuoto</p>
-
             </div>
 
         </main>
@@ -112,13 +115,10 @@ export default {
 
     methods: {
         fetchPlates () {
-            if ( !sessionStorage.resId ) {
-                return
-            }
+            if ( !sessionStorage.resId ) return;
 
             store.loading = true;
-            axios
-                .get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
+            axios.get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
                     store.loading = false;
@@ -127,21 +127,20 @@ export default {
 
         pulisciStorage () {
             sessionStorage.clear();
-            location.reload();
+            store.plates = null;
             this.total = 0;
         },
 
         totalF () {
-            if ( !sessionStorage.resId ) {
-                return
-            }
-            let s = 0
+            if ( !sessionStorage.resId ) return;
+
+            let s = 0;
             this.plates.forEach( e => {
-                let q = ( sessionStorage.getItem( e.plate_name + '-counter' ) )
-                s += ( e.plate_price * q )
+                let q = sessionStorage.getItem( e.plate_name + '-counter' );
+                s += e.plate_price * q;
                 sessionStorage.setItem( "spesaTotale", s );
             } )
-            return s
+            return s;
         },
 
         addPlate ( plate ) {
@@ -158,9 +157,7 @@ export default {
                 sessionStorage.setItem( "resId", plate.restaurant_id );
                 this.plateLocalStore( plate );
             }
-            else {
-                alert( 'hai il pc vecchio, vai a piedi' );
-            }
+            else alert( 'hai il pc vecchio, vai a piedi' );
         },
 
         plateLocalStore ( plate ) {
@@ -191,20 +188,16 @@ export default {
                     }
                 }
             }
-            else {
-                alert( 'hai il pc vecchio, vai a piedi' )
-            }
+            else alert( 'hai il pc vecchio, vai a piedi' );
 
-            if ( sessionStorage.length <= 2 ) {
-                this.pulisciStorage();
-            }
+            if ( sessionStorage.length <= 2 ) this.pulisciStorage();
         },
 
         totalprice () {
-            let s = 0
+            let s = 0;
             this.plates.forEach( e => {
-                let q = ( sessionStorage.getItem( e.plate_name + '-counter' ) );
-                s += ( e.plate_price * q );
+                let q = sessionStorage.getItem( e.plate_name + '-counter' );
+                s += e.plate_price * q;
                 sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
             } )
             this.total = sessionStorage.getItem( 'spesaTotale' );
@@ -218,7 +211,6 @@ export default {
     created () {
         this.fetchPlates();
     },
-
 };
 </script>
 

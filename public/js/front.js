@@ -19189,7 +19189,7 @@ var render = function render() {
           }
         }
       }
-    }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))])])]);
+    }, [_c("li", [_c("strong", [_vm._v(_vm._s(restaurant.user.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(restaurant.restaurant_address))])])]);
   }), 1) : _c("div", [_c("LoaderC")], 1)])]);
 };
 var staticRenderFns = [];
@@ -36048,7 +36048,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

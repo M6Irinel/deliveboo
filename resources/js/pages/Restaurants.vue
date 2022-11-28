@@ -28,6 +28,7 @@
                     :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
                     <li>
                         <strong>{{ restaurant.user.name }}</strong>
+                        <p>{{restaurant.restaurant_address}}</p>
                     </li>
                 </router-link>
             </ul>

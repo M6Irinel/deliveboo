@@ -80,7 +80,6 @@
 import store from "../store/store";
 import LoaderC from "../components/Loader.vue";
 
-
 export default {
     name: "CartVue",
 
@@ -99,6 +98,7 @@ export default {
                 return store.plates.filter((e) => sessionStorage[e.plate_name]);
             else return null;
         },
+
         loading() {
             return store.loading;
         },
@@ -194,7 +194,7 @@ export default {
                 sessionStorage.setItem("spesaTotale", s.toFixed(2));
             })
             this.total = sessionStorage.getItem('spesaTotale');
-            store.totalCart = this.total
+            store.totalCart = this.total;
         },
 
         quantity(v) {
@@ -208,7 +208,7 @@ export default {
 };
 </script>
 
-  
+
 <style scoped lang="scss">
 
 </style>

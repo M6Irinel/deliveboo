@@ -5,10 +5,10 @@
             <div class="flex between align-items-center py-3 mt-2">
                 <h1>Ristoranti</h1>
                 <div>
-                    <div @click="modalCart()" class="btn btn-success px-1" >
+                    <div @click="modalCart()" class="btn btn-success px-1">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                        <span v-if="totalC">{{ parseFloat(totalC).toFixed(2) }}€</span>
-                        
+                        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
+
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         <p>{{ restaurant.restaurant_address }}</p>
                         <p v-for="(t, i) in restaurant.typologies" :key="i">
 
-                        {{ t.name }}
+                            {{ t.name }}
                         </p>
                     </li>
                 </router-link>
@@ -65,31 +65,35 @@ export default {
 
     components: { LoaderC, CartModal },
 
-    data() {
+    data () {
         return {
             forLogin,
             types: [],
-        
-            visibilityCart:false
+            visibilityCart: false
         };
     },
-    methods:{
-        modalCart(){
-            this.visibilityCart=!this.visibilityCart
+
+    methods: {
+        modalCart () {
+            this.visibilityCart = !this.visibilityCart
         }
     },
 
     computed: {
-        restaurants() {
+        restaurants () {
             let r = store.restaurants;
-            if (!this.types.length) return r;
-            return r.filter(e => this.types.every(f => e.typologies.map(m => m.name).includes(f)));
+            if ( !this.types.length ) return r;
+            return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
         },
-        typologies() { return store.typologies; },
-        loading() { return store.loading; },
-        totalC(){ return store.totalCart}
+        typologies () { return store.typologies; },
+        loading () { return store.loading; },
+        total () {
+            if ( !store.totalCart )
+                return sessionStorage.getItem( 'spesaTotale' );
+            return store.totalCart;
+        }
     },
-   
+
 }
 </script>
 

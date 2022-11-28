@@ -81,14 +81,14 @@ export default {
     data () {
         return {
             forLogin,
-            total: sessionStorage.getItem( 'spesaTotale' )
+            total: localStorage.getItem( 'spesaTotale' )
         };
     },
 
     computed: {
         plates () {
             if ( store.plates )
-                return store.plates.filter( ( e ) => sessionStorage[ e.plate_name ] );
+                return store.plates.filter( ( e ) => localStorage[ e.plate_name ] );
             else return null;
         },
 
@@ -99,10 +99,10 @@ export default {
 
     methods: {
         fetchPlates () {
-            if ( !sessionStorage.resId ) return;
+            if ( !localStorage.resId ) return;
 
             store.loadingCart = true;
-            axios.get( `/api/restaurants/${ sessionStorage.getItem( "resId" ) }` )
+            axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
                     store.loadingCart = false;
@@ -110,28 +110,28 @@ export default {
         },
 
         pulisciStorage () {
-            sessionStorage.clear();
+            localStorage.clear();
             store.plates = null;
             this.total = 0;
             store.totalCart = null
         },
 
         totalF () {
-            if ( !sessionStorage.resId ) return;
+            if ( !localStorage.resId ) return;
 
             let s = 0;
             this.plates.forEach( e => {
-                let q = sessionStorage.getItem( e.plate_name + '-counter' );
+                let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
-                sessionStorage.setItem( "spesaTotale", s );
+                localStorage.setItem( "spesaTotale", s );
             } )
             return s;
         },
 
         addPlate ( plate ) {
             if ( typeof ( Storage ) ) {
-                if ( sessionStorage.resId ) {
-                    if ( sessionStorage.getItem( "resId" ) == plate.restaurant_id ) {
+                if ( localStorage.resId ) {
+                    if ( localStorage.getItem( "resId" ) == plate.restaurant_id ) {
                         this.plateLocalStore( plate );
                         return;
                     } else {
@@ -139,7 +139,7 @@ export default {
                         return;
                     }
                 }
-                sessionStorage.setItem( "resId", plate.restaurant_id );
+                localStorage.setItem( "resId", plate.restaurant_id );
                 this.plateLocalStore( plate );
             }
             else alert( 'hai il pc vecchio, vai a piedi' );
@@ -148,12 +148,12 @@ export default {
         plateLocalStore ( plate ) {
             let plateCounter = plate.plate_name + '-counter';
 
-            if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
-                let c = sessionStorage.getItem( plateCounter );
-                sessionStorage.setItem( plateCounter, ++c );
+            if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
+                let c = localStorage.getItem( plateCounter );
+                localStorage.setItem( plateCounter, ++c );
             } else {
-                sessionStorage.setItem( plate.plate_name, plate.id );
-                sessionStorage.setItem( plateCounter, 1 );
+                localStorage.setItem( plate.plate_name, plate.id );
+                localStorage.setItem( plateCounter, 1 );
             }
             this.totalprice();
         },
@@ -162,35 +162,35 @@ export default {
             let plateCounter = plate.plate_name + '-counter';
 
             if ( typeof ( Storage ) ) {
-                if ( sessionStorage.getItem( plate.plate_name ) == plate.id ) {
-                    let c = sessionStorage.getItem( plateCounter );
-                    sessionStorage.setItem( plateCounter, --c );
+                if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
+                    let c = localStorage.getItem( plateCounter );
+                    localStorage.setItem( plateCounter, --c );
                     this.totalprice();
                     if ( c === 0 ) {
-                        sessionStorage.removeItem( plateCounter );
-                        sessionStorage.removeItem( plate.plate_name );
+                        localStorage.removeItem( plateCounter );
+                        localStorage.removeItem( plate.plate_name );
                         store.plates.splice( store.plates.indexOf( plate ), 1 );
                     }
                 }
             }
             else alert( 'hai il pc vecchio, vai a piedi' );
 
-            if ( sessionStorage.length <= 2 ) this.pulisciStorage();
+            if ( localStorage.length <= 2 ) this.pulisciStorage();
         },
 
         totalprice () {
             let s = 0;
             this.plates.forEach( e => {
-                let q = sessionStorage.getItem( e.plate_name + '-counter' );
+                let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
-                sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+                localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
             } )
-            this.total = sessionStorage.getItem( 'spesaTotale' );
+            this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;
         },
 
         quantity ( v ) {
-            return sessionStorage.getItem( v + '-counter' );
+            return localStorage.getItem( v + '-counter' );
         },
     },
 

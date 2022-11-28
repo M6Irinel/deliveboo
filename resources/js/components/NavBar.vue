@@ -1,5 +1,5 @@
 <template>
-    <header class="py-2 bg-red-7">
+    <header class="py-2 bg-red-7 sticky top right left z-index-9">
         <div class="container flex between i-center">
             <div>
                 <a class="btn white" href="/" title="home">deliveboo</a>

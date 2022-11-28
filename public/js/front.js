@@ -18489,13 +18489,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       forLogin: forLogin,
-      total: sessionStorage.getItem('spesaTotale')
+      total: localStorage.getItem('spesaTotale')
     };
   },
   computed: {
     plates: function plates() {
       if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates) return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.filter(function (e) {
-        return sessionStorage[e.plate_name];
+        return localStorage[e.plate_name];
       });else return null;
     },
     loadingCart: function loadingCart() {
@@ -18504,33 +18504,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   methods: {
     fetchPlates: function fetchPlates() {
-      if (!sessionStorage.resId) return;
+      if (!localStorage.resId) return;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
-      axios.get("/api/restaurants/".concat(sessionStorage.getItem("resId"))).then(function (r) {
+      axios.get("/api/restaurants/".concat(localStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
       });
     },
     pulisciStorage: function pulisciStorage() {
-      sessionStorage.clear();
+      localStorage.clear();
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = null;
       this.total = 0;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = null;
     },
     totalF: function totalF() {
-      if (!sessionStorage.resId) return;
+      if (!localStorage.resId) return;
       var s = 0;
       this.plates.forEach(function (e) {
-        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s);
+        localStorage.setItem("spesaTotale", s);
       });
       return s;
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.resId) {
-          if (sessionStorage.getItem("resId") == plate.restaurant_id) {
+        if (localStorage.resId) {
+          if (localStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
             return;
           } else {
@@ -18538,49 +18538,49 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             return;
           }
         }
-        sessionStorage.setItem("resId", plate.restaurant_id);
+        localStorage.setItem("resId", plate.restaurant_id);
         this.plateLocalStore(plate);
       } else alert('hai il pc vecchio, vai a piedi');
     },
     plateLocalStore: function plateLocalStore(plate) {
       var plateCounter = plate.plate_name + '-counter';
-      if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-        var c = sessionStorage.getItem(plateCounter);
-        sessionStorage.setItem(plateCounter, ++c);
+      if (localStorage.getItem(plate.plate_name) == plate.id) {
+        var c = localStorage.getItem(plateCounter);
+        localStorage.setItem(plateCounter, ++c);
       } else {
-        sessionStorage.setItem(plate.plate_name, plate.id);
-        sessionStorage.setItem(plateCounter, 1);
+        localStorage.setItem(plate.plate_name, plate.id);
+        localStorage.setItem(plateCounter, 1);
       }
       this.totalprice();
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-          var c = sessionStorage.getItem(plateCounter);
-          sessionStorage.setItem(plateCounter, --c);
+        if (localStorage.getItem(plate.plate_name) == plate.id) {
+          var c = localStorage.getItem(plateCounter);
+          localStorage.setItem(plateCounter, --c);
           this.totalprice();
           if (c === 0) {
-            sessionStorage.removeItem(plateCounter);
-            sessionStorage.removeItem(plate.plate_name);
+            localStorage.removeItem(plateCounter);
+            localStorage.removeItem(plate.plate_name);
             _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.splice(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.indexOf(plate), 1);
           }
         }
       } else alert('hai il pc vecchio, vai a piedi');
-      if (sessionStorage.length <= 2) this.pulisciStorage();
+      if (localStorage.length <= 2) this.pulisciStorage();
     },
     totalprice: function totalprice() {
       var s = 0;
       this.plates.forEach(function (e) {
-        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s.toFixed(2));
+        localStorage.setItem("spesaTotale", s.toFixed(2));
       });
-      this.total = sessionStorage.getItem('spesaTotale');
+      this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
     },
     quantity: function quantity(v) {
-      return sessionStorage.getItem(v + '-counter');
+      return localStorage.getItem(v + '-counter');
     }
   },
   created: function created() {
@@ -18643,13 +18643,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       forLogin: forLogin,
-      total: sessionStorage.getItem('spesaTotale')
+      total: localStorage.getItem('spesaTotale')
     };
   },
   computed: {
     plates: function plates() {
       if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates) return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.filter(function (e) {
-        return sessionStorage[e.plate_name];
+        return localStorage[e.plate_name];
       });else return null;
     },
     loadingCart: function loadingCart() {
@@ -18658,33 +18658,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   methods: {
     fetchPlates: function fetchPlates() {
-      if (!sessionStorage.resId) return;
+      if (!localStorage.resId) return;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
-      axios.get("/api/restaurants/".concat(sessionStorage.getItem("resId"))).then(function (r) {
+      axios.get("/api/restaurants/".concat(localStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
       });
     },
     pulisciStorage: function pulisciStorage() {
-      sessionStorage.clear();
+      localStorage.clear();
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = null;
       this.total = 0;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = null;
     },
     totalF: function totalF() {
-      if (!sessionStorage.resId) return;
+      if (!localStorage.resId) return;
       var s = 0;
       this.plates.forEach(function (e) {
-        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s);
+        localStorage.setItem("spesaTotale", s);
       });
       return s;
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.resId) {
-          if (sessionStorage.getItem("resId") == plate.restaurant_id) {
+        if (localStorage.resId) {
+          if (localStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
             return;
           } else {
@@ -18692,49 +18692,49 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             return;
           }
         }
-        sessionStorage.setItem("resId", plate.restaurant_id);
+        localStorage.setItem("resId", plate.restaurant_id);
         this.plateLocalStore(plate);
       } else alert('hai il pc vecchio, vai a piedi');
     },
     plateLocalStore: function plateLocalStore(plate) {
       var plateCounter = plate.plate_name + '-counter';
-      if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-        var c = sessionStorage.getItem(plateCounter);
-        sessionStorage.setItem(plateCounter, ++c);
+      if (localStorage.getItem(plate.plate_name) == plate.id) {
+        var c = localStorage.getItem(plateCounter);
+        localStorage.setItem(plateCounter, ++c);
       } else {
-        sessionStorage.setItem(plate.plate_name, plate.id);
-        sessionStorage.setItem(plateCounter, 1);
+        localStorage.setItem(plate.plate_name, plate.id);
+        localStorage.setItem(plateCounter, 1);
       }
       this.totalprice();
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-          var c = sessionStorage.getItem(plateCounter);
-          sessionStorage.setItem(plateCounter, --c);
+        if (localStorage.getItem(plate.plate_name) == plate.id) {
+          var c = localStorage.getItem(plateCounter);
+          localStorage.setItem(plateCounter, --c);
           this.totalprice();
           if (c === 0) {
-            sessionStorage.removeItem(plateCounter);
-            sessionStorage.removeItem(plate.plate_name);
+            localStorage.removeItem(plateCounter);
+            localStorage.removeItem(plate.plate_name);
             _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.splice(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates.indexOf(plate), 1);
           }
         }
       } else alert('hai il pc vecchio, vai a piedi');
-      if (sessionStorage.length <= 2) this.pulisciStorage();
+      if (localStorage.length <= 2) this.pulisciStorage();
     },
     totalprice: function totalprice() {
       var s = 0;
       this.plates.forEach(function (e) {
-        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s.toFixed(2));
+        localStorage.setItem("spesaTotale", s.toFixed(2));
       });
-      this.total = sessionStorage.getItem('spesaTotale');
+      this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
     },
     quantity: function quantity(v) {
-      return sessionStorage.getItem(v + '-counter');
+      return localStorage.getItem(v + '-counter');
     }
   },
   created: function created() {
@@ -18783,7 +18783,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     return {
       forLogin: forLogin,
       plates: null,
-      total: sessionStorage.getItem('spesaTotale')
+      total: localStorage.getItem('spesaTotale')
     };
   },
   methods: {
@@ -18798,16 +18798,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     totalprice: function totalprice() {
       var s = 0;
       this.plates.forEach(function (e) {
-        var q = sessionStorage.getItem(e.plate_name + '-counter');
+        var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
-        sessionStorage.setItem("spesaTotale", s.toFixed(2));
+        localStorage.setItem("spesaTotale", s.toFixed(2));
       });
-      this.total = sessionStorage.getItem('spesaTotale');
+      this.total = localStorage.getItem('spesaTotale');
     },
     addPlate: function addPlate(plate) {
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.resId) {
-          if (sessionStorage.getItem("resId") == plate.restaurant_id) {
+        if (localStorage.resId) {
+          if (localStorage.getItem("resId") == plate.restaurant_id) {
             this.plateLocalStore(plate);
             return;
           } else {
@@ -18815,42 +18815,42 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             return;
           }
         }
-        sessionStorage.setItem("resId", plate.restaurant_id);
+        localStorage.setItem("resId", plate.restaurant_id);
         this.plateLocalStore(plate);
       } else alert('hai il pc vecchio, vai a piedi');
     },
     plateLocalStore: function plateLocalStore(plate) {
       var plateCounter = plate.plate_name + '-counter';
-      if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-        var c = sessionStorage.getItem(plateCounter);
-        sessionStorage.setItem(plateCounter, ++c);
+      if (localStorage.getItem(plate.plate_name) == plate.id) {
+        var c = localStorage.getItem(plateCounter);
+        localStorage.setItem(plateCounter, ++c);
       } else {
-        sessionStorage.setItem(plate.plate_name, plate.id);
-        sessionStorage.setItem(plateCounter, 1);
+        localStorage.setItem(plate.plate_name, plate.id);
+        localStorage.setItem(plateCounter, 1);
       }
       this.totalprice();
     },
     removePlate: function removePlate(plate) {
       var plateCounter = plate.plate_name + '-counter';
       if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-        if (sessionStorage.getItem(plate.plate_name) == plate.id) {
-          var c = sessionStorage.getItem(plateCounter);
-          sessionStorage.setItem(plateCounter, --c);
+        if (localStorage.getItem(plate.plate_name) == plate.id) {
+          var c = localStorage.getItem(plateCounter);
+          localStorage.setItem(plateCounter, --c);
           this.totalprice();
           if (c === 0) {
-            sessionStorage.removeItem(plateCounter);
-            sessionStorage.removeItem(plate.plate_name);
+            localStorage.removeItem(plateCounter);
+            localStorage.removeItem(plate.plate_name);
           }
         }
       } else alert('hai il pc vecchio, vai a piedi');
-      if (sessionStorage.length <= 2) this.pulisciStorage();
+      if (localStorage.length <= 2) this.pulisciStorage();
     },
     pulisciStorage: function pulisciStorage() {
-      sessionStorage.clear();
+      localStorage.clear();
       this.total = 0;
     },
     quantity: function quantity(v) {
-      return sessionStorage.getItem(v + '-counter');
+      return localStorage.getItem(v + '-counter');
     }
   },
   computed: {
@@ -18866,7 +18866,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   created: function created() {
     this.fetchPlates();
-    this.total = sessionStorage.getItem('spesaTotale');
+    this.total = localStorage.getItem('spesaTotale');
   }
 });
 
@@ -18926,7 +18926,7 @@ __webpack_require__.r(__webpack_exports__);
       return _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].loadingRestaurant;
     },
     total: function total() {
-      if (!_store_store__WEBPACK_IMPORTED_MODULE_2__["default"].totalCart) return sessionStorage.getItem('spesaTotale');
+      if (!_store_store__WEBPACK_IMPORTED_MODULE_2__["default"].totalCart) return localStorage.getItem('spesaTotale');
       return _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].totalCart;
     }
   }
@@ -19099,7 +19099,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("header", {
-    staticClass: "py-2 bg-red-7"
+    staticClass: "py-2 bg-red-7 sticky top right left z-index-9"
   }, [_c("div", {
     staticClass: "container flex between i-center"
   }, [_c("div", [_c("a", {
@@ -19384,7 +19384,7 @@ var render = function render() {
       icon: "fa-solid fa-basket-shopping"
     }
   }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
-    staticClass: "flex j-flex-end relative gap-5"
+    staticClass: "flex j-flex-end relative gap-5 i-flex-start"
   }, [_c("div", {
     staticStyle: {
       "flex-grow": "1"
@@ -36523,7 +36523,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

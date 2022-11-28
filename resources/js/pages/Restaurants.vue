@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="flex j-flex-end relative gap-5">
+        <div class="flex j-flex-end relative gap-5 i-flex-start">
             <div style="flex-grow: 1;">
                 <div v-if="!loadingRestaurant">
                     <div class="flex f-column">
@@ -96,7 +96,7 @@ export default {
         loadingRestaurant () { return store.loadingRestaurant; },
         total () {
             if ( !store.totalCart )
-                return sessionStorage.getItem( 'spesaTotale' );
+                return localStorage.getItem( 'spesaTotale' );
             return store.totalCart;
         }
     },

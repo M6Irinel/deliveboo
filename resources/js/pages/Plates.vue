@@ -1,6 +1,5 @@
 <template>
     <div>
-        <header v-html="forLogin" />
         <main class="container">
             <div class="flex between mt-2">
                 <div>

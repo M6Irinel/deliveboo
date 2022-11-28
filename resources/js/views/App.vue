@@ -1,7 +1,6 @@
 <template>
-    <div class="max">
+    <div class="min-h-100vh flex f-column">
         <NavBar />
-
         <router-view />
     </div>
 </template>
@@ -17,6 +16,7 @@ export default {
     components: {
         NavBar,
     },
+
     methods: {
         fetchRestaurants () {
             axios.get( '/api/restaurants' ).then( r => {
@@ -43,8 +43,4 @@ export default {
 
 
 <style lang="scss">
-    .max{
-        min-height: 100vh;
-       
-    }
 </style>

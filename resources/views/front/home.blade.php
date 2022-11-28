@@ -79,7 +79,6 @@
     </script>
 
     <!-- FUCSSIA -->
-
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/M6Irinel/Framkcss@7afed426c3eb96b21f164839fc10279163084c3c/Framkcss.css">
 

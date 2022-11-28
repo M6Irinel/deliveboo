@@ -1,34 +1,25 @@
 <template>
-  <header class="">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="logo">
-        <p>LOGO</p>
-      </div>
+    <header class="py-2 bg-red-7">
+        <div class="container flex between i-center">
+            <div>
+                <a class="btn white" href="/" title="home">deliveboo</a>
+            </div>
 
-      <div>
-        Benvenuti su DeliveBoo
-      </div>
-
-      <div>
-        <ul>
-          <a href="http://127.0.0.1:8000/register">
-            <button class="btn">Vai alla zona ristoratori</button>
-          </a>
-        </ul>
-      </div>
-    </div>
-  </header>
-
-
+            <div class="flex gap-20">
+                <a class="btn white" href="/login" title="sign in">accedi</a>
+                <a class="btn white" href="/register" title="new restaurant">registrati</a>
+            </div>
+        </div>
+    </header>
 </template>
 
-<script>
 
+<script>
+export default {
+    name: 'NavBar',
+}
 </script>
 
+
 <style scoped lang="scss">
-header {
-  background-color: bisque;
-  opacity: 0.9;
-}
 </style>

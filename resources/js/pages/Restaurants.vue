@@ -1,56 +1,61 @@
 <template>
-    <div>
-        <!-- <header v-html="forLogin" /> -->
-        <main class="container relative">
-            <div class="flex between align-items-center py-3 mt-2">
-                <h1>Ristoranti</h1>
-                <div>
-                    <div @click="modalCart()" class="btn btn-success px-1">
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
+    <main class="container flex f-column">
+        <div class="flex between i-center py-1">
+            <h1>Ristoranti</h1>
 
-                    </div>
+            <div>
+                <div @click="modalCart()" class="btn btn-success px-1">
+                    <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                    <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
                 </div>
             </div>
+        </div>
 
-            <div class="d-flex gap-5 fixed right top-20 z-index-full bg-white">
+        <div v-if="!loading">
+            <div class="flex j-flex-end relative gap-5">
+                <div class="flex f-column">
+                    <div class="grid-12 gap-5">
+                        <router-link
+                            class="g-col-3 border border-azure p-2 rounded t-center shadow btn bg-gray-1-H red-H"
+                            v-for="(restaurant, i) in restaurants" :key="i"
+                            :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
 
-                <div class="shadow p-2 mb-5 tag-wrapper">
-                    <h4>Filtra per tipologie</h4>
-                    <div class="list-style-none flex-column center">
-                        <label class="px-2 py-1 border rounded-3 flex gap-6 pointer card__typology"
-                            v-for="(t, i) in typologies" :key="i">
-                            <input type="checkbox" :value="t.name" v-model="types">
-                            <div>{{ t.name }}</div>
-                        </label>
+                            <h4>{{ restaurant.user.name }}</h4>
+                            <address>{{ restaurant.restaurant_address }}</address>
+                            <p v-for="(t, i) in restaurant.typologies" :key="i">
+                                {{ t.name }}
+                            </p>
+                        </router-link>
+                    </div>
+
+                    <div v-if="visibilityCart">
+                        <CartModal />
                     </div>
                 </div>
+
+                <div class="sticky right top z-index-full bg-white shadow p-2 tag-wrapper t-center">
+                    <div>Filtra per tipologie</div>
+
+                    <ul class="list-style-none flex gap-5 f-column center">
+                        <li v-for="(t, i) in typologies" :key="i">
+
+                            <input class="d-none checkTrue" type="checkbox" :id="'typology-' + i" :value="t.name"
+                                v-model="types">
+
+                            <label :for="'typology-' + i"
+                                class="d-block rounded-3 border pointer px-2 py-1 red-H bg-gray-1-H">
+                                {{ t.name }}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
-            <ul class="list-style-none grid-12 gap-5" v-if="!loading">
-                <router-link class="g-col-3 border border-azure p-2 rounded t-center shadow"
-                    v-for="(restaurant, i) in restaurants" :key="i"
-                    :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
-                    <li>
-                        <strong>{{ restaurant.user.name }}</strong>
-                        <p>{{ restaurant.restaurant_address }}</p>
-                        <p v-for="(t, i) in restaurant.typologies" :key="i">
-
-                            {{ t.name }}
-                        </p>
-                    </li>
-                </router-link>
-            </ul>
-            <div v-else>
-                <LoaderC />
-            </div>
-
-            <div v-if="visibilityCart">
-                <CartModal />
-            </div>
-
-        </main>
-    </div>
+        <div v-else>
+            <LoaderC />
+        </div>
+    </main>
 </template>
 
 
@@ -98,6 +103,10 @@ export default {
 </script>
 
 <style lang="scss">
+main {
+    flex-grow: 1;
+}
+
 .tag-wrapper {
     flex-basis: 15%;
 }
@@ -106,31 +115,24 @@ export default {
     gap: 2rem;
 }
 
-.card__typology {
-    &:hover {
-        background-color: rgb(249, 242, 242);
-        color: red;
-
-    }
-}
-
 .card__restaurant {
-    background-color: rgb(249, 242, 242);
+    overflow: hidden;
 
     img {
-        border-radius: 50px;
-        overflow: hidden;
+        border-radius: 20px;
         max-width: 90%;
     }
 
     &:hover {
-        color: red;
-
         img {
             opacity: 0.5;
             scale: 1.1;
             border-radius: 150px;
         }
     }
+}
+
+.checkTrue:checked + label {
+    background-color: #ac7676;
 }
 </style>

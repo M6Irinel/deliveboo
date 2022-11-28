@@ -128,6 +128,7 @@ export default {
             sessionStorage.clear();
             store.plates = null;
             this.total = 0;
+            store.totalCart=null
         },
 
         totalF () {
@@ -200,6 +201,7 @@ export default {
                 sessionStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
             } )
             this.total = sessionStorage.getItem( 'spesaTotale' );
+            store.totalCart=this.total
         },
 
         quantity ( v ) {

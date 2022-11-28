@@ -6,7 +6,7 @@
       </div>
 
       <div>
-        CENTRO
+        Benvenuti su DeliveBoo
       </div>
 
       <div>
@@ -27,9 +27,8 @@
 </script>
 
 <style scoped lang="scss">
-header{
-background-color: bisque;
-opacity: 0.9;
+header {
+  background-color: bisque;
+  opacity: 0.9;
 }
-
 </style>

@@ -5,5 +5,6 @@ export default Vue.observable({
     restaurants: null,
     typologies: null,
     loading: false,
-    plates: null
+    plates: null,
+    totalCart: null
 });

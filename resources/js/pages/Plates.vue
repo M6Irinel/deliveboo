@@ -20,7 +20,7 @@
             <div v-if="!loadingPlates">
                 <div class="grid-12 grid-10-lg grid-12-xl gap-5">
                     <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                        v-for="(plate, i) in plates" :key="i">
+                        v-for="(plate, i) in plates" :key="i" v-if="plate.visibility==1">
 
                         <div v-if="plate.plate_image">
                             <img class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />

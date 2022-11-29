@@ -49,10 +49,10 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="flex between">
+                    <!-- <div class="flex between">
                         <h2>Totale di tutto: {{ totalF().toFixed(2) }} €</h2>
                         <button class="btn btn-danger" @click="pulisciStorage()">Svuota il Carello</button>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div v-else>

@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'name_app' => 'deliveboo',
     'name' => env('APP_NAME', 'deliveboo'),
 
     /*

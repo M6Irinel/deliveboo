@@ -19058,16 +19058,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0), _vm._v(" "), _c("div", {
-    staticClass: "flex between"
-  }, [_c("h2", [_vm._v("Totale di tutto: " + _vm._s(_vm.totalF().toFixed(2)) + " €")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-danger",
-    on: {
-      click: function click($event) {
-        return _vm.pulisciStorage();
-      }
-    }
-  }, [_vm._v("Svuota il Carello")])])]) : _c("div", [_c("p", [_vm._v("carrello vuoto")])])])] : [_c("LoaderC")]], 2);
+  }), 0)]) : _c("div", [_c("p", [_vm._v("carrello vuoto")])])])] : [_c("LoaderC")]], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -19358,7 +19349,7 @@ var render = function render() {
   }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1)], 1)]), _vm._v(" "), _c("h1", [_vm._v("Piatti")]), _vm._v(" "), !_vm.loadingPlates ? _c("div", [_c("div", {
     staticClass: "grid-12 grid-10-lg grid-12-xl gap-5"
   }, _vm._l(_vm.plates, function (plate, i) {
-    return _c("div", {
+    return plate.visibility == 1 ? _c("div", {
       key: i,
       staticClass: "card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
     }, [plate.plate_image ? _c("div", [_c("img", {
@@ -19395,7 +19386,7 @@ var render = function render() {
           return _vm.addPlate(plate);
         }
       }
-    }, [_vm._v("+")])])]);
+    }, [_vm._v("+")])])]) : _vm._e();
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "flex j-flex-end"
   }, [_c("button", {
@@ -36716,7 +36707,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -43,6 +43,7 @@ class RestaurantController extends Controller
     {
         if (is_numeric($slug)) {
             $plates = User::where('id', $slug)->first()->restaurant->plates;
+            
 
             if ($plates) {
                 return response()->json([
@@ -56,6 +57,7 @@ class RestaurantController extends Controller
             }
         } else {
             $plates = User::where('slug', $slug)->first()->restaurant->plates;
+        
 
             if ($plates) {
                 return response()->json([

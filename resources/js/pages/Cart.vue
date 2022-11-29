@@ -79,6 +79,16 @@
         <div v-else>
             <LoaderC />
         </div>
+
+        <div class="container">
+            <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
+                @onError="paymentOnError" ref="PaymentRef" />
+
+            <div>
+                <button :disabled="disabledBuyButton" @click.prevent="beforeBuy"
+                    class="block w-100 btn btn-success py-2 my-2 uppercase">compra</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -87,17 +97,23 @@
 // @ts-nocheck
 import store from "../store/store";
 import LoaderC from "../components/Loader.vue";
-
+import BraintreVue from "../components/BraintreVue.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC },
+    components: { LoaderC, BraintreVue },
 
     data () {
         return {
             forLogin,
-            total: localStorage.getItem( 'spesaTotale' )
+            total: localStorage.getItem( 'spesaTotale' ),
+            tokenApi: '',
+            form: {
+                token: '',
+                amount: ''
+            },
+            disabledBuyButton: true,
         };
     },
 
@@ -114,6 +130,30 @@ export default {
     },
 
     methods: {
+        paymentOnSuccess ( nonce ) {
+            this.form.token = nonce;
+            this.pulisciStorage();
+            this.buy();
+        },
+
+        paymentOnError ( error ) {
+
+        },
+
+        beforeBuy () {
+            this.form.amount = localStorage.getItem( 'spesaTotale' );
+            this.$refs.PaymentRef.$refs.paymentBtnRef.click();
+        },
+
+        buy () {
+            this.disabledBuyButton = true;
+            let message;
+            axios.post( '/api/make/payment', { ...this.form } ).then( r => {
+                message = r.data.message;
+                this.$router.push( { path: '/thankyou' } );
+            } );
+        },
+
         fetchPlates () {
             if ( !localStorage.resId ) return;
 
@@ -129,7 +169,7 @@ export default {
             localStorage.clear();
             store.plates = null;
             this.total = 0;
-            store.totalCart=null
+            store.totalCart = null;
         },
 
         totalF () {
@@ -208,9 +248,18 @@ export default {
         quantity ( v ) {
             return localStorage.getItem( v + '-counter' );
         },
+
+        fetchToken () {
+            this.disabledBuyButton = true;
+            axios.get( '/api/generate' ).then( r => {
+                this.tokenApi = r.data.token;
+                this.disabledBuyButton = false;
+            } )
+        }
     },
 
     created () {
+        this.fetchToken();
         this.fetchPlates();
     },
 };

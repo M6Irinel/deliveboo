@@ -23,3 +23,6 @@ Route::resource('typologies', 'Api\TypologiesController')->only('index', 'show')
 
 // For EMAIL
 // Route::post('email', 'Api\EmailController@store')->name('email');
+
+Route::get('generate', 'Api\BraintreeController@generate');
+Route::post('make/payment', 'Api\BraintreeController@makePayment');

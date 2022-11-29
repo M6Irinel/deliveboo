@@ -19120,16 +19120,32 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("header", {
-    staticClass: "h-auto-sm bg-red-7 sticky top right left z-index-full transition-h duration-3",
+    staticClass: "sticky top right left z-index-full",
     "class": {
-      "h-100vh": _vm.mobile && _vm.isOpenNavbar
+      "h-100vh": _vm.mobile && _vm.isOpenNavbar,
+      primaria: !_vm.mobile,
+      "bg-bottom-version-mobile": _vm.mobile
     }
   }, [_c("div", {
-    staticClass: "container flex between-sm f-column f-row-sm i-center-sm"
+    staticClass: "container flex between-sm f-column f-row-sm"
   }, [_c("div", {
-    staticClass: "flex"
-  }, [_vm._m(0), _vm._v(" "), _vm.mobile ? _c("div", [_c("button", {
-    staticClass: "bg-transparent border-none white",
+    staticClass: "flex",
+    "class": {
+      "primaria shadow-1-light": _vm.mobile
+    }
+  }, [_c("div", {
+    staticClass: "grow-1"
+  }, [_c("a", {
+    staticClass: "t-shadow header-height bg-hover-button-header bg-active-button-header flex center i-center white decoration-none-H black-H bold",
+    "class": {
+      "pl-15": _vm.mobile
+    },
+    attrs: {
+      href: "/",
+      title: "home"
+    }
+  }, [_vm._v("deliveboo")])]), _vm._v(" "), _c("div", [_vm.mobile ? _c("button", {
+    staticClass: "bg-transparent border-none white bg-hover-button-header bg-active-button-header",
     on: {
       click: function click($event) {
         return _vm.openClosedNavbar();
@@ -19139,44 +19155,34 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-bars"
     }
-  })], 1)]) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "flex-sm j-flex-end grow-1 bg-red-7 gap-20-sm p-2 p-0-sm",
+  })], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "flex f-column f-row-sm i-stretch grow-1 j-flex-end",
     "class": {
       "d-none": _vm.mobile && !_vm.isOpenNavbar
     }
-  }, [_c("div", [_c("a", {
-    staticClass: "white decoration-none-H d-block t-right black-H d-inline-block-sm",
+  }, [_c("a", {
+    staticClass: "header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm",
     "class": {
-      bold: _vm.mobile
+      "bg-button-header text-button": _vm.mobile,
+      "white t-shadow": !_vm.mobile
     },
     attrs: {
       href: "/login",
       title: "sign in"
     }
-  }, [_vm._v("accedi")])]), _vm._v(" "), _c("div", [_c("a", {
-    staticClass: "white decoration-none-H d-block t-right black-H d-inline-block-sm",
+  }, [_vm._v("accedi")]), _vm._v(" "), _c("a", {
+    staticClass: "header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm",
     "class": {
-      bold: _vm.mobile
+      "bg-button-header text-button": _vm.mobile,
+      "white t-shadow": !_vm.mobile
     },
     attrs: {
       href: "/register",
       title: "new restaurant"
     }
-  }, [_vm._v("registrati")])])])])]);
+  }, [_vm._v("registrati")])])])]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "t-center title"
-  }, [_c("a", {
-    staticClass: "py-2 white d-block d-inline-block-sm decoration-none-H black-H bold",
-    attrs: {
-      href: "/",
-      title: "home"
-    }
-  }, [_vm._v("deliveboo")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -19424,7 +19430,7 @@ var render = function render() {
   return _c("main", {
     staticClass: "container flex f-column"
   }, [_c("div", {
-    staticClass: "flex between i-center py-1"
+    staticClass: "flex between i-center py-1 sticky top left right"
   }, [_c("h1", [_vm._v("Ristoranti")]), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "btn btn-success px-1",
     on: {
@@ -19449,7 +19455,7 @@ var render = function render() {
   }, _vm._l(_vm.restaurants, function (restaurant, i) {
     return _c("router-link", {
       key: i,
-      staticClass: "g-col-3 border border-azure p-2 rounded t-center shadow btn bg-gray-1-H red-H",
+      staticClass: "g-col-12 g-col-6-md g-col-3 border border-azure p-2 rounded t-center black p-6 shadow bg-gray-1-H red-H",
       attrs: {
         to: {
           name: "Plates",
@@ -19573,7 +19579,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".title[data-v-5dd24bca] {\n  flex-grow: 1;\n}\nbutton[data-v-5dd24bca] {\n  display: block;\n  height: 100%;\n  padding: 0 1.5rem;\n}", ""]);
+exports.push([module.i, ".header-height[data-v-5dd24bca] {\n  height: 50px;\n}\n.text-button[data-v-5dd24bca] {\n  color: #373737;\n}\n.border-color[data-v-5dd24bca] {\n  border-color: #b6b6b6;\n}\n.bg-button-header[data-v-5dd24bca] {\n  background-color: #f3e3e4;\n}\n.bg-bottom-version-mobile[data-v-5dd24bca] {\n  background-color: #fbd7da;\n}\n.bg-hover-button-header[data-v-5dd24bca]:hover {\n  background-color: #fcced1 !important;\n}\n.bg-active-button-header[data-v-5dd24bca]:active {\n  background-color: #dfb5b8 !important;\n}\n.primaria[data-v-5dd24bca] {\n  background-color: #f0c3c6;\n  min-height: 50px;\n}\n.title[data-v-5dd24bca] {\n  flex-grow: 1;\n}\nbutton[data-v-5dd24bca] {\n  display: block;\n  height: 100%;\n  padding: 0 1.5rem;\n}", ""]);
 
 // exports
 

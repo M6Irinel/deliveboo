@@ -1,26 +1,31 @@
 <template>
-    <header class="h-auto-sm bg-red-7 sticky top right left z-index-full transition-h duration-3"
-        :class="{ 'h-100vh': (mobile && isOpenNavbar) }">
-        <div class="container flex between-sm f-column f-row-sm i-center-sm">
-            <div class="flex">
-                <div class="t-center title">
-                    <a class="py-2 white d-block d-inline-block-sm decoration-none-H black-H bold" href="/" title="home">deliveboo</a>
+    <header class="sticky top right left z-index-full"
+        :class="{ 'h-100vh': (mobile && isOpenNavbar), 'primaria': !mobile, 'bg-bottom-version-mobile': mobile }">
+        <div class="container flex between-sm f-column f-row-sm">
+            <div class="flex" :class="{ 'primaria shadow-1-light': mobile }">
+                <div class="grow-1">
+                    <a class="t-shadow header-height bg-hover-button-header bg-active-button-header flex center i-center white decoration-none-H black-H bold"
+                        :class="{ 'pl-15': mobile }" href="/" title="home">deliveboo</a>
                 </div>
-                <div v-if="mobile">
-                    <button @click="openClosedNavbar()" class="bg-transparent border-none white">
+
+                <div>
+                    <button v-if="mobile" @click="openClosedNavbar()"
+                        class="bg-transparent border-none white bg-hover-button-header bg-active-button-header">
                         <font-awesome-icon icon="fa-solid fa-bars" />
                     </button>
                 </div>
             </div>
 
-            <div class="flex-sm j-flex-end grow-1 bg-red-7 gap-20-sm p-2 p-0-sm" :class="{ 'd-none': (mobile && !isOpenNavbar) }">
-                <div>
-                    <a class="white decoration-none-H d-block t-right black-H d-inline-block-sm" :class="{ 'bold': mobile }" href="/login" title="sign in">accedi</a>
-                </div>
-                <div>
-                    <a class="white decoration-none-H d-block t-right black-H d-inline-block-sm" :class="{ 'bold': mobile }" href="/register"
-                        title="new restaurant">registrati</a>
-                </div>
+            <div class="flex f-column f-row-sm i-stretch grow-1 j-flex-end"
+                :class="{ 'd-none': (mobile && !isOpenNavbar) }">
+
+                <a class="header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="{ 'bg-button-header text-button': mobile, 'white t-shadow': !mobile }" href="/login"
+                    title="sign in">accedi</a>
+
+                <a class="header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="{ 'bg-button-header text-button': mobile, 'white t-shadow': !mobile }" href="/register"
+                    title="new restaurant">registrati</a>
             </div>
         </div>
     </header>
@@ -67,6 +72,41 @@ export default {
 
 
 <style scoped lang="scss">
+@import '../../sass/variabili.scss';
+
+.header-height {
+    height: $headerHeight;
+}
+
+.text-button {
+    color: $textButton;
+}
+
+.border-color {
+    border-color: $borderColorHeader;
+}
+
+.bg-button-header {
+    background-color: $bgButtonHeader;
+}
+
+.bg-bottom-version-mobile {
+    background-color: $bgBottomVersionMobile;
+}
+
+.bg-hover-button-header:hover {
+    background-color: $bgHoverButtonHeader !important;
+}
+
+.bg-active-button-header:active {
+    background-color: $bgActiveButtonHeader !important;
+}
+
+.primaria {
+    background-color: $primaria;
+    min-height: $headerHeight;
+}
+
 .title {
     flex-grow: 1;
 }

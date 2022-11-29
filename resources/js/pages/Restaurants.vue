@@ -1,6 +1,6 @@
 <template>
     <main class="container flex f-column">
-        <div class="flex between i-center py-1">
+        <div class="flex between i-center py-1 sticky top left right">
             <h1>Ristoranti</h1>
 
             <div>
@@ -17,7 +17,7 @@
                     <div class="flex f-column">
                         <div class="grid-12 gap-5">
                             <router-link
-                                class="g-col-3 border border-azure p-2 rounded t-center shadow btn bg-gray-1-H red-H"
+                                class="g-col-12 g-col-6-md g-col-3 border border-azure p-2 rounded t-center black p-6 shadow bg-gray-1-H red-H"
                                 v-for="(restaurant, i) in restaurants" :key="i"
                                 :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
 

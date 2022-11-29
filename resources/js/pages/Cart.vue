@@ -86,7 +86,7 @@
 
             <div>
                 <button :disabled="disabledBuyButton" @click.prevent="beforeBuy"
-                    class="block w-100 btn btn-success py-2 my-2 uppercase">compra</button>
+                    class="block w-100 btn btn-success py-2 my-2 uppercase">Compra Ora</button>
             </div>
         </div>
     </div>

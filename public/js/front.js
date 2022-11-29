@@ -19435,7 +19435,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-  }, [_vm._v("compra")])])], 1)]);
+  }, [_vm._v("Compra Ora")])])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -62431,7 +62431,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

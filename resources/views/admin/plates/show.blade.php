@@ -9,6 +9,9 @@
                 </a>
             </div>
 
+
+            @if ($plate->restaurant_id==auth()->user()->id)
+
             <div class="d-flex">
                 <div class="mx-3">
                     <a class="btn btn-secondary d-block button" href="{{ route('admin.plates.edit', $plate) }}">
@@ -20,6 +23,10 @@
                     <button class="btn btn-danger" id="openModal">Elimina</button>
                 </div>
             </div>
+                
+            @endif
+
+
         </div>
 
         <h1>SHOW DEL PIATTO</h1>

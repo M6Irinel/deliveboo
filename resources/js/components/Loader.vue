@@ -1,5 +1,5 @@
 <template>
-    <div class="load_back">
+    <div class="grow-1 bg-gray-1 grid">
         <div class="load_class">
             <font-awesome-icon icon="fa-regular fa-hourglass-half" />
         </div>
@@ -15,28 +15,18 @@ export default {
 
 
 <style scoped lang="scss">
-.load_back {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    background-color: gray;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
+.grow-1 {
+    flex-grow: 1;
+    place-items: center;
+}
 
-    .load_class {
-        border-radius: 50%;
-        font-size: 5rem;
-        animation: spin 3s linear infinite;
+.load_class {
+    font-size: 4rem;
+    animation: spin 4s linear infinite;
 
-        @keyframes spin {
-            100% {
-                transform: rotate(1turn);
-            }
+    @keyframes spin {
+        100% {
+            transform: rotate(1turn);
         }
     }
 }

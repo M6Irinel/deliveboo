@@ -1,7 +1,6 @@
 <template>
-    <div class="max">
+    <div class="min-h-100vh flex f-column">
         <NavBar />
-
         <router-view />
     </div>
 </template>
@@ -11,12 +10,14 @@
 // @ts-nocheck
 import store from '../store/store';
 import NavBar from '../components/NavBar.vue';
+
 export default {
     name: 'AppVue',
 
     components: {
         NavBar,
     },
+
     methods: {
         fetchRestaurants () {
             axios.get( '/api/restaurants' ).then( r => {
@@ -28,7 +29,7 @@ export default {
         fetchTypologies () {
             axios.get( '/api/typologies' ).then( r => {
                 store.typologies = r.data.typologies;
-                store.loading = false;
+                store.loadingRestaurant = false;
             } );
         }
     },
@@ -43,8 +44,10 @@ export default {
 
 
 <style lang="scss">
-    .max{
-        min-height: 100vh;
-       
-    }
+.grow-1 {
+    flex-grow: 1;
+}
+.grow-2 {
+    flex-grow: 2;
+}
 </style>

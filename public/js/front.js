@@ -18656,6 +18656,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
         localStorage.setItem("spesaTotale", s.toFixed(2));
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = s.toFixed(2);
       });
       this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
@@ -18854,9 +18855,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //     let q = localStorage.getItem(l.plate_name + '-counter');
       //     return
       // })
-
-      console.log(this.datiUtente);
-      console.log(this.prezzoTotale);
+      // console.log(this.datiUtente)
+      // console.log(this.prezzoTotale)
       axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(function (r) {
         console.log(r);
         // this.$router.push({ path: '/thankyou' });
@@ -18885,11 +18885,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fetchPlates: function fetchPlates() {
+      var _this2 = this;
       if (!localStorage.resId) return;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
       axios.get("/api/restaurants/".concat(localStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
+        _this2.totalprice();
       });
     },
     pulisciStorage: function pulisciStorage() {
@@ -18952,12 +18954,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     totalprice: function totalprice() {
       var s = 0;
-      this.plates.forEach(function (e) {
-        var q = localStorage.getItem(e.plate_name + '-counter');
-        s += e.plate_price * q;
-        localStorage.setItem("spesaTotale", s.toFixed(2));
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = localStorage.getItem("spesaTotale", s.toFixed(2));
-      });
+      if (this.plates) {
+        this.plates.forEach(function (e) {
+          var q = localStorage.getItem(e.plate_name + '-counter');
+          s += e.plate_price * q;
+          localStorage.setItem("spesaTotale", s.toFixed(2));
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = s.toFixed(2);
+        });
+      }
       this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
     },
@@ -18965,18 +18969,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return localStorage.getItem(v + '-counter');
     },
     fetchToken: function fetchToken() {
-      var _this2 = this;
+      var _this3 = this;
       this.disabledBuyButton = true;
       axios.get('/api/generate').then(function (r) {
-        _this2.tokenApi = r.data.token;
-        _this2.disabledBuyButton = false;
+        _this3.tokenApi = r.data.token;
+        _this3.disabledBuyButton = false;
       });
     }
   },
   created: function created() {
     this.fetchToken();
     this.fetchPlates();
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -19043,6 +19048,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
         localStorage.setItem("spesaTotale", s.toFixed(2));
+        _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].prezzoTotaleDaPagare = s.toFixed(2);
       });
       this.total = localStorage.getItem('spesaTotale');
     },

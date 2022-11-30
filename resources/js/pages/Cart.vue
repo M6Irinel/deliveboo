@@ -145,9 +145,8 @@ export default {
             //     let q = localStorage.getItem(l.plate_name + '-counter');
             //     return
             // })
-
-            console.log(this.datiUtente)
-            console.log(this.prezzoTotale)
+            // console.log(this.datiUtente)
+            // console.log(this.prezzoTotale)
             axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(r => {
                 console.log(r)
                 // this.$router.push({ path: '/thankyou' });
@@ -191,6 +190,7 @@ export default {
                 .then((r) => {
                     store.plates = r.data.plates;
                     store.loadingCart = false;
+                    this.totalprice();
                 });
         },
 
@@ -265,12 +265,16 @@ export default {
 
         totalprice() {
             let s = 0;
-            this.plates.forEach(e => {
-                let q = localStorage.getItem(e.plate_name + '-counter');
-                s += e.plate_price * q;
-                localStorage.setItem("spesaTotale", s.toFixed(2));
-                store.prezzoTotaleDaPagare=localStorage.getItem("spesaTotale", s.toFixed(2));
-            })
+            
+            if (this.plates) {
+               
+                this.plates.forEach(e => {
+                    let q = localStorage.getItem(e.plate_name + '-counter');
+                    s += e.plate_price * q;
+                    localStorage.setItem("spesaTotale", s.toFixed(2));
+                    store.prezzoTotaleDaPagare = s.toFixed(2);
+                })
+            }
             this.total = localStorage.getItem('spesaTotale');
             store.totalCart = this.total;
         },
@@ -291,7 +295,13 @@ export default {
     created() {
         this.fetchToken();
         this.fetchPlates();
+        
     },
+    
+    mounted(){
+      
+       
+    }
 };
 </script>
 

@@ -69,6 +69,7 @@
                     <h2>Totale di tutto: {{ totalF().toFixed(2) }} €</h2>
                     <button class="btn btn-danger" @click="pulisciStorage()">Svuota il Carello</button>
                 </div>
+                <Braintree />
 
             </div>
             <div v-else>
@@ -87,12 +88,13 @@
 // @ts-nocheck
 import store from "../store/store";
 import LoaderC from "../components/Loader.vue";
+import Braintree from "../components/Braintree.vue";
 
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC },
+    components: { LoaderC, Braintree },
 
     data () {
         return {

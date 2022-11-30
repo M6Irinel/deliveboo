@@ -1,69 +1,47 @@
 <template>
     <div>
-        <template v-if="!loadingCart">
-            <main class="container">
-                <h1>Cart Modal</h1>
-                <div>
-                    <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
-                    </router-link>
-                </div>
+        <main v-if="!loadingCart" class="container">
+            <div class="none" v-if="total" />
 
-                <div v-if="plates">
-                    <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
-                        <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                            v-for="(plate, i) in plates" :key="i">
+            <div v-if="plates">
+                <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+                    <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        v-for="(plate, i) in plates" :key="i">
 
-                            <div class="mt-auto">
-                                <p>{{ plate.plate_name }}</p>
-                                <div class="absolute badge badge-primary p-1 badge-n"
-                                    v-if="quantity(plate.plate_name) > 1">
-                                    &Cross;
-                                    {{ quantity(plate.plate_name) }}
-                                </div>
-                            </div>
+                        <p class="mb-auto bold">{{ plate.plate_name }}</p>
 
-                            <p>Prezzo: {{ plate.plate_price }}€</p>
+                        <p>Prezzo: <strong>{{ plate.plate_price }}€</strong></p>
 
-                            <div v-if="quantity(plate.plate_name) > 1">
-                                <p>Quantità: {{ quantity(plate.plate_name) }}</p>
-                                <p>
-                                    Totale del Piatto:
+                        <div v-if="quantity(plate.plate_name) > 1">
+                            <p>
+                                Totale del Piatto:
+                                <strong>
                                     {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
                                     €
-                                </p>
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div :class="[
+                            'flex mt-auto',
+                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        ]">
+                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3 bold"
+                                @click="removePlate(plate)">-</button>
+
+                            <div class="badge badge-primary badge-n py-1 px-2">
+                                &#215;{{ quantity(plate.plate_name) }}
                             </div>
 
-                            <div :class="[
-                                'flex mt-auto',
-                                quantity(plate.plate_name) ? 'between' : 'j-flex-end'
-                            ]">
-                                <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
-                                    @click="removePlate(plate)">-</button>
+                            <button class="btn btn-success px-3 bold" @click="addPlate(plate)">+</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <p v-else>carrello vuoto</p>
 
-                                <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}
-                                </div>
-
-                                <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- <div class="flex between">
-                        <h2>Totale di tutto: {{ totalF().toFixed(2) }} €</h2>
-                        <button class="btn btn-danger" @click="pulisciStorage()">Svuota il Carello</button>
-                    </div> -->
-
-                </div>
-                <div v-else>
-                    <p>carrello vuoto</p>
-                </div>
-
-            </main>
-        </template>
-        <template v-else>
-            <LoaderC />
-        </template>
+        </main>
+        <LoaderC v-else />
     </div>
 </template>
 

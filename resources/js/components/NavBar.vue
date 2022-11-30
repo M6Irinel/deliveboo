@@ -3,15 +3,14 @@
         :class="{ 'h-100vh': (mobile && isOpenNavbar), 'primaria': !mobile, 'bg-bottom-version-mobile': mobile }">
         <div class="container flex between-sm f-column f-row-sm">
             <div class="flex" :class="{ 'primaria shadow-1-light': mobile }">
-                <div class="grow-1">
-                    <a class="t-shadow header-height bg-hover-button-header bg-active-button-header flex center i-center white decoration-none-H black-H bold"
-                        :class="{ 'pl-15': mobile }" href="/" title="home">deliveboo</a>
-                </div>
+                <a class="grow-1 white header-height bg-hover-button-header bg-active-button-header flex center i-center decoration-none-H black-H bold"
+                    :class="{ 'pl-15': mobile }" href="/" title="home">deliveboo</a>
 
                 <div>
                     <button v-if="mobile" @click="openClosedNavbar()"
-                        class="bg-transparent border-none white bg-hover-button-header bg-active-button-header">
-                        <font-awesome-icon icon="fa-solid fa-bars" />
+                        class="bg-transparent border-none white bg-hover-button-header bg-active-button-header black-H">
+                        <font-awesome-icon v-if="isOpenNavbar" class="fs-7" icon="fa-solid fa-xmark" />
+                        <font-awesome-icon v-else class="fs-5" icon="fa-solid fa-bars" />
                     </button>
                 </div>
             </div>
@@ -19,13 +18,18 @@
             <div class="flex f-column f-row-sm i-stretch grow-1 j-flex-end"
                 :class="{ 'd-none': (mobile && !isOpenNavbar) }">
 
-                <a class="header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
-                    :class="{ 'bg-button-header text-button': mobile, 'white t-shadow': !mobile }" href="/login"
-                    title="sign in">accedi</a>
+                <a class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="{ 'bg-button-header text-button': mobile }" href="/login" title="sign in">accedi</a>
 
-                <a class="header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
-                    :class="{ 'bg-button-header text-button': mobile, 'white t-shadow': !mobile }" href="/register"
+                <a class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="{ 'bg-button-header text-button': mobile }" href="/register"
                     title="new restaurant">registrati</a>
+
+                <router-link :to="{path: 'Settings'}" class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="{ 'bg-button-header text-button': mobile }" title="new restaurant">
+                    <span v-if="mobile">impostazioni</span>
+                    <font-awesome-icon v-else icon="fa-solid fa-gear" />
+                </router-link>
             </div>
         </div>
     </header>

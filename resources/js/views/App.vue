@@ -35,7 +35,7 @@ export default {
     },
 
     created () {
-        store.loading = true;
+        store.loadingRestaurant = true;
         this.fetchRestaurants();
         this.fetchTypologies();
     }

@@ -1,9 +1,10 @@
 // @ts-nocheck
 import Restaurants from "../pages/Restaurants.vue";
 import Plates from "../pages/Plates.vue";
-import NotFound from '../pages/NotFound.vue';
-import Cart from '../pages/Cart.vue';
-import ThankYou from '../pages/ThankYou.vue';
+import NotFound from "../pages/NotFound.vue";
+import Cart from "../pages/Cart.vue";
+import ThankYou from "../pages/ThankYou.vue";
+import Settings from "../pages/Settings.vue";
 
 export default [
     {
@@ -27,8 +28,13 @@ export default [
         component: ThankYou,
     },
     {
-        path: '*',
-        name: 'not-found',
-        component: NotFound
-    }
+        path: "/settings",
+        name: "Settings",
+        component: Settings,
+    },
+    {
+        path: "*",
+        name: "not-found",
+        component: NotFound,
+    },
 ];

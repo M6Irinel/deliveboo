@@ -1,76 +1,38 @@
 <template>
-    <main class="container flex f-column">
+    <main class="container flex f-column grow-1">
         <div class="flex between i-center py-1 sticky top left right">
             <h1>Ristoranti</h1>
 
-            <div>
-                <div @click="modalCart()" class="btn btn-success px-1">
-                    <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                    <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
-                </div>
-            </div>
+            <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" />
         </div>
 
         <div class="flex j-flex-end relative gap-5 i-flex-start">
-            <div style="flex-grow: 1;">
-                <div v-if="!loadingRestaurant">
-                    <div class="flex f-column">
-                        <div class="grid-12 gap-5">
-                            <router-link
-                                class="g-col-12 g-col-6-md g-col-3 border border-azure p-2 rounded t-center black p-6 shadow bg-gray-1-H red-H"
-                                v-for="(restaurant, i) in restaurants" :key="i"
-                                :to="{ name: 'Plates', params: { 'slug': restaurant.user.slug } }">
+            <div class="flex f-column gap-5 grow-1">
+                <cart-modal v-if="visibilityCart" />
 
-                                <h4>{{ restaurant.user.name }}</h4>
-                                <address>{{ restaurant.restaurant_address }}</address>
-                                <p v-for="(t, i) in restaurant.typologies" :key="i">
-                                    {{ t.name }}
-                                </p>
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <LoaderC />
-                </div>
-
-                <div v-if="visibilityCart">
-                    <cart-modal />
-                </div>
+                <CardFrontEnd v-if="(!loadingRestaurant && restaurants)" :restaurants="restaurants" />
+                <LoaderC v-else />
             </div>
-            <div class="sticky right top z-index-3 bg-white shadow p-2 tag-wrapper t-center">
-                <div>Filtra per tipologie</div>
 
-                <ul class="list-style-none flex gap-5 f-column center">
-                    <li v-for="(t, i) in typologies" :key="i">
-
-                        <input class="d-none checkTrue" type="checkbox" :id="'typology-' + i" :value="t.name"
-                            v-model="types">
-
-                        <label :for="'typology-' + i"
-                            class="d-block rounded-3 border pointer px-2 py-1 red-H bg-gray-1-H">
-                            {{ t.name }}
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <TypologyVue v-if="typologies" @emitTypes="emitTypes" :typologies="typologies" />
         </div>
-
-
     </main>
 </template>
 
 
 <script>
 // @ts-nocheck
+import store from '../store/store';
 import CartModal from '../components/CartModal.vue';
 import LoaderC from '../components/Loader.vue';
-import store from '../store/store';
+import ButtonCart from '../components/ButtonCart.vue';
+import CardFrontEnd from '../components/Restaurant/CardFrontEnd.vue';
+import TypologyVue from '../components/Restaurant/TypologyVue.vue';
 
 export default {
     name: "RestaurantsIndex",
 
-    components: { LoaderC, CartModal },
+    components: { LoaderC, CartModal, CardFrontEnd, TypologyVue, ButtonCart },
 
     data () {
         return {
@@ -83,6 +45,10 @@ export default {
     methods: {
         modalCart () {
             this.visibilityCart = !this.visibilityCart
+        },
+
+        emitTypes (v) {
+            this.types = v;
         }
     },
 
@@ -100,19 +66,10 @@ export default {
             return store.totalCart;
         }
     },
-
 }
 </script>
 
 <style lang="scss">
-main {
-    flex-grow: 1;
-}
-
-.tag-wrapper {
-    flex-basis: 15%;
-}
-
 .tag-distance {
     gap: 2rem;
 }
@@ -132,9 +89,5 @@ main {
             border-radius: 150px;
         }
     }
-}
-
-.checkTrue:checked + label {
-    background-color: #ac7676;
 }
 </style>

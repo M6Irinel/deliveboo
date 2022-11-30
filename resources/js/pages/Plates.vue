@@ -2,70 +2,59 @@
     <div>
         <main class="container">
             <div class="flex between mt-2">
+
+                <ButtonsLeft />
+
                 <div>
-                    <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
-                    <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
-                </div>
-                <div>
+                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il Carrello</button>
                     <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-                        <font-awesome-icon icon="fa-solid fa-basket-shopping" /> <span v-if="total">{{
-                                parseFloat(total).toFixed(2)
-                        }}€</span>
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                        <span v-if="total">
+                            {{ parseFloat(total).toFixed(2) }}€
+                        </span>
                     </router-link>
                 </div>
             </div>
 
             <h1>Piatti</h1>
 
-            <div v-if="!loadingPlates">
-                <div class="grid-12 grid-10-lg grid-12-xl gap-5">
-                    <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                        v-for="(plate, i) in plates" :key="i" v-if="plate.visibility==1">
+            <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5">
+                <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                    v-for="(plate, i) in plates" :key="i">
 
-                        <div v-if="plate.plate_image">
-                            <img class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />
-                        </div>
-                        <div v-else>
-                            <img class="img-fluid" :src="'../img/default/plate-empty.png'" alt="" />
-                        </div>
+                    <img v-if="plate.plate_image" class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />
+                    <img v-else class="img-fluid" :src="'../img/default/plate-empty.png'" alt="" />
 
-                        <div>
-                            <p class="t-center">{{ plate.plate_name }}</p>
+                    <div>
+                        <p class="t-center">{{ plate.plate_name }}</p>
 
-                            <p>
-                                <strong>Ingredienti: </strong>
-                                <span>{{ plate.ingredients }}</span>
-                            </p>
+                        <p>
+                            <strong>Ingredienti: </strong>
+                            <span>{{ plate.ingredients }}</span>
+                        </p>
 
-                            <p class="flex between">
-                                <strong>Prezzo: </strong>
-                                <span>
-                                    {{ parseFloat(plate.plate_price).toFixed(2) }}€
-                                </span>
-                            </p>
-                        </div>
+                        <p class="flex between">
+                            <strong>Prezzo: </strong>
+                            <span>
+                                {{ parseFloat(plate.plate_price).toFixed(2) }}€
+                            </span>
+                        </p>
+                    </div>
 
-                        <div :class="[
-                            'flex mt-auto',
-                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
-                        ]">
-                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
-                                @click="removePlate(plate)">-</button>
+                    <div :class="[
+                        'flex mt-auto',
+                        quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                    ]">
+                        <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                            @click="removePlate(plate)">-</button>
 
-                            <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+                        <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
 
-                            <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
-                        </div>
+                        <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
                     </div>
                 </div>
-
-                <div class="flex j-flex-end">
-                    <button class="btn btn-danger px-1" @click="pulisciStorage()">Svuota il Carrello </button>
-                </div>
             </div>
-            <div v-else>
-                <LoaderC />
-            </div>
+            <LoaderC v-else />
         </main>
     </div>
 </template>
@@ -74,12 +63,13 @@
 <script>
 // @ts-nocheck
 import LoaderC from "../components/Loader.vue";
+import ButtonsLeft from "../components/ButtonsLeft.vue";
 import store from "../store/store";
 
 export default {
     name: "PlatesIndex",
 
-    components: { LoaderC },
+    components: { LoaderC, ButtonsLeft },
 
     data () {
         return {
@@ -93,7 +83,7 @@ export default {
         fetchPlates () {
             store.loadingPlates = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
-                this.plates = r.data.plates;
+                this.plates = r.data.plates.filter( e => e.visibility );
                 store.loadingPlates = false;
             } );
         },

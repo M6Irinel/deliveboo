@@ -1,94 +1,83 @@
 <template>
     <div>
         <main v-if="!loadingCart" class="container">
-            <div class="flex between mt-2">
+            <div class="flex between i-center py-2">
 
-                <div class="mt-2">
-                    <button class="btn btn-secondary px-1" @click="$router.go(-1)">←</button>
-                    <router-link class="btn btn-primary px-1" :to="{ name: 'Home' }">Ristoranti</router-link>
-                </div>
+                <ButtonsLeft />
 
-                <div>
-                    <div class="badge badge-warning p-2 fs-3">
+                <div class="flex i-center gap-5">
+                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il Carello</button>
+                    <div class="badge badge-warning p-1 fs-3">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-
                         <span v-if="total">
+                            Totale del ordine:
                             {{ parseFloat(total).toFixed(2) }}€
                         </span>
                     </div>
                 </div>
             </div>
 
-            <h1>Cart</h1>
+            <h1>Carrello <span v-if="!total">vuoto</span></h1>
 
-            <div v-if="plates">
-                <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
-                    <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                        v-for="(plate, i) in plates" :key="i">
+            <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                    v-for="(plate, i) in plates" :key="i">
 
-                        <div v-if="plate.plate_image">
-                            <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
+                    <div v-if="plate.plate_image">
+                        <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
+                    </div>
+                    <div v-else>
+                        <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                    </div>
+
+                    <div class="mt-auto">
+                        <p>{{ plate.plate_name }}</p>
+                        <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(plate.plate_name) > 1">
+                            &Cross;
+                            {{ quantity(plate.plate_name) }}
                         </div>
-                        <div v-else>
-                            <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
-                        </div>
+                    </div>
 
-                        <div class="mt-auto">
-                            <p>{{ plate.plate_name }}</p>
-                            <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(plate.plate_name) > 1">
-                                &Cross;
-                                {{ quantity(plate.plate_name) }}
-                            </div>
-                        </div>
+                    <p>Prezzo: {{ plate.plate_price }}€</p>
 
-                        <p>Prezzo: {{ plate.plate_price }}€</p>
+                    <div v-if="quantity(plate.plate_name) > 1">
+                        <p>Quantità: {{ quantity(plate.plate_name) }}</p>
+                        <p>
+                            Totale del Piatto:
+                            {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
+                            €
+                        </p>
+                    </div>
 
-                        <div v-if="quantity(plate.plate_name) > 1">
-                            <p>Quantità: {{ quantity(plate.plate_name) }}</p>
-                            <p>
-                                Totale del Piatto:
-                                {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
-                                €
-                            </p>
-                        </div>
+                    <div :class="[
+                        'flex mt-auto',
+                        quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                    ]">
+                        <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                            @click="removePlate(plate)">-</button>
 
-                        <div :class="[
-                            'flex mt-auto',
-                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
-                        ]">
-                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
-                                @click="removePlate(plate)">-</button>
+                        <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
 
-                            <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+                        <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
+                    </div>
+                </li>
+            </ul>
 
-                            <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="flex between">
-                    <h2>Totale di tutto: {{ totalF().toFixed(2) }} €</h2>
-                    <button class="btn btn-danger" @click="pulisciStorage()">Svuota il Carello</button>
-                </div>
-
-            </div>
-            <div v-else>
-                <p>carrello vuoto</p>
-            </div>
-
-        </main>
-        <div v-else>
-            <LoaderC />
-        </div>
-
-        <div class="container">
-            <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
+            <BraintreVue v-if="tokenApi && total" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
 
+<<<<<<< HEAD
             <div>
                 <button :disabled="disabledBuyButton" @click.prevent="beforeBuy"
                     class="block w-100 btn btn-success py-2 my-2 uppercase">Compra Ora</button>
             </div>
         </div>
+=======
+            <button v-if="tokenApi && total" :disabled="disabledBuyButton" @click.prevent="beforeBuy"
+                class="block w-100 btn btn-success py-2 my-2 uppercase">compra</button>
+        </main>
+        <LoaderC v-else />
+>>>>>>> feature/ordinare1
     </div>
 </template>
 
@@ -98,11 +87,12 @@
 import store from "../store/store";
 import LoaderC from "../components/Loader.vue";
 import BraintreVue from "../components/BraintreVue.vue";
+import ButtonsLeft from "../components/ButtonsLeft.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC, BraintreVue },
+    components: { LoaderC, BraintreVue, ButtonsLeft },
 
     data () {
         return {

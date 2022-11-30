@@ -24,7 +24,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/cacio_e_pepe.png',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 1,
                 'plate_name' => 'Carbonara',
                 'ingredients' => 'Guanciale affumicato, uova, grana, pecorino, pepe, olio evo',
                 'plate_description' => 'Piatto tipico della tradizione romana',
@@ -42,7 +42,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/cozze_e_vongole.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 3,
                 'plate_name' => 'Carbonara di mare',
                 'ingredients' => 'Seppia, olio, calamaro, polpo, gamberetti, crema di zucchine, aglio, pepe',
                 'plate_description' => 'Variante della carbonara fatta con i frutti di mare',
@@ -61,7 +61,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/edamame.png',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 1,
                 'plate_name' => 'Gyoza di carne',
                 'ingredients' => 'Gyoza, carne di maiale',
                 'plate_description' => 'Ravioli homemade di carne',
@@ -70,7 +70,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/gyoza_di_carne.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 1,
                 'plate_name' => 'Sashimi mix',
                 'ingredients' => 'Salmone, tonno, pesce bianco, gambero rosso, scampo',
                 'plate_description' => '3pz salmone, 3pz tonno, 3pz pesce bianco, 1pz gambero, 1pz scampo',
@@ -79,7 +79,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/sashimi_mix.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 1,
                 'plate_name' => 'Temaki maguro',
                 'ingredients' => 'Tonno, avocado, uova di pesce',
                 'plate_description' => 'Cono di alga nori ripieno di riso con tonno, avocado e uova di pesce',
@@ -98,7 +98,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/pizza_margherita.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 1,
                 'plate_name' => 'Pizza tonno e cipolla',
                 'ingredients' => 'impasto tradizionale, pomodoro, mozzarella, tonno, cipolla',
                 'plate_description' => 'Pizza tonno e cipolla',
@@ -107,7 +107,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/pizza_tonno_e_cipolla.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 1,
                 'plate_name' => 'Pizza ai 4 formaggi',
                 'ingredients' => 'Impasto tradizionale, quattro tipi di formaggio',
                 'plate_description' => 'Pizza ai 4 formaggi',
@@ -116,7 +116,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/pizza_ai_4_formaggi.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 1,
                 'plate_name' => 'Focaccia',
                 'ingredients' => 'Impasto tradizionale, pecorino, olio, sale, origano',
                 'plate_description' => 'Focaccia semplice',
@@ -126,7 +126,7 @@ class PlateSeeder extends Seeder
             ],
             //Poke
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 2,
                 'plate_name' => 'Salmon bowl',
                 'ingredients' => 'Riso bianco, salmone, avocado, alga wakame e sesamo',
                 'plate_description' => 'Bowl di riso, salmone, avocado, alghe wakame e sesamo',
@@ -144,7 +144,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/japan_special_bowl.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 2,
                 'plate_name' => 'Tataki bowl',
                 'ingredients' => 'riso bianco, fette spesse di salmone scottato, avocado, lime, sesamo',
                 'plate_description' => 'Bowl di riso bianco con fette spesse di salmone scottato in crosta di sesamo, mezzo avocado, lime, misticanza con salsa ponzu e teriyaki',
@@ -153,7 +153,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/tataki_bowl.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 2,
                 'plate_name' => 'Mediterraneo bowl',
                 'ingredients' => 'Tonno, pomodori datterini, misticanza, stracciatella di burrata, avocado, granella di pistacchio, salsa di soia, riso bianco',
                 'plate_description' => 'Bowl di riso con tataki di tonno, pomodorini datterini, misticanza, stracciatella di burrata, avocado, granella di pistacchio tostato, salsa di soia e olio evo',
@@ -163,7 +163,7 @@ class PlateSeeder extends Seeder
             ],
             //KEBAB
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 2,
                 'plate_name' => 'Panino kebab',
                 'ingredients' => 'Carne, instalata, salsa yogurt, salsa piccante',
                 'plate_description' => 'Panino kebab composto con carne, instala mista, salsa piccante, salsa yogurt',
@@ -181,7 +181,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/piadina_kebab.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 2,
                 'plate_name' => 'Vaschetta kebab - grande',
                 'ingredients' => 'Carne, instalata, salsa yogurt, salsa piccante',
                 'plate_description' => 'Vaschetta composta con Carne, instalata, salsa yogurt, salsa piccante',
@@ -190,7 +190,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/vaschetta_kebab.jpeg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 2,
                 'plate_name' => 'Piadina kebab no piccante',
                 'ingredients' => 'Carne, instalata, salsa yogurt',
                 'plate_description' => 'Piadina kebab composta con arne, instalata, salsa yogurt',
@@ -200,7 +200,7 @@ class PlateSeeder extends Seeder
             ],
             //BURGER (burger king)
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 2,
                 'plate_name' => 'Plant based nuggets burger',
                 'ingredients' => 'Nuggets vegetali, salse, insalata',
                 'plate_description' => 'Panino con gustosi e croccanti nuggets plant based, 100% vegetali. Un mix perfetto per gli amanti dei prodotti a base vegetale che potranno scegliere questa new entry all\'interno della gamma',
@@ -218,7 +218,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/parmigiano_burger.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 2,
                 'plate_name' => 'Bacon King',
                 'ingredients' => 'Bun composto con due hamburger di manzo alla griglia con 8 fette di bacon, cheddar, ketchup e maionese',
                 'plate_description' => 'Inimitabile. Due hamburger di manzo alla griglia con 8 fette di bacon, cheddar, ketchup e maionese',
@@ -227,7 +227,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/bacon_king.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 2,
                 'plate_name' => 'Bronx steakhouse',
                 'ingredients' => 'Pane al mais con carne grigliata, bacon, formaggio cheddar, cipolla croccante, insalata, salse',
                 'plate_description' => '175 gr di carne grigliata! Bacon, gustoso formaggio cheddar, cipolle croccanti, verdura fresca, salsa bbq, maionese e pane al mais',
@@ -237,7 +237,7 @@ class PlateSeeder extends Seeder
             ],
             //VEG
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 3,
                 'plate_name' => 'Palline veggie',
                 'ingredients' => 'Polpette vegane',
                 'plate_description' => 'Palline veggie 100% vegetali al gusto pollo con salsa bbq - 8 pezzi',
@@ -246,7 +246,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/palline_veggie.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 3,
                 'plate_name' => 'Poke vegano',
                 'ingredients' => 'Riso rosso, riso venere, pomodori datterino, ceci, lenticchie, rucola foglia larga, olive taggiasche, mandorle, salda agrumi, semi di chia',
                 'plate_description' => 'Poke con riso rosso, riso venere, pomodori datterino, ceci, lenticchie, rucola foglia larga, olive taggiasche, mandorle, salda agrumi, semi di chia',
@@ -264,7 +264,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/piadina_vegana.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 3,
                 'plate_name' => 'Piadina Vegana',
                 'ingredients' => 'Affettato vegano, cicoria ripassata, trifolata di porcini',
                 'plate_description' => 'Piadina con affettato vegano, cicoria ripassata, trifolata di porcini',
@@ -274,7 +274,7 @@ class PlateSeeder extends Seeder
             ],
             //PESCE
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 3,
                 'plate_name' => 'Pesce Spada alla Siciliana',
                 'ingredients' => 'pesce spada, capperi, olive verdi, pomodorini, basilico, olio evo',
                 'plate_description' => 'Piatto di pesce spada, capperi, olive verdi, pomodorini, basilico, olio evo',
@@ -283,7 +283,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/pesce_spada_alla_siciliana.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 3,
                 'plate_name' => 'Zuppa di pesce',
                 'ingredients' => 'Gamberi, salmone e orata',
                 'plate_description' => 'Zuppa con gamberi, salmone e orata',
@@ -301,7 +301,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/carpaccio_di_pesce.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 3,
                 'plate_name' => 'Cotoletta di pesce',
                 'ingredients' => 'Filetto di merluzzo, uova, pangrattato, sale, farina, pepe',
                 'plate_description' => 'Cotoletta di pescato del giorno impanata e fritta',
@@ -311,7 +311,7 @@ class PlateSeeder extends Seeder
             ],
             //CARNE (Old wild west)
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 4,
                 'plate_name' => 'Rosemary fillet',
                 'ingredients' => 'Filetto di manzo, polvere di bacon, olio',
                 'plate_description' => 'Tagliata di filetto di manzo alla griglia con polvere di bacon e olio aromatizzato al rosmarino su letto di rucola, servita con patate al forno e salse',
@@ -320,7 +320,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/rosemary_fillet.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 4,
                 'plate_name' => 'Mississippi beef',
                 'ingredients' => 'Filetto di manzo, rucola, patate al forno',
                 'plate_description' => 'Tagliata di filetto di manzo alla griglia su letto di rucola, accompagnata da patate al forno e salsa barbecue',
@@ -329,7 +329,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/mississippi_beef.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 4,
                 'plate_name' => 'Gran Canyon mix',
                 'ingredients' => 'Tagliata di picanha, tagliata di entrecote e scamone di manzo, olio evo, spinaci, patate al forno',
                 'plate_description' => 'Piatto composto da tagliata di picanha, tagliata di entrecote e scamone di manzo, condite con olio extravergine di oliva e fiocchi di sale su letto di spinacino, il tutto accompagnato da patate al forno e salsa chimichurri homemade',
@@ -348,7 +348,7 @@ class PlateSeeder extends Seeder
             ],
             //INDIANO
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 4,
                 'plate_name' => 'Malahi tikka',
                 'ingredients' => 'Pollo, pesto di anacardi, zenzero, spezie',
                 'plate_description' => 'Spiedini di pollo marinati con pesto di anacardi zenzero e spezie',
@@ -357,7 +357,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/malahi_tikka.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 4,
                 'plate_name' => 'Baigan bharta',
                 'ingredients' => 'Melanzane, cipolla, pomodoro, aglio, spezie',
                 'plate_description' => 'Crema di melanzane, cipolla, pomodoro, aglio, spezie',
@@ -366,7 +366,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/baigan_bharta.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 4,
                 'plate_name' => 'Cheese naan',
                 'ingredients' => 'Pane, formaggio',
                 'plate_description' => 'Pane farcito con formaggio',
@@ -385,7 +385,7 @@ class PlateSeeder extends Seeder
             ],
             //MESSICANO
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 4,
                 'plate_name' => 'Tostada Cancun',
                 'ingredients' => 'Tonno rosso, sesamo, cavolo rosso, guacamole, cipolla',
                 'plate_description' => 'Tataki di tonno in crosta di sesamo su un letto di cavolo rosso e salsa guacamole con un ciuffetto di cipolla Tropea caramellizzata, salsa chipotle e avocado',
@@ -394,7 +394,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/tostada_cancun.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 4,
                 'plate_name' => 'Burrito luchador',
                 'ingredients' => 'Chorizo, patate, formaggio, guacamole',
                 'plate_description' => 'Burrito ripieno di chorizo con patate, formaggio fuso e salsa guacamole.',
@@ -403,7 +403,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/burrito_luchador.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 4,
                 'plate_name' => 'Taco Pibil',
                 'ingredients' => 'Carne di maiale, cipolla rossa, peproncino habanéro',
                 'plate_description' => 'Carne di maiale sfilacciata, speziata, marinata all’arancia e cotta al forno, condita con cipolla rossa macerata alla messicana e peperoncino habanéro.',
@@ -422,7 +422,7 @@ class PlateSeeder extends Seeder
             ],
             //DOLCI
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 5,
                 'plate_name' => 'Torta della nonna',
                 'ingredients' => 'Pasta frolla, crema pasticcera, mandorle, zucchero a velo',
                 'plate_description' => 'Torta di pasta frolla ripiena di fragrante crema pasticcera che profuma di uova e limone, ricoperta di bastoncini di mandorle e spolverata di zucchero a velo.',
@@ -431,7 +431,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/torta_della_nonna.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 5,
                 'plate_name' => 'Torta alle mele',
                 'ingredients' => 'Mele, confettura, pasta frolla, mandorle, zucchero a velo',
                 'plate_description' => 'Le mele a pezzetti sono unite a una profumata confettura di albicocche, avvolte e racchiuse da una morbida pasta frolla, spolverata di zucchero e decorata da mandorle croccanti',
@@ -440,7 +440,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/torta_alle_mele.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 5,
                 'plate_name' => 'Torta ai frutti di bosco',
                 'ingredients' => 'Pasta frolla, noci, frutti di bosco',
                 'plate_description' => 'Pasta frolla, ricoperta di noci, che racchiude un ripieno di deliziosi frutti di bosco. Avvolti dalla pasta frolla, i frutti di bosco conservano tutto il loro profumo e lo regalano all’impasto. Il gusto e la croccantezza delle noci sono il raffinato tocco finale, che si sposa alla dolcezza della torta.',
@@ -449,7 +449,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/torta_ai_frutti_di_bosco.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 5,
                 'plate_name' => 'Cheesecake',
                 'ingredients' => 'Biscotto, fromaggio cremoso, panna acida, fragole',
                 'plate_description' => 'Fondo di biscotto allo zenzero e cannella, cremoso formaggio e panna acida si uniscono nella classica, golosissima, New York cheesecake. La freschezza del formaggio esalta il gusto della base di biscotto e della copertura di panna che può essere guarnita con passata di fragole o con altri frutti di stagione.',
@@ -459,7 +459,7 @@ class PlateSeeder extends Seeder
             ],
             //GELATO
             [
-                'restaurant_id' => 1,
+                'restaurant_id' => 5,
                 'plate_name' => 'Brioche siciliana vuota',
                 'ingredients' => 'Brioche siciliana',
                 'plate_description' => 'Semplice brioche siciliana, aprila a metà e gustala col gelato che preferisci',
@@ -468,7 +468,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/brioche_siciliana_vuota.jpg',
             ],
             [
-                'restaurant_id' => 2,
+                'restaurant_id' => 5,
                 'plate_name' => 'Brioche siciliana con gelato al pistacchio',
                 'ingredients' => 'Brioche siciliana, gelato al pistacchio',
                 'plate_description' => 'Brioche siciliana ripiena di gelato al pistacchio di bronte',
@@ -477,7 +477,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/brioche_siciliana_con_gelato_al_pistacchio.jpg',
             ],
             [
-                'restaurant_id' => 3,
+                'restaurant_id' => 5,
                 'plate_name' => 'Vaschetta gelato media',
                 'ingredients' => 'Tre diversi gusti di gelato',
                 'plate_description' => 'Vaschetta da 500g di gelato, fino a tre gusti diversi',
@@ -486,7 +486,7 @@ class PlateSeeder extends Seeder
                 'plate_image' => 'plate_img/vaschetta_gelato_media.jpg',
             ],
             [
-                'restaurant_id' => 4,
+                'restaurant_id' => 5,
                 'plate_name' => 'Vaschetta gelato grande',
                 'ingredients' => 'Tre diversi gusti di gelato',
                 'plate_description' => 'Vaschetta da 750g di gelato, fino a tre gusti diversi',

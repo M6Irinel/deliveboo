@@ -13,6 +13,7 @@ class RestaurantSeeder extends Seeder
      */
     public function run()
     {
+        $tags = Typology::all()->pluck('id');
         $restaurants = [
             [
                 'restaurant_address'        => 'Via Dante 212',
@@ -21,6 +22,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => '3254445876',
                 'restaurant_website'        => 'http//:ristorante-da-gianluca',
                 'restaurant_image'          => 'restaurant_img/da_gianluca.jpg',
+                'tags' => [1,2,3]
             ],
             [
                 'restaurant_address'        => 'Via Milano 11/A',
@@ -29,6 +31,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => '9876543210',
                 'restaurant_website'        => 'http//:ristorante-da-mauro',
                 'restaurant_image'          => 'restaurant_img/da_mauro.jpg',
+                'tags' => [4,5,6]
             ],
             [
                 'restaurant_address'        => 'Viale Bonaria 153',
@@ -37,6 +40,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => '3405430191',
                 'restaurant_website'        => 'http//:ristorante-da-alessandro',
                 'restaurant_image'          => 'restaurant_img/da_alessandro.jpg',
+                'tags' => [7,8]
             ],
             [
                 'restaurant_address'        => 'Corso Vittorio Emanuele II 15',
@@ -45,6 +49,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => '3320985821',
                 'restaurant_website'        => 'http//:ristorante-da-massimo',
                 'restaurant_image'          => 'restaurant_img/da_massimo.jpg',
+                'tags' => [9,10,11]
             ],
             [
                 'restaurant_address'        => 'Via Vittoria 15',
@@ -53,6 +58,9 @@ class RestaurantSeeder extends Seeder
                 'restaurant_phone_number'   => '3820971621',
                 'restaurant_website'        => 'http//:ristorante-da-tiziano',
                 'restaurant_image'          => 'restaurant_img/da_tiziano.jpg',
+                'tags' => [12,13]
+                
+        
             ]
             
         ];
@@ -72,8 +80,8 @@ class RestaurantSeeder extends Seeder
                 
 
             ]);
-            $tagIds = $tags->shuffle()->take(4)->all();
-            $r->typologies()->sync($tagIds);
+            // $tagIds = $tags->take(4)->all();
+            $r->typologies()->sync($restaurant['tags']);
         }
     }
 }

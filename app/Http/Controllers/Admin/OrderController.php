@@ -38,7 +38,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-      
+    
         Mail::to('order@boolpress.com')->send(new ConfermaPagamento($request));
     }
 

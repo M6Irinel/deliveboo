@@ -7,6 +7,7 @@ Pagamento Effettuato
 {{$post->title}}
 @endcomponent --}}
  
+{{$order->spesaTotale}}
 
 
 

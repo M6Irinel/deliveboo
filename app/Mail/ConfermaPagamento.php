@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-
+use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -18,9 +18,9 @@ class ConfermaPagamento extends Mailable
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct(Request $request)
     {
-       $this->order=$order;
+       $this->order=$request;
     }
 
     /**

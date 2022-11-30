@@ -95,6 +95,7 @@ export default {
     data() {
         return {
             forLogin,
+            tornaMail:'we we we',
             total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
             form: {
@@ -120,17 +121,22 @@ export default {
 
     methods: {
         listaOrdini() {
-            console.log(JSON.stringify(localStorage))
+            // console.log(JSON.stringify(localStorage))
             let s = JSON.stringify(localStorage)
             let p = JSON.parse(s)
-            console.log(p)
+            // console.log(p)
             // ...JSON.parse(JSON.stringify(localStorage))
             return p
         },
 
         prova() {
-            axios.post('/orders/store', { }).then(r => {
-                this.$router.push({ path: '/thankyou' });
+            let s = JSON.stringify(localStorage)
+            let p = JSON.parse(s)
+            axios.post('/orders/store', p).then(r => {
+              console.log(r.config.data)
+                // this.$router.push({ path: '/thankyou' });
+               
+             
 
             });
         },

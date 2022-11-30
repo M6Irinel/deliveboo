@@ -18816,6 +18816,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       forLogin: forLogin,
+      tornaMail: 'we we we',
       total: localStorage.getItem('spesaTotale'),
       tokenApi: '',
       form: {
@@ -18838,19 +18839,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     listaOrdini: function listaOrdini() {
-      console.log(JSON.stringify(localStorage));
+      // console.log(JSON.stringify(localStorage))
       var s = JSON.stringify(localStorage);
       var p = JSON.parse(s);
-      console.log(p);
+      // console.log(p)
       // ...JSON.parse(JSON.stringify(localStorage))
       return p;
     },
     prova: function prova() {
-      var _this = this;
-      axios.post('/orders/store', {}).then(function (r) {
-        _this.$router.push({
-          path: '/thankyou'
-        });
+      var s = JSON.stringify(localStorage);
+      var p = JSON.parse(s);
+      axios.post('/orders/store', p).then(function (r) {
+        console.log(r.config.data);
+        // this.$router.push({ path: '/thankyou' });
       });
     },
     paymentOnSuccess: function paymentOnSuccess(nonce) {
@@ -18865,13 +18866,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$refs.PaymentRef.$refs.paymentBtnRef.click();
     },
     buy: function buy() {
-      var _this2 = this;
+      var _this = this;
       this.disabledBuyButton = true;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
-        _this2.$router.push({
+        _this.$router.push({
           path: '/thankyou'
         });
-        _this2.loadingBuyButton = false;
+        _this.loadingBuyButton = false;
       });
     },
     fetchPlates: function fetchPlates() {
@@ -18954,11 +18955,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return localStorage.getItem(v + '-counter');
     },
     fetchToken: function fetchToken() {
-      var _this3 = this;
+      var _this2 = this;
       this.disabledBuyButton = true;
       axios.get('/api/generate').then(function (r) {
-        _this3.tokenApi = r.data.token;
-        _this3.disabledBuyButton = false;
+        _this2.tokenApi = r.data.token;
+        _this2.disabledBuyButton = false;
       });
     }
   },

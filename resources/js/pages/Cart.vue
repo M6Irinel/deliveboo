@@ -133,7 +133,7 @@ export default {
             let s = JSON.stringify(localStorage)
             let p = JSON.parse(s)
             axios.post('/orders/store', p).then(r => {
-              console.log(r.config.data)
+              console.log(r)
                 // this.$router.push({ path: '/thankyou' });
                
              

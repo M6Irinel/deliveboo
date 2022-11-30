@@ -18850,7 +18850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var s = JSON.stringify(localStorage);
       var p = JSON.parse(s);
       axios.post('/orders/store', p).then(function (r) {
-        console.log(r.config.data);
+        console.log(r);
         // this.$router.push({ path: '/thankyou' });
       });
     },

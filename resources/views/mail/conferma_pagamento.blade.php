@@ -7,7 +7,13 @@ Pagamento Effettuato
 {{$post->title}}
 @endcomponent --}}
  
-{{$order->spesaTotale}}
+
+
+
+@foreach ($order->all() as $key=> $item)
+  {{$key}} : {{$item}}
+@endforeach
+
 
 
 

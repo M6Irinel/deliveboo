@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Gateway::class, function($app){
             return new Gateway(
                 [
-                    'environment' => env('ENVIROnMENT'),
+                    'environment' => env('ENVIRONMENT'),
                     'merchantId' => env('MERCHANT_ID'),
                     'publicKey' => env('PUBLIC_KEY'),
                     'privateKey' => env('PRIVATE_KEY'),

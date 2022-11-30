@@ -21,7 +21,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piatto tipico della tradizione romana',
                 'plate_price' => 14.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/cacio_e_pepe.png',
             ],
             [
                 'restaurant_id' => 2,
@@ -30,7 +30,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piatto tipico della tradizione romana',
                 'plate_price' => 14.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/carbonara.png',
             ],
             [
                 'restaurant_id' => 3,
@@ -39,7 +39,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piatto di pasta ai frutti di mare',
                 'plate_price' => 15.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/cozze_e_vongole.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -48,7 +48,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Variante della carbonara fatta con i frutti di mare',
                 'plate_price' => 15.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/carbonara_di_mare.png',
             ],
             //SUSHI
             [
@@ -58,7 +58,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Bacelli di soia in salsa piccante thai',
                 'plate_price' => 4.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/edamame.png',
             ],
             [
                 'restaurant_id' => 2,
@@ -67,7 +67,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Ravioli homemade di carne',
                 'plate_price' => 4.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/gyoza_di_carne.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -76,7 +76,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => '3pz salmone, 3pz tonno, 3pz pesce bianco, 1pz gambero, 1pz scampo',
                 'plate_price' => 14.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/sashimi_mix.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -85,7 +85,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Cono di alga nori ripieno di riso con tonno, avocado e uova di pesce',
                 'plate_price' => 3.85,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/temaki_maguro.png',
             ],
             //PIZZA
             [
@@ -95,7 +95,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pizza margherita',
                 'plate_price' => 5.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/pizza_margherita.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -104,7 +104,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pizza tonno e cipolla',
                 'plate_price' => 7,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/pizza_tonno_e_cipolla.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -113,7 +113,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pizza ai 4 formaggi',
                 'plate_price' => 10,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/pizza_ai_4_formaggi.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -122,7 +122,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Focaccia semplice',
                 'plate_price' => 3.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/focaccia.png',
             ],
             //Poke
             [
@@ -132,7 +132,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Bowl di riso, salmone, avocado, alghe wakame e sesamo',
                 'plate_price' => 11.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/salmon_bowl.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -141,7 +141,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Questa bowl con base riso bianco si ispira al chirashi tradizionale giapponese',
                 'plate_price' => 15.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/japan_special_bowl.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -150,7 +150,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Bowl di riso bianco con fette spesse di salmone scottato in crosta di sesamo, mezzo avocado, lime, misticanza con salsa ponzu e teriyaki',
                 'plate_price' => 15.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/tataki_bowl.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -159,7 +159,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Bowl di riso con tataki di tonno, pomodorini datterini, misticanza, stracciatella di burrata, avocado, granella di pistacchio tostato, salsa di soia e olio evo',
                 'plate_price' => 15.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/bowl_mediterraneo.jpg',
             ],
             //KEBAB
             [
@@ -169,7 +169,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Panino kebab composto con carne, instala mista, salsa piccante, salsa yogurt',
                 'plate_price' => 6.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/panino_kebab.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -178,7 +178,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piadina kebab composta con carne, instala mista, salsa piccante, salsa yogurt',
                 'plate_price' => 7.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/piadina_kebab.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -187,7 +187,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Vaschetta composta con Carne, instalata, salsa yogurt, salsa piccante',
                 'plate_price' => 13.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/vaschetta_kebab.jpeg',
             ],
             [
                 'restaurant_id' => 4,
@@ -196,7 +196,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piadina kebab composta con arne, instalata, salsa yogurt',
                 'plate_price' => 6.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/piadina_kebab_nopiccante.jpg',
             ],
             //BURGER (burger king)
             [
@@ -206,7 +206,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Panino con gustosi e croccanti nuggets plant based, 100% vegetali. Un mix perfetto per gli amanti dei prodotti a base vegetale che potranno scegliere questa new entry all\'interno della gamma',
                 'plate_price' => 6.10,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/plant_based_burger.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -215,7 +215,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Bun composto con 150gr di carne grigliata, salsa parmigiano reggiano, bacon, cipolla fritta, rucola, parmigiano reggiano',
                 'plate_price' => 11.10,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/parmigiano_burger.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -224,7 +224,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Inimitabile. Due hamburger di manzo alla griglia con 8 fette di bacon, cheddar, ketchup e maionese',
                 'plate_price' => 12.20,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/bacon_king.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -233,7 +233,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => '175 gr di carne grigliata! Bacon, gustoso formaggio cheddar, cipolle croccanti, verdura fresca, salsa bbq, maionese e pane al mais',
                 'plate_price' => 6.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/bronx_steakhouse.jpg',
             ],
             //VEG
             [
@@ -243,7 +243,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Palline veggie 100% vegetali al gusto pollo con salsa bbq - 8 pezzi',
                 'plate_price' => 4.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/palline_veggie.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -252,7 +252,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Poke con riso rosso, riso venere, pomodori datterino, ceci, lenticchie, rucola foglia larga, olive taggiasche, mandorle, salda agrumi, semi di chia',
                 'plate_price' => 9.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/poke_vegano.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -261,7 +261,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piadina con affettato vegano, cicoria ripassata, trifolata di porcini',
                 'plate_price' => 8.60,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/piadina_vegana.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -270,7 +270,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piadina con affettato vegano, cicoria ripassata, trifolata di porcini',
                 'plate_price' => 8.60,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/piadina_vegana.jpg',
             ],
             //PESCE
             [
@@ -280,7 +280,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piatto di pesce spada, capperi, olive verdi, pomodorini, basilico, olio evo',
                 'plate_price' => 15.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/pesce_spada_alla_siciliana.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -289,7 +289,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Zuppa con gamberi, salmone e orata',
                 'plate_price' => 4.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/zuppa_di_pesce.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -298,7 +298,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pesce fresco marinato: salmone, tonno, branzino',
                 'plate_price' => 13.90,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/carpaccio_di_pesce.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -307,7 +307,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Cotoletta di pescato del giorno impanata e fritta',
                 'plate_price' => 12.60,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/cotoletta_di_pesce.jpg',
             ],
             //CARNE (Old wild west)
             [
@@ -317,7 +317,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Tagliata di filetto di manzo alla griglia con polvere di bacon e olio aromatizzato al rosmarino su letto di rucola, servita con patate al forno e salse',
                 'plate_price' => 21.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/rosemary_fillet.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -326,7 +326,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Tagliata di filetto di manzo alla griglia su letto di rucola, accompagnata da patate al forno e salsa barbecue',
                 'plate_price' => 22.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/mississippi_beef.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -335,7 +335,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Piatto composto da tagliata di picanha, tagliata di entrecote e scamone di manzo, condite con olio extravergine di oliva e fiocchi di sale su letto di spinacino, il tutto accompagnato da patate al forno e salsa chimichurri homemade',
                 'plate_price' => 20.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/gran_canyon_mix.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -344,7 +344,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Tagliata di picanha alla griglia, servita con verdure al forno e accompagnata da salsa chimichurri homemade',
                 'plate_price' => 16.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/picanha_steak.jpg',
             ],
             //INDIANO
             [
@@ -354,7 +354,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Spiedini di pollo marinati con pesto di anacardi zenzero e spezie',
                 'plate_price' => 12.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/malahi_tikka.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -363,7 +363,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Crema di melanzane, cipolla, pomodoro, aglio, spezie',
                 'plate_price' => 8.60,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/baigan_bharta.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -372,7 +372,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pane farcito con formaggio',
                 'plate_price' => 3.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/cheese_naan.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -381,7 +381,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pane soffice preparato con farina, yogurt, sale',
                 'plate_price' => 2.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/naan_semplice.jpg',
             ],
             //MESSICANO
             [
@@ -391,7 +391,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Tataki di tonno in crosta di sesamo su un letto di cavolo rosso e salsa guacamole con un ciuffetto di cipolla Tropea caramellizzata, salsa chipotle e avocado',
                 'plate_price' => 10.90,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/tostada_cancun.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -400,7 +400,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Burrito ripieno di chorizo con patate, formaggio fuso e salsa guacamole.',
                 'plate_price' => 9.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/burrito_luchador.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -409,7 +409,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Carne di maiale sfilacciata, speziata, marinata all’arancia e cotta al forno, condita con cipolla rossa macerata alla messicana e peperoncino habanéro.',
                 'plate_price' => 4.90,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/taco_pibil.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -418,7 +418,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Triangoli di tortilla di mais croccanti conditi con una cascata di formaggio cheddar fuso, salsa guacamole fatta con avocado, cipolla, lime e coriandolo frullato, peperoncino jalapeño, fagioli messicani e pico de gallo fatto con pomodoro, cipolla, lime, pepe e coriandolo.',
                 'plate_price' => 8.80,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/nachos_gringos.jpg',
             ],
             //DOLCI
             [
@@ -428,7 +428,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Torta di pasta frolla ripiena di fragrante crema pasticcera che profuma di uova e limone, ricoperta di bastoncini di mandorle e spolverata di zucchero a velo.',
                 'plate_price' => 19,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/torta_della_nonna.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -437,7 +437,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Le mele a pezzetti sono unite a una profumata confettura di albicocche, avvolte e racchiuse da una morbida pasta frolla, spolverata di zucchero e decorata da mandorle croccanti',
                 'plate_price' => 8.60,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/torta_alle_mele.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -446,7 +446,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pasta frolla, ricoperta di noci, che racchiude un ripieno di deliziosi frutti di bosco. Avvolti dalla pasta frolla, i frutti di bosco conservano tutto il loro profumo e lo regalano all’impasto. Il gusto e la croccantezza delle noci sono il raffinato tocco finale, che si sposa alla dolcezza della torta.',
                 'plate_price' => 19.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/torta_ai_frutti_di_bosco.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -455,7 +455,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Fondo di biscotto allo zenzero e cannella, cremoso formaggio e panna acida si uniscono nella classica, golosissima, New York cheesecake. La freschezza del formaggio esalta il gusto della base di biscotto e della copertura di panna che può essere guarnita con passata di fragole o con altri frutti di stagione.',
                 'plate_price' => 27.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/cheesecake.jpg',
             ],
             //GELATO
             [
@@ -465,7 +465,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Semplice brioche siciliana, aprila a metà e gustala col gelato che preferisci',
                 'plate_price' => 3.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/brioche_siciliana_vuota.jpg',
             ],
             [
                 'restaurant_id' => 2,
@@ -474,7 +474,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Brioche siciliana ripiena di gelato al pistacchio di bronte',
                 'plate_price' => 4.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/brioche_siciliana_con_gelato_al_pistacchio.jpg',
             ],
             [
                 'restaurant_id' => 3,
@@ -483,7 +483,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Vaschetta da 500g di gelato, fino a tre gusti diversi',
                 'plate_price' => 13.50,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/vaschetta_gelato_media.jpg',
             ],
             [
                 'restaurant_id' => 4,
@@ -492,7 +492,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Vaschetta da 750g di gelato, fino a tre gusti diversi',
                 'plate_price' => 19.00,
                 'visibility' => 1,
-                'plate_image' => '',
+                'plate_image' => 'plate_img/vaschetta_gelato_grande.jpg',
             ],
         ];
 
@@ -505,7 +505,7 @@ class PlateSeeder extends Seeder
                 'plate_price'           => $plate['plate_price'],
                 'visibility'            => $plate['visibility'],
                 'plate_image'           => $plate['plate_image'],
-            ]);
+           ]);
         }
     }
 }

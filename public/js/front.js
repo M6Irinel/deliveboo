@@ -18819,6 +18819,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       tornaMail: 'we we we',
       total: localStorage.getItem('spesaTotale'),
       tokenApi: '',
+      email: '',
       form: {
         token: '',
         amount: ''
@@ -18846,8 +18847,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //     return
       // })
 
-      var n = 'ciao a tutti sono il secondo';
-      axios.post('/orders/store', [p, n]).then(function (r) {
+      console.log(this.email);
+      axios.post('/orders/store', [p, this.email]).then(function (r) {
         console.log(r);
         // this.$router.push({ path: '/thankyou' });
       });
@@ -19764,7 +19765,26 @@ var render = function render() {
         return _vm.prova();
       }
     }
-  }, [_vm._v(" Proviamo la mail")]), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }, [_vm._v(" Proviamo la mail")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
+    attrs: {
+      type: "email"
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi

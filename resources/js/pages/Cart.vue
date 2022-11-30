@@ -66,6 +66,7 @@
 
             <button @click="prova()"> Proviamo la mail</button>
 
+            <input type="email" v-model="email">
 
             <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
@@ -99,6 +100,7 @@ export default {
             tornaMail: 'we we we',
             total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
+            email:'',
             form: {
                 token: '',
                 amount: ''
@@ -131,8 +133,8 @@ export default {
             //     return
             // })
 
-            let n='ciao a tutti sono il secondo'
-            axios.post('/orders/store', [p,n]).then(r => {
+          console.log(this.email)
+            axios.post('/orders/store', [p,this.email]).then(r => {
                 console.log(r)
                 // this.$router.push({ path: '/thankyou' });
              

@@ -14,7 +14,7 @@
             {{ $key }} : {{ $item }}
         @endforeach
   
-
+      {{ $order->all()[0]['resId']}} res Id
         {{$order->all()[1]}}
 
 

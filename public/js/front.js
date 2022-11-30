@@ -18837,6 +18837,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
+    listaOrdini: function listaOrdini() {
+      console.log(JSON.stringify(localStorage));
+      var s = JSON.stringify(localStorage);
+      var p = JSON.parse(s);
+      console.log(p);
+      // ...JSON.parse(JSON.stringify(localStorage))
+      return p;
+    },
+    prova: function prova() {
+      var _this = this;
+      axios.post('/orders/store', {}).then(function (r) {
+        _this.$router.push({
+          path: '/thankyou'
+        });
+      });
+    },
     paymentOnSuccess: function paymentOnSuccess(nonce) {
       this.loadingBuyButton = true;
       this.form.token = nonce;
@@ -18849,13 +18865,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$refs.PaymentRef.$refs.paymentBtnRef.click();
     },
     buy: function buy() {
-      var _this = this;
+      var _this2 = this;
       this.disabledBuyButton = true;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
-        _this.$router.push({
+        _this2.$router.push({
           path: '/thankyou'
         });
-        _this.loadingBuyButton = false;
+        _this2.loadingBuyButton = false;
       });
     },
     fetchPlates: function fetchPlates() {
@@ -18938,11 +18954,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return localStorage.getItem(v + '-counter');
     },
     fetchToken: function fetchToken() {
-      var _this2 = this;
+      var _this3 = this;
       this.disabledBuyButton = true;
       axios.get('/api/generate').then(function (r) {
-        _this2.tokenApi = r.data.token;
-        _this2.disabledBuyButton = false;
+        _this3.tokenApi = r.data.token;
+        _this3.disabledBuyButton = false;
       });
     }
   },
@@ -19742,7 +19758,13 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }), 0) : _vm._e(), _vm._v(" "), _c("pre", [_vm._v(_vm._s(_vm.listaOrdini()))]), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.prova();
+      }
+    }
+  }, [_vm._v("Prova")]), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -63207,7 +63229,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

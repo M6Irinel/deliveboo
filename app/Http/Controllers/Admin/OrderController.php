@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfermaPagamento;
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -36,7 +38,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+        Mail::to('order@boolpress.com')->send(new ConfermaPagamento($request));
     }
 
     /**

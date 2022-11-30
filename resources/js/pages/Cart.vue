@@ -66,7 +66,10 @@
 
             <button @click="prova()"> Proviamo la mail</button>
 
-            <input type="email" v-model="email">
+            <input type="email" v-model="datiUtente.email" placeholder="inserisci la tua mail">
+            <input type="text" v-model="datiUtente.numeroTelefono" placeholder="inserisci il tuo num di Telefono">
+            <input type="text" v-model="datiUtente.indirizzo" placeholder="inserisci il tuo indirizzo">
+            <input type="text" v-model="datiUtente.nome" placeholder="inserisci il tuo Nome e Cognome ">
 
             <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
@@ -100,7 +103,13 @@ export default {
             tornaMail: 'we we we',
             total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
-            email:'',
+            datiUtente: {
+                email: '',
+                numeroTelefono: '',
+                indirizzo: '',
+                nome: '',
+            },
+
             form: {
                 token: '',
                 amount: ''
@@ -120,6 +129,10 @@ export default {
         loadingCart() {
             return store.loadingCart;
         },
+
+        prezzoTotale() {
+            return store.prezzoTotaleDaPagare
+        }
     },
 
     methods: {
@@ -133,15 +146,16 @@ export default {
             //     return
             // })
 
-          console.log(this.email)
-            axios.post('/orders/store', [p,this.email]).then(r => {
+            console.log(this.datiUtente)
+            console.log(this.prezzoTotale)
+            axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(r => {
                 console.log(r)
                 // this.$router.push({ path: '/thankyou' });
-             
+
 
 
             });
-       
+
         },
         paymentOnSuccess(nonce) {
             this.loadingBuyButton = true;
@@ -255,6 +269,7 @@ export default {
                 let q = localStorage.getItem(e.plate_name + '-counter');
                 s += e.plate_price * q;
                 localStorage.setItem("spesaTotale", s.toFixed(2));
+                store.prezzoTotaleDaPagare=localStorage.getItem("spesaTotale", s.toFixed(2));
             })
             this.total = localStorage.getItem('spesaTotale');
             store.totalCart = this.total;

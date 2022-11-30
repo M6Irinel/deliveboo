@@ -18819,7 +18819,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       tornaMail: 'we we we',
       total: localStorage.getItem('spesaTotale'),
       tokenApi: '',
-      email: '',
+      datiUtente: {
+        email: '',
+        numeroTelefono: '',
+        indirizzo: '',
+        nome: ''
+      },
       form: {
         token: '',
         amount: ''
@@ -18836,6 +18841,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     loadingCart: function loadingCart() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart;
+    },
+    prezzoTotale: function prezzoTotale() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare;
     }
   },
   methods: {
@@ -18847,8 +18855,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //     return
       // })
 
-      console.log(this.email);
-      axios.post('/orders/store', [p, this.email]).then(function (r) {
+      console.log(this.datiUtente);
+      console.log(this.prezzoTotale);
+      axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(function (r) {
         console.log(r);
         // this.$router.push({ path: '/thankyou' });
       });
@@ -18947,6 +18956,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
         localStorage.setItem("spesaTotale", s.toFixed(2));
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = localStorage.getItem("spesaTotale", s.toFixed(2));
       });
       this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
@@ -19769,19 +19779,80 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.email,
-      expression: "email"
+      value: _vm.datiUtente.email,
+      expression: "datiUtente.email"
     }],
     attrs: {
-      type: "email"
+      type: "email",
+      placeholder: "inserisci la tua mail"
     },
     domProps: {
-      value: _vm.email
+      value: _vm.datiUtente.email
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.email = $event.target.value;
+        _vm.$set(_vm.datiUtente, "email", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.numeroTelefono,
+      expression: "datiUtente.numeroTelefono"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo num di Telefono"
+    },
+    domProps: {
+      value: _vm.datiUtente.numeroTelefono
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "numeroTelefono", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.indirizzo,
+      expression: "datiUtente.indirizzo"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo indirizzo"
+    },
+    domProps: {
+      value: _vm.datiUtente.indirizzo
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "indirizzo", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.nome,
+      expression: "datiUtente.nome"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo Nome e Cognome "
+    },
+    domProps: {
+      value: _vm.datiUtente.nome
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "nome", $event.target.value);
       }
     }
   }), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
@@ -63150,7 +63221,8 @@ __webpack_require__.r(__webpack_exports__);
   loadingCart: false,
   loadingPlates: false,
   plates: null,
-  totalCart: null
+  totalCart: null,
+  prezzoTotaleDaPagare: null
 }));
 
 /***/ }),

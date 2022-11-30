@@ -113,7 +113,7 @@ class PlateSeeder extends Seeder
                 'plate_description' => 'Pizza ai 4 formaggi',
                 'plate_price' => 10,
                 'visibility' => 1,
-                'plate_image' => 'plate_img/pizza_ai_4_formaggi.jpg',
+                'plate_image' => 'plate_img/pizza_ai_quattro_formaggi.jpg',
             ],
             [
                 'restaurant_id' => 1,

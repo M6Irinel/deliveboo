@@ -18838,18 +18838,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    listaOrdini: function listaOrdini() {
-      // console.log(JSON.stringify(localStorage))
-      var s = JSON.stringify(localStorage);
-      var p = JSON.parse(s);
-      // console.log(p)
-      // ...JSON.parse(JSON.stringify(localStorage))
-      return p;
-    },
     prova: function prova() {
       var s = JSON.stringify(localStorage);
       var p = JSON.parse(s);
-      axios.post('/orders/store', p).then(function (r) {
+      // let n= p.filter(l=>{
+      //     let q = localStorage.getItem(l.plate_name + '-counter');
+      //     return
+      // })
+
+      var n = 'ciao a tutti sono il secondo';
+      axios.post('/orders/store', [p, n]).then(function (r) {
         console.log(r);
         // this.$router.push({ path: '/thankyou' });
       });
@@ -18857,7 +18855,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paymentOnSuccess: function paymentOnSuccess(nonce) {
       this.loadingBuyButton = true;
       this.form.token = nonce;
-      this.pulisciStorage();
       this.buy();
     },
     paymentOnError: function paymentOnError(error) {},
@@ -18869,10 +18866,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
       this.disabledBuyButton = true;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
+        _this.prova();
         _this.$router.push({
           path: '/thankyou'
         });
         _this.loadingBuyButton = false;
+        _this.pulisciStorage();
       });
     },
     fetchPlates: function fetchPlates() {
@@ -19759,13 +19758,13 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _c("pre", [_vm._v(_vm._s(_vm.listaOrdini()))]), _vm._v(" "), _c("button", {
+  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
     on: {
       click: function click($event) {
         return _vm.prova();
       }
     }
-  }, [_vm._v("Prova")]), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }, [_vm._v(" Proviamo la mail")]), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi

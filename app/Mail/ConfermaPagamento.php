@@ -12,6 +12,7 @@ class ConfermaPagamento extends Mailable
 {
     use Queueable, SerializesModels;
     public $order;
+  
 
     /**
      * Create a new message instance.
@@ -21,6 +22,7 @@ class ConfermaPagamento extends Mailable
     public function __construct(Request $request)
     {
        $this->order=$request;
+       
     }
 
     /**

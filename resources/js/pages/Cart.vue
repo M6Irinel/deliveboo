@@ -63,8 +63,9 @@
                     </div>
                 </li>
             </ul>
-            <pre>{{ listaOrdini() }}</pre>
-            <button @click="prova()">Prova</button>
+
+            <button @click="prova()"> Proviamo la mail</button>
+
 
             <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
@@ -95,7 +96,7 @@ export default {
     data() {
         return {
             forLogin,
-            tornaMail:'we we we',
+            tornaMail: 'we we we',
             total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
             form: {
@@ -120,31 +121,31 @@ export default {
     },
 
     methods: {
-        listaOrdini() {
-            // console.log(JSON.stringify(localStorage))
-            let s = JSON.stringify(localStorage)
-            let p = JSON.parse(s)
-            // console.log(p)
-            // ...JSON.parse(JSON.stringify(localStorage))
-            return p
-        },
+
 
         prova() {
             let s = JSON.stringify(localStorage)
             let p = JSON.parse(s)
-            axios.post('/orders/store', p).then(r => {
-              console.log(r)
+            // let n= p.filter(l=>{
+            //     let q = localStorage.getItem(l.plate_name + '-counter');
+            //     return
+            // })
+
+            let n='ciao a tutti sono il secondo'
+            axios.post('/orders/store', [p,n]).then(r => {
+                console.log(r)
                 // this.$router.push({ path: '/thankyou' });
-               
              
 
+
             });
+       
         },
         paymentOnSuccess(nonce) {
             this.loadingBuyButton = true;
             this.form.token = nonce;
-            this.pulisciStorage();
             this.buy();
+
         },
 
         paymentOnError(error) {
@@ -159,8 +160,10 @@ export default {
         buy() {
             this.disabledBuyButton = true;
             axios.post('/api/make/payment', { ...this.form }).then(r => {
+                this.prova()
                 this.$router.push({ path: '/thankyou' });
                 this.loadingBuyButton = false;
+                this.pulisciStorage();
             });
         },
 

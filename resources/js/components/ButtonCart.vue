@@ -1,7 +1,7 @@
 <template>
-    <div @click="$emit('modalCart')" class="btn btn-success px-1">
-        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
+    <div @click="$emit('modalCart')" class="btn btn-success px-2">
+        <font-awesome-icon v-if="status" icon="fa-solid fa-up-long" />
+        <font-awesome-icon v-else icon="fa-solid fa-down-long" />
     </div>
 </template>
 
@@ -14,6 +14,10 @@ export default {
         total: {
             required: false,
             type: String
+        },
+
+        status: {
+            type: Boolean
         }
     }
 }
@@ -21,4 +25,5 @@ export default {
 
 
 <style lang="scss">
+
 </style>

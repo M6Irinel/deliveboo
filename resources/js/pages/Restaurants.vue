@@ -3,7 +3,14 @@
         <div class="flex between i-center py-1 sticky top left right">
             <h1>Ristoranti</h1>
 
-            <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" />
+            <div v-if="total">
+                <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" :status="visibilityCart" />
+
+                <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
+                    <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                    {{ parseFloat(total).toFixed(2) }}€
+                </router-link>
+            </div>
         </div>
 
         <div class="flex j-flex-end relative gap-5 i-flex-start">
@@ -47,7 +54,7 @@ export default {
             this.visibilityCart = !this.visibilityCart
         },
 
-        emitTypes (v) {
+        emitTypes ( v ) {
             this.types = v;
         }
     },

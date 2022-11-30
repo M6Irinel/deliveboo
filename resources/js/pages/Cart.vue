@@ -6,7 +6,8 @@
                 <ButtonsLeft />
 
                 <div class="flex i-center gap-5">
-                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il Carello</button>
+                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il
+                        Carello</button>
                     <div class="badge badge-warning p-1 fs-3">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">
@@ -63,21 +64,16 @@
                 </li>
             </ul>
 
-            <BraintreVue v-if="tokenApi && total" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
+            <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
 
-<<<<<<< HEAD
-            <div>
-                <button :disabled="disabledBuyButton" @click.prevent="beforeBuy"
-                    class="block w-100 btn btn-success py-2 my-2 uppercase">Compra Ora</button>
-            </div>
-        </div>
-=======
-            <button v-if="tokenApi && total" :disabled="disabledBuyButton" @click.prevent="beforeBuy"
-                class="block w-100 btn btn-success py-2 my-2 uppercase">compra</button>
+            <button v-if="tokenApi" :disabled="disabledBuyButton" @click.prevent="beforeBuy"
+                class="block w-100 btn btn-success py-2 my-2 uppercase">
+                <span v-if="loadingBuyButton">conferma pagamento in corso...</span>
+                <span v-else>compra</span>
+            </button>
         </main>
         <LoaderC v-else />
->>>>>>> feature/ordinare1
     </div>
 </template>
 
@@ -104,6 +100,7 @@ export default {
                 amount: ''
             },
             disabledBuyButton: true,
+            loadingBuyButton: false,
         };
     },
 
@@ -121,6 +118,7 @@ export default {
 
     methods: {
         paymentOnSuccess ( nonce ) {
+            this.loadingBuyButton = true;
             this.form.token = nonce;
             this.pulisciStorage();
             this.buy();
@@ -137,10 +135,9 @@ export default {
 
         buy () {
             this.disabledBuyButton = true;
-            let message;
             axios.post( '/api/make/payment', { ...this.form } ).then( r => {
-                message = r.data.message;
                 this.$router.push( { path: '/thankyou' } );
+                this.loadingBuyButton = false;
             } );
         },
 

@@ -16,6 +16,8 @@ import {
     faGear,
     faXmark,
     faLeftLong,
+    faDownLong,
+    faUpLong,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHourglassHalf } from "@fortawesome/free-regular-svg-icons";
 // import { faHatWizard } from '@fortawesome/free-brands-svg-icons';
@@ -29,6 +31,8 @@ library.add(
     faGear,
     faXmark,
     faLeftLong,
+    faDownLong,
+    faUpLong,
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

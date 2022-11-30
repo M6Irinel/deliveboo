@@ -18523,6 +18523,9 @@ __webpack_require__.r(__webpack_exports__);
     total: {
       required: false,
       type: String
+    },
+    status: {
+      type: Boolean
     }
   }
 });
@@ -18819,7 +18822,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         token: '',
         amount: ''
       },
-      disabledBuyButton: true
+      disabledBuyButton: true,
+      loadingBuyButton: false
     };
   },
   computed: {
@@ -18834,6 +18838,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     paymentOnSuccess: function paymentOnSuccess(nonce) {
+      this.loadingBuyButton = true;
       this.form.token = nonce;
       this.pulisciStorage();
       this.buy();
@@ -18846,12 +18851,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     buy: function buy() {
       var _this = this;
       this.disabledBuyButton = true;
-      var message;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
-        message = r.data.message;
         _this.$router.push({
           path: '/thankyou'
         });
+        _this.loadingBuyButton = false;
       });
     },
     fetchPlates: function fetchPlates() {
@@ -19289,17 +19293,21 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "btn btn-success px-1",
+    staticClass: "btn btn-success px-2",
     on: {
       click: function click($event) {
         return _vm.$emit("modalCart");
       }
     }
-  }, [_c("font-awesome-icon", {
+  }, [_vm.status ? _c("font-awesome-icon", {
     attrs: {
-      icon: "fa-solid fa-basket-shopping"
+      icon: "fa-solid fa-up-long"
     }
-  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v(_vm._s(parseFloat(_vm.total).toFixed(2)) + "€")]) : _vm._e()], 1);
+  }) : _c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-down-long"
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -19687,7 +19695,7 @@ var render = function render() {
         return _vm.pulisciStorage();
       }
     }
-  }, [_vm._v("Svuota il Carello")]) : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_vm._v("Svuota il\n                    Carello")]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "badge badge-warning p-1 fs-3"
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -19734,7 +19742,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.tokenApi && _vm.total ? _c("BraintreVue", {
+  }), 0) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -19743,7 +19751,7 @@ var render = function render() {
       onSuccess: _vm.paymentOnSuccess,
       onError: _vm.paymentOnError
     }
-  }) : _vm._e(), _vm._v(" "), _vm.tokenApi && _vm.total ? _c("button", {
+  }) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("button", {
     staticClass: "block w-100 btn btn-success py-2 my-2 uppercase",
     attrs: {
       disabled: _vm.disabledBuyButton
@@ -19754,11 +19762,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-<<<<<<< HEAD
-  }, [_vm._v("Compra Ora")])])], 1)]);
-=======
-  }, [_vm._v("compra")]) : _vm._e()], 1) : _c("LoaderC")], 1);
->>>>>>> feature/ordinare1
+  }, [_vm.loadingBuyButton ? _c("span", [_vm._v("conferma pagamento in corso...")]) : _c("span", [_vm._v("compra")])]) : _vm._e()], 1) : _c("LoaderC")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -19895,15 +19899,27 @@ var render = function render() {
     staticClass: "container flex f-column grow-1"
   }, [_c("div", {
     staticClass: "flex between i-center py-1 sticky top left right"
-  }, [_c("h1", [_vm._v("Ristoranti")]), _vm._v(" "), _c("ButtonCart", {
+  }, [_c("h1", [_vm._v("Ristoranti")]), _vm._v(" "), _vm.total ? _c("div", [_c("ButtonCart", {
     attrs: {
       title: "look cart preview",
-      total: _vm.total
+      total: _vm.total,
+      status: _vm.visibilityCart
     },
     on: {
       modalCart: _vm.modalCart
     }
-  })], 1), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-success px-1",
+    attrs: {
+      to: {
+        name: "Cart"
+      }
+    }
+  }, [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-solid fa-basket-shopping"
+    }
+  }), _vm._v("\n                " + _vm._s(parseFloat(_vm.total).toFixed(2)) + "€\n            ")], 1)], 1) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "flex j-flex-end relative gap-5 i-flex-start"
   }, [_c("div", {
     staticClass: "flex f-column gap-5 grow-1"
@@ -62551,7 +62567,7 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // import { faHatWizard } from '@fortawesome/free-brands-svg-icons';
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faHourglassHalf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faBasketShopping"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faGear"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faXmark"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faLeftLong"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faHourglassHalf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faBasketShopping"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faGear"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faXmark"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faLeftLong"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faDownLong"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faUpLong"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("font-awesome-icon", _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_braintree__WEBPACK_IMPORTED_MODULE_1__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -63191,7 +63207,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

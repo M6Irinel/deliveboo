@@ -1,31 +1,24 @@
 <template>
     <main class="container flex f-column grow-1">
-        <div class="flex between i-center py-1 sticky top left right">
-            <h1>Ristoranti</h1>
+        <div v-if="total" class="flex j-flex-end i-center pt-3 gap-10">
+            <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" :status="visibilityCart" />
 
-            <div v-if="total">
-                <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" :status="visibilityCart" />
-
-                <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
-                    <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-                    {{ parseFloat(total).toFixed(2) }}€
-                </router-link>
-            </div>
+            <router-link class="btn btn-success px-2 py-1" :to="{ name: 'Cart' }">
+                <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                {{ parseFloat(total).toFixed(2) }}€
+            </router-link>
         </div>
 
-        <div class="flex j-flex-end relative gap-5 i-flex-start">
+        <div class="flex j-flex-end relative gap-5 i-flex-start pt-3">
             <div class="flex f-column gap-5 grow-1">
                 <cart-modal v-if="visibilityCart" />
 
                 <CardFrontEnd v-if="(!loadingRestaurant && restaurants)" :restaurants="restaurants" />
-                <LoaderC v-else />
+                <Loader v-else />
             </div>
 
             <TypologyVue v-if="typologies" @emitTypes="emitTypes" :typologies="typologies" />
         </div>
-
-       
-
     </main>
 </template>
 
@@ -34,7 +27,7 @@
 // @ts-nocheck
 import store from '../store/store';
 import CartModal from '../components/CartModal.vue';
-import LoaderC from '../components/Loader.vue';
+import Loader from '../components/Loader.vue';
 import ButtonCart from '../components/ButtonCart.vue';
 import CardFrontEnd from '../components/Restaurant/CardFrontEnd.vue';
 import TypologyVue from '../components/Restaurant/TypologyVue.vue';
@@ -42,7 +35,7 @@ import TypologyVue from '../components/Restaurant/TypologyVue.vue';
 export default {
     name: "RestaurantsIndex",
 
-    components: { LoaderC, CartModal, CardFrontEnd, TypologyVue, ButtonCart },
+    components: { Loader, CartModal, CardFrontEnd, TypologyVue, ButtonCart },
 
     data () {
         return {

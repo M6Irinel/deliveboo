@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-100vh flex f-column">
+    <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
         <NavBar />
         <router-view />
     </div>
@@ -14,8 +14,12 @@ import NavBar from '../components/NavBar.vue';
 export default {
     name: 'AppVue',
 
-    components: {
-        NavBar,
+    components: { NavBar },
+
+    computed: {
+        tema () {
+            return store.coloreTema;
+        }
     },
 
     methods: {
@@ -45,10 +49,21 @@ export default {
 
 
 <style lang="scss">
+@import '../../sass/variabili.scss';
+
 .grow-1 {
     flex-grow: 1;
 }
+
 .grow-2 {
     flex-grow: 2;
+}
+
+.bg-body-light {
+    background-color: $bgBodyLight;
+}
+
+.bg-body-dark {
+    background-color: $bgBodyDark;
 }
 </style>

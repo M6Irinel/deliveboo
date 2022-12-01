@@ -14,7 +14,7 @@
 
                         <div v-if="quantity(plate.plate_name) > 1">
                             <p>
-                                Totale del Piatto:
+                                Totale Piatto:
                                 <strong>
                                     {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
                                     €
@@ -26,22 +26,20 @@
                             'flex mt-auto',
                             quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                         ]">
-                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3 bold"
+                            <button v-if="quantity(plate.plate_name)" class="btn border px-3 bold"
                                 @click="removePlate(plate)">-</button>
 
-                            <div class="badge badge-primary badge-n py-1 px-2">
+                            <strong class="fs-4">
                                 &#215;{{ quantity(plate.plate_name) }}
-                            </div>
+                            </strong>
 
-                            <button class="btn btn-success px-3 bold" @click="addPlate(plate)">+</button>
+                            <button class="btn border px-3 bold" @click="addPlate(plate)">+</button>
                         </div>
                     </li>
                 </ul>
             </div>
-            <p v-else>carrello vuoto</p>
-
         </main>
-        <LoaderC v-else />
+        <Load v-else />
     </div>
 </template>
 
@@ -49,12 +47,12 @@
 <script>
 // @ts-nocheck
 import store from "../store/store";
-import LoaderC from "../components/Loader.vue";
+import Load from "../components/Loader.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC },
+    components: { Load },
 
     data () {
         return {
@@ -102,7 +100,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s );
-              
+
             } )
             return s;
         },

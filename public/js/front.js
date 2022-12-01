@@ -18823,19 +18823,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       forLogin: forLogin,
       total: localStorage.getItem('spesaTotale'),
-      tokenApi: '',
+      tokenApi: null,
       datiUtente: {
-        email: '',
-        numeroTelefono: '',
-        indirizzo: '',
-        nome: ''
+        email: null,
+        numeroTelefono: null,
+        indirizzo: null,
+        nome: null
       },
       form: {
-        token: '',
-        amount: ''
+        token: null,
+        amount: null
       },
-      disabledBuyButton: true,
-      loadingBuyButton: false
+      errorEmail: false,
+      errorNumeroTelefono: false,
+      errorIndirizzo: false,
+      errorNome: false,
+      orderSuccess: false
     };
   },
   computed: {
@@ -18852,44 +18855,73 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     tema: function tema() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].coloreTema;
+    },
+    t: function t() {
+      return this.datiUtente.numeroTelefono;
     }
   },
   methods: {
-    prova: function prova() {
-      var s = JSON.stringify(localStorage);
-      var p = JSON.parse(s);
-      axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]);
+    validationForm: function validationForm() {
+      var _this = this;
+      var letters = 'qwertyuiopè+asdfghjklòàù<zxcvbnm,.-[]{};:é*/|€$%&=\'"ì^@°#§'.split('');
+      this.orderSuccess = false;
+      this.errorEmail = false;
+      this.errorNumeroTelefono = false;
+      this.errorIndirizzo = false;
+      this.errorNome = false;
+      if (this.datiUtente.email != null || undefined || '') {
+        if (this.datiUtente.email.length < 8 || !this.datiUtente.email.includes('@', 2) || !this.datiUtente.email.includes('.', this.datiUtente.email.indexOf('@') + 2) || this.datiUtente.email.length < this.datiUtente.email.indexOf('.') + 3) this.errorEmail = true;
+      } else this.errorEmail = true;
+      if (this.datiUtente.numeroTelefono != null || undefined || '') {
+        var r = this.datiUtente.numeroTelefono.toLowerCase();
+        letters.forEach(function (e) {
+          if (r.includes(e)) {
+            _this.errorNumeroTelefono = true;
+            return;
+          }
+        });
+        if (this.datiUtente.numeroTelefono.length < 10 || this.datiUtente.numeroTelefono.length > 14) this.errorNumeroTelefono = true;
+      } else this.errorNumeroTelefono = true;
+      if (this.datiUtente.indirizzo != null || undefined || '') {
+        if (this.datiUtente.indirizzo.length < 5) this.errorIndirizzo = true;
+      } else this.errorIndirizzo = true;
+      if (this.datiUtente.nome != null || undefined || '') {
+        if (this.datiUtente.nome.length < 4) this.errorNome = true;
+      } else this.errorNome = true;
+      if (!this.errorEmail && !this.errorNumeroTelefono && !this.errorIndirizzo && !this.errorNome) return true;
+      return false;
+    },
+    goEmail: function goEmail() {
+      var lStorage = JSON.stringify(localStorage);
+      var parseLStorage = JSON.parse(lStorage);
+      axios.post('/orders/store', [parseLStorage, this.datiUtente, this.form.amount]);
+    },
+    beforeBuy: function beforeBuy() {
+      if (this.validationForm()) this.$refs.PaymentRef.$refs.paymentBtnRef.click();else this.orderSuccess = false;
     },
     paymentOnSuccess: function paymentOnSuccess(nonce) {
-      this.loadingBuyButton = true;
+      var _this2 = this;
+      this.orderSuccess = true;
+      this.form.amount = this.prezzoTotale;
       this.form.token = nonce;
-      this.buy();
-    },
-    paymentOnError: function paymentOnError(error) {},
-    beforeBuy: function beforeBuy() {
-      this.form.amount = localStorage.getItem('spesaTotale');
-      this.$refs.PaymentRef.$refs.paymentBtnRef.click();
-    },
-    buy: function buy() {
-      var _this = this;
-      this.disabledBuyButton = true;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
-        _this.prova();
-        _this.$router.push({
+        _this2.goEmail();
+        _this2.$router.push({
           path: '/thankyou'
         });
-        _this.loadingBuyButton = false;
-        _this.pulisciStorage();
+        _this2.orderSuccess = false;
+        _this2.pulisciStorage();
       });
     },
+    paymentOnError: function paymentOnError(error) {},
     fetchPlates: function fetchPlates() {
-      var _this2 = this;
+      var _this3 = this;
       if (!localStorage.resId) return;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
       axios.get("/api/restaurants/".concat(localStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
-        _this2.totalprice();
+        _this3.totalprice();
       });
     },
     pulisciStorage: function pulisciStorage() {
@@ -18957,11 +18989,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return localStorage.getItem(v + '-counter');
     },
     fetchToken: function fetchToken() {
-      var _this3 = this;
+      var _this4 = this;
       this.disabledBuyButton = true;
       axios.get('/api/generate').then(function (r) {
-        _this3.tokenApi = r.data.token;
-        _this3.disabledBuyButton = false;
+        _this4.tokenApi = r.data.token;
+        _this4.disabledBuyButton = false;
       });
     }
   },
@@ -19233,8 +19265,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/store */ "./resources/js/store/store.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ThankYou'
+  name: 'ThankYou',
+  computed: {
+    tema: function tema() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].coloreTema;
+    }
+  }
 });
 
 /***/ }),
@@ -19478,7 +19517,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "grow-1 bg-gray-1 grid place-items"
+    staticClass: "grow-1 grid place-items"
   }, [_c("div", {
     staticClass: "load_class"
   }, [_c("font-awesome-icon", {
@@ -19741,7 +19780,7 @@ var render = function render() {
     attrs: {
       icon: "fa-solid fa-basket-shopping"
     }
-  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v("\n                        Totale del ordine:\n                        " + _vm._s(parseFloat(_vm.total).toFixed(2)) + "€\n                    ")]) : _vm._e()], 1)])], 1), _vm._v(" "), _c("h1", [_vm._v("Carrello "), !_vm.total ? _c("span", [_vm._v("vuoto")]) : _vm._e()]), _vm._v(" "), _vm.plates ? _c("ul", {
+  }), _vm._v(" "), _vm.total ? _c("span", [_vm._v("\n                        Totale Ordine:\n                        " + _vm._s(parseFloat(_vm.total).toFixed(2)) + "€\n                    ")]) : _vm._e()], 1)])], 1), _vm._v(" "), _c("h1", [_vm._v("Cesto "), !_vm.total ? _c("span", [_vm._v("vuoto")]) : _vm._e()]), _vm._v(" "), _vm.plates && !_vm.orderSuccess ? _c("ul", {
     staticClass: "list-style-none grid-12 grid-10-lg grid-12-xl gap-5"
   }, _vm._l(_vm.plates, function (plate, i) {
     return _c("li", {
@@ -19781,22 +19820,22 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
-    on: {
-      click: function click($event) {
-        return _vm.prova();
-      }
-    }
-  }, [_vm._v(" Proviamo la mail")]), _vm._v(" "), _c("input", {
+  }), 0) : _vm._e(), _vm._v(" "), _vm.total ? _c("div", [!_vm.orderSuccess ? _c("div", {
+    staticClass: "pt-3"
+  }, [_c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.datiUtente.email,
       expression: "datiUtente.email"
     }],
+    staticClass: "form-control mt-2 px-3",
+    "class": {
+      "is-invalid": _vm.errorEmail
+    },
     attrs: {
       type: "email",
-      placeholder: "inserisci la tua mail"
+      placeholder: "inserisci la tua mail *"
     },
     domProps: {
       value: _vm.datiUtente.email
@@ -19807,16 +19846,24 @@ var render = function render() {
         _vm.$set(_vm.datiUtente, "email", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _vm.errorEmail ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Errore: la email non è valida")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.datiUtente.numeroTelefono,
       expression: "datiUtente.numeroTelefono"
     }],
+    staticClass: "form-control mt-2 px-3",
+    "class": {
+      "is-invalid": _vm.errorNumeroTelefono
+    },
     attrs: {
-      type: "text",
-      placeholder: "inserisci il tuo num di Telefono"
+      type: "number",
+      max: "14",
+      min: "10",
+      placeholder: "inserisci il tuo num di Telefono *"
     },
     domProps: {
       value: _vm.datiUtente.numeroTelefono
@@ -19827,16 +19874,22 @@ var render = function render() {
         _vm.$set(_vm.datiUtente, "numeroTelefono", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _vm.errorNumeroTelefono ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Errore: il numero di telefono non è\n                        valido")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.datiUtente.indirizzo,
       expression: "datiUtente.indirizzo"
     }],
+    staticClass: "form-control mt-2 px-3",
+    "class": {
+      "is-invalid": _vm.errorIndirizzo
+    },
     attrs: {
       type: "text",
-      placeholder: "inserisci il tuo indirizzo"
+      placeholder: "inserisci il tuo indirizzo *"
     },
     domProps: {
       value: _vm.datiUtente.indirizzo
@@ -19847,16 +19900,22 @@ var render = function render() {
         _vm.$set(_vm.datiUtente, "indirizzo", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _vm.errorIndirizzo ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Errore: il campo dell'indirizzo è richiesto\n                    ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.datiUtente.nome,
       expression: "datiUtente.nome"
     }],
+    staticClass: "form-control mt-2 px-3",
+    "class": {
+      "is-invalid": _vm.errorNome
+    },
     attrs: {
       type: "text",
-      placeholder: "inserisci il tuo Nome e Cognome "
+      placeholder: "inserisci il tuo Nome e Cognome *"
     },
     domProps: {
       value: _vm.datiUtente.nome
@@ -19867,7 +19926,9 @@ var render = function render() {
         _vm.$set(_vm.datiUtente, "nome", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }), _vm._v(" "), _vm.errorNome ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("Errore: il campo della Nome e Cognome è richiesto\n                    ")]) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -19879,7 +19940,7 @@ var render = function render() {
   }) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("button", {
     staticClass: "block w-100 btn btn-success py-2 my-2 uppercase",
     attrs: {
-      disabled: _vm.disabledBuyButton
+      disabled: _vm.orderSuccess
     },
     on: {
       click: function click($event) {
@@ -19887,7 +19948,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-  }, [_vm.loadingBuyButton ? _c("span", [_vm._v("conferma pagamento in corso...")]) : _c("span", [_vm._v("compra")])]) : _vm._e()], 1) : _c("Loader")], 1);
+  }, [_vm.orderSuccess ? _c("span", [_vm._v("conferma pagamento in corso...")]) : _c("span", [_vm._v("compra")])]) : _vm._e()], 1) : _vm._e()]) : _c("Loader")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -20124,7 +20185,8 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container mt-4"
+    staticClass: "container mt-4",
+    "class": [_vm.tema ? "text-dark" : "text-light"]
   }, [_c("h1", {
     staticClass: "t-center"
   }, [_vm._v("Grazie per aver acquistato da noi!")]), _vm._v(" "), _c("div", {
@@ -63483,7 +63545,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

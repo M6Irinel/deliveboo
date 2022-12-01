@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main v-if="!loadingCart" class="container" :class="[tema ? 'text-dark':'text-light']">
+        <main v-if="!loadingCart" class="container" :class="[tema ? 'text-dark' : 'text-light']">
             <div class="flex between i-center py-2">
 
                 <ButtonsLeft />
@@ -13,19 +13,18 @@
                     <div class="btn-warning px-3 py-1 fs-3 rounded bold">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">
-                            Totale del ordine:
+                            Totale Ordine:
                             {{ parseFloat(total).toFixed(2) }}€
                         </span>
                     </div>
                 </div>
             </div>
 
-            <h1>Carrello <span v-if="!total">vuoto</span></h1>
+            <h1>Cesto <span v-if="!total">vuoto</span></h1>
 
-            <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+            <ul v-if="(plates && !orderSuccess)" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                 <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
-                    v-for="(plate, i) in plates" :key="i">
+                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
 
                     <div class="image_plate">
                         <img v-if="plate.plate_image" :src="'./storage/' + plate.plate_image" alt="" />
@@ -49,31 +48,54 @@
                         'flex mt-auto',
                         quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                     ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']"
-                            @click="removePlate(plate)">-</button>
+                        <button v-if="quantity(plate.plate_name)" class="btn border px-3"
+                            :class="[tema ? 'text-dark' : 'text-light']" @click="removePlate(plate)">-</button>
 
                         <div class="bold py-1 px-2 fs-3">&Cross;{{ quantity(plate.plate_name) }}</div>
 
-                        <button class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']" @click="addPlate(plate)">+</button>
+                        <button class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']"
+                            @click="addPlate(plate)">+</button>
                     </div>
                 </li>
             </ul>
 
-            <button @click="prova()"> Proviamo la mail</button>
+            <div v-if="total">
+                <div v-if="!orderSuccess" class="pt-3">
+                    <div>
+                        <input type="email" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorEmail }"
+                            v-model="datiUtente.email" placeholder="inserisci la tua mail *">
+                        <div v-if="errorEmail" class="invalid-feedback">Errore: la email non è valida</div>
+                    </div>
+                    <div>
+                        <input type="number" max="14" min="10" class="form-control mt-2 px-3"
+                            :class="{ 'is-invalid': errorNumeroTelefono }" v-model="datiUtente.numeroTelefono"
+                            placeholder="inserisci il tuo num di Telefono *">
+                        <div v-if="errorNumeroTelefono" class="invalid-feedback">Errore: il numero di telefono non è
+                            valido</div>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorIndirizzo }"
+                            v-model="datiUtente.indirizzo" placeholder="inserisci il tuo indirizzo *">
+                        <div v-if="errorIndirizzo" class="invalid-feedback">Errore: il campo dell'indirizzo è richiesto
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorNome }"
+                            v-model="datiUtente.nome" placeholder="inserisci il tuo Nome e Cognome *">
+                        <div v-if="errorNome" class="invalid-feedback">Errore: il campo della Nome e Cognome è richiesto
+                        </div>
+                    </div>
+                </div>
 
-            <input type="email" v-model="datiUtente.email" placeholder="inserisci la tua mail">
-            <input type="text" v-model="datiUtente.numeroTelefono" placeholder="inserisci il tuo num di Telefono">
-            <input type="text" v-model="datiUtente.indirizzo" placeholder="inserisci il tuo indirizzo">
-            <input type="text" v-model="datiUtente.nome" placeholder="inserisci il tuo Nome e Cognome ">
+                <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
+                    @onError="paymentOnError" ref="PaymentRef" />
 
-            <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
-                @onError="paymentOnError" ref="PaymentRef" />
-
-            <button v-if="tokenApi" :disabled="disabledBuyButton" @click.prevent="beforeBuy"
-                class="block w-100 btn btn-success py-2 my-2 uppercase">
-                <span v-if="loadingBuyButton">conferma pagamento in corso...</span>
-                <span v-else>compra</span>
-            </button>
+                <button v-if="tokenApi" :disabled="orderSuccess" @click.prevent="beforeBuy"
+                    class="block w-100 btn btn-success py-2 my-2 uppercase">
+                    <span v-if="orderSuccess">conferma pagamento in corso...</span>
+                    <span v-else>compra</span>
+                </button>
+            </div>
         </main>
         <Loader v-else />
     </div>
@@ -92,175 +114,214 @@ export default {
 
     components: { Loader, BraintreVue, ButtonsLeft },
 
-    data() {
+    data () {
         return {
             forLogin,
-            total: localStorage.getItem('spesaTotale'),
-            tokenApi: '',
+            total: localStorage.getItem( 'spesaTotale' ),
+            tokenApi: null,
             datiUtente: {
-                email: '',
-                numeroTelefono: '',
-                indirizzo: '',
-                nome: '',
+                email: null,
+                numeroTelefono: null,
+                indirizzo: null,
+                nome: null,
             },
             form: {
-                token: '',
-                amount: ''
+                token: null,
+                amount: null
             },
-            disabledBuyButton: true,
-            loadingBuyButton: false,
+            errorEmail: false,
+            errorNumeroTelefono: false,
+            errorIndirizzo: false,
+            errorNome: false,
+            orderSuccess: false,
         };
     },
 
     computed: {
-        plates() {
-            if (store.plates)
-                return store.plates.filter((e) => localStorage[e.plate_name]);
+        plates () {
+            if ( store.plates )
+                return store.plates.filter( ( e ) => localStorage[ e.plate_name ] );
             else return null;
         },
 
-        loadingCart() {
+        loadingCart () {
             return store.loadingCart;
         },
 
-        prezzoTotale() {
+        prezzoTotale () {
             return store.prezzoTotaleDaPagare
         },
 
         tema () {
             return store.coloreTema;
-        }
+        },
+
+        t(){return this.datiUtente.numeroTelefono}
     },
 
     methods: {
-        prova() {
-            let s = JSON.stringify(localStorage);
-            let p = JSON.parse(s);
-            axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]);
+        validationForm () {
+            const letters = 'qwertyuiopè+asdfghjklòàù<zxcvbnm,.-[]{};:é*/|€$%&=\'"ì^@°#§'.split('');
+            this.orderSuccess = false;
+            this.errorEmail = false;
+            this.errorNumeroTelefono = false;
+            this.errorIndirizzo = false;
+            this.errorNome = false;
+
+            if ( this.datiUtente.email != null || undefined || '' ) {
+                if ( this.datiUtente.email.length < 8 || !this.datiUtente.email.includes( '@', 2 ) || !this.datiUtente.email.includes( '.', this.datiUtente.email.indexOf('@') + 2 ) || this.datiUtente.email.length < this.datiUtente.email.indexOf('.') + 3 )
+                    this.errorEmail = true;
+            } else this.errorEmail = true;
+
+            if ( this.datiUtente.numeroTelefono != null || undefined || '' ) {
+                const r = this.datiUtente.numeroTelefono.toLowerCase();
+                letters.forEach( e => {
+                    if ( r.includes( e ) ) { this.errorNumeroTelefono = true; return; }
+                } );
+                if ( this.datiUtente.numeroTelefono.length < 10 || this.datiUtente.numeroTelefono.length > 14 )
+                    this.errorNumeroTelefono = true;
+            } else this.errorNumeroTelefono = true;
+
+            if ( this.datiUtente.indirizzo != null || undefined || '' ) {
+                if ( this.datiUtente.indirizzo.length < 5 )
+                    this.errorIndirizzo = true;
+            } else this.errorIndirizzo = true;
+
+            if ( this.datiUtente.nome != null || undefined || '' ) {
+                if ( this.datiUtente.nome.length < 4 )
+                    this.errorNome = true;
+            } else this.errorNome = true;
+
+            if ( !this.errorEmail && !this.errorNumeroTelefono && !this.errorIndirizzo && !this.errorNome )
+                return true;
+            return false;
         },
 
-        paymentOnSuccess(nonce) {
-            this.loadingBuyButton = true;
+        goEmail () {
+            let lStorage = JSON.stringify( localStorage );
+            let parseLStorage = JSON.parse( lStorage );
+            axios.post( '/orders/store', [ parseLStorage, this.datiUtente, this.form.amount ] );
+        },
+
+        beforeBuy () {
+            if ( this.validationForm() )
+                this.$refs.PaymentRef.$refs.paymentBtnRef.click();
+            else this.orderSuccess = false;
+        },
+
+        paymentOnSuccess ( nonce ) {
+            this.orderSuccess = true;
+            this.form.amount = this.prezzoTotale;
             this.form.token = nonce;
-            this.buy();
-        },
-
-        paymentOnError(error) {},
-
-        beforeBuy() {
-            this.form.amount = localStorage.getItem('spesaTotale');
-            this.$refs.PaymentRef.$refs.paymentBtnRef.click();
-        },
-
-        buy() {
-            this.disabledBuyButton = true;
-            axios.post('/api/make/payment', { ...this.form }).then(r => {
-                this.prova()
-                this.$router.push({ path: '/thankyou' });
-                this.loadingBuyButton = false;
+            axios.post( '/api/make/payment', { ...this.form } ).then( r => {
+                this.goEmail();
+                this.$router.push( { path: '/thankyou' } );
+                this.orderSuccess = false;
                 this.pulisciStorage();
-            });
+            } );
         },
 
-        fetchPlates() {
-            if (!localStorage.resId) return;
+        paymentOnError ( error ) { },
+
+        fetchPlates () {
+            if ( !localStorage.resId ) return;
 
             store.loadingCart = true;
-            axios.get(`/api/restaurants/${localStorage.getItem("resId")}`)
-                .then((r) => {
+            axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
+                .then( ( r ) => {
                     store.plates = r.data.plates;
                     store.loadingCart = false;
                     this.totalprice();
-                });
+                } );
         },
 
-        pulisciStorage() {
+        pulisciStorage () {
             localStorage.clear();
             store.plates = null;
             this.total = 0;
             store.totalCart = null;
         },
 
-        addPlate(plate) {
-            if (typeof (Storage)) {
-                if (localStorage.resId) {
-                    if (localStorage.getItem("resId") == plate.restaurant_id) {
-                        this.plateLocalStore(plate);
+        addPlate ( plate ) {
+            if ( typeof ( Storage ) ) {
+                if ( localStorage.resId ) {
+                    if ( localStorage.getItem( "resId" ) == plate.restaurant_id ) {
+                        this.plateLocalStore( plate );
                         return;
                     } else {
-                        alert('non puoi ordinare da più ristoranti');
+                        alert( 'non puoi ordinare da più ristoranti' );
                         return;
                     }
                 }
-                localStorage.setItem("resId", plate.restaurant_id);
-                this.plateLocalStore(plate);
+                localStorage.setItem( "resId", plate.restaurant_id );
+                this.plateLocalStore( plate );
             }
-            else alert('hai il pc vecchio, vai a piedi');
+            else alert( 'hai il pc vecchio, vai a piedi' );
         },
 
-        plateLocalStore(plate) {
+        plateLocalStore ( plate ) {
             let plateCounter = plate.plate_name + '-counter';
 
-            if (localStorage.getItem(plate.plate_name) == plate.id) {
-                let c = localStorage.getItem(plateCounter);
-                localStorage.setItem(plateCounter, ++c);
+            if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
+                let c = localStorage.getItem( plateCounter );
+                localStorage.setItem( plateCounter, ++c );
             } else {
-                localStorage.setItem(plate.plate_name, plate.id);
-                localStorage.setItem(plateCounter, 1);
+                localStorage.setItem( plate.plate_name, plate.id );
+                localStorage.setItem( plateCounter, 1 );
             }
             this.totalprice();
         },
 
-        removePlate(plate) {
+        removePlate ( plate ) {
             let plateCounter = plate.plate_name + '-counter';
 
-            if (typeof (Storage)) {
-                if (localStorage.getItem(plate.plate_name) == plate.id) {
-                    let c = localStorage.getItem(plateCounter);
-                    localStorage.setItem(plateCounter, --c);
+            if ( typeof ( Storage ) ) {
+                if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
+                    let c = localStorage.getItem( plateCounter );
+                    localStorage.setItem( plateCounter, --c );
                     this.totalprice();
-                    if (c === 0) {
-                        localStorage.removeItem(plateCounter);
-                        localStorage.removeItem(plate.plate_name);
-                        store.plates.splice(store.plates.indexOf(plate), 1);
+                    if ( c === 0 ) {
+                        localStorage.removeItem( plateCounter );
+                        localStorage.removeItem( plate.plate_name );
+                        store.plates.splice( store.plates.indexOf( plate ), 1 );
                     }
                 }
             }
-            else alert('hai il pc vecchio, vai a piedi');
+            else alert( 'hai il pc vecchio, vai a piedi' );
 
-            if (localStorage.length <= 2) this.pulisciStorage();
+            if ( localStorage.length <= 2 ) this.pulisciStorage();
         },
 
-        totalprice() {
+        totalprice () {
             let s = 0;
 
-            if (this.plates) {
+            if ( this.plates ) {
 
-                this.plates.forEach(e => {
-                    let q = localStorage.getItem(e.plate_name + '-counter');
+                this.plates.forEach( e => {
+                    let q = localStorage.getItem( e.plate_name + '-counter' );
                     s += e.plate_price * q;
-                    localStorage.setItem("spesaTotale", s.toFixed(2));
-                    store.prezzoTotaleDaPagare = s.toFixed(2);
-                })
+                    localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+                    store.prezzoTotaleDaPagare = s.toFixed( 2 );
+                } )
             }
-            this.total = localStorage.getItem('spesaTotale');
+            this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;
         },
 
-        quantity(v) {
-            return localStorage.getItem(v + '-counter');
+        quantity ( v ) {
+            return localStorage.getItem( v + '-counter' );
         },
 
-        fetchToken() {
+        fetchToken () {
             this.disabledBuyButton = true;
-            axios.get('/api/generate').then(r => {
+            axios.get( '/api/generate' ).then( r => {
                 this.tokenApi = r.data.token;
                 this.disabledBuyButton = false;
-            })
+            } )
         }
     },
 
-    created() {
+    created () {
         this.fetchToken();
         this.fetchPlates();
     },

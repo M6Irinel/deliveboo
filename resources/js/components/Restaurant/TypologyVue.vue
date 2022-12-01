@@ -42,7 +42,7 @@ export default {
 
 <style scoped lang="scss">
 .tag-wrapper {
-    flex-basis: 15%;
+    flex-basis: 20%;
     border-radius: 4px 0 0 4px;
     background-color: gray;
 }

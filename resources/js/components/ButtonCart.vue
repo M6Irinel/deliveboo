@@ -1,5 +1,5 @@
 <template>
-    <div @click="$emit('modalCart')" class="btn btn-success px-2">
+    <div @click="$emit('modalCart')" class="btn btn-success px-3 py-1">
         <font-awesome-icon v-if="status" icon="fa-solid fa-up-long" />
         <font-awesome-icon v-else icon="fa-solid fa-down-long" />
     </div>

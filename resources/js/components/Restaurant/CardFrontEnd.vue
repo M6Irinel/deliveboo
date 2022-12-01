@@ -18,8 +18,9 @@
                     'slug': restaurant.user.slug
                 }
             }">
+
             <div class="my-card-img" v-if="restaurant.restaurant_image">
-                <img class="w-100" :src="'./storage/' + restaurant.restaurant_image" alt="">
+                <img :src="'./storage/' + restaurant.restaurant_image" alt="">
             </div>
 
             <div class="my-card-body flex f-column h-100">
@@ -53,7 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .my-card {
-    height: 200px;
+    height: 10rem;
     border: 3px solid #8f5221;
     padding: 0;
 }
@@ -62,10 +63,10 @@ export default {
     background-color:  #8f5221;
 }
 
-.my-card:hover::before {
+.my-card::before {
     content: '';
     display: block;
-    background: linear-gradient(to left, #000000a1, #ffffff00);
+    background: linear-gradient(to left, #000000bb, #ffffff00);
     z-index: 1;
 }
 
@@ -74,8 +75,10 @@ export default {
     inset: 0;
 }
 
-.my-card-img {
-    transform: translateY(-50%);
+.my-card-img > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .my-card-body {

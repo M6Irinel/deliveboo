@@ -10,4 +10,5 @@ export default Vue.observable({
     plates: null,
     totalCart: null,
     prezzoTotaleDaPagare: null,
+    coloreTema: 0,
 });

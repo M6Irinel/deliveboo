@@ -1,14 +1,16 @@
 <template>
     <div>
-        <main v-if="!loadingCart" class="container">
+        <main v-if="!loadingCart" class="container" :class="[tema ? 'text-dark':'text-light']">
             <div class="flex between i-center py-2">
 
                 <ButtonsLeft />
 
                 <div class="flex i-center gap-5">
-                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il
-                        Carello</button>
-                    <div class="badge badge-warning p-1 fs-3">
+                    <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
+                        Svuota il Carello
+                    </button>
+
+                    <div class="btn-warning px-3 py-1 fs-3 rounded bold">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">
                             Totale del ordine:
@@ -22,29 +24,22 @@
 
             <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                 <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
                     v-for="(plate, i) in plates" :key="i">
 
-                    <div v-if="plate.plate_image">
-                        <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
-                    </div>
-                    <div v-else>
-                        <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                    <div class="image_plate">
+                        <img v-if="plate.plate_image" :src="'./storage/' + plate.plate_image" alt="" />
+                        <img v-else :src="'./img/default/plate-empty.png'" alt="" />
                     </div>
 
-                    <div class="mt-auto">
-                        <p>{{ plate.plate_name }}</p>
-                        <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(plate.plate_name) > 1">
-                            &Cross;
-                            {{ quantity(plate.plate_name) }}
-                        </div>
-                    </div>
+                    <p>{{ plate.plate_name }}</p>
 
                     <p>Prezzo: {{ plate.plate_price }}€</p>
 
                     <div v-if="quantity(plate.plate_name) > 1">
                         <p>Quantità: {{ quantity(plate.plate_name) }}</p>
                         <p>
-                            Totale del Piatto:
+                            Totale Piatto:
                             {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
                             €
                         </p>
@@ -54,12 +49,12 @@
                         'flex mt-auto',
                         quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                     ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                        <button v-if="quantity(plate.plate_name)" class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']"
                             @click="removePlate(plate)">-</button>
 
-                        <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+                        <div class="bold py-1 px-2 fs-3">&Cross;{{ quantity(plate.plate_name) }}</div>
 
-                        <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
+                        <button class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']" @click="addPlate(plate)">+</button>
                     </div>
                 </li>
             </ul>
@@ -80,7 +75,7 @@
                 <span v-else>compra</span>
             </button>
         </main>
-        <LoaderC v-else />
+        <Loader v-else />
     </div>
 </template>
 
@@ -88,19 +83,18 @@
 <script>
 // @ts-nocheck
 import store from "../store/store";
-import LoaderC from "../components/Loader.vue";
+import Loader from "../components/Loader.vue";
 import BraintreVue from "../components/BraintreVue.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC, BraintreVue, ButtonsLeft },
+    components: { Loader, BraintreVue, ButtonsLeft },
 
     data() {
         return {
             forLogin,
-            tornaMail: 'we we we',
             total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
             datiUtente: {
@@ -109,7 +103,6 @@ export default {
                 indirizzo: '',
                 nome: '',
             },
-
             form: {
                 token: '',
                 amount: ''
@@ -132,40 +125,27 @@ export default {
 
         prezzoTotale() {
             return store.prezzoTotaleDaPagare
+        },
+
+        tema () {
+            return store.coloreTema;
         }
     },
 
     methods: {
-
-
         prova() {
-            let s = JSON.stringify(localStorage)
-            let p = JSON.parse(s)
-            // let n= p.filter(l=>{
-            //     let q = localStorage.getItem(l.plate_name + '-counter');
-            //     return
-            // })
-            // console.log(this.datiUtente)
-            // console.log(this.prezzoTotale)
-            axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(r => {
-                console.log(r)
-                // this.$router.push({ path: '/thankyou' });
-
-
-
-            });
-
+            let s = JSON.stringify(localStorage);
+            let p = JSON.parse(s);
+            axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]);
         },
+
         paymentOnSuccess(nonce) {
             this.loadingBuyButton = true;
             this.form.token = nonce;
             this.buy();
-
         },
 
-        paymentOnError(error) {
-
-        },
+        paymentOnError(error) {},
 
         beforeBuy() {
             this.form.amount = localStorage.getItem('spesaTotale');
@@ -199,18 +179,6 @@ export default {
             store.plates = null;
             this.total = 0;
             store.totalCart = null;
-        },
-
-        totalF() {
-            if (!localStorage.resId) return;
-
-            let s = 0;
-            this.plates.forEach(e => {
-                let q = localStorage.getItem(e.plate_name + '-counter');
-                s += e.plate_price * q;
-                localStorage.setItem("spesaTotale", s);
-            })
-            return s;
         },
 
         addPlate(plate) {
@@ -265,9 +233,9 @@ export default {
 
         totalprice() {
             let s = 0;
-            
+
             if (this.plates) {
-               
+
                 this.plates.forEach(e => {
                     let q = localStorage.getItem(e.plate_name + '-counter');
                     s += e.plate_price * q;
@@ -295,17 +263,30 @@ export default {
     created() {
         this.fetchToken();
         this.fetchPlates();
-        
     },
-    
-    mounted(){
-      
-       
-    }
 };
 </script>
 
 
 <style lang="scss">
+@import '../../sass/variabili.scss';
 
+.bg-card-light {
+    background-color: $bgCardLight;
+}
+
+.bg-card-dark {
+    background-color: $bgCardDark;
+}
+
+.image_plate {
+    height: 8rem;
+    overflow: hidden;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 </style>

@@ -1,13 +1,16 @@
 <template>
     <div>
         <main class="container">
-            <div class="flex between mt-2">
+            <div class="flex between pt-3">
 
                 <ButtonsLeft />
 
                 <div>
-                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il Carrello</button>
-                    <router-link class="btn btn-success px-1" :to="{ name: 'Cart' }">
+                    <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
+                        Svuota il Carrello
+                    </button>
+
+                    <router-link class="btn btn-success px-3 py-1" :to="{ name: 'Cart' }">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">
                             {{ parseFloat(total).toFixed(2) }}€
@@ -16,19 +19,19 @@
                 </div>
             </div>
 
-            <h1>Piatti</h1>
-
-            <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5">
+            <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
                 <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
                     v-for="(plate, i) in plates" :key="i">
 
-                    <img v-if="plate.plate_image" class="img-fluid" :src="'../storage/' + plate.plate_image" alt="" />
-                    <img v-else class="img-fluid" :src="'../img/default/plate-empty.png'" alt="" />
+                    <div class="image_plate">
+                        <img v-if="plate.plate_image" :src="'../storage/' + plate.plate_image" alt="" />
+                        <img v-else :src="'../img/default/plate-empty.png'" alt="" />
+                    </div>
 
                     <div>
                         <p class="t-center">{{ plate.plate_name }}</p>
 
-                        <p>
+                        <p class="ingredients">
                             <strong>Ingredienti: </strong>
                             <span>{{ plate.ingredients }}</span>
                         </p>
@@ -94,7 +97,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
-                store.prezzoTotaleDaPagare = s.toFixed(2);
+                store.prezzoTotaleDaPagare = s.toFixed( 2 );
             } )
             this.total = localStorage.getItem( 'spesaTotale' );
         },
@@ -183,5 +186,19 @@ export default {
 
 
 <style lang="scss">
+.image_plate {
+    height: 8rem;
+    overflow: hidden;
 
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.ingredients {
+    height: 3rem;
+    overflow-y: auto;
+}
 </style>

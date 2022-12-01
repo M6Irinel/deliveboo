@@ -57,6 +57,13 @@ export default {
     height: 10rem;
     border: 3px solid #8f5221;
     padding: 0;
+    &:hover{
+        img{
+            scale: 1.15;
+
+        }
+    }
+    
 }
 
 .bg-brown {
@@ -79,6 +86,7 @@ export default {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: all 0.3s ease-in-out;
 }
 
 .my-card-body {

@@ -45295,7 +45295,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".my-card[data-v-3f5d1f8e] {\n  height: 10rem;\n  border: 3px solid #8f5221;\n  padding: 0;\n}\n.bg-brown[data-v-3f5d1f8e] {\n  background-color: #8f5221;\n}\n.my-card[data-v-3f5d1f8e]::before {\n  content: \"\";\n  display: block;\n  background: linear-gradient(to left, rgba(0, 0, 0, 0.7333333333), rgba(255, 255, 255, 0));\n  z-index: 1;\n}\n.my-card-img[data-v-3f5d1f8e], .my-card[data-v-3f5d1f8e]::before {\n  position: absolute;\n  inset: 0;\n}\n.my-card-img > img[data-v-3f5d1f8e] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.my-card-body[data-v-3f5d1f8e] {\n  position: relative;\n  z-index: 2;\n}", ""]);
+exports.push([module.i, ".my-card[data-v-3f5d1f8e] {\n  height: 10rem;\n  border: 3px solid #8f5221;\n  padding: 0;\n}\n.my-card:hover img[data-v-3f5d1f8e] {\n  scale: 1.15;\n}\n.bg-brown[data-v-3f5d1f8e] {\n  background-color: #8f5221;\n}\n.my-card[data-v-3f5d1f8e]::before {\n  content: \"\";\n  display: block;\n  background: linear-gradient(to left, rgba(0, 0, 0, 0.7333333333), rgba(255, 255, 255, 0));\n  z-index: 1;\n}\n.my-card-img[data-v-3f5d1f8e], .my-card[data-v-3f5d1f8e]::before {\n  position: absolute;\n  inset: 0;\n}\n.my-card-img > img[data-v-3f5d1f8e] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  transition: all 0.3s ease-in-out;\n}\n.my-card-body[data-v-3f5d1f8e] {\n  position: relative;\n  z-index: 2;\n}", ""]);
 
 // exports
 
@@ -63483,7 +63483,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

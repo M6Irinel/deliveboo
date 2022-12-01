@@ -18656,6 +18656,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
         localStorage.setItem("spesaTotale", s.toFixed(2));
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = s.toFixed(2);
       });
       this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
@@ -18816,8 +18817,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       forLogin: forLogin,
+      tornaMail: 'we we we',
       total: localStorage.getItem('spesaTotale'),
       tokenApi: '',
+      datiUtente: {
+        email: '',
+        numeroTelefono: '',
+        indirizzo: '',
+        nome: ''
+      },
       form: {
         token: '',
         amount: ''
@@ -18834,13 +18842,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     loadingCart: function loadingCart() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart;
+    },
+    prezzoTotale: function prezzoTotale() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare;
     }
   },
   methods: {
+    prova: function prova() {
+      var s = JSON.stringify(localStorage);
+      var p = JSON.parse(s);
+      // let n= p.filter(l=>{
+      //     let q = localStorage.getItem(l.plate_name + '-counter');
+      //     return
+      // })
+      // console.log(this.datiUtente)
+      // console.log(this.prezzoTotale)
+      axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(function (r) {
+        console.log(r);
+        // this.$router.push({ path: '/thankyou' });
+      });
+    },
     paymentOnSuccess: function paymentOnSuccess(nonce) {
       this.loadingBuyButton = true;
       this.form.token = nonce;
-      this.pulisciStorage();
       this.buy();
     },
     paymentOnError: function paymentOnError(error) {},
@@ -18852,18 +18876,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
       this.disabledBuyButton = true;
       axios.post('/api/make/payment', _objectSpread({}, this.form)).then(function (r) {
+        _this.prova();
         _this.$router.push({
           path: '/thankyou'
         });
         _this.loadingBuyButton = false;
+        _this.pulisciStorage();
       });
     },
     fetchPlates: function fetchPlates() {
+      var _this2 = this;
       if (!localStorage.resId) return;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = true;
       axios.get("/api/restaurants/".concat(localStorage.getItem("resId"))).then(function (r) {
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].plates = r.data.plates;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].loadingCart = false;
+        _this2.totalprice();
       });
     },
     pulisciStorage: function pulisciStorage() {
@@ -18926,11 +18954,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     totalprice: function totalprice() {
       var s = 0;
-      this.plates.forEach(function (e) {
-        var q = localStorage.getItem(e.plate_name + '-counter');
-        s += e.plate_price * q;
-        localStorage.setItem("spesaTotale", s.toFixed(2));
-      });
+      if (this.plates) {
+        this.plates.forEach(function (e) {
+          var q = localStorage.getItem(e.plate_name + '-counter');
+          s += e.plate_price * q;
+          localStorage.setItem("spesaTotale", s.toFixed(2));
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].prezzoTotaleDaPagare = s.toFixed(2);
+        });
+      }
       this.total = localStorage.getItem('spesaTotale');
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].totalCart = this.total;
     },
@@ -18938,18 +18969,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return localStorage.getItem(v + '-counter');
     },
     fetchToken: function fetchToken() {
-      var _this2 = this;
+      var _this3 = this;
       this.disabledBuyButton = true;
       axios.get('/api/generate').then(function (r) {
-        _this2.tokenApi = r.data.token;
-        _this2.disabledBuyButton = false;
+        _this3.tokenApi = r.data.token;
+        _this3.disabledBuyButton = false;
       });
     }
   },
   created: function created() {
     this.fetchToken();
     this.fetchPlates();
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -19016,6 +19048,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         var q = localStorage.getItem(e.plate_name + '-counter');
         s += e.plate_price * q;
         localStorage.setItem("spesaTotale", s.toFixed(2));
+        _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].prezzoTotaleDaPagare = s.toFixed(2);
       });
       this.total = localStorage.getItem('spesaTotale');
     },
@@ -19213,7 +19246,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchRestaurants: function fetchRestaurants() {
       axios.get('/api/restaurants').then(function (r) {
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants.data;
+        console.log(r.data);
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].hasPlates = true;
       });
     },
@@ -19742,7 +19776,93 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.prova();
+      }
+    }
+  }, [_vm._v(" Proviamo la mail")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.email,
+      expression: "datiUtente.email"
+    }],
+    attrs: {
+      type: "email",
+      placeholder: "inserisci la tua mail"
+    },
+    domProps: {
+      value: _vm.datiUtente.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "email", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.numeroTelefono,
+      expression: "datiUtente.numeroTelefono"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo num di Telefono"
+    },
+    domProps: {
+      value: _vm.datiUtente.numeroTelefono
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "numeroTelefono", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.indirizzo,
+      expression: "datiUtente.indirizzo"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo indirizzo"
+    },
+    domProps: {
+      value: _vm.datiUtente.indirizzo
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "indirizzo", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.datiUtente.nome,
+      expression: "datiUtente.nome"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "inserisci il tuo Nome e Cognome "
+    },
+    domProps: {
+      value: _vm.datiUtente.nome
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.datiUtente, "nome", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -63108,7 +63228,8 @@ __webpack_require__.r(__webpack_exports__);
   loadingCart: false,
   loadingPlates: false,
   plates: null,
-  totalCart: null
+  totalCart: null,
+  prezzoTotaleDaPagare: null
 }));
 
 /***/ }),
@@ -63207,7 +63328,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -23,6 +23,9 @@
 
             <TypologyVue v-if="typologies" @emitTypes="emitTypes" :typologies="typologies" />
         </div>
+
+       
+
     </main>
 </template>
 

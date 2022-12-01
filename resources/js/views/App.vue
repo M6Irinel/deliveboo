@@ -21,7 +21,8 @@ export default {
     methods: {
         fetchRestaurants () {
             axios.get( '/api/restaurants' ).then( r => {
-                store.restaurants = r.data.restaurants;
+                store.restaurants = r.data.restaurants.data;
+                console.log(r.data);
                 store.hasPlates = true;
             } );
         },

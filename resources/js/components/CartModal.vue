@@ -102,6 +102,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s );
+              
             } )
             return s;
         },
@@ -162,6 +163,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+                store.prezzoTotaleDaPagare = s.toFixed(2);
             } )
             this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;

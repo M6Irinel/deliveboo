@@ -64,6 +64,13 @@
                 </li>
             </ul>
 
+            <button @click="prova()"> Proviamo la mail</button>
+
+            <input type="email" v-model="datiUtente.email" placeholder="inserisci la tua mail">
+            <input type="text" v-model="datiUtente.numeroTelefono" placeholder="inserisci il tuo num di Telefono">
+            <input type="text" v-model="datiUtente.indirizzo" placeholder="inserisci il tuo indirizzo">
+            <input type="text" v-model="datiUtente.nome" placeholder="inserisci il tuo Nome e Cognome ">
+
             <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                 @onError="paymentOnError" ref="PaymentRef" />
 
@@ -90,11 +97,19 @@ export default {
 
     components: { LoaderC, BraintreVue, ButtonsLeft },
 
-    data () {
+    data() {
         return {
             forLogin,
-            total: localStorage.getItem( 'spesaTotale' ),
+            tornaMail: 'we we we',
+            total: localStorage.getItem('spesaTotale'),
             tokenApi: '',
+            datiUtente: {
+                email: '',
+                numeroTelefono: '',
+                indirizzo: '',
+                nome: '',
+            },
+
             form: {
                 token: '',
                 amount: ''
@@ -105,150 +120,188 @@ export default {
     },
 
     computed: {
-        plates () {
-            if ( store.plates )
-                return store.plates.filter( ( e ) => localStorage[ e.plate_name ] );
+        plates() {
+            if (store.plates)
+                return store.plates.filter((e) => localStorage[e.plate_name]);
             else return null;
         },
 
-        loadingCart () {
+        loadingCart() {
             return store.loadingCart;
         },
+
+        prezzoTotale() {
+            return store.prezzoTotaleDaPagare
+        }
     },
 
     methods: {
-        paymentOnSuccess ( nonce ) {
+
+
+        prova() {
+            let s = JSON.stringify(localStorage)
+            let p = JSON.parse(s)
+            // let n= p.filter(l=>{
+            //     let q = localStorage.getItem(l.plate_name + '-counter');
+            //     return
+            // })
+            // console.log(this.datiUtente)
+            // console.log(this.prezzoTotale)
+            axios.post('/orders/store', [p, this.datiUtente, this.prezzoTotale]).then(r => {
+                console.log(r)
+                // this.$router.push({ path: '/thankyou' });
+
+
+
+            });
+
+        },
+        paymentOnSuccess(nonce) {
             this.loadingBuyButton = true;
             this.form.token = nonce;
-            this.pulisciStorage();
             this.buy();
-        },
-
-        paymentOnError ( error ) {
 
         },
 
-        beforeBuy () {
-            this.form.amount = localStorage.getItem( 'spesaTotale' );
+        paymentOnError(error) {
+
+        },
+
+        beforeBuy() {
+            this.form.amount = localStorage.getItem('spesaTotale');
             this.$refs.PaymentRef.$refs.paymentBtnRef.click();
         },
 
-        buy () {
+        buy() {
             this.disabledBuyButton = true;
-            axios.post( '/api/make/payment', { ...this.form } ).then( r => {
-                this.$router.push( { path: '/thankyou' } );
+            axios.post('/api/make/payment', { ...this.form }).then(r => {
+                this.prova()
+                this.$router.push({ path: '/thankyou' });
                 this.loadingBuyButton = false;
-            } );
+                this.pulisciStorage();
+            });
         },
 
-        fetchPlates () {
-            if ( !localStorage.resId ) return;
+        fetchPlates() {
+            if (!localStorage.resId) return;
 
             store.loadingCart = true;
-            axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
-                .then( ( r ) => {
+            axios.get(`/api/restaurants/${localStorage.getItem("resId")}`)
+                .then((r) => {
                     store.plates = r.data.plates;
                     store.loadingCart = false;
-                } );
+                    this.totalprice();
+                });
         },
 
-        pulisciStorage () {
+        pulisciStorage() {
             localStorage.clear();
             store.plates = null;
             this.total = 0;
             store.totalCart = null;
         },
 
-        totalF () {
-            if ( !localStorage.resId ) return;
+        totalF() {
+            if (!localStorage.resId) return;
 
             let s = 0;
-            this.plates.forEach( e => {
-                let q = localStorage.getItem( e.plate_name + '-counter' );
+            this.plates.forEach(e => {
+                let q = localStorage.getItem(e.plate_name + '-counter');
                 s += e.plate_price * q;
-                localStorage.setItem( "spesaTotale", s );
-            } )
+                localStorage.setItem("spesaTotale", s);
+            })
             return s;
         },
 
-        addPlate ( plate ) {
-            if ( typeof ( Storage ) ) {
-                if ( localStorage.resId ) {
-                    if ( localStorage.getItem( "resId" ) == plate.restaurant_id ) {
-                        this.plateLocalStore( plate );
+        addPlate(plate) {
+            if (typeof (Storage)) {
+                if (localStorage.resId) {
+                    if (localStorage.getItem("resId") == plate.restaurant_id) {
+                        this.plateLocalStore(plate);
                         return;
                     } else {
-                        alert( 'non puoi ordinare da più ristoranti' );
+                        alert('non puoi ordinare da più ristoranti');
                         return;
                     }
                 }
-                localStorage.setItem( "resId", plate.restaurant_id );
-                this.plateLocalStore( plate );
+                localStorage.setItem("resId", plate.restaurant_id);
+                this.plateLocalStore(plate);
             }
-            else alert( 'hai il pc vecchio, vai a piedi' );
+            else alert('hai il pc vecchio, vai a piedi');
         },
 
-        plateLocalStore ( plate ) {
+        plateLocalStore(plate) {
             let plateCounter = plate.plate_name + '-counter';
 
-            if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
-                let c = localStorage.getItem( plateCounter );
-                localStorage.setItem( plateCounter, ++c );
+            if (localStorage.getItem(plate.plate_name) == plate.id) {
+                let c = localStorage.getItem(plateCounter);
+                localStorage.setItem(plateCounter, ++c);
             } else {
-                localStorage.setItem( plate.plate_name, plate.id );
-                localStorage.setItem( plateCounter, 1 );
+                localStorage.setItem(plate.plate_name, plate.id);
+                localStorage.setItem(plateCounter, 1);
             }
             this.totalprice();
         },
 
-        removePlate ( plate ) {
+        removePlate(plate) {
             let plateCounter = plate.plate_name + '-counter';
 
-            if ( typeof ( Storage ) ) {
-                if ( localStorage.getItem( plate.plate_name ) == plate.id ) {
-                    let c = localStorage.getItem( plateCounter );
-                    localStorage.setItem( plateCounter, --c );
+            if (typeof (Storage)) {
+                if (localStorage.getItem(plate.plate_name) == plate.id) {
+                    let c = localStorage.getItem(plateCounter);
+                    localStorage.setItem(plateCounter, --c);
                     this.totalprice();
-                    if ( c === 0 ) {
-                        localStorage.removeItem( plateCounter );
-                        localStorage.removeItem( plate.plate_name );
-                        store.plates.splice( store.plates.indexOf( plate ), 1 );
+                    if (c === 0) {
+                        localStorage.removeItem(plateCounter);
+                        localStorage.removeItem(plate.plate_name);
+                        store.plates.splice(store.plates.indexOf(plate), 1);
                     }
                 }
             }
-            else alert( 'hai il pc vecchio, vai a piedi' );
+            else alert('hai il pc vecchio, vai a piedi');
 
-            if ( localStorage.length <= 2 ) this.pulisciStorage();
+            if (localStorage.length <= 2) this.pulisciStorage();
         },
 
-        totalprice () {
+        totalprice() {
             let s = 0;
-            this.plates.forEach( e => {
-                let q = localStorage.getItem( e.plate_name + '-counter' );
-                s += e.plate_price * q;
-                localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
-            } )
-            this.total = localStorage.getItem( 'spesaTotale' );
+            
+            if (this.plates) {
+               
+                this.plates.forEach(e => {
+                    let q = localStorage.getItem(e.plate_name + '-counter');
+                    s += e.plate_price * q;
+                    localStorage.setItem("spesaTotale", s.toFixed(2));
+                    store.prezzoTotaleDaPagare = s.toFixed(2);
+                })
+            }
+            this.total = localStorage.getItem('spesaTotale');
             store.totalCart = this.total;
         },
 
-        quantity ( v ) {
-            return localStorage.getItem( v + '-counter' );
+        quantity(v) {
+            return localStorage.getItem(v + '-counter');
         },
 
-        fetchToken () {
+        fetchToken() {
             this.disabledBuyButton = true;
-            axios.get( '/api/generate' ).then( r => {
+            axios.get('/api/generate').then(r => {
                 this.tokenApi = r.data.token;
                 this.disabledBuyButton = false;
-            } )
+            })
         }
     },
 
-    created () {
+    created() {
         this.fetchToken();
         this.fetchPlates();
+        
     },
+    
+    mounted(){
+      
+       
+    }
 };
 </script>
 

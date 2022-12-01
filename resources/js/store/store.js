@@ -8,5 +8,6 @@ export default Vue.observable({
     loadingCart: false,
     loadingPlates: false,
     plates: null,
-    totalCart: null
+    totalCart: null,
+    prezzoTotaleDaPagare: null,
 });

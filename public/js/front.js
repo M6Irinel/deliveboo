@@ -19246,7 +19246,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchRestaurants: function fetchRestaurants() {
       axios.get('/api/restaurants').then(function (r) {
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants;
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = r.data.restaurants.data;
+        console.log(r.data);
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].hasPlates = true;
       });
     },

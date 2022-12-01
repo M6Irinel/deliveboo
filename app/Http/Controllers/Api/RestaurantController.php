@@ -16,7 +16,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::orderBy('created_at', 'desc')->with('typologies', 'user')->get();
+        $restaurants = Restaurant::with('typologies', 'user')->paginate(6);
+        // dd($restaurants);
         $status = true;
 
         return response()->json(compact('restaurants', 'status'));

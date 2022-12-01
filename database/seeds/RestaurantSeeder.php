@@ -48,7 +48,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_description'    => 'Da Massimo, ristorante di nuova apertura vi invita ad assaggiare le specialità della casa!',
                 'restaurant_phone_number'   => '3320985821',
                 'restaurant_website'        => 'http//:ristorante-da-massimo',
-                'restaurant_image'          => 'restaurant_img/da_massimo.jpg',
+                'restaurant_image'          => 'restaurant_img/da_massimo_serio.jpg',
                 'tags' => [9,10,11]
             ],
             [

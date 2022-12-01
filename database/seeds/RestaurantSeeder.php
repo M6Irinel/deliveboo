@@ -59,9 +59,34 @@ class RestaurantSeeder extends Seeder
                 'restaurant_website'        => 'http//:ristorante-da-tiziano',
                 'restaurant_image'          => 'restaurant_img/da_tiziano.jpg',
                 'tags' => [12,13]
-                
-        
-            ]
+            ],
+            [
+                'restaurant_address'        => 'Corso Vittorio Emanuele II 1',
+                'p_iva'                     => 'IT45765474511',
+                'restaurant_description'    => 'Osteria ormai affermata sul territorio, da adesso effettua consegne a domicilio!',
+                'restaurant_phone_number'   => '3870985821',
+                'restaurant_website'        => 'http//:osteria-del-borgo',
+                'restaurant_image'          => 'restaurant_img/trattoria.webp',
+                'tags' => [1,6,12]
+            ],
+            [
+                'restaurant_address'        => 'Via Carlini 14',
+                'p_iva'                     => 'IT46079574511',
+                'restaurant_description'    => 'Forno dalla tradizione decennale adesso disponibile al servizio da asporto.',
+                'restaurant_phone_number'   => '3963145821',
+                'restaurant_website'        => 'http//:forno-del-vicolo',
+                'restaurant_image'          => 'restaurant_img/forno_del_vicolo.jpg',
+                'tags' => [3,12]
+            ],
+            [
+                'restaurant_address'        => 'Via degli Sviluppatori 9',
+                'p_iva'                     => 'IT45741574511',
+                'restaurant_description'    => 'Ristorante specializzato nella cottura di carni con cucina a vista',
+                'restaurant_phone_number'   => '3982485821',
+                'restaurant_website'        => 'http//:bottega-della-carne',
+                'restaurant_image'          => 'restaurant_img/Braceria-Bifulco.jpg',
+                'tags' => [5,6,9]
+            ],
             
         ];
 

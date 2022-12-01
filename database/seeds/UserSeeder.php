@@ -15,28 +15,43 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Ristorante da Gianluca',
+                'name' => 'Da Gianluca',
                 'email' => 'primo@ristorante.it',
                 'password' => 'pippo123'
             ],
             [
-                'name' => 'Ristorante da Mauro',
+                'name' => 'Da Mauro',
                 'email' => 'secondo@ristorante.it',
                 'password' => 'pippo123'
             ],
             [
-                'name' => 'Ristorante da Alessandro',
+                'name' => 'da Alessandro',
                 'email' => 'terzo@ristorante.it',
                 'password' => 'pippo123'
             ],
             [
-                'name' => 'Ristorante da Massimo',
+                'name' => 'da Massimo',
                 'email' => 'quarto@ristorante.it',
                 'password' => 'pippo123'
             ],
             [
-                'name' => 'Ristorante da Tiziano',
+                'name' => 'Da Tiziano',
                 'email' => 'quinto@ristorante.it',
+                'password' => 'pippo123'
+            ],
+            [
+                'name' => 'Osteria del Borgo',
+                'email' => 'sesto@ristorante.it',
+                'password' => 'pippo123'
+            ],
+            [
+                'name' => 'Il forno del Vicolo',
+                'email' => 'settimo@ristorante.it',
+                'password' => 'pippo123'
+            ],
+            [
+                'name' => 'Bottega della Carne',
+                'email' => 'ottavo@ristorante.it',
                 'password' => 'pippo123'
             ],
         ];

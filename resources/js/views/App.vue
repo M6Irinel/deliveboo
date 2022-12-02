@@ -23,10 +23,12 @@ export default {
     },
 
     methods: {
-        fetchRestaurants () {
-            axios.get( '/api/restaurants' ).then( r => {
-                store.restaurants = r.data.restaurants.data;
-                console.log(r.data);
+        fetchRestaurants ( page = 1 ) {
+            axios.get( '/api/restaurants', { params: { page: page } } ).then( r => {
+                const { data, last_page, current_page } = r.data.restaurants;
+                store.restaurants = data;
+                store.lastPage = last_page;
+                store.currentPage = current_page;
                 store.hasPlates = true;
             } );
         },

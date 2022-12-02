@@ -263,15 +263,6 @@ class PlateSeeder extends Seeder
                 'visibility' => 1,
                 'plate_image' => 'plate_img/piadina_vegana.jpg',
             ],
-            [
-                'restaurant_id' => 3,
-                'plate_name' => 'Piadina Vegana',
-                'ingredients' => 'Affettato vegano, cicoria ripassata, trifolata di porcini',
-                'plate_description' => 'Piadina con affettato vegano, cicoria ripassata, trifolata di porcini',
-                'plate_price' => 8.60,
-                'visibility' => 1,
-                'plate_image' => 'plate_img/piadina_vegana.jpg',
-            ],
             //PESCE
             [
                 'restaurant_id' => 3,

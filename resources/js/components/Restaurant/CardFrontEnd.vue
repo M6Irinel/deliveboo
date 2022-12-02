@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-12 gap-5">
+    <div class="grid-12 gap-5 grow-1">
         <router-link class="
             my-card
             relative
@@ -63,7 +63,7 @@ export default {
 
         }
     }
-    
+
 }
 
 .bg-brown {

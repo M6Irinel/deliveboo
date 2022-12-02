@@ -48,12 +48,14 @@
                         'flex mt-auto',
                         quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                     ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn border px-3"
-                            :class="[tema ? 'text-dark' : 'text-light']" @click="removePlate(plate)">-</button>
+                        <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
+                            :class="[tema ? 'bg-light' : 'bg-dark']" @click="removePlate(plate)">-</button>
 
-                        <div class="bold py-1 px-2 fs-3">&Cross;{{ quantity(plate.plate_name) }}</div>
+                        <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{
+                                quantity(plate.plate_name)
+                        }}</div>
 
-                        <button class="btn border px-3" :class="[tema ? 'text-dark' : 'text-light']"
+                        <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']"
                             @click="addPlate(plate)">+</button>
                     </div>
                 </li>
@@ -156,12 +158,12 @@ export default {
             return store.coloreTema;
         },
 
-        t(){return this.datiUtente.numeroTelefono}
+        t () { return this.datiUtente.numeroTelefono }
     },
 
     methods: {
         validationForm () {
-            const letters = 'qwertyuiopè+asdfghjklòàù<zxcvbnm,.-[]{};:é*/|€$%&=\'"ì^@°#§'.split('');
+            const letters = 'qwertyuiopè+asdfghjklòàù<zxcvbnm,.-[]{};:é*/|€$%&=\'"ì^@°#§'.split( '' );
             this.orderSuccess = false;
             this.errorEmail = false;
             this.errorNumeroTelefono = false;
@@ -169,7 +171,7 @@ export default {
             this.errorNome = false;
 
             if ( this.datiUtente.email != null || undefined || '' ) {
-                if ( this.datiUtente.email.length < 8 || !this.datiUtente.email.includes( '@', 2 ) || !this.datiUtente.email.includes( '.', this.datiUtente.email.indexOf('@') + 2 ) || this.datiUtente.email.length < this.datiUtente.email.indexOf('.') + 3 )
+                if ( this.datiUtente.email.length < 8 || !this.datiUtente.email.includes( '@', 2 ) || !this.datiUtente.email.includes( '.', this.datiUtente.email.indexOf( '@' ) + 2 ) || this.datiUtente.email.length < this.datiUtente.email.indexOf( '.' ) + 3 )
                     this.errorEmail = true;
             } else this.errorEmail = true;
 

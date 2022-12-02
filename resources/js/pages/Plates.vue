@@ -21,6 +21,7 @@
 
             <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
                 <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
                     v-for="(plate, i) in plates" :key="i">
 
                     <div class="image_plate">
@@ -48,12 +49,12 @@
                         'flex mt-auto',
                         quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                     ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
+                        <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']"
                             @click="removePlate(plate)">-</button>
 
-                        <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
+                        <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{ quantity(plate.plate_name) }}</div>
 
-                        <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
+                        <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']" @click="addPlate(plate)">+</button>
                     </div>
                 </div>
             </div>
@@ -174,6 +175,10 @@ export default {
         restaurant_Id () {
             return this.$route.params.id;
         },
+
+        tema () {
+            return store.coloreTema;
+        }
     },
 
     created () {
@@ -186,6 +191,16 @@ export default {
 
 
 <style lang="scss">
+@import '../../sass/variabili.scss';
+
+.bg-card-light {
+    background-color: $bgCardLight;
+}
+
+.bg-card-dark {
+    background-color: $bgCardDark;
+}
+
 .image_plate {
     height: 8rem;
     overflow: hidden;

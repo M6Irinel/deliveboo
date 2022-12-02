@@ -1,5 +1,5 @@
 <template>
-    <main class="container flex f-column grow-1">
+    <main class="container flex f-column grow-1" :class="[tema ? 'text-dark' : 'text-light']">
         <div v-if="total" class="flex j-flex-end i-center pt-3 gap-10">
             <ButtonCart title="look cart preview" @modalCart="modalCart" :total="total" :status="visibilityCart" />
 
@@ -9,12 +9,14 @@
             </router-link>
         </div>
 
-        <div class="flex j-flex-end relative gap-5 i-flex-start pt-3">
+        <div class="flex j-flex-end grow-1 relative gap-5 i-flex-start pt-3">
             <div class="flex f-column gap-5 grow-1">
                 <cart-modal v-if="visibilityCart" />
 
                 <CardFrontEnd v-if="(!loadingRestaurant && restaurants)" :restaurants="restaurants" />
                 <Loader v-else />
+
+                <SelectPaginate />
             </div>
 
             <TypologyVue v-if="typologies" @emitTypes="emitTypes" :typologies="typologies" />
@@ -31,11 +33,12 @@ import Loader from '../components/Loader.vue';
 import ButtonCart from '../components/ButtonCart.vue';
 import CardFrontEnd from '../components/Restaurant/CardFrontEnd.vue';
 import TypologyVue from '../components/Restaurant/TypologyVue.vue';
+import SelectPaginate from '../components/Restaurant/SelectPaginate.vue';
 
 export default {
     name: "RestaurantsIndex",
 
-    components: { Loader, CartModal, CardFrontEnd, TypologyVue, ButtonCart },
+    components: { Loader, CartModal, CardFrontEnd, TypologyVue, ButtonCart, SelectPaginate },
 
     data () {
         return {
@@ -67,7 +70,8 @@ export default {
             if ( !store.totalCart )
                 return localStorage.getItem( 'spesaTotale' );
             return store.totalCart;
-        }
+        },
+        tema () { return store.coloreTema; }
     },
 }
 </script>

@@ -6,6 +6,7 @@
             <div v-if="plates">
                 <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                     <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
                         v-for="(plate, i) in plates" :key="i">
 
                         <p class="mb-auto bold">{{ plate.plate_name }}</p>
@@ -71,6 +72,10 @@ export default {
         loadingCart () {
             return store.loadingCart;
         },
+
+        tema () {
+            return store.coloreTema;
+        }
     },
 
     methods: {
@@ -180,5 +185,13 @@ export default {
 
 
 <style scoped lang="scss">
+@import '../../sass/variabili.scss';
 
+.bg-card-light {
+    background-color: $bgCardLight;
+}
+
+.bg-card-dark {
+    background-color: $bgCardDark;
+}
 </style>

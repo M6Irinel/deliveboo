@@ -38,6 +38,7 @@ export default {
                 store.lastPage = last_page;
                 store.currentPage = current_page;
                 store.hasPlates = true;
+                console.log(r);
             } );
         },
 

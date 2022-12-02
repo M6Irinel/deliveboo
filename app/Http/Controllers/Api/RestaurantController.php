@@ -18,6 +18,7 @@ class RestaurantController extends Controller
     {
         $restaurants = Restaurant::with('typologies', 'user')->paginate(6);
         $status = true;
+       
 
         return response()->json(compact('restaurants', 'status'));
     }

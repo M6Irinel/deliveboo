@@ -29,7 +29,7 @@
                     href="/register"
                     title="new restaurant">registrati</a>
 
-                <router-link :to="{ path: 'Settings' }"
+                <router-link :to="{ name: 'Settings' }"
                     class="header-height bold flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
                     :class="[ mobile ? tema ? 'bg-button-header-light text-button-light border-color-light bg-hover-button-header-light bg-active-button-header-light text-hover-button-light' : 'bg-button-header-dark text-button-dark border-color-dark bg-hover-button-header-dark bg-active-button-header-dark text-hover-button-dark' : tema ? 'bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-hover-button-header-dark text-button-dark text-hover-button-dark' ]"
                     title="new restaurant">

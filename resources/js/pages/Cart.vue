@@ -7,7 +7,7 @@
 
                 <div class="flex i-center gap-5">
                     <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
-                        Svuota il Carello
+                        svuota cesto
                     </button>
 
                     <div class="btn-warning px-3 py-1 fs-3 rounded bold">
@@ -31,7 +31,7 @@
                         <img v-else :src="'./img/default/plate-empty.png'" alt="" />
                     </div>
 
-                    <p>{{ plate.plate_name }}</p>
+                    <p class="bold">{{ plate.plate_name }}</p>
 
                     <p>Prezzo: {{ plate.plate_price }}€</p>
 

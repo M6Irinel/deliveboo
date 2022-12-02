@@ -43,10 +43,12 @@ class RestaurantController extends Controller
     {
         if (is_numeric($slug)) {
             $plates = User::where('id', $slug)->first()->restaurant->plates;
+            $user = User::where('id', $slug)->with('restaurant')->first();
 
 
             if ($plates) {
                 return response()->json([
+                    'user' => $user,
                     'plates' => $plates,
                     'status' => true
                 ]);
@@ -57,10 +59,12 @@ class RestaurantController extends Controller
             }
         } else {
             $plates = User::where('slug', $slug)->first()->restaurant->plates;
+            $user = User::where('slug', $slug)->with('restaurant')->first();
 
 
             if ($plates) {
                 return response()->json([
+                    'user' => $user,
                     'plates' => $plates,
                     'status' => true
                 ]);

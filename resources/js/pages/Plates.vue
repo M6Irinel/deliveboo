@@ -7,7 +7,7 @@
 
                 <div>
                     <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
-                        Svuota il Carrello
+                        svuota cesto
                     </button>
 
                     <router-link class="btn btn-success px-3 py-1" :to="{ name: 'Cart' }">
@@ -18,6 +18,8 @@
                     </router-link>
                 </div>
             </div>
+
+            <HeroPlate v-if="user" :user="user" />
 
             <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
                 <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
@@ -30,7 +32,7 @@
                     </div>
 
                     <div>
-                        <p class="t-center">{{ plate.plate_name }}</p>
+                        <p class="t-center bold">{{ plate.plate_name }}</p>
 
                         <p class="ingredients">
                             <strong>Ingredienti: </strong>
@@ -68,17 +70,19 @@
 // @ts-nocheck
 import LoaderC from "../components/Loader.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
+import HeroPlate from "../components/HeroPlate.vue";
 import store from "../store/store";
 
 export default {
     name: "PlatesIndex",
 
-    components: { LoaderC, ButtonsLeft },
+    components: { LoaderC, ButtonsLeft, HeroPlate },
 
     data () {
         return {
             forLogin,
             plates: null,
+            user: null,
             total: localStorage.getItem( 'spesaTotale' )
         };
     },
@@ -87,6 +91,8 @@ export default {
         fetchPlates () {
             store.loadingPlates = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
+                console.log(r);
+                this.user = r.data.user;
                 this.plates = r.data.plates.filter( e => e.visibility );
                 store.loadingPlates = false;
             } );
@@ -202,7 +208,7 @@ export default {
 }
 
 .image_plate {
-    height: 8rem;
+    height: 10rem;
     overflow: hidden;
 
     img {

@@ -549,19 +549,18 @@ class PlateSeeder extends Seeder
                 'visibility' => 1,
                 'plate_image' => 'plate_img/kebab_fatto_in_casa.webp',
             ],
-
         ];
 
-        foreach ($plates as $plate) {
+        foreach ($plates as $p) {
             Plate::create([
-                'restaurant_id'         => $plate['restaurant_id'],
-                'plate_name'            => $plate['plate_name'],
-                'ingredients'           => $plate['ingredients'],
-                'plate_description'     => $plate['plate_description'],
-                'plate_price'           => $plate['plate_price'],
-                'visibility'            => $plate['visibility'],
-                'plate_image'           => $plate['plate_image'],
-           ]);
+                'restaurant_id'         => $p['restaurant_id'],
+                'plate_name'            => $p['plate_name'],
+                'ingredients'           => $p['ingredients'],
+                'plate_description'     => $p['plate_description'],
+                'plate_price'           => $p['plate_price'],
+                'visibility'            => $p['visibility'],
+                'plate_image'           => $p['plate_image'],
+            ]);
         }
     }
 }

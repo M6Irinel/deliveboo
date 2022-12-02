@@ -2,23 +2,29 @@
 
 namespace App\Mail;
 
+use App\Restaurant;
+use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Conferma extends Mailable
+class ConfermaRegistrazione extends Mailable
 {
     use Queueable, SerializesModels;
+    public $restaurant;
+  
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($restaurant)
     {
-        //
+   
+       $this->restaurant=$restaurant;
+       
     }
 
     /**
@@ -28,6 +34,6 @@ class Conferma extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('mail.conferma_registrazione');
     }
 }

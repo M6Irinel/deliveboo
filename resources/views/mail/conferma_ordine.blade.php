@@ -22,36 +22,40 @@
 
 
 @php
-// array_filter(array $array, ?callable $callback = null, int $mode = 0): array
 $af = array_filter(
 $order->all()[0],
 function ($e) {
-// if (!strpos($e, '-')) {
-// $s = explode('-', $e);
-// return $s[1] == 'counter';
-// }
+
 return $e != 'resId' && strpos($e, '-');
 },
 ARRAY_FILTER_USE_KEY,
 );
 
-//explode(string $separator, string $string, int $limit = PHP_INT_MAX): array
 
 @endphp
 
 
 @foreach ($af as $key => $item)
-{{ $key }} : x {{ $item }}
+@php
+    $key = str_replace("-counter"," ", $key);
+@endphp
+<p style="color: darkblue; padding: 8px 0">
+    {{ $key }} : x {{ $item }}
+</p>
 @endforeach
 
 
-
+<div style="color: black; text-transform: capitalize;">
 Il pagamento da lei effettuato è di : {{ $order->all()[2] }} €
 
-Dati per la consegna:
+Dati per la consegna: <br>
 @foreach ($order->all()[1] as $key => $item)
-<p>{{ $key }}:- {{ $item }} - </p>
+@php
+$key = str_replace("numeroTelefono","Numero di Telefono", $key);
+@endphp
+{{ $key }}: {{ $item }} <br>
 @endforeach
+</div>
 
 
 

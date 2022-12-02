@@ -12,6 +12,7 @@ class ConfermaPagamento extends Mailable
 {
     use Queueable, SerializesModels;
     public $order;
+    public $userName;
   
 
     /**
@@ -19,9 +20,10 @@ class ConfermaPagamento extends Mailable
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request,$userName)
     {
        $this->order=$request;
+       $this->userName=$userName;
        
     }
 

@@ -1,96 +1,332 @@
 <template>
-    <div class="grid-12 gap-5">
-        <router-link class="
-            my-card
-            relative
-            g-col-12
-            g-col-6-md
-            p-2
-            rounded-3
-            t-right
-            orange-H
-            shadow
-            decoration-none-H
-            overflow-hidden"
-            :class="[restaurant.restaurant_image ? 'white bg-brown': 'black']" v-for="(restaurant, i) in restaurants" :key="i" :to="{
-                name: 'Plates',
-                params: {
-                    'slug': restaurant.user.slug
-                }
-            }">
-
-            <div class="my-card-img" v-if="restaurant.restaurant_image">
-                <img :src="'./storage/' + restaurant.restaurant_image" alt="">
+  <div id="cards">
+    <router-link
+      class="card"
+      v-for="(restaurant, i) in restaurants"
+      :key="i"
+      :to="{
+        name: 'Plates',
+        params: {
+          slug: restaurant.user.slug,
+        },
+      }"
+    >
+      <div class="card-content">
+        <div class="card-image">
+          <img :src="'./storage/' + restaurant.restaurant_image" alt="" />
+        </div>
+        <div class="card-info-wrapper">
+          <div class="card-info">
+            <i class="fa-duotone fa-apartment"></i>
+            <div class="card-info-title">
+              <h3>{{ restaurant.user.name }}</h3>
+              <address>{{ restaurant.restaurant_address }}</address>
+              <p v-for="(typology, e) in restaurant.typologies" :key="e">
+                {{ typology.name }}
+              </p>
             </div>
-
-            <div class="my-card-body flex f-column h-100">
-                <h3>{{ restaurant.user.name }}</h3>
-                <address>{{ restaurant.restaurant_address }}</address>
-                <div class="mt-auto">
-                    <p class="inline-block px-1" v-for="(typology, e) in restaurant.typologies" :key="e">
-                        {{ typology.name }}
-                    </p>
-                </div>
-            </div>
-        </router-link>
-    </div>
+          </div>
+        </div>
+      </div>
+    </router-link>
+  </div>
 </template>
-
 
 <script>
 // @ts-nocheck
 export default {
-    name: 'CardFrontEnd',
+  name: "CardFrontEnd",
 
-    props: {
-        restaurants: {
-            required: true,
-            type: Array
+  props: {
+    restaurants: {
+      required: true,
+      type: Array,
+    },
+  },
+  methods: {
+    letshover() {
+      document.getElementById("cards").onmousemove = (e) => {
+        for (const card of document.getElementsByClassName("card")) {
+          const rect = card.getBoundingClientRect(),
+            x = e.clientX - rect.left,
+            y = e.clientY - rect.top;
+
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
         }
-    }
-}
+      };
+    },
+  },
+  mounted() {
+    this.letshover();
+  },
+};
 </script>
 
 
-<style scoped lang="scss">
-.my-card {
-    height: 10rem;
-    border: 3px solid #8f5221;
-    padding: 0;
-    &:hover{
-        img{
-            scale: 1.15;
-
-        }
-    }
-    
+<style  lang="scss">
+:root {
+  --bg-color: rgb(20, 20, 20);
+  --card-color: rgb(23, 23, 23);
 }
 
-.bg-brown {
-    background-color:  #8f5221;
+body {
+  align-items: center;
+  background-color: var(--bg-color);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: 0px;
+  overflow: scroll;
+  padding: 0px;
 }
 
-.my-card::before {
-    content: '';
-    display: block;
-    background: linear-gradient(to left, #000000bb, #ffffff00);
-    z-index: 1;
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 916px;
+  width: calc(100% - 20px);
 }
 
-.my-card-img, .my-card::before {
+#cards:hover {
+  .card::after {
+    opacity: 1;
+  }
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  height: 260px;
+  flex-direction: column;
+  position: relative;
+  width: 300px;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::before,
+.card::after {
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  transition: opacity 500ms;
+  width: 100%;
+}
+
+.card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 3;
+}
+
+.card::after {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.4),
+    transparent 40%
+  );
+  z-index: 1;
+}
+
+.card {
+  .card-content {
+    background-color: var(--card-color);
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    inset: 1px;
+    padding: 10px;
     position: absolute;
-    inset: 0;
-}
-
-.my-card-img > img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: all 0.3s ease-in-out;
-}
-
-.my-card-body {
-    position: relative;
     z-index: 2;
+  }
+}
+
+/* -- ↓ ↓ ↓ extra card content styles ↓ ↓ ↓ -- */
+
+h1,
+h2,
+h3,
+h4,
+span {
+  color: rgb(240, 240, 240);
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  margin: 0px;
+}
+
+i {
+  color: rgb(240, 240, 240);
+}
+
+.card-image {
+  align-items: center;
+  display: flex;
+  height: 140px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-image {
+  i {
+    font-size: 6em;
+    opacity: 0.25;
+  }
+}
+
+.card-info-wrapper {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  padding: 0px 20px;
+}
+
+.card-info {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+}
+
+.card-info {
+  i {
+    font-size: 1em;
+    height: 20px;
+    line-height: 20px;
+  }
+}
+
+.card-info-title {
+  h3 {
+    font-size: 1.1em;
+    line-height: 20px;
+  }
+}
+
+.card-info-title {
+  h4 {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85em;
+    margin-top: 8px;
+  }
+}
+
+/* -- ↓ ↓ ↓ some responsiveness ↓ ↓ ↓ -- */
+
+@media (max-width: 1000px) {
+  body {
+    align-items: flex-start;
+    overflow: auto;
+  }
+
+  #cards {
+    max-width: 1000px;
+    padding: 10px 0px;
+  }
+
+  .card {
+    flex-shrink: 1;
+    width: calc(50% - 4px);
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    height: 180px;
+  }
+
+  .card-image {
+    height: 80px;
+  }
+
+  .card-image > i {
+    font-size: 3em;
+  }
+
+  .card-info-wrapper {
+    padding: 0px 10px;
+  }
+
+  .card-info > i {
+    font-size: 0.8em;
+  }
+
+  .card-info-title > h3 {
+    font-size: 0.9em;
+  }
+
+  .card-info-title > h4 {
+    font-size: 0.8em;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 320px) {
+  .card {
+    width: 100%;
+  }
+}
+
+/* -- ↓ ↓ ↓ YouTube link styles ↓ ↓ ↓ -- */
+
+#youtube-link {
+  bottom: 10px;
+}
+
+#youtube-link > i {
+  color: rgb(239, 83, 80);
+}
+
+#source-link {
+  bottom: 60px;
+}
+
+#source-link > i {
+  color: rgb(94, 106, 210);
+}
+
+.link {
+  align-items: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 5px;
+  left: 10px;
+  padding: 10px 20px;
+  position: fixed;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.link > i,
+.link > span {
+  height: 20px;
+  line-height: 20px;
+}
+
+.link > span {
+  color: white;
 }
 </style>

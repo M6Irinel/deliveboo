@@ -18720,6 +18720,11 @@ __webpack_require__.r(__webpack_exports__);
     tema: function tema() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].coloreTema;
     }
+  },
+  methods: {
+    removeSpace: function removeSpace(v) {
+      return v.replace(' ', '');
+    }
   }
 });
 
@@ -18795,7 +18800,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _views_App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../views/App.vue */ "./resources/js/views/App.vue");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
 // @ts-nocheck
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CardFrontEnd',
   props: {
@@ -18803,6 +18812,10 @@ __webpack_require__.r(__webpack_exports__);
       required: true,
       type: Array
     }
+  },
+  created: function created() {
+    _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].typolo = [];
+    _views_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"].methods.fetchRestaurants();
   }
 });
 
@@ -18850,7 +18863,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _views_App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../views/App.vue */ "./resources/js/views/App.vue");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
 // @ts-nocheck
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TypologyVue',
   props: {
@@ -18869,6 +18886,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       setTimeout(function () {
         _this.$emit('emitTypes', _this.types);
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].typolo = _this.types;
+        _views_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"].methods.fetchRestaurants();
       }, 0);
     }
   }
@@ -19152,7 +19171,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       var _this = this;
       _store_store__WEBPACK_IMPORTED_MODULE_3__["default"].loadingPlates = true;
       axios.get("/api/restaurants/".concat(this.$route.params.slug)).then(function (r) {
-        console.log(r);
         _this.user = r.data.user;
         _this.plates = r.data.plates.filter(function (e) {
           return e.visibility;
@@ -19409,15 +19427,32 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetchRestaurants: function fetchRestaurants() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/restaurants', {
+      if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].typolo.length) {
+        axios.get("/api/restaurants/index/".concat(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].typolo[0]), {
+          params: {
+            page: page
+          }
+        }).then(function (r) {
+          var _r$data$restaurants = r.data.restaurants,
+            data = _r$data$restaurants.data,
+            last_page = _r$data$restaurants.last_page,
+            current_page = _r$data$restaurants.current_page;
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = data;
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].lastPage = last_page;
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].currentPage = current_page;
+          _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].hasPlates = true;
+        });
+        return;
+      }
+      axios.get('/api/restaurants/index/all', {
         params: {
           page: page
         }
       }).then(function (r) {
-        var _r$data$restaurants = r.data.restaurants,
-          data = _r$data$restaurants.data,
-          last_page = _r$data$restaurants.last_page,
-          current_page = _r$data$restaurants.current_page;
+        var _r$data$restaurants2 = r.data.restaurants,
+          data = _r$data$restaurants2.data,
+          last_page = _r$data$restaurants2.last_page,
+          current_page = _r$data$restaurants2.current_page;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants = data;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].lastPage = last_page;
         _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].currentPage = current_page;
@@ -19667,15 +19702,19 @@ var render = function render() {
     staticClass: "flex between i-center"
   }, [_c("span", {
     staticClass: "fs-7 bold"
-  }, [_vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _c("span", {
-    staticClass: "fs-3"
+  }, [_vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _c("a", {
+    staticClass: "fs-3 bold black",
+    attrs: {
+      href: "tel:" + _vm.removeSpace(_vm.user.restaurant.restaurant_phone_number)
+    }
   }, [_vm._v(_vm._s(_vm.user.restaurant.restaurant_phone_number))])]), _vm._v(" "), _c("h3", {
     staticClass: "fs-3 mt-2"
-  }, [_vm._v(_vm._s(_vm.user.restaurant.restaurant_address))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.user.email))]), _vm._v(" "), _c("a", {
+  }, [_vm._v(_vm._s(_vm.user.restaurant.restaurant_address))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.user.email))]), _vm._v(" "), _c("div", [_c("a", {
+    staticClass: "black fs-3",
     attrs: {
       href: _vm.user.restaurant.restaurant_website
     }
-  }, [_vm._v(_vm._s(_vm.user.restaurant.restaurant_website))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\n                " + _vm._s(_vm.user.restaurant.restaurant_website) + "\n            ")])]), _vm._v(" "), _c("p", {
     staticClass: "mt-auto"
   }, [_vm._v(_vm._s(_vm.user.restaurant.restaurant_description))])]), _vm._v(" "), _c("img", {
     attrs: {
@@ -20458,9 +20497,9 @@ var render = function render() {
   return _c("div", {
     staticClass: "min-h-100vh flex f-column",
     "class": _vm.tema ? "bg-body-light" : "bg-body-dark"
-  }, [_c("div", [_c("NavBar")], 1), _vm._v(" "), _c("div", {
+  }, [_c("NavBar"), _vm._v(" "), _c("div", {
     staticClass: "grow-1"
-  }, [_c("router-view")], 1), _vm._v(" "), _c("div", [_c("FooterVue")], 1)]);
+  }, [_c("router-view")], 1), _vm._v(" "), _c("FooterVue")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -64160,7 +64199,8 @@ __webpack_require__.r(__webpack_exports__);
   prezzoTotaleDaPagare: null,
   coloreTema: 1,
   lastPage: null,
-  currentPage: null
+  currentPage: null,
+  typolo: []
 }));
 
 /***/ }),

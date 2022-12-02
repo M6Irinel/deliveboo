@@ -1,14 +1,10 @@
 <template>
     <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
-        <div>
-            <NavBar />
-        </div>
+        <NavBar />
         <div class="grow-1">
             <router-view />
         </div>
-        <div>
-            <FooterVue />
-        </div>
+        <FooterVue />
     </div>
 </template>
 
@@ -27,12 +23,22 @@ export default {
     computed: {
         tema () {
             return store.coloreTema;
-        }
+        },
     },
 
     methods: {
         fetchRestaurants ( page = 1 ) {
-            axios.get( '/api/restaurants', { params: { page: page } } ).then( r => {
+            if ( store.typolo.length ) {
+                axios.get( `/api/restaurants/index/${ store.typolo[ 0 ] }`, { params: { page: page } } ).then( r => {
+                    const { data, last_page, current_page } = r.data.restaurants;
+                    store.restaurants = data;
+                    store.lastPage = last_page;
+                    store.currentPage = current_page;
+                    store.hasPlates = true;
+                } );
+                return;
+            }
+            axios.get( '/api/restaurants/index/all', { params: { page: page } } ).then( r => {
                 const { data, last_page, current_page } = r.data.restaurants;
                 store.restaurants = data;
                 store.lastPage = last_page;
@@ -46,7 +52,7 @@ export default {
                 store.typologies = r.data.typologies;
                 store.loadingRestaurant = false;
             } );
-        }
+        },
     },
 
     created () {

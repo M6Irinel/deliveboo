@@ -13,4 +13,5 @@ export default Vue.observable({
     coloreTema: 1,
     lastPage: null,
     currentPage: null,
+    typolo: []
 });

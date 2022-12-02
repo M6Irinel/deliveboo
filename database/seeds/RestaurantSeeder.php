@@ -89,7 +89,7 @@ class RestaurantSeeder extends Seeder
 
         $i = 1;
         foreach ($restaurants as $r) {
-           $r= Restaurant::create([
+           $n = Restaurant::create([
                 'restaurant_address'        => $r['restaurant_address'],
                 'user_id'                   => $i++,
                 'p_iva'                     => $r['p_iva'],
@@ -98,7 +98,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_website'        => $r['restaurant_website'],
                 'restaurant_image'          => $r['restaurant_image'],
             ]);
-            $r->typologies()->sync($r['tags']);
+            $n->typologies()->sync($r['tags']);
         }
     }
 }

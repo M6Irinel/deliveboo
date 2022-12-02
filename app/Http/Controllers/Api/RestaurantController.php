@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Restaurant;
+use App\Typology;
 use App\User;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class RestaurantController extends Controller
 {
@@ -14,11 +16,16 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($value)
     {
-        $restaurants = Restaurant::with('typologies', 'user')->paginate(6);
         $status = true;
 
+        if ($value == 'all') {
+            $restaurants = Restaurant::with('typologies', 'user')->paginate(6);
+            return response()->json(compact('restaurants', 'status'));
+        }
+
+        $restaurants = Typology::where('name', $value)->first()->restaurants()->with('typologies', 'user')->paginate(6);
         return response()->json(compact('restaurants', 'status'));
     }
 

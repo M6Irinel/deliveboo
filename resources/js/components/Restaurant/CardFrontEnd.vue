@@ -39,6 +39,9 @@
 
 <script>
 // @ts-nocheck
+import App from '../../views/App.vue';
+import store from '../../store/store';
+
 export default {
     name: 'CardFrontEnd',
 
@@ -47,6 +50,11 @@ export default {
             required: true,
             type: Array
         }
+    },
+
+    created () {
+        store.typolo = [];
+        App.methods.fetchRestaurants();
     }
 }
 </script>

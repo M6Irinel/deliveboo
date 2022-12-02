@@ -91,7 +91,6 @@ export default {
         fetchPlates () {
             store.loadingPlates = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
-                console.log(r);
                 this.user = r.data.user;
                 this.plates = r.data.plates.filter( e => e.visibility );
                 store.loadingPlates = false;

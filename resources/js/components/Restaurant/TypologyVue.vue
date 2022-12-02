@@ -2,7 +2,8 @@
     <div class="sticky right top z-index-3 shadow tag-wrapper t-center overflow-hidden">
         <ul class="list-style-none flex f-column">
             <li v-for="(typology, i) in typologies" :key="i">
-                <input @input.prevent="emita" class="d-none checkTrue" type="checkbox" :id="'typology-' + i" :value="typology.name" v-model="types">
+                <input @input.prevent="emita" class="d-none checkTrue" type="checkbox" :id="'typology-' + i"
+                    :value="typology.name" v-model="types">
 
                 <label :for="'typology-' + i" class="d-block pointer p-2 bg-red-1 bg-gray-1-H bold">
                     {{ typology.name }}
@@ -15,6 +16,9 @@
 
 <script>
 // @ts-nocheck
+import App from '../../views/App.vue';
+import store from '../../store/store';
+
 export default {
     name: 'TypologyVue',
 
@@ -33,7 +37,11 @@ export default {
 
     methods: {
         emita () {
-            setTimeout( () => { this.$emit( 'emitTypes', this.types ); }, 0 );
+            setTimeout( () => {
+                this.$emit( 'emitTypes', this.types );
+                store.typolo = this.types;
+                App.methods.fetchRestaurants();
+            }, 0 );
         }
     }
 }

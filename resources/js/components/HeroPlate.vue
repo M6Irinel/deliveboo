@@ -3,13 +3,19 @@
         :class="[tema ? 'bg-hero-plate-light text-dark' : 'bg-hero-plate-dark text-light']">
         <div class="flex f-column pb-3 p-3 grow-1">
             <h1 class="flex between i-center">
-                <span class="fs-7 bold">{{                                                                                            user.name                                                                                            }}</span>
-                <span class="fs-3">{{                                                                                            user.restaurant.restaurant_phone_number                                                                                            }}</span>
+                <span class="fs-7 bold">{{ user.name }}</span>
+                <a :href="'tel:' + removeSpace(user.restaurant.restaurant_phone_number)" class="fs-3 bold black">{{
+                        user.restaurant.restaurant_phone_number
+                }}</a>
             </h1>
-            <h3 class="fs-3 mt-2">{{                                                                                            user.restaurant.restaurant_address                                                                                            }}</h3>
-            <div>{{                                                                                            user.email                                                                                            }}</div>
-            <a :href="user.restaurant.restaurant_website">{{                                                                                            user.restaurant.restaurant_website                                                                                            }}</a>
-            <p class="mt-auto">{{                                                                                            user.restaurant.restaurant_description                                                                                            }}</p>
+            <h3 class="fs-3 mt-2">{{ user.restaurant.restaurant_address }}</h3>
+            <div>{{ user.email }}</div>
+            <div>
+                <a class="black fs-3" :href="user.restaurant.restaurant_website">
+                    {{ user.restaurant.restaurant_website }}
+                </a>
+            </div>
+            <p class="mt-auto">{{ user.restaurant.restaurant_description }}</p>
         </div>
         <img :src="'../storage/' + user.restaurant.restaurant_image" alt="">
     </div>
@@ -32,6 +38,12 @@ export default {
     computed: {
         tema () {
             return store.coloreTema;
+        }
+    },
+
+    methods: {
+        removeSpace ( v ) {
+            return v.replace( ' ', '' );
         }
     }
 }

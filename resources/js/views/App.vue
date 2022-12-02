@@ -1,7 +1,14 @@
 <template>
     <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
-        <NavBar />
-        <router-view />
+        <div>
+            <NavBar />
+        </div>
+        <div class="grow-1">
+            <router-view />
+        </div>
+        <div>
+            <FooterVue />
+        </div>
     </div>
 </template>
 
@@ -10,11 +17,12 @@
 // @ts-nocheck
 import store from '../store/store';
 import NavBar from '../components/NavBar.vue';
+import FooterVue from '../components/Footer.vue';
 
 export default {
     name: 'AppVue',
 
-    components: { NavBar },
+    components: { NavBar, FooterVue },
 
     computed: {
         tema () {

@@ -23,7 +23,7 @@
 
             <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
                 <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
+                    :class="[tema ? 'bg-card-light text-dark' : 'bg-card-dark text-light']"
                     v-for="(plate, i) in plates" :key="i">
 
                     <div class="image_plate">

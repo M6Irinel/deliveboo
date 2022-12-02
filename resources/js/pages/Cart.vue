@@ -88,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                <button @click="goEmail()">mail</button>
 
                 <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
                     @onError="paymentOnError" ref="PaymentRef" />
@@ -203,6 +204,7 @@ export default {
             let lStorage = JSON.stringify( localStorage );
             let parseLStorage = JSON.parse( lStorage );
             axios.post( '/orders/store', [ parseLStorage, this.datiUtente, this.form.amount ] );
+            console.log('spedita')
         },
 
         beforeBuy () {

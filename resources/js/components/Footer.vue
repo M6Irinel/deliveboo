@@ -4,7 +4,7 @@
       <div class="container footer_container_top">
         <div class="about_us sub_footer_top">
           <ul>
-            About Us
+            <h4> About Us</h4>
             <li>
               <a href="https://www.linkedin.com/in/adamo-carangi/">Adamo</a>
             </li>
@@ -19,7 +19,7 @@
         </div>
         <div class="lavora_con_noi sub_footer_top">
           <ul>
-            Lavora con noi
+            <h4> Lavora con noi</h4>
             <li><a href="">Diventa un Driver</a></li>
             <li><a href="">Hai un'Attività?</a></li>
             <li><a href="">Entra nel Team</a></li>
@@ -27,7 +27,7 @@
         </div>
         <div class="note_legali sub_footer_top">
           <ul>
-            Note Legali
+            <h4> Note Legali</h4>
             <li><a href="">Termini e Condizioni</a></li>
             <li><a href="">Privacy Policy</a></li>
             <li><a href="">Cookie Policy</a></li>
@@ -99,11 +99,26 @@ ul {
 
   li {
     margin-top: 23px;
+    position: relative;
     a {
       color: inherit;
       text-decoration: none;
     }
   }
+}
+li::after{
+    content:'';
+    position:absolute;
+    width: 0%;
+    height: 2px;    
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    background-color: #2285D4;
+}
+li:hover::after{
+    width: 100%;
+    transition: 0.25s;
 }
 .download {
   display: flex;

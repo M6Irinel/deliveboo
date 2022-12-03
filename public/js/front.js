@@ -23087,7 +23087,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "about_us sub_footer_top"
-  }, [_c("ul", [_vm._v("\n          About Us\n          "), _c("li", [_c("a", {
+  }, [_c("ul", [_c("h4", [_vm._v(" About Us")]), _vm._v(" "), _c("li", [_c("a", {
     attrs: {
       href: "https://www.linkedin.com/in/adamo-carangi/"
     }
@@ -23109,7 +23109,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "lavora_con_noi sub_footer_top"
-  }, [_c("ul", [_vm._v("\n          Lavora con noi\n          "), _c("li", [_c("a", {
+  }, [_c("ul", [_c("h4", [_vm._v(" Lavora con noi")]), _vm._v(" "), _c("li", [_c("a", {
     attrs: {
       href: ""
     }
@@ -23127,7 +23127,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "note_legali sub_footer_top"
-  }, [_c("ul", [_vm._v("\n          Note Legali\n          "), _c("li", [_c("a", {
+  }, [_c("ul", [_c("h4", [_vm._v(" Note Legali")]), _vm._v(" "), _c("li", [_c("a", {
     attrs: {
       href: ""
     }
@@ -49081,7 +49081,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\n.footer_container[data-v-61a7c374] {\n  display: flex;\n  flex-direction: column;\n}\n.footer_container_top[data-v-61a7c374] {\n  display: flex;\n  justify-content: space-between;\n  height: 350px;\n  padding-top: 75px;\n}\n.sub_footer[data-v-61a7c374] {\n  background-color: rgb(161, 118, 118);\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  margin-top: 23px;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\n.download[data-v-61a7c374] {\n  display: flex;\n  flex-direction: row;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.footer_container_bot[data-v-61a7c374] {\n  padding-bottom: 50px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container *[data-v-61a7c374] {\n  height: 50px;\n  margin-inline: 20px;\n  color: inherit;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #4b3c3d;\n  color: #e0e0e0;\n}\n@media screen and (max-width: 767px) {\n.footer_container_top[data-v-61a7c374] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer_container_top ul[data-v-61a7c374] {\n    margin-top: 50px;\n}\n}", ""]);
+exports.push([module.i, ".footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\n.footer_container[data-v-61a7c374] {\n  display: flex;\n  flex-direction: column;\n}\n.footer_container_top[data-v-61a7c374] {\n  display: flex;\n  justify-content: space-between;\n  height: 350px;\n  padding-top: 75px;\n}\n.sub_footer[data-v-61a7c374] {\n  background-color: rgb(161, 118, 118);\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  margin-top: 23px;\n  position: relative;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  position: absolute;\n  width: 0%;\n  height: 2px;\n  left: 0%;\n  right: 0%;\n  bottom: 0%;\n  background-color: #2285D4;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n  transition: 0.25s;\n}\n.download[data-v-61a7c374] {\n  display: flex;\n  flex-direction: row;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.footer_container_bot[data-v-61a7c374] {\n  padding-bottom: 50px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container *[data-v-61a7c374] {\n  height: 50px;\n  margin-inline: 20px;\n  color: inherit;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #4b3c3d;\n  color: #e0e0e0;\n}\n@media screen and (max-width: 767px) {\n.footer_container_top[data-v-61a7c374] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer_container_top ul[data-v-61a7c374] {\n    margin-top: 50px;\n}\n}", ""]);
 
 // exports
 

@@ -35289,6 +35289,19 @@ module.exports = function(module) {
 
 // @ts-nocheck
 
+var modal = document.querySelector("#modal");
+var openModal = document.querySelector("#openModal");
+var closeModal = document.querySelector("#closeModal");
+if (modal) {
+  modal.style.display = "none";
+  openModal.addEventListener("click", function () {
+    modal.style.display = "block";
+  });
+  closeModal.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+}
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -35321,19 +35334,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // const app = new Vue({
 //     el: "#app",
 // } );
-
-var modal = document.querySelector("#modal");
-var openModal = document.querySelector("#openModal");
-var closeModal = document.querySelector("#closeModal");
-if (modal) {
-  modal.style.display = "none";
-  openModal.addEventListener("click", function () {
-    modal.style.display = "block";
-  });
-  closeModal.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
-}
 
 /***/ }),
 

@@ -10,23 +10,23 @@
                 @foreach ($restaurants as $restaurant)
                     <li>
                         @if ($restaurant->restaurant_image)
-                            <div class="my-3">
-                                <img height="300" src="{{ asset('storage/' . $restaurant->restaurant_image) }}"
-                                    alt="NON HAI MESSO UNA IMMAGINE DEL RISTORANTE!">
+                            <div class="my-3 w-100 w-50-xs">
+                                <img class="img-fluid" src="{{ asset('storage/' . $restaurant->restaurant_image) }}"
+                                    alt="IMMAGINE DEL RISTORANTE">
                             </div>
                         @else
-                            <h3 class="text-danger">NON HAI VOLUTO INSERIRE UNA IMMAGINE DEL RISTORANTE!?</h3>
+                            <h3>NON HAI VOLUTO INSERIRE UNA IMMAGINE DEL RISTORANTE!?</h3>
                         @endif
 
                         <p>Partita Iva : <strong>{{ $restaurant->p_iva }}</strong></p>
                         <p>Indirizzo : <strong>{{ $restaurant->restaurant_address }}</strong></p>
                         <p>Descrizione : <strong>{{ $restaurant->restaurant_description }}</strong></p>
-                        <p>Numero di telefono : <strong>+39 {{ $restaurant->restaurant_phone_number }}</strong></p>
+                        <p>Numero di telefono : <a class="black" href="tel:{{ $restaurant->restaurant_phone_number }}">{{ $restaurant->restaurant_phone_number }}</a></p>
 
                         @if ($restaurant->restaurant_website)
-                            <p>Sito Web : <a href="#">{{ $restaurant->restaurant_website }}</a></p>
+                            <p>Sito Web : <a href="#" class="black">{{ $restaurant->restaurant_website }}</a></p>
                         @else
-                            <p>Sito Web : <strong>---</strong></p>
+                            <p>Sito Web : <strong>-----</strong></p>
                         @endif
 
                         <div style="margin-top: 15px;">
@@ -41,14 +41,14 @@
 
                             <div class="d-flex justify-content-center">
                                 <div class="mt-2 mx-3">
-                                    <a class="btn btn-primary d-block button" href="{{ route('admin.plates.index') }}">
-                                        VAI ALLA LISTA DEI PIATTI
+                                    <a class="btn btn-primary d-block button bold letter-spacing-3" href="{{ route('admin.plates.index') }}">
+                                        LISTA PIATTI
                                     </a>
                                 </div>
 
                                 <div class="mt-2 mx-3">
-                                    <a class="btn btn-warning d-block button"
-                                        href="{{ route('admin.plates.create') }}">CREA UN PIATTO</a>
+                                    <a class="btn btn-success d-block button bold letter-spacing-3"
+                                        href="{{ route('admin.plates.create') }}">NUOVO PIATTO</a>
                                 </div>
                             </div>
                         </div>

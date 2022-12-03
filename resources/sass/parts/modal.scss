@@ -60,7 +60,7 @@
         box-shadow: 0 0 30px red;
     }
     100% {
-        box-shadow: 0 0 30px rgba(255, 0, 0, 0);
+        box-shadow: 0 0 30px #ff000000;
     }
 }
 
@@ -72,6 +72,6 @@
         box-shadow: 0 0 30px green;
     }
     100% {
-        box-shadow: 0 0 30px rgba(0, 128, 0, 0);
+        box-shadow: 0 0 30px #00800000;
     }
 }

@@ -19341,6 +19341,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    minPage: function minPage() {
+      return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].lastPage > 1;
+    },
     restaurants: function restaurants() {
       var _this = this;
       var r = _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].restaurants;
@@ -19973,7 +19976,7 @@ var render = function render() {
           return _vm.newPage(page);
         }
       }
-    }, [_vm._v(_vm._s(page))]);
+    }, [_vm._v("\n        " + _vm._s(page) + "\n    ")]);
   }), 0);
 };
 var staticRenderFns = [];
@@ -20444,7 +20447,7 @@ var render = function render() {
     attrs: {
       restaurants: _vm.restaurants
     }
-  }) : _c("Loader"), _vm._v(" "), _c("SelectPaginate")], 1), _vm._v(" "), _vm.typologies ? _c("TypologyVue", {
+  }) : _c("Loader"), _vm._v(" "), _vm.minPage ? _c("SelectPaginate") : _vm._e()], 1), _vm._v(" "), _vm.typologies ? _c("TypologyVue", {
     attrs: {
       typologies: _vm.typologies
     },

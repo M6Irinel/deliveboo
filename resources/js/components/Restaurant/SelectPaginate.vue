@@ -3,7 +3,9 @@
         <li :class="{
             'pointer bg-gray-3-H bg-gray-1 l': true,
             'bg-orange': page == currentPage,
-        }" v-for="page in lastPage" :key="page" @click="newPage(page)">{{ page }}</li>
+        }" v-for="page in lastPage" :key="page" @click="newPage(page)">
+            {{ page }}
+        </li>
     </ul>
 </template>
 

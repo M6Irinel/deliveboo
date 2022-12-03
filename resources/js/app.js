@@ -1,5 +1,21 @@
 // @ts-nocheck
 
+const modal = document.querySelector("#modal");
+const openModal = document.querySelector("#openModal");
+const closeModal = document.querySelector("#closeModal");
+
+if (modal) {
+    modal.style.display = "none";
+
+    openModal.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -32,19 +48,3 @@ require("./bootstrap");
 // const app = new Vue({
 //     el: "#app",
 // } );
-
-const modal = document.querySelector("#modal");
-const openModal = document.querySelector("#openModal");
-const closeModal = document.querySelector("#closeModal");
-
-if (modal) {
-    modal.style.display = "none";
-
-    openModal.addEventListener("click", () => {
-        modal.style.display = "block";
-    });
-
-    closeModal.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-}

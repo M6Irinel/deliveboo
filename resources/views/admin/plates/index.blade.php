@@ -20,14 +20,14 @@
         <h1>PIATTI - <span class="text-primary">{{ strtoupper($name) }}</span></h1>
 
         @if ($plates->all() != [])
-            <ul class="p-0 layout-card mt-3">
+            <ul class="p-0 layout-card mt-3 grid-12">
                 @foreach ($plates as $plate)
-                    <li class="card-n position-relative">
+                    <li class="card-n position-relative g-col-6">
 
                         <a class="btn" href="{{ route('admin.plates.show', $plate) }}">
                             @if ($plate->plate_image)
                                 <div class="card-img">
-                                    <img class="img-fluid" src="{{ asset('storage/' . $plate->plate_image) }} "
+                                    <img class="h-100 w-100 obj-cover" src="{{ asset('storage/' . $plate->plate_image) }} "
                                         alt="Nessuna Foto Del Piatto">
                                 </div>
                             @else
@@ -39,8 +39,18 @@
 
                             <div class="mt-auto d-flex flex-column">
                                 <h4>{{ $plate->plate_name }}</h4>
-                                <p class="card-text">Descrizione<strong
-                                        class="d-block card-d">{{ $plate->plate_description }}</strong></p>
+                                <p class="card-text">
+                                    Descrizione
+                                    <strong class="d-block card-d">
+                                        {{ $plate->plate_description }}
+                                    </strong>
+                                </p>
+                                <p class="card-text">
+                                    Ingredienti
+                                    <strong class="d-block card-d">
+                                        {{$plate->ingredients}}
+                                    </strong>
+                                </p>
                             </div>
                         </a>
                     </li>

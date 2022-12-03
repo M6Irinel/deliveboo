@@ -16,7 +16,7 @@
                 <CardFrontEnd v-if="restaurants" :restaurants="restaurants" />
                 <Loader v-else />
 
-                <SelectPaginate />
+                <SelectPaginate v-if="minPage" />
             </div>
 
             <TypologyVue v-if="typologies" @emitTypes="emitTypes" @close="close" :typologies="typologies" />
@@ -58,10 +58,11 @@ export default {
             this.types = v;
         },
 
-        close () { this.visibilityCart = false; }
+        close () { this.visibilityCart = false; },
     },
 
     computed: {
+        minPage () { return store.lastPage > 1; },
         restaurants () {
             let r = store.restaurants;
             if ( !this.types.length ) return r;

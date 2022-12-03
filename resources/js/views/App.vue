@@ -1,6 +1,7 @@
 <template>
     <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
         <NavBar />
+   
         <div class="grow-1 padding-height-navbar" :class="{ 'px-2': mobile }">
             <router-view />
         </div>
@@ -14,11 +15,12 @@
 import store from '../store/store';
 import NavBar from '../components/NavBar.vue';
 import FooterVue from '../components/Footer.vue';
+import HeroMain from '../components/HeroMain.vue';
 
 export default {
     name: 'AppVue',
 
-    components: { NavBar, FooterVue },
+    components: { NavBar, FooterVue, HeroMain },
 
     computed: {
         tema () {

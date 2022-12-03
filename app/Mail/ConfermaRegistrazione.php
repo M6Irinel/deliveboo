@@ -2,17 +2,17 @@
 
 namespace App\Mail;
 
+use App\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfermaPagamento extends Mailable
+class ConfermaRegistrazione extends Mailable
 {
     use Queueable, SerializesModels;
-    public $order;
-    public $userName;
+    public $restaurant;
   
 
     /**
@@ -20,10 +20,10 @@ class ConfermaPagamento extends Mailable
      *
      * @return void
      */
-    public function __construct(Request $request,$userName)
+    public function __construct($restaurant)
     {
-       $this->order=$request;
-       $this->userName=$userName;
+   
+       $this->restaurant=$restaurant;
        
     }
 
@@ -34,6 +34,6 @@ class ConfermaPagamento extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.conferma_pagamento');
+        return $this->markdown('mail.conferma_registrazione');
     }
 }

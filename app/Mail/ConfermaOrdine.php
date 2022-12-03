@@ -8,11 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfermaPagamento extends Mailable
+class ConfermaOrdine extends Mailable
 {
     use Queueable, SerializesModels;
     public $order;
-    public $userName;
   
 
     /**
@@ -20,10 +19,9 @@ class ConfermaPagamento extends Mailable
      *
      * @return void
      */
-    public function __construct(Request $request,$userName)
+    public function __construct(Request $request)
     {
        $this->order=$request;
-       $this->userName=$userName;
        
     }
 
@@ -34,6 +32,6 @@ class ConfermaPagamento extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.conferma_pagamento');
+        return $this->markdown('mail.conferma_ordine');
     }
 }

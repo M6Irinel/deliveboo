@@ -18989,9 +18989,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     tema: function tema() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].coloreTema;
-    },
-    t: function t() {
-      return this.datiUtente.numeroTelefono;
     }
   },
   methods: {

@@ -157,8 +157,6 @@ export default {
         tema () {
             return store.coloreTema;
         },
-
-        t () { return this.datiUtente.numeroTelefono }
     },
 
     methods: {

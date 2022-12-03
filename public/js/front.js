@@ -18919,9 +18919,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     tema: function tema() {
       return _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].coloreTema;
-    },
-    t: function t() {
-      return this.datiUtente.numeroTelefono;
     }
   },
   methods: {
@@ -18959,7 +18956,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var lStorage = JSON.stringify(localStorage);
       var parseLStorage = JSON.parse(lStorage);
       axios.post('/orders/store', [parseLStorage, this.datiUtente, this.form.amount]);
-      console.log('spedita');
     },
     beforeBuy: function beforeBuy() {
       if (this.validationForm()) this.$refs.PaymentRef.$refs.paymentBtnRef.click();else this.orderSuccess = false;
@@ -20105,13 +20101,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errorNome ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("Errore: il campo della Nome e Cognome è richiesto\n                    ")]) : _vm._e()])]) : _vm._e(), _vm._v(" "), _c("button", {
-    on: {
-      click: function click($event) {
-        return _vm.goEmail();
-      }
-    }
-  }, [_vm._v("mail")]), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
+  }, [_vm._v("Errore: il campo della Nome e Cognome è richiesto\n                    ")]) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.tokenApi ? _c("BraintreVue", {
     ref: "PaymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -64077,7 +64067,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

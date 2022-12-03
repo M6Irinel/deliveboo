@@ -6,8 +6,7 @@
             <div v-if="plates">
                 <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                     <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']"
-                        v-for="(plate, i) in plates" :key="i">
+                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
 
                         <p class="mb-auto bold">{{ plate.plate_name }}</p>
 
@@ -58,7 +57,8 @@ export default {
     data () {
         return {
             forLogin,
-            total: localStorage.getItem( 'spesaTotale' )
+            total: localStorage.getItem( 'spesaTotale' ),
+            loadingCart: false,
         };
     },
 
@@ -67,10 +67,6 @@ export default {
             if ( store.plates )
                 return store.plates.filter( ( e ) => localStorage[ e.plate_name ] );
             else return null;
-        },
-
-        loadingCart () {
-            return store.loadingCart;
         },
 
         tema () {
@@ -82,11 +78,11 @@ export default {
         fetchPlates () {
             if ( !localStorage.resId ) return;
 
-            store.loadingCart = true;
+            this.loadingCart = true;
             axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loadingCart = false;
+                    this.loadingCart = false;
                 } );
         },
 
@@ -166,7 +162,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
-                store.prezzoTotaleDaPagare = s.toFixed(2);
+                store.prezzoTotaleDaPagare = s.toFixed( 2 );
             } )
             this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;

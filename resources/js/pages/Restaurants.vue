@@ -13,13 +13,14 @@
             <div class="flex f-column gap-5 grow-1">
                 <cart-modal v-if="visibilityCart" />
 
-                <CardFrontEnd v-if="(!loadingRestaurant && restaurants)" :restaurants="restaurants" />
+                <CardFrontEnd v-if="restaurants" :restaurants="restaurants" />
                 <Loader v-else />
 
                 <SelectPaginate />
             </div>
 
-            <TypologyVue v-if="typologies" @emitTypes="emitTypes" :typologies="typologies" />
+            <TypologyVue v-if="typologies" @emitTypes="emitTypes" @close="close" :typologies="typologies" />
+            <Loader v-else />
         </div>
     </main>
 </template>
@@ -55,7 +56,9 @@ export default {
 
         emitTypes ( v ) {
             this.types = v;
-        }
+        },
+
+        close () { this.visibilityCart = false; }
     },
 
     computed: {
@@ -65,7 +68,6 @@ export default {
             return r.filter( e => this.types.every( f => e.typologies.map( m => m.name ).includes( f ) ) );
         },
         typologies () { return store.typologies; },
-        loadingRestaurant () { return store.loadingRestaurant; },
         total () {
             if ( !store.totalCart )
                 return localStorage.getItem( 'spesaTotale' );
@@ -76,7 +78,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .tag-distance {
     gap: 2rem;
 }

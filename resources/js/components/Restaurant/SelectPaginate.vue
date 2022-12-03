@@ -35,7 +35,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 .l {
     width: 1.3rem;
     aspect-ratio: 1;

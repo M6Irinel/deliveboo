@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
         <NavBar />
-        <div class="grow-1">
+        <div class="grow-1 padding-height-navbar" :class="{ 'px-2': mobile }">
             <router-view />
         </div>
         <FooterVue />
@@ -24,48 +24,64 @@ export default {
         tema () {
             return store.coloreTema;
         },
+
+        mobile () {
+            return store.mobile;
+        }
     },
 
     methods: {
         fetchRestaurants ( page = 1 ) {
             if ( store.typolo.length ) {
-                axios.get( `/api/restaurants/index/${ store.typolo[ 0 ] }`, { params: { page: page } } ).then( r => {
-                    const { data, last_page, current_page } = r.data.restaurants;
-                    store.restaurants = data;
-                    store.lastPage = last_page;
-                    store.currentPage = current_page;
-                    store.hasPlates = true;
-                } );
+                this.forRestaurants( store.typolo[0], page );
                 return;
             }
-            axios.get( '/api/restaurants/index/all', { params: { page: page } } ).then( r => {
+            this.forRestaurants( 'all', page );
+        },
+
+        forRestaurants ( v, p ) {
+            axios.get( `/api/restaurants/index/${ v }`, { params: { page: p } } ).then( r => {
                 const { data, last_page, current_page } = r.data.restaurants;
                 store.restaurants = data;
                 store.lastPage = last_page;
                 store.currentPage = current_page;
-                store.hasPlates = true;
             } );
         },
 
         fetchTypologies () {
             axios.get( '/api/typologies' ).then( r => {
                 store.typologies = r.data.typologies;
-                store.loadingRestaurant = false;
             } );
         },
+
+        clearStorage () {
+            if ( localStorage.coloreTema ) {
+                const c = localStorage.getItem( 'coloreTema' );
+                localStorage.clear();
+                localStorage.setItem( 'coloreTema', c );
+                return;
+            }
+            localStorage.clear();
+        }
     },
 
     created () {
-        store.loadingRestaurant = true;
         this.fetchRestaurants();
         this.fetchTypologies();
-    }
+
+        if ( localStorage.coloreTema ) store.coloreTema = parseInt(localStorage.getItem( 'coloreTema' ));
+        else localStorage.setItem( 'coloreTema', store.coloreTema );
+    },
 }
 </script>
 
 
 <style lang="scss">
 @import '../../sass/variabili.scss';
+
+.grow-0 {
+    flex-grow: 0;
+}
 
 .grow-1 {
     flex-grow: 1;
@@ -81,5 +97,9 @@ export default {
 
 .bg-body-dark {
     background-color: $bgBodyDark;
+}
+
+.padding-height-navbar {
+    padding-top: $headerHeight;
 }
 </style>

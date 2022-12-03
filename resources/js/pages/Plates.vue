@@ -2,7 +2,6 @@
     <div>
         <main class="container">
             <div class="flex between pt-3">
-
                 <ButtonsLeft />
 
                 <div>
@@ -21,10 +20,10 @@
 
             <HeroPlate v-if="user" :user="user" />
 
-            <div v-if="!loadingPlates" class="grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
-                <div class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                    :class="[tema ? 'bg-card-light text-dark' : 'bg-card-dark text-light']"
-                    v-for="(plate, i) in plates" :key="i">
+            <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
+                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                    :class="[tema ? 'bg-card-light text-dark' : 'bg-card-dark text-light']" v-for="(plate, i) in plates"
+                    :key="i">
 
                     <div class="image_plate">
                         <img v-if="plate.plate_image" :src="'../storage/' + plate.plate_image" alt="" />
@@ -49,17 +48,20 @@
 
                     <div :class="[
                         'flex mt-auto',
-                        quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        quantity(plate.plate_name) ? 'between' : 'j-flex-end',
                     ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']"
+                        <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
+                            :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
                             @click="removePlate(plate)">-</button>
 
-                        <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{ quantity(plate.plate_name) }}</div>
+                        <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{ quantity(plate.plate_name) }}
+                        </div>
 
-                        <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']" @click="addPlate(plate)">+</button>
+                        <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
+                            @click="addPlate(plate)">+</button>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
             <LoaderC v-else />
         </main>
     </div>
@@ -72,6 +74,7 @@ import LoaderC from "../components/Loader.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
 import HeroPlate from "../components/HeroPlate.vue";
 import store from "../store/store";
+import App from "../views/App.vue";
 
 export default {
     name: "PlatesIndex",
@@ -83,17 +86,15 @@ export default {
             forLogin,
             plates: null,
             user: null,
-            total: localStorage.getItem( 'spesaTotale' )
+            total: localStorage.getItem( 'spesaTotale' ),
         };
     },
 
     methods: {
         fetchPlates () {
-            store.loadingPlates = true;
             axios.get( `/api/restaurants/${ this.$route.params.slug }` ).then( r => {
                 this.user = r.data.user;
                 this.plates = r.data.plates.filter( e => e.visibility );
-                store.loadingPlates = false;
             } );
         },
 
@@ -159,7 +160,7 @@ export default {
         },
 
         pulisciStorage () {
-            localStorage.clear();
+            App.methods.clearStorage();
             this.total = 0;
         },
 
@@ -183,19 +184,18 @@ export default {
 
         tema () {
             return store.coloreTema;
-        }
+        },
     },
 
     created () {
         this.fetchPlates();
         this.total = localStorage.getItem( 'spesaTotale' );
     },
-
 };
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '../../sass/variabili.scss';
 
 .bg-card-light {

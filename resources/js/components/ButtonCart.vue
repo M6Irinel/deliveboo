@@ -1,7 +1,8 @@
 <template>
     <div @click="$emit('modalCart')" class="btn btn-success px-3 py-1">
-        <font-awesome-icon v-if="status" icon="fa-solid fa-up-long" />
-        <font-awesome-icon v-else icon="fa-solid fa-down-long" />
+        <div class="transition-transform duration-3 ease-in-out" :class="[status ? '' : 'rotate-180']">
+            <font-awesome-icon icon="fa-solid fa-up-long" />
+        </div>
     </div>
 </template>
 
@@ -23,7 +24,5 @@ export default {
 }
 </script>
 
-
-<style lang="scss">
-
+<style scoped lang="scss">
 </style>

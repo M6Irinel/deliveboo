@@ -33,12 +33,22 @@ export default {
 
     methods: {
         light () {
-            store.coloreTema = 1;
+            this.imposta( 1 );
         },
 
         dark () {
-            store.coloreTema = 0;
+            this.imposta( 0 );
         },
+
+        imposta ( c ) {
+            store.coloreTema = c;
+            if ( localStorage.coloreTema ) {
+                localStorage.removeItem( 'coloreTema' );
+                localStorage.setItem( 'coloreTema', c );
+                return;
+            }
+            localStorage.setItem( 'coloreTema', c );
+        }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main v-if="!loadingCart" class="container" :class="[tema ? 'text-dark' : 'text-light']">
+        <main class="container" :class="[tema ? 'text-dark' : 'text-light']">
             <div class="flex between i-center py-2">
 
                 <ButtonsLeft />
@@ -22,44 +22,47 @@
 
             <h1>Cesto <span v-if="!total">vuoto</span></h1>
 
-            <ul v-if="(plates && !orderSuccess)" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
-                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                    :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
+            <div v-if="!loadingCart">
+                <ul v-if="(plates && !orderSuccess)" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+                    <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
 
-                    <div class="image_plate">
-                        <img v-if="plate.plate_image" :src="'./storage/' + plate.plate_image" alt="" />
-                        <img v-else :src="'./img/default/plate-empty.png'" alt="" />
-                    </div>
+                        <div class="image_plate">
+                            <img v-if="plate.plate_image" :src="'./storage/' + plate.plate_image" alt="" />
+                            <img v-else :src="'./img/default/plate-empty.png'" alt="" />
+                        </div>
 
-                    <p class="bold">{{ plate.plate_name }}</p>
+                        <p class="bold">{{ plate.plate_name }}</p>
 
-                    <p>Prezzo: {{ plate.plate_price }}€</p>
+                        <p>Prezzo: {{ plate.plate_price }}€</p>
 
-                    <div v-if="quantity(plate.plate_name) > 1">
-                        <p>Quantità: {{ quantity(plate.plate_name) }}</p>
-                        <p>
-                            Totale Piatto:
-                            {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
-                            €
-                        </p>
-                    </div>
+                        <div v-if="quantity(plate.plate_name) > 1">
+                            <p>Quantità: {{ quantity(plate.plate_name) }}</p>
+                            <p>
+                                Totale Piatto:
+                                {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
+                                €
+                            </p>
+                        </div>
 
-                    <div :class="[
-                        'flex mt-auto',
-                        quantity(plate.plate_name) ? 'between' : 'j-flex-end'
-                    ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
-                            :class="[tema ? 'bg-light' : 'bg-dark']" @click="removePlate(plate)">-</button>
+                        <div :class="[
+                            'flex mt-auto',
+                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        ]">
+                            <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
+                                :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']" @click="removePlate(plate)">-</button>
 
-                        <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{
-                                quantity(plate.plate_name)
-                        }}</div>
+                            <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{
+                                    quantity(plate.plate_name)
+                            }}</div>
 
-                        <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light' : 'bg-dark']"
-                            @click="addPlate(plate)">+</button>
-                    </div>
-                </li>
-            </ul>
+                            <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
+                                @click="addPlate(plate)">+</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <Loader v-else />
 
             <div v-if="total">
                 <div v-if="!orderSuccess" class="pt-3">
@@ -99,7 +102,6 @@
                 </button>
             </div>
         </main>
-        <Loader v-else />
     </div>
 </template>
 
@@ -110,6 +112,7 @@ import store from "../store/store";
 import Loader from "../components/Loader.vue";
 import BraintreVue from "../components/BraintreVue.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
+import App from "../views/App.vue";
 
 export default {
     name: "CartVue",
@@ -136,6 +139,7 @@ export default {
             errorIndirizzo: false,
             errorNome: false,
             orderSuccess: false,
+            loadingCart: null,
         };
     },
 
@@ -144,10 +148,6 @@ export default {
             if ( store.plates )
                 return store.plates.filter( ( e ) => localStorage[ e.plate_name ] );
             else return null;
-        },
-
-        loadingCart () {
-            return store.loadingCart;
         },
 
         prezzoTotale () {
@@ -228,17 +228,17 @@ export default {
         fetchPlates () {
             if ( !localStorage.resId ) return;
 
-            store.loadingCart = true;
+            this.loadingCart = true;
             axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loadingCart = false;
+                    this.loadingCart = false;
                     this.totalprice();
                 } );
         },
 
         pulisciStorage () {
-            localStorage.clear();
+            App.methods.clearStorage();
             store.plates = null;
             this.total = 0;
             store.totalCart = null;
@@ -331,7 +331,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '../../sass/variabili.scss';
 
 .bg-card-light {

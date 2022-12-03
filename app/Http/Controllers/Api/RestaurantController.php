@@ -19,6 +19,7 @@ class RestaurantController extends Controller
     public function index($value)
     {
         $status = true;
+       
 
         if ($value == 'all') {
             $restaurants = Restaurant::with('typologies', 'user')->paginate(6);

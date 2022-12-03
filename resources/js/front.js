@@ -17,10 +17,10 @@ import {
     faXmark,
     faLeftLong,
     faDownLong,
-    faUpLong,
-} from "@fortawesome/free-solid-svg-icons";
+    faUpLong, } from "@fortawesome/free-solid-svg-icons";
+
 import { faHourglassHalf } from "@fortawesome/free-regular-svg-icons";
-// import { faHatWizard } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faLinkedin, faTelegram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -33,6 +33,13 @@ library.add(
     faLeftLong,
     faDownLong,
     faUpLong,
+    faFacebook,
+    faInstagram,
+    faTelegram,
+    faLinkedin,
+    faTwitter
+
+    
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

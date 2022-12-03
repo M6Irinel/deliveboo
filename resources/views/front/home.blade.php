@@ -87,6 +87,11 @@
 <body class="reset">
     <div id="app"></div>
 
+    {{-- <form action="/orders/store" method="POST">
+        @csrf
+        <button type="submit">Manda Mail</button>
+    </form> --}}
+
     <!-- Scripts -->
     <script src="{{ asset('js/front.js') }}" defer></script>
 </body>

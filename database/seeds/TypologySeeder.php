@@ -12,64 +12,64 @@ class TypologySeeder extends Seeder
      */
     public function run()
     {
-        $myTypologies = [
+        $typologies = [
             [
                 "Tipologia" => "Primo",
-                "Immagine" => "primo.png",
+                "Immagine"  => "primo.png",
             ],
             [
                 "Tipologia" => "Sushi",
-                "Immagine" => "sushi.png",
+                "Immagine"  => "sushi.png",
             ],
             [
                 "Tipologia" => "Pizza",
-                "Immagine" => "pizza.png",
+                "Immagine"  => "pizza.png",
             ],
             [
                 "Tipologia" => "Poke",
-                "Immagine" => "poke.png",
+                "Immagine"  => "poke.png",
             ],
             [
                 "Tipologia" => "Kebab",
-                "Immagine" => "kebab.png",
+                "Immagine"  => "kebab.png",
             ],
             [
                 "Tipologia" => "Burger",
-                "Immagine" => "burger.png",
+                "Immagine"  => "burger.png",
             ],
             [
                 "Tipologia" => "Veg",
-                "Immagine" => "veg.png",
+                "Immagine"  => "veg.png",
             ],
             [
                 "Tipologia" => "Pesce",
-                "Immagine" => "pesce.png",
+                "Immagine"  => "pesce.png",
             ],
             [
                 "Tipologia" => "Carne",
-                "Immagine" => "carne.png",
+                "Immagine"  => "carne.png",
             ],
             [
                 "Tipologia" => "Indiano",
-                "Immagine" => "indiano.png",
+                "Immagine"  => "indiano.png",
             ],
             [
                 "Tipologia" => "Messicano",
-                "Immagine" => "messicano.png",
+                "Immagine"  => "messicano.png",
             ],
             [
                 "Tipologia" => "Dolci",
-                "Immagine" => "dolci.png",
+                "Immagine"  => "dolci.png",
             ],
             [
                 "Tipologia" => "Gelato",
-                "Immagine" => "gelato.png",
+                "Immagine"  => "gelato.png",
             ],
         ];
 
-        foreach ($myTypologies as $t) {
+        foreach ($typologies as $t) {
             Typology::create([
-                "name" => $t["Tipologia"],
+                "name"  => $t["Tipologia"],
                 "image" => $t["Immagine"],
             ]);
         }

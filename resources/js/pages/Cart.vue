@@ -1,75 +1,107 @@
 <template>
     <div>
-        <main v-if="!loadingCart" class="container">
+        <main class="container" :class="[tema ? 'text-dark' : 'text-light']">
             <div class="flex between i-center py-2">
 
                 <ButtonsLeft />
 
                 <div class="flex i-center gap-5">
-                    <button class="btn btn-danger px-1" v-if="total" @click="pulisciStorage()">Svuota il Carello</button>
-                    <div class="badge badge-warning p-1 fs-3">
+                    <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
+                        svuota cesto
+                    </button>
+
+                    <div class="btn-warning px-3 py-1 fs-3 rounded bold">
                         <font-awesome-icon icon="fa-solid fa-basket-shopping" />
                         <span v-if="total">
-                            Totale del ordine:
+                            Totale Ordine:
                             {{ parseFloat(total).toFixed(2) }}€
                         </span>
                     </div>
                 </div>
             </div>
 
-            <h1>Carrello <span v-if="!total">vuoto</span></h1>
+            <h1>Cesto <span v-if="!total">vuoto</span></h1>
 
-            <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
-                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                    v-for="(plate, i) in plates" :key="i">
+            <div v-if="!loadingCart">
+                <ul v-if="(plates && !orderSuccess)" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
+                    <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
 
-                    <div v-if="plate.plate_image">
-                        <img class="img-fluid" :src="'./storage/' + plate.plate_image" alt="" />
+                        <div class="image_plate">
+                            <img v-if="plate.plate_image" :src="'./storage/' + plate.plate_image" alt="" />
+                            <img v-else :src="'./img/default/plate-empty.png'" alt="" />
+                        </div>
+
+                        <p class="bold">{{ plate.plate_name }}</p>
+
+                        <p>Prezzo: {{ plate.plate_price }}€</p>
+
+                        <div v-if="quantity(plate.plate_name) > 1">
+                            <p>Quantità: {{ quantity(plate.plate_name) }}</p>
+                            <p>
+                                Totale Piatto:
+                                {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
+                                €
+                            </p>
+                        </div>
+
+                        <div :class="[
+                            'flex mt-auto',
+                            quantity(plate.plate_name) ? 'between' : 'j-flex-end'
+                        ]">
+                            <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
+                                :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']" @click="removePlate(plate)">-</button>
+
+                            <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{
+                                    quantity(plate.plate_name)
+                            }}</div>
+
+                            <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
+                                @click="addPlate(plate)">+</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <Loader v-else />
+
+            <div v-if="total">
+                <div v-if="!orderSuccess" class="pt-3">
+                    <div>
+                        <input type="email" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorEmail }"
+                            v-model="datiUtente.email" placeholder="inserisci la tua mail *">
+                        <div v-if="errorEmail" class="invalid-feedback">Errore: la email non è valida</div>
                     </div>
-                    <div v-else>
-                        <img class="img-fluid" :src="'./img/default/plate-empty.png'" alt="" />
+                    <div>
+                        <input type="number" max="14" min="10" class="form-control mt-2 px-3"
+                            :class="{ 'is-invalid': errorNumeroTelefono }" v-model="datiUtente.numeroTelefono"
+                            placeholder="inserisci il tuo num di Telefono *">
+                        <div v-if="errorNumeroTelefono" class="invalid-feedback">Errore: il numero di telefono non è
+                            valido</div>
                     </div>
-
-                    <div class="mt-auto">
-                        <p>{{ plate.plate_name }}</p>
-                        <div class="absolute badge badge-primary p-1 badge-n" v-if="quantity(plate.plate_name) > 1">
-                            &Cross;
-                            {{ quantity(plate.plate_name) }}
+                    <div>
+                        <input type="text" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorIndirizzo }"
+                            v-model="datiUtente.indirizzo" placeholder="inserisci il tuo indirizzo *">
+                        <div v-if="errorIndirizzo" class="invalid-feedback">Errore: il campo dell'indirizzo è richiesto
                         </div>
                     </div>
-
-                    <p>Prezzo: {{ plate.plate_price }}€</p>
-
-                    <div v-if="quantity(plate.plate_name) > 1">
-                        <p>Quantità: {{ quantity(plate.plate_name) }}</p>
-                        <p>
-                            Totale del Piatto:
-                            {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
-                            €
-                        </p>
+                    <div>
+                        <input type="text" class="form-control mt-2 px-3" :class="{ 'is-invalid': errorNome }"
+                            v-model="datiUtente.nome" placeholder="inserisci il tuo Nome e Cognome *">
+                        <div v-if="errorNome" class="invalid-feedback">Errore: il campo della Nome e Cognome è richiesto
+                        </div>
                     </div>
+                </div>
 
-                    <div :class="[
-                        'flex mt-auto',
-                        quantity(plate.plate_name) ? 'between' : 'j-flex-end'
-                    ]">
-                        <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3"
-                            @click="removePlate(plate)">-</button>
+                <BraintreVue v-if="tokenApi" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
+                    @onError="paymentOnError" ref="PaymentRef" />
 
-                        <div class="badge badge-primary badge-n py-1 px-2">{{ quantity(plate.plate_name) }}</div>
-
-                        <button class="btn btn-success px-3" @click="addPlate(plate)">+</button>
-                    </div>
-                </li>
-            </ul>
-
-            <BraintreVue v-if="tokenApi && total" :authorization="tokenApi" @onSuccess="paymentOnSuccess"
-                @onError="paymentOnError" ref="PaymentRef" />
-
-            <button v-if="tokenApi && total" :disabled="disabledBuyButton" @click.prevent="beforeBuy"
-                class="block w-100 btn btn-success py-2 my-2 uppercase">compra</button>
+                <button v-if="tokenApi" :disabled="orderSuccess" @click.prevent="beforeBuy"
+                    class="block w-100 btn btn-success py-2 my-2 uppercase">
+                    <span v-if="orderSuccess">conferma pagamento in corso...</span>
+                    <span v-else>compra</span>
+                </button>
+            </div>
         </main>
-        <LoaderC v-else />
     </div>
 </template>
 
@@ -77,25 +109,37 @@
 <script>
 // @ts-nocheck
 import store from "../store/store";
-import LoaderC from "../components/Loader.vue";
+import Loader from "../components/Loader.vue";
 import BraintreVue from "../components/BraintreVue.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
+import App from "../views/App.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC, BraintreVue, ButtonsLeft },
+    components: { Loader, BraintreVue, ButtonsLeft },
 
     data () {
         return {
             forLogin,
             total: localStorage.getItem( 'spesaTotale' ),
-            tokenApi: '',
-            form: {
-                token: '',
-                amount: ''
+            tokenApi: null,
+            datiUtente: {
+                email: null,
+                numeroTelefono: null,
+                indirizzo: null,
+                nome: null,
             },
-            disabledBuyButton: true,
+            form: {
+                token: null,
+                amount: null
+            },
+            errorEmail: false,
+            errorNumeroTelefono: false,
+            errorIndirizzo: false,
+            errorNome: false,
+            orderSuccess: false,
+            loadingCart: null,
         };
     },
 
@@ -106,64 +150,96 @@ export default {
             else return null;
         },
 
-        loadingCart () {
-            return store.loadingCart;
+        prezzoTotale () {
+            return store.prezzoTotaleDaPagare
+        },
+
+        tema () {
+            return store.coloreTema;
         },
     },
 
     methods: {
-        paymentOnSuccess ( nonce ) {
-            this.form.token = nonce;
-            this.pulisciStorage();
-            this.buy();
+        validationForm () {
+            const letters = 'qwertyuiopè+asdfghjklòàù<zxcvbnm,.-[]{};:é*/|€$%&=\'"ì^@°#§'.split( '' );
+            this.orderSuccess = false;
+            this.errorEmail = false;
+            this.errorNumeroTelefono = false;
+            this.errorIndirizzo = false;
+            this.errorNome = false;
+
+            if ( this.datiUtente.email != null || undefined || '' ) {
+                if ( this.datiUtente.email.length < 8 || !this.datiUtente.email.includes( '@', 2 ) || !this.datiUtente.email.includes( '.', this.datiUtente.email.indexOf( '@' ) + 2 ) || this.datiUtente.email.length < this.datiUtente.email.indexOf( '.' ) + 3 )
+                    this.errorEmail = true;
+            } else this.errorEmail = true;
+
+            if ( this.datiUtente.numeroTelefono != null || undefined || '' ) {
+                const r = this.datiUtente.numeroTelefono.toLowerCase();
+                letters.forEach( e => {
+                    if ( r.includes( e ) ) { this.errorNumeroTelefono = true; return; }
+                } );
+                if ( this.datiUtente.numeroTelefono.length < 10 || this.datiUtente.numeroTelefono.length > 14 )
+                    this.errorNumeroTelefono = true;
+            } else this.errorNumeroTelefono = true;
+
+            if ( this.datiUtente.indirizzo != null || undefined || '' ) {
+                if ( this.datiUtente.indirizzo.length < 5 )
+                    this.errorIndirizzo = true;
+            } else this.errorIndirizzo = true;
+
+            if ( this.datiUtente.nome != null || undefined || '' ) {
+                if ( this.datiUtente.nome.length < 4 )
+                    this.errorNome = true;
+            } else this.errorNome = true;
+
+            if ( !this.errorEmail && !this.errorNumeroTelefono && !this.errorIndirizzo && !this.errorNome )
+                return true;
+            return false;
         },
 
-        paymentOnError ( error ) {
-
+        goEmail () {
+            let lStorage = JSON.stringify( localStorage );
+            let parseLStorage = JSON.parse( lStorage );
+            axios.post( '/orders/store', [ parseLStorage, this.datiUtente, this.form.amount ] );
         },
 
         beforeBuy () {
-            this.form.amount = localStorage.getItem( 'spesaTotale' );
-            this.$refs.PaymentRef.$refs.paymentBtnRef.click();
+            if ( this.validationForm() )
+                this.$refs.PaymentRef.$refs.paymentBtnRef.click();
+            else this.orderSuccess = false;
         },
 
-        buy () {
-            this.disabledBuyButton = true;
-            let message;
+        paymentOnSuccess ( nonce ) {
+            this.orderSuccess = true;
+            this.form.amount = this.prezzoTotale;
+            this.form.token = nonce;
             axios.post( '/api/make/payment', { ...this.form } ).then( r => {
-                message = r.data.message;
+                this.goEmail();
                 this.$router.push( { path: '/thankyou' } );
+                this.orderSuccess = false;
+                this.pulisciStorage();
             } );
         },
+
+        paymentOnError ( error ) { },
 
         fetchPlates () {
             if ( !localStorage.resId ) return;
 
-            store.loadingCart = true;
+            this.loadingCart = true;
             axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loadingCart = false;
+                    this.loadingCart = false;
+                    this.totalprice();
                 } );
         },
 
         pulisciStorage () {
-            localStorage.clear();
+            App.methods.clearStorage();
             store.plates = null;
             this.total = 0;
             store.totalCart = null;
-        },
-
-        totalF () {
-            if ( !localStorage.resId ) return;
-
-            let s = 0;
-            this.plates.forEach( e => {
-                let q = localStorage.getItem( e.plate_name + '-counter' );
-                s += e.plate_price * q;
-                localStorage.setItem( "spesaTotale", s );
-            } )
-            return s;
         },
 
         addPlate ( plate ) {
@@ -218,11 +294,16 @@ export default {
 
         totalprice () {
             let s = 0;
-            this.plates.forEach( e => {
-                let q = localStorage.getItem( e.plate_name + '-counter' );
-                s += e.plate_price * q;
-                localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
-            } )
+
+            if ( this.plates ) {
+
+                this.plates.forEach( e => {
+                    let q = localStorage.getItem( e.plate_name + '-counter' );
+                    s += e.plate_price * q;
+                    localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+                    store.prezzoTotaleDaPagare = s.toFixed( 2 );
+                } )
+            }
             this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;
         },
@@ -248,6 +329,25 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
+@import '../../sass/variabili.scss';
 
+.bg-card-light {
+    background-color: $bgCardLight;
+}
+
+.bg-card-dark {
+    background-color: $bgCardDark;
+}
+
+.image_plate {
+    height: 8rem;
+    overflow: hidden;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 </style>

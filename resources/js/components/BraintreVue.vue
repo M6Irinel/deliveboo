@@ -6,7 +6,7 @@
             </template>
         </v-braintree>
         <div>
-            <p v-if="error" class="red">
+            <p v-if="error" class="red bold">
                 {{ error }}
             </p>
         </div>
@@ -55,6 +55,6 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 </style>

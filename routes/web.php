@@ -30,6 +30,8 @@ Route::middleware('auth')
         Route::resource('plates', 'PlateController');
     });
 
+Route::post('/orders/store', 'Admin\OrderController@store');
+
 Route::get('{any?}', function () {
     return view('front.home');
 })->where('any', '.*');

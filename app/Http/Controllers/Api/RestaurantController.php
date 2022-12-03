@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Restaurant;
+use App\Typology;
 use App\User;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class RestaurantController extends Controller
 {
@@ -14,11 +16,16 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($value)
     {
-        $restaurants = Restaurant::orderBy('created_at', 'desc')->with('typologies', 'user')->get();
         $status = true;
 
+        if ($value == 'all') {
+            $restaurants = Restaurant::with('typologies', 'user')->paginate(6);
+            return response()->json(compact('restaurants', 'status'));
+        }
+
+        $restaurants = Typology::where('name', $value)->first()->restaurants()->with('typologies', 'user')->paginate(6);
         return response()->json(compact('restaurants', 'status'));
     }
 
@@ -43,10 +50,12 @@ class RestaurantController extends Controller
     {
         if (is_numeric($slug)) {
             $plates = User::where('id', $slug)->first()->restaurant->plates;
+            $user = User::where('id', $slug)->with('restaurant')->first();
 
 
             if ($plates) {
                 return response()->json([
+                    'user' => $user,
                     'plates' => $plates,
                     'status' => true
                 ]);
@@ -57,10 +66,12 @@ class RestaurantController extends Controller
             }
         } else {
             $plates = User::where('slug', $slug)->first()->restaurant->plates;
+            $user = User::where('slug', $slug)->with('restaurant')->first();
 
 
             if ($plates) {
                 return response()->json([
+                    'user' => $user,
                     'plates' => $plates,
                     'status' => true
                 ]);

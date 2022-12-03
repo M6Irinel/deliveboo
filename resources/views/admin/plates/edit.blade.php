@@ -4,16 +4,12 @@
     <div class="container">
 
         <div class="d-flex justify-content-center">
-            <div class="my-2 mx-3">
-                <a class="btn btn-secondary" href="{{ route('admin.plates.index') }}">TORNA ALL'INDEX DEI PIATTI</a>
-            </div>
+            <a class="my-2 mx-3 btn btn-secondary" href="{{ route('admin.plates.index') }}">LISTA PIATTI</a>
 
-            <div class="my-2 mx-3">
-                <a class="btn btn-success" href="{{ route('admin.plates.show', $plate) }}">TORNA ALLO SHOW DEL PIATTO</a>
-            </div>
+            <a class="my-2 mx-3 btn btn-success" href="{{ route('admin.plates.show', $plate) }}">PROFILO PIATTO</a>
         </div>
 
-        <h1>MODIFICA IL PIATTO</h1>
+        <h3 class="t-center"><strong>MODIFICA PIATTO</strong></h3>
 
         <form action="{{ route('admin.plates.update', $plate) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -44,10 +40,9 @@
 
 
             <div class="form-group">
-                <label for="plate_description">descivi il tuo </label>
+                <label for="plate_description">Descivi il tuo piatto</label>
 
-                <input class="form-control" type="text" name="plate_description" id="plate_description"
-                    value="{{ old('plate_description', $plate->plate_description) }}">
+                <textarea class="form-control" name="plate_description" id="plate_description" rows="3" cols="30">{{ old('plate_description', $plate->plate_description) }}</textarea>
 
                 @error('plate_description')
                     <p class="invalid-feedback error__mess">{{ $message }}</p>

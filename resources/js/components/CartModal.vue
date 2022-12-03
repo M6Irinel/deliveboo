@@ -6,7 +6,7 @@
             <div v-if="plates">
                 <ul class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
                     <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
-                        v-for="(plate, i) in plates" :key="i">
+                        :class="[tema ? 'bg-card-light' : 'bg-card-dark']" v-for="(plate, i) in plates" :key="i">
 
                         <p class="mb-auto bold">{{ plate.plate_name }}</p>
 
@@ -14,7 +14,7 @@
 
                         <div v-if="quantity(plate.plate_name) > 1">
                             <p>
-                                Totale del Piatto:
+                                Totale Piatto:
                                 <strong>
                                     {{ parseFloat(plate.plate_price * quantity(plate.plate_name)).toFixed(2) }}
                                     €
@@ -26,22 +26,20 @@
                             'flex mt-auto',
                             quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                         ]">
-                            <button v-if="quantity(plate.plate_name)" class="btn btn-danger px-3 bold"
+                            <button v-if="quantity(plate.plate_name)" class="btn border px-3 bold"
                                 @click="removePlate(plate)">-</button>
 
-                            <div class="badge badge-primary badge-n py-1 px-2">
+                            <strong class="fs-4">
                                 &#215;{{ quantity(plate.plate_name) }}
-                            </div>
+                            </strong>
 
-                            <button class="btn btn-success px-3 bold" @click="addPlate(plate)">+</button>
+                            <button class="btn border px-3 bold" @click="addPlate(plate)">+</button>
                         </div>
                     </li>
                 </ul>
             </div>
-            <p v-else>carrello vuoto</p>
-
         </main>
-        <LoaderC v-else />
+        <Load v-else />
     </div>
 </template>
 
@@ -49,17 +47,18 @@
 <script>
 // @ts-nocheck
 import store from "../store/store";
-import LoaderC from "../components/Loader.vue";
+import Load from "../components/Loader.vue";
 
 export default {
     name: "CartVue",
 
-    components: { LoaderC },
+    components: { Load },
 
     data () {
         return {
             forLogin,
-            total: localStorage.getItem( 'spesaTotale' )
+            total: localStorage.getItem( 'spesaTotale' ),
+            loadingCart: false,
         };
     },
 
@@ -70,20 +69,20 @@ export default {
             else return null;
         },
 
-        loadingCart () {
-            return store.loadingCart;
-        },
+        tema () {
+            return store.coloreTema;
+        }
     },
 
     methods: {
         fetchPlates () {
             if ( !localStorage.resId ) return;
 
-            store.loadingCart = true;
+            this.loadingCart = true;
             axios.get( `/api/restaurants/${ localStorage.getItem( "resId" ) }` )
                 .then( ( r ) => {
                     store.plates = r.data.plates;
-                    store.loadingCart = false;
+                    this.loadingCart = false;
                 } );
         },
 
@@ -102,6 +101,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s );
+
             } )
             return s;
         },
@@ -162,6 +162,7 @@ export default {
                 let q = localStorage.getItem( e.plate_name + '-counter' );
                 s += e.plate_price * q;
                 localStorage.setItem( "spesaTotale", s.toFixed( 2 ) );
+                store.prezzoTotaleDaPagare = s.toFixed( 2 );
             } )
             this.total = localStorage.getItem( 'spesaTotale' );
             store.totalCart = this.total;
@@ -180,5 +181,13 @@ export default {
 
 
 <style scoped lang="scss">
+@import '../../sass/variabili.scss';
 
+.bg-card-light {
+    background-color: $bgCardLight;
+}
+
+.bg-card-dark {
+    background-color: $bgCardDark;
+}
 </style>

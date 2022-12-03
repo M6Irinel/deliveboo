@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfermaRegistrazione;
 use App\Restaurant;
 use App\Plate;
 use App\Typology;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
@@ -37,6 +40,7 @@ class RestaurantController extends Controller
         if ($exist == []) {
             $typologies = Typology::orderBy('name', 'asc')->get();
 
+
             return view('admin.restaurants.create', compact('typologies'));
         } else {
             return redirect()->route('admin.restaurants.index');
@@ -62,6 +66,10 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::create($params);
 
         $restaurant->typologies()->sync($params['typologies']);
+
+        $userMail = User::where('id', $params['user_id'])->first()->email;
+        $userName = User::where('id', $params['user_id'])->first()->name;
+        Mail::to($userMail)->send(new ConfermaRegistrazione($userName));
 
         return redirect()->route('admin.restaurants.index');
     }

@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('restaurants', 'Api\RestaurantController')->only('index', 'show');
+// Route::resource('restaurants', 'Api\RestaurantController')->only('index', 'show');
+Route::get('/restaurants/index/{value}', 'Api\RestaurantController@index');
+Route::get('/restaurants/{value}', 'Api\RestaurantController@show');
+
 Route::resource('typologies', 'Api\TypologiesController')->only('index', 'show');
 
 // For EMAIL

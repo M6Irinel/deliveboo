@@ -1,35 +1,46 @@
 <template>
-    <header class="sticky top right left z-index-full"
-        :class="{ 'h-100vh': (mobile && isOpenNavbar), 'primaria': !mobile, 'bg-bottom-version-mobile': mobile }">
-        <div class="container flex between-sm f-column f-row-sm">
-            <div class="flex" :class="{ 'primaria shadow-1-light': mobile }">
-                <a class="grow-1 white header-height bg-hover-button-header bg-active-button-header flex center i-center decoration-none-H black-H bold"
-                    :class="{ 'pl-15': mobile }" href="/" title="home">deliveboo</a>
+    <header class="fixed top right left z-index-full"
+        :class="[(mobile && isOpenNavbar) ? 'h-100vh' : '', mobile ? tema ? 'bg-bottom-version-mobile-light light' : 'bg-bottom-version-mobile-light dark' : tema ? 'light' : 'dark']">
+        <div class="container h-100 flex between-sm f-column f-row-sm">
+            <div class="flex"
+                :class="[mobile ? tema ? 'light shadow-1-light' : 'dark shadow-1-dark' : tema ? 'light' : 'dark']">
+                <a class="grow-1 header-height flex center i-center decoration-none-H bold"
+                    :class="[mobile ? 'pl-15' : '', tema ? 'bg-active-button-header-light bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-active-button-header-dark bg-hover-button-header-dark text-button-dark text-hover-button-dark']"
+                    href="/" title="home">deliveboo</a>
 
                 <div>
-                    <button v-if="mobile" @click="openClosedNavbar()"
-                        class="bg-transparent border-none white bg-hover-button-header bg-active-button-header black-H">
+                    <button v-if="mobile" @click="openClosedNavbar()" class="bg-transparent border-none"
+                        :class="[tema ? 'bg-active-button-header-light bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-active-button-header-dark bg-hover-button-header-dark text-button-dark text-hover-button-dark']">
                         <font-awesome-icon v-if="isOpenNavbar" class="fs-7" icon="fa-solid fa-xmark" />
                         <font-awesome-icon v-else class="fs-5" icon="fa-solid fa-bars" />
                     </button>
                 </div>
             </div>
 
-            <div class="flex f-column f-row-sm i-stretch grow-1 j-flex-end"
-                :class="{ 'd-none': (mobile && !isOpenNavbar) }">
+            <div class="body-navbar flex f-column f-row-sm i-stretch grow-1 j-flex-end-sm transition-height duration-5"
+                :class="[(mobile && !isOpenNavbar) ? 'd-none' : '']">
 
-                <a class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
-                    :class="{ 'bg-button-header text-button': mobile }" href="/login" title="sign in">accedi</a>
+                <a class="header-height bold flex i-center j-flex-end border-b border-t border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="[mobile ? tema ? 'border-color-light bg-button-header-light text-button-light bg-hover-button-header-light bg-active-button-header-light text-hover-button-light' : 'border-color-dark bg-button-header-dark text-button-dark bg-hover-button-header-dark bg-active-button-header-dark text-hover-button-dark' : tema ? 'bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-hover-button-header-dark text-button-dark text-hover-button-dark']"
+                    href="/login" title="sign in" @click="closeNavbar">
+                    accedi
+                </a>
 
-                <a class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
-                    :class="{ 'bg-button-header text-button': mobile }" href="/register"
-                    title="new restaurant">registrati</a>
+                <a class="header-height bold flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                    :class="[mobile ? tema ? 'bg-button-header-light text-button-light border-color-light bg-hover-button-header-light bg-active-button-header-light text-hover-button-light' : 'bg-button-header-dark text-button-dark border-color-dark bg-hover-button-header-dark bg-active-button-header-dark text-hover-button-dark' : tema ? 'bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-hover-button-header-dark text-button-dark text-hover-button-dark']"
+                    href="/register" title="new restaurant" @click="closeNavbar">
+                    registrati
+                </a>
 
-                <router-link :to="{path: 'Settings'}" class="white header-height bold border-color bg-hover-button-header bg-active-button-header flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
-                    :class="{ 'bg-button-header text-button': mobile }" title="new restaurant">
-                    <span v-if="mobile">impostazioni</span>
-                    <font-awesome-icon v-else icon="fa-solid fa-gear" />
-                </router-link>
+                <div @click="closeNavbar">
+                    <router-link :to="{ name: 'Settings' }"
+                        class="header-height bold flex i-center j-flex-end border-b border-none-sm px-3 decoration-none-H block black-H d-inline-block-sm"
+                        :class="[mobile ? tema ? 'bg-button-header-light text-button-light border-color-light bg-hover-button-header-light bg-active-button-header-light text-hover-button-light' : 'bg-button-header-dark text-button-dark border-color-dark bg-hover-button-header-dark bg-active-button-header-dark text-hover-button-dark' : tema ? 'bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-hover-button-header-dark text-button-dark text-hover-button-dark']"
+                        title="new restaurant">
+                        <span v-if="mobile">impostazioni</span>
+                        <font-awesome-icon v-else icon="fa-solid fa-gear" />
+                    </router-link>
+                </div>
             </div>
         </div>
     </header>
@@ -37,6 +48,9 @@
 
 
 <script>
+// @ts-nocheck
+import store from '../store/store';
+
 export default {
     name: 'NavBar',
 
@@ -49,12 +63,18 @@ export default {
 
     computed: {
         mobile () {
-            return this.widthSizeX < 576;
+            store.mobile = this.widthSizeX < 576;
+            return store.mobile;
+        },
+
+        tema () {
+            return store.coloreTema;
         },
     },
 
     methods: {
         openClosedNavbar () {
+            store.closeTypology = true;
             this.isOpenNavbar = !this.isOpenNavbar;
         },
 
@@ -62,7 +82,9 @@ export default {
             this.widthSizeX = window.innerWidth;
             if ( !this.mobile )
                 this.isOpenNavbar = false;
-        }
+        },
+
+        closeNavbar () { this.isOpenNavbar = false }
     },
 
     mounted () {
@@ -82,37 +104,70 @@ export default {
     height: $headerHeight;
 }
 
-.text-button {
-    color: $textButton;
+.text-button-light {
+    color: $textButtonLight;
 }
 
-.border-color {
-    border-color: $borderColorHeader;
+.text-button-dark {
+    color: $textButtonDark;
 }
 
-.bg-button-header {
-    background-color: $bgButtonHeader;
+.text-hover-button-light:hover {
+    color: $textHoverButtonLight;
 }
 
-.bg-bottom-version-mobile {
-    background-color: $bgBottomVersionMobile;
+.text-hover-button-dark:hover {
+    color: $textHoverButtonDark;
 }
 
-.bg-hover-button-header:hover {
-    background-color: $bgHoverButtonHeader !important;
+.border-color-light {
+    border-color: $borderColorHeaderLight;
 }
 
-.bg-active-button-header:active {
-    background-color: $bgActiveButtonHeader !important;
+.border-color-dark {
+    border-color: $borderColorHeaderDark;
 }
 
-.primaria {
-    background-color: $primaria;
+.bg-button-header-light {
+    background-color: $bgButtonHeaderLight;
+}
+
+.bg-button-header-dark {
+    background-color: $bgButtonHeaderDark;
+}
+
+.bg-bottom-version-mobile-light {
+    background-color: $bgBottomVersionMobileLight;
+}
+
+.bg-bottom-version-mobile-dark {
+    background-color: $bgBottomVersionMobileDark;
+}
+
+.bg-hover-button-header-light:hover {
+    background-color: $bgHoverButtonHeaderLight !important;
+}
+
+.bg-hover-button-header-dark:hover {
+    background-color: $bgHoverButtonHeaderDark !important;
+}
+
+.bg-active-button-header-light:active {
+    background-color: $bgActiveButtonHeaderLight !important;
+}
+
+.bg-active-button-header-dark:active {
+    background-color: $bgActiveButtonHeaderDark !important;
+}
+
+.light {
+    background-color: $light;
     min-height: $headerHeight;
 }
 
-.title {
-    flex-grow: 1;
+.dark {
+    background-color: $dark;
+    min-height: $headerHeight;
 }
 
 button {

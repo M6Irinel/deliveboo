@@ -1,7 +1,8 @@
 <template>
-    <div @click="$emit('modalCart')" class="btn btn-success px-1">
-        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
-        <span v-if="total">{{ parseFloat(total).toFixed(2) }}€</span>
+    <div @click="$emit('modalCart')" class="btn btn-success px-3 py-1">
+        <div class="transition-transform duration-3 ease-in-out" :class="[status ? '' : 'rotate-180']">
+            <font-awesome-icon icon="fa-solid fa-up-long" />
+        </div>
     </div>
 </template>
 
@@ -14,11 +15,14 @@ export default {
         total: {
             required: false,
             type: String
+        },
+
+        status: {
+            type: Boolean
         }
     }
 }
 </script>
 
-
-<style lang="scss">
+<style scoped lang="scss">
 </style>

@@ -7,10 +7,9 @@
     .card-n {
         display: flex;
         flex-direction: column;
-        border: 2px rgb(203, 203, 203) solid;
+        border: 2px #cbcbcb solid;
         border-radius: 6px;
         box-shadow: 3px 3px 8px gray;
-        padding: 10px;
         transition: transform 0.2s ease-in-out;
 
         &:hover {
@@ -25,6 +24,7 @@
         .card-img {
             overflow: hidden;
             transition: all 0.3s ease-in-out;
+            max-height: 8rem;
 
             &:hover {
                 z-index: 1;
@@ -39,8 +39,13 @@
         }
 
         .card-d {
-            height: 6rem;
+            max-height: 6rem;
             overflow-y: auto;
         }
     }
+}
+
+.card-img {
+    overflow: hidden;
+    height: 20rem;
 }

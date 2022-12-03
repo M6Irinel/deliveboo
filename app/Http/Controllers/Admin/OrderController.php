@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfermaPagamento;
+use App\Mail\ConfermaOrdine;
+use App\Mail\ConfermaRegistrazione;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -36,7 +41,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mail = $request->all()[1]['email'];
+        $userResId = $request->all()[0]['resId'];
+        $userMail = User::where('id', $userResId)->first()->email;
+        $userName=User::where('id', $userResId)->first()->name;
+        Mail::to($mail)->send(new ConfermaOrdine($request));
+        Mail::to($userMail)->send(new ConfermaPagamento($request,$userName));
+        
     }
 
     /**

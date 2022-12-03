@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
         <NavBar />
-        <div class="grow-1 padding-height-navbar" :class="{ 'px-2': mobile }">
+        <div class="grow-1 padding-height-navbar">
             <router-view />
         </div>
         <FooterVue />

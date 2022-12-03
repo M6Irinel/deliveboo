@@ -1,7 +1,7 @@
 <template>
     <footer class="mt-3" :class="[tema ? 'bg-footer-light' : 'bg-footer-dark']">
         <div class="flex f-column">
-            <div class="container pt-4 pb-2 px-2 px-0-md grid-10 gap-20 flex-md between-md">
+            <div class="container pt-4 pb-2 px-0-md grid-10 gap-20 flex-md between-md" :class="[mobile ? 'px-2' : '']">
                 <div class="about_us g-col-5">
                     <h4 class="bold">About Us</h4>
                     <ul>
@@ -54,10 +54,10 @@
                 <div class="flex f-column between g-col-5">
                     <div class="flex f-column items-flex-end">
                         <a href="http://" class="download">
-                            <img class="img-fluid" :src="'./storage/site_img/img_appstore.png'" alt="" />
+                            <img class="img-fluid" :src="'../storage/site_img/img_appstore.png'" alt="" />
                         </a>
                         <a href="http://" class="download">
-                            <img class="img-fluid" :src="'./storage/site_img/img_playstore.png'" alt="" />
+                            <img class="img-fluid" :src="'../storage/site_img/img_playstore.png'" alt="" />
                         </a>
                     </div>
 
@@ -70,20 +70,20 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-red-2 py-2 px-2 px-0-md">
+            <div class="bg-red-2 py-2 px-0-md" :class="[mobile ? 'px-2' : '']">
                 <div class="container flex between i-center py-2">
                     <div>
                         <cite class="fs-2">© Boolean - Classe 70 - Team 5</cite>
                     </div>
                     <div class="flex gap-10 overflow-hidden">
                         <div class="imd-card-pay">
-                            <img class="fluid-img" :src="'./storage/site_img/visa.png'" alt="">
+                            <img class="fluid-img" :src="'../storage/site_img/visa.png'" alt="">
                         </div>
                         <div class="imd-card-pay">
-                            <img class="fluid-img" :src="'./storage/site_img/mastercard.png'" alt="">
+                            <img class="fluid-img" :src="'../storage/site_img/mastercard.png'" alt="">
                         </div>
                         <div class="imd-card-pay">
-                            <img class="fluid-img" :src="'./storage/site_img/mastercard-securcode.png'" alt="">
+                            <img class="fluid-img" :src="'../storage/site_img/mastercard-securcode.png'" alt="">
                         </div>
                     </div>
                 </div>
@@ -99,9 +99,9 @@ export default {
     name: "FooterVue",
 
     computed: {
-        tema () {
-            return store.coloreTema;
-        },
+        tema () { return store.coloreTema; },
+
+        mobile () { return store.mobile; }
     },
 };
 </script>

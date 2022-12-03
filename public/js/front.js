@@ -23082,13 +23082,14 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("footer", {
+    staticClass: "mt-3",
     "class": [_vm.tema ? "bg-footer-light" : "bg-footer-dark"]
   }, [_c("div", {
-    staticClass: "flex f-column container"
+    staticClass: "flex f-column"
   }, [_c("div", {
-    staticClass: "p-1 grid-12 gap-20 flex-md between-md i-flex-start"
+    staticClass: "container pt-4 pb-2 px-2 px-0-md grid-10 gap-20 flex-md between-md"
   }, [_c("div", {
-    staticClass: "about_us g-col-6"
+    staticClass: "about_us g-col-5"
   }, [_c("h4", {
     staticClass: "bold"
   }, [_vm._v("About Us")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
@@ -23128,7 +23129,9 @@ var render = function render() {
       icon: "fa-brands fa-linkedin"
     }
   })], 1)])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "flex f-column g-col-6"
+    staticClass: "flex f-column between g-col-5"
+  }, [_c("div", {
+    staticClass: "flex f-column items-flex-end"
   }, [_c("a", {
     staticClass: "download",
     attrs: {
@@ -23151,8 +23154,8 @@ var render = function render() {
       src: "./storage/site_img/img_playstore.png",
       alt: ""
     }
-  })])])]), _vm._v(" "), _c("div", {
-    staticClass: "icons_container"
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "icons_container j-flex-end"
   }, [_c("a", {
     attrs: {
       href: "#"
@@ -23193,21 +23196,46 @@ var render = function render() {
     attrs: {
       icon: "fa-brands fa-telegram"
     }
-  })], 1)])])]);
+  })], 1)])])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-red-2 py-2 px-2 px-0-md"
+  }, [_c("div", {
+    staticClass: "container flex between i-center py-2"
+  }, [_vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "flex gap-10 overflow-hidden"
+  }, [_c("div", {
+    staticClass: "imd-card-pay"
+  }, [_c("img", {
+    staticClass: "fluid-img",
+    attrs: {
+      src: "./storage/site_img/visa.png",
+      alt: ""
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "imd-card-pay"
+  }, [_c("img", {
+    staticClass: "fluid-img",
+    attrs: {
+      src: "./storage/site_img/mastercard.png",
+      alt: ""
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "imd-card-pay"
+  }, [_c("img", {
+    staticClass: "fluid-img",
+    attrs: {
+      src: "./storage/site_img/mastercard-securcode.png",
+      alt: ""
+    }
+  })])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "lavora_con_noi g-col-6"
+    staticClass: "lavora_con_noi g-col-5"
   }, [_c("h4", {
     staticClass: "bold"
   }, [_vm._v(" Lavora con noi")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
-    staticClass: "block",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Diventa un Driver")])]), _vm._v(" "), _c("li", [_c("a", {
     staticClass: "block",
     attrs: {
       href: "#"
@@ -23217,12 +23245,17 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Entra nel Team")])])])]);
+  }, [_vm._v("Entra nel Team")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Diventa un Driver")])])])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "note_legali g-col-6"
+    staticClass: "note_legali g-col-5"
   }, [_c("h4", {
     staticClass: "bold"
   }, [_vm._v(" Note Legali")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
@@ -23246,6 +23279,12 @@ var staticRenderFns = [function () {
       href: "#"
     }
   }, [_vm._v("Preferenze Cookies")])])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("cite", {
+    staticClass: "fs-2"
+  }, [_vm._v("© Boolean - Classe 70 - Team 5")])]);
 }];
 render._withStripped = true;
 
@@ -49211,7 +49250,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".download[data-v-61a7c374] {\n  height: 2.5rem;\n}\n.aboutUs > span[data-v-61a7c374]:last-of-type {\n  color: #2285D4;\n  opacity: 0;\n  transition: opacity 1s ease-in-out;\n}\n.aboutUs:hover > span[data-v-61a7c374]:last-of-type {\n  opacity: 1;\n}\n.footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  padding-top: 0.6rem;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  display: block;\n  width: 0%;\n  height: 3px;\n  background-color: #2285D4;\n  transition: width 1s cubic-bezier(0.51, -0.01, 0.38, 1);\n  border-radius: 10px;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n  gap: 1rem;\n}\n.icons_container *[data-v-61a7c374] {\n  height: 1rem;\n  color: inherit;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #46393a;\n  color: #e0e0e0;\n}", ""]);
+exports.push([module.i, ".imd-card-pay[data-v-61a7c374] {\n  height: 2rem;\n}\n.download[data-v-61a7c374] {\n  height: 2.5rem;\n}\n.aboutUs > span[data-v-61a7c374]:last-of-type {\n  color: #2285D4;\n  opacity: 0;\n  transition: opacity 0.6s ease-in-out;\n}\n.aboutUs:hover > span[data-v-61a7c374]:last-of-type {\n  opacity: 1;\n}\n.footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  padding-top: 0.6rem;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  display: block;\n  width: 0%;\n  height: 3px;\n  background-color: #2285D4;\n  transition: width 0.6s cubic-bezier(0.51, -0.01, 0.38, 1);\n  border-radius: 10px;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container a[data-v-61a7c374] {\n  color: inherit;\n  font-size: 1.5rem;\n  padding: 0.5rem;\n  flex-grow: 1;\n  flex-basis: 0;\n  display: flex;\n  justify-content: center;\n  transition: color 0.2s ease-in-out;\n}\n.icons_container a[data-v-61a7c374]:hover {\n  color: #2285D4;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #46393a;\n  color: #e0e0e0;\n}", ""]);
 
 // exports
 

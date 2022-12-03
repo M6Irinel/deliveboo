@@ -1,14 +1,10 @@
 <template>
-    <div class="min-h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
-        <div>
-            <NavBar />
-        </div>
+    <div class="h-100vh flex f-column" :class="tema ? 'bg-body-light' : 'bg-body-dark'">
+        <NavBar />
         <div class="grow-1">
             <router-view />
         </div>
-        <div>
-            <FooterVue />
-        </div>
+        <FooterVue />
     </div>
 </template>
 
@@ -38,7 +34,7 @@ export default {
                 store.lastPage = last_page;
                 store.currentPage = current_page;
                 store.hasPlates = true;
-                console.log(r);
+                console.log( r );
             } );
         },
 

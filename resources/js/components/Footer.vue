@@ -1,166 +1,164 @@
 <template>
-  <footer :class="[tema ? 'bg-footer-light' : 'bg-footer-dark']">
-    <div class="footer_container">
-      <div class="container footer_container_top">
-        <div class="about_us sub_footer_top">
-          <ul>
-            <h4> About Us</h4>
-            <li>
-              <a href="https://www.linkedin.com/in/adamo-carangi/">Adamo</a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/irinel-momoloaca/">Irinel</a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/jacopo-marini/">Jacopo</a>
-            </li>
-            <li><a href="https://www.linkedin.com/in/lucaponzoni/">Luca</a></li>
-          </ul>
-        </div>
-        <div class="lavora_con_noi sub_footer_top">
-          <ul>
-            <h4> Lavora con noi</h4>
-            <li><a href="">Diventa un Driver</a></li>
-            <li><a href="">Hai un'Attività?</a></li>
-            <li><a href="">Entra nel Team</a></li>
-          </ul>
-        </div>
-        <div class="note_legali sub_footer_top">
-          <ul>
-            <h4> Note Legali</h4>
-            <li><a href="">Termini e Condizioni</a></li>
-            <li><a href="">Privacy Policy</a></li>
-            <li><a href="">Cookie Policy</a></li>
-            <li><a href="">Preferenze Cookies</a></li>
-          </ul>
-        </div>
-        <div class="download sub_footer_top">
-          <a href="http://"
-            ><img :src="`/storage/site_img/appbuttondef.png`" alt=""
-          /></a>
-          <a href="http://"
-            ><img
-              :src="`/storage/site_img/get-it-on-google-play-store-button.png`"
-              alt=""
-          /></a>
-        </div>
-        
-      </div>
-      <div class="container footer_container_bot">
-            <div class="icons_container">
-                <a href=""> <font-awesome-icon icon="fa-brands fa-facebook" /></a>
-                <a href=""> <font-awesome-icon icon="fa-brands fa-instagram" /></a>
-                <a href=""> <font-awesome-icon icon="fa-brands fa-linkedin" /></a>
-                <a href=""> <font-awesome-icon icon="fa-brands fa-twitter" /></a>
-                <a href=""> <font-awesome-icon icon="fa-brands fa-telegram" /></a>
+    <footer :class="[tema ? 'bg-footer-light' : 'bg-footer-dark']">
+        <div class="flex f-column container">
+            <div class="p-1 grid-12 gap-20 flex-md between-md i-flex-start">
+                <div class="about_us g-col-6">
+                    <h4 class="bold">About Us</h4>
+                    <ul>
+                        <li>
+                            <a class="aboutUs block flex between" href="https://www.linkedin.com/in/adamo-carangi/">
+                                <span>Adamo</span>
+                                <span><font-awesome-icon icon="fa-brands fa-linkedin" /></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="aboutUs block flex between" href="https://www.linkedin.com/in/irinel-momoloaca/">
+                                <span>Irinel</span>
+                                <span><font-awesome-icon icon="fa-brands fa-linkedin" /></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="aboutUs block flex between" href="https://www.linkedin.com/in/jacopo-marini/">
+                                <span>Jacopo</span>
+                                <span><font-awesome-icon icon="fa-brands fa-linkedin" /></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="aboutUs block flex between" href="https://www.linkedin.com/in/lucaponzoni/">
+                                <span>Luca</span>
+                                <span><font-awesome-icon icon="fa-brands fa-linkedin" /></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lavora_con_noi g-col-6">
+                    <h4 class="bold"> Lavora con noi</h4>
+                    <ul>
+                        <li><a class="block" href="#">Diventa un Driver</a></li>
+                        <li><a class="block" href="#">Hai un'Attività?</a></li>
+                        <li><a class="block" href="#">Entra nel Team</a></li>
+                    </ul>
+                </div>
+
+                <div class="note_legali g-col-6">
+                    <h4 class="bold"> Note Legali</h4>
+                    <ul>
+                        <li><a class="block" href="#">Termini e Condizioni</a></li>
+                        <li><a class="block" href="#">Privacy Policy</a></li>
+                        <li><a class="block" href="#">Cookie Policy</a></li>
+                        <li><a class="block" href="#">Preferenze Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div class="flex f-column g-col-6">
+                    <a href="http://" class="download">
+                        <img class="img-fluid" :src="'/storage/site_img/img_appstore.png'" alt="" />
+                    </a>
+                    <a href="http://" class="download">
+                        <img class="img-fluid" :src="'/storage/site_img/img_playstore.png'" alt="" />
+                    </a>
+                </div>
             </div>
 
+            <div class="icons_container">
+                <a href="#"><font-awesome-icon icon="fa-brands fa-facebook" /></a>
+                <a href="#"><font-awesome-icon icon="fa-brands fa-instagram" /></a>
+                <a href="#"><font-awesome-icon icon="fa-brands fa-linkedin" /></a>
+                <a href="#"><font-awesome-icon icon="fa-brands fa-twitter" /></a>
+                <a href="#"><font-awesome-icon icon="fa-brands fa-telegram" /></a>
+            </div>
         </div>
-    </div>
-  </footer>
+    </footer>
 </template>
 
 
 <script>
 import store from "../store/store";
 export default {
-  name: "FooterVue",
+    name: "FooterVue",
 
-  computed: {
-    tema() {
-      return store.coloreTema;
+    computed: {
+        tema () {
+            return store.coloreTema;
+        },
     },
-  },
 };
 </script>
 
 
 <style scoped lang="scss">
 @import "../../sass/variabili.scss";
-.footer_container{
+
+.download {
+    height: 2.5rem;
+}
+
+.aboutUs > span:last-of-type {
+    color: $textHoverFooterButton;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.aboutUs:hover > span:last-of-type {
+    opacity: 1;
+}
+
+.footer_container {
     margin: 0 auto;
 }
-.footer_container{
-    display: flex;
-    flex-direction: column;
-}
 
-.footer_container_top {
-  display: flex;
-  justify-content: space-between;
-  height: 350px;
-  padding-top: 75px;
-}
-.sub_footer {
-  background-color: rgb(161, 118, 118);
-}
 ul {
-  list-style: none;
+    list-style: none;
 
-  li {
-    margin-top: 23px;
-    position: relative;
-    a {
-      color: inherit;
-      text-decoration: none;
+    li {
+        padding-top: 0.6rem;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
     }
-  }
 }
-li::after{
-    content:'';
-    position:absolute;
+
+li::after {
+    content: '';
+    display: block;
     width: 0%;
-    height: 2px;    
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
-    background-color: #2285D4;
+    height: 3px;
+    background-color: $textHoverFooterButton;
+    transition: width 1s cubic-bezier(.51, -0.01, .38, 1);
+    border-radius: 10px;
 }
-li:hover::after{
+
+li:hover::after {
     width: 100%;
-    transition: 0.25s;
 }
+
 .download {
-  display: flex;
-  flex-direction: row;
-  img {
-    max-height: 40px;
-  }
+    img {
+        max-height: 40px;
+    }
 }
-.footer_container_bot{
-    padding-bottom: 50px;
-}
-.icons_container{
+
+.icons_container {
     display: flex;
     justify-content: center;
-    *{
-        height: 50px;
-        margin-inline: 20px;
+    gap: 1rem;
+
+    * {
+        height: 1rem;
         color: inherit;
     }
 }
 
 .bg-footer-light {
-  background-color: $bgFooterLight;
-  color: $textButtonLight;
+    background-color: $bgFooterLight;
+    color: $textButtonLight;
 }
 
 .bg-footer-dark {
-  background-color: $bgFooterDark;
-  color: $textButtonDark;
-}
-
-// Responsive !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-@media screen and (max-width:767px){
-    .footer_container_top {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  ul{
-    margin-top: 50px;
-  }
-}
-
+    background-color: $bgFooterDark;
+    color: $textButtonDark;
 }
 </style>

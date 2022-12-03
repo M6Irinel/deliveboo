@@ -23013,36 +23013,78 @@ var render = function render() {
   return _c("footer", {
     "class": [_vm.tema ? "bg-footer-light" : "bg-footer-dark"]
   }, [_c("div", {
-    staticClass: "footer_container"
+    staticClass: "flex f-column container"
   }, [_c("div", {
-    staticClass: "container footer_container_top"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
-    staticClass: "download sub_footer_top"
+    staticClass: "p-1 grid-12 gap-20 flex-md between-md i-flex-start"
+  }, [_c("div", {
+    staticClass: "about_us g-col-6"
+  }, [_c("h4", {
+    staticClass: "bold"
+  }, [_vm._v("About Us")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
+    staticClass: "aboutUs block flex between",
+    attrs: {
+      href: "https://www.linkedin.com/in/adamo-carangi/"
+    }
+  }, [_c("span", [_vm._v("Adamo")]), _vm._v(" "), _c("span", [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-brands fa-linkedin"
+    }
+  })], 1)])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "aboutUs block flex between",
+    attrs: {
+      href: "https://www.linkedin.com/in/irinel-momoloaca/"
+    }
+  }, [_c("span", [_vm._v("Irinel")]), _vm._v(" "), _c("span", [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-brands fa-linkedin"
+    }
+  })], 1)])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "aboutUs block flex between",
+    attrs: {
+      href: "https://www.linkedin.com/in/jacopo-marini/"
+    }
+  }, [_c("span", [_vm._v("Jacopo")]), _vm._v(" "), _c("span", [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-brands fa-linkedin"
+    }
+  })], 1)])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "aboutUs block flex between",
+    attrs: {
+      href: "https://www.linkedin.com/in/lucaponzoni/"
+    }
+  }, [_c("span", [_vm._v("Luca")]), _vm._v(" "), _c("span", [_c("font-awesome-icon", {
+    attrs: {
+      icon: "fa-brands fa-linkedin"
+    }
+  })], 1)])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "flex f-column g-col-6"
   }, [_c("a", {
+    staticClass: "download",
     attrs: {
       href: "http://"
     }
   }, [_c("img", {
+    staticClass: "img-fluid",
     attrs: {
-      src: "/storage/site_img/appbuttondef.png",
+      src: "/storage/site_img/img_appstore.png",
       alt: ""
     }
   })]), _vm._v(" "), _c("a", {
+    staticClass: "download",
     attrs: {
       href: "http://"
     }
   }, [_c("img", {
+    staticClass: "img-fluid",
     attrs: {
-      src: "/storage/site_img/get-it-on-google-play-store-button.png",
+      src: "/storage/site_img/img_playstore.png",
       alt: ""
     }
   })])])]), _vm._v(" "), _c("div", {
-    staticClass: "container footer_container_bot"
-  }, [_c("div", {
     staticClass: "icons_container"
   }, [_c("a", {
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -23050,7 +23092,7 @@ var render = function render() {
     }
   })], 1), _vm._v(" "), _c("a", {
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -23058,7 +23100,7 @@ var render = function render() {
     }
   })], 1), _vm._v(" "), _c("a", {
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -23066,7 +23108,7 @@ var render = function render() {
     }
   })], 1), _vm._v(" "), _c("a", {
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -23074,74 +23116,63 @@ var render = function render() {
     }
   })], 1), _vm._v(" "), _c("a", {
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_c("font-awesome-icon", {
     attrs: {
       icon: "fa-brands fa-telegram"
     }
-  })], 1)])])])]);
+  })], 1)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "about_us sub_footer_top"
-  }, [_c("ul", [_c("h4", [_vm._v(" About Us")]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "lavora_con_noi g-col-6"
+  }, [_c("h4", {
+    staticClass: "bold"
+  }, [_vm._v(" Lavora con noi")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: "https://www.linkedin.com/in/adamo-carangi/"
-    }
-  }, [_vm._v("Adamo")])]), _vm._v(" "), _c("li", [_c("a", {
-    attrs: {
-      href: "https://www.linkedin.com/in/irinel-momoloaca/"
-    }
-  }, [_vm._v("Irinel")])]), _vm._v(" "), _c("li", [_c("a", {
-    attrs: {
-      href: "https://www.linkedin.com/in/jacopo-marini/"
-    }
-  }, [_vm._v("Jacopo")])]), _vm._v(" "), _c("li", [_c("a", {
-    attrs: {
-      href: "https://www.linkedin.com/in/lucaponzoni/"
-    }
-  }, [_vm._v("Luca")])])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "lavora_con_noi sub_footer_top"
-  }, [_c("ul", [_c("h4", [_vm._v(" Lavora con noi")]), _vm._v(" "), _c("li", [_c("a", {
-    attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Diventa un Driver")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Hai un'Attività?")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Entra nel Team")])])])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "note_legali sub_footer_top"
-  }, [_c("ul", [_c("h4", [_vm._v(" Note Legali")]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "note_legali g-col-6"
+  }, [_c("h4", {
+    staticClass: "bold"
+  }, [_vm._v(" Note Legali")]), _vm._v(" "), _c("ul", [_c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Termini e Condizioni")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Privacy Policy")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Cookie Policy")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "block",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Preferenze Cookies")])])])]);
 }];
@@ -23962,11 +23993,11 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "min-h-100vh flex f-column",
+    staticClass: "h-100vh flex f-column",
     "class": _vm.tema ? "bg-body-light" : "bg-body-dark"
-  }, [_c("div", [_c("NavBar")], 1), _vm._v(" "), _c("div", {
+  }, [_c("NavBar"), _vm._v(" "), _c("div", {
     staticClass: "grow-1"
-  }, [_c("router-view")], 1), _vm._v(" "), _c("div", [_c("FooterVue")], 1)]);
+  }, [_c("router-view")], 1), _vm._v(" "), _c("FooterVue")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -49081,7 +49112,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\n.footer_container[data-v-61a7c374] {\n  display: flex;\n  flex-direction: column;\n}\n.footer_container_top[data-v-61a7c374] {\n  display: flex;\n  justify-content: space-between;\n  height: 350px;\n  padding-top: 75px;\n}\n.sub_footer[data-v-61a7c374] {\n  background-color: rgb(161, 118, 118);\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  margin-top: 23px;\n  position: relative;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  position: absolute;\n  width: 0%;\n  height: 2px;\n  left: 0%;\n  right: 0%;\n  bottom: 0%;\n  background-color: #2285D4;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n  transition: 0.25s;\n}\n.download[data-v-61a7c374] {\n  display: flex;\n  flex-direction: row;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.footer_container_bot[data-v-61a7c374] {\n  padding-bottom: 50px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container *[data-v-61a7c374] {\n  height: 50px;\n  margin-inline: 20px;\n  color: inherit;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #4b3c3d;\n  color: #e0e0e0;\n}\n@media screen and (max-width: 767px) {\n.footer_container_top[data-v-61a7c374] {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    height: 100%;\n}\n.footer_container_top ul[data-v-61a7c374] {\n    margin-top: 50px;\n}\n}", ""]);
+exports.push([module.i, ".download[data-v-61a7c374] {\n  height: 2.5rem;\n}\n.aboutUs > span[data-v-61a7c374]:last-of-type {\n  color: #2285D4;\n  opacity: 0;\n  transition: opacity 1s ease-in-out;\n}\n.aboutUs:hover > span[data-v-61a7c374]:last-of-type {\n  opacity: 1;\n}\n.footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  padding-top: 0.6rem;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  display: block;\n  width: 0%;\n  height: 3px;\n  background-color: #2285D4;\n  transition: width 1s cubic-bezier(0.51, -0.01, 0.38, 1);\n  border-radius: 10px;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n  gap: 1rem;\n}\n.icons_container *[data-v-61a7c374] {\n  height: 1rem;\n  color: inherit;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #4b3c3d;\n  color: #e0e0e0;\n}", ""]);
 
 // exports
 
@@ -67765,7 +67796,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -19759,17 +19759,44 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "hero__main"
-  }, [_c("img", {
+    staticClass: "relative"
+  }, [_c("div", {
+    staticClass: "hero__main mb-4"
+  }, [_vm.tema ? _c("img", {
     attrs: {
       src: __webpack_require__(/*! ../../../storage/app/public/hero_main/MainHero.webp */ "./storage/app/public/hero_main/MainHero.webp"),
       alt: ""
     }
-  }), _vm._v(" "), _c("div", [_c("h1", {
+  }) : _c("img", {
+    attrs: {
+      src: __webpack_require__(/*! ../../../storage/app/public/hero_main/dark_hero.jpg */ "./storage/app/public/hero_main/dark_hero.jpg"),
+      alt: ""
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "content-hero flex f-column i-center p-5 w-50 rounded-10 shadow",
+    "class": [_vm.tema ? "bg-hero-restaurants-light" : "bg-hero-restaurants-dark"]
+  }, [_c("h1", {
     "class": [_vm.tema ? "text-dark" : "text-light"]
-  }, [_vm._v("Ordina qui il tuo Pasto Preferito!!!")])])]);
+  }, [_vm._v("\n            Ordina qui il tuo Pasto Preferito!!!\n        ")]), _vm._v(" "), _c("p", {
+    staticClass: "fs-4"
+  }, [_vm._v("Ordina online dai tuoi ristoranti preferiti")]), _vm._v(" "), _c("address", {
+    staticClass: "fs-4 my-2 w-100 p-1 flex gap-10 between i-center border border-dark rounded-full"
+  }, [_c("h2", {
+    staticClass: "fs-4 p-2"
+  }, [_vm._v("Nome della città")]), _vm._v(" "), _c("div", {
+    staticClass: "py-2 px-4 rounded-full",
+    "class": [_vm.tema ? "bg-hero-button-restaurants-light" : "bg-hero-button-restaurants-dark"]
+  }, [_vm._v("... consegna a TE")])]), _vm._v(" "), _vm._m(0)])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("p", [_c("a", {
+    attrs: {
+      href: "/accedi"
+    }
+  }, [_vm._v("Accedi")]), _vm._v(" per visualizare il tuo ristorante")]);
+}];
 render._withStripped = true;
 
 
@@ -45753,7 +45780,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".hero__main[data-v-0e4f30be] {\n  padding-bottom: 1rem;\n  width: 100vw;\n  height: 750px;\n}\n.hero__main img[data-v-0e4f30be] {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.hero__main h1[data-v-0e4f30be] {\n  text-align: center;\n  font-size: 3rem;\n  margin-top: -15px;\n}", ""]);
+exports.push([module.i, ".hero__main[data-v-0e4f30be] {\n  height: 28rem;\n}\n.hero__main img[data-v-0e4f30be] {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.content-hero[data-v-0e4f30be] {\n  position: absolute;\n  bottom: -1.5rem;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.content-hero h1[data-v-0e4f30be] {\n  text-align: center;\n}\n.bg-hero-restaurants-light[data-v-0e4f30be] {\n  background-color: #ffecee;\n}\n.bg-hero-restaurants-dark[data-v-0e4f30be] {\n  background-color: #685456;\n}\n.bg-hero-button-restaurants-light[data-v-0e4f30be] {\n  background-color: #c04f5b;\n}\n.bg-hero-button-restaurants-dark[data-v-0e4f30be] {\n  background-color: #64262c;\n}", ""]);
 
 // exports
 
@@ -64558,6 +64585,17 @@ module.exports = "/images/MainHero.webp?04bb7a2143c8758c3598678bbe094148";
 
 /***/ }),
 
+/***/ "./storage/app/public/hero_main/dark_hero.jpg":
+/*!****************************************************!*\
+  !*** ./storage/app/public/hero_main/dark_hero.jpg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/dark_hero.jpg?944b782a63c9159659905df4524d4e65";
+
+/***/ }),
+
 /***/ 1:
 /*!*************************************!*\
   !*** multi ./resources/js/front.js ***!
@@ -64565,7 +64603,7 @@ module.exports = "/images/MainHero.webp?04bb7a2143c8758c3598678bbe094148";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

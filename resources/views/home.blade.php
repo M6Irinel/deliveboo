@@ -16,6 +16,10 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
+                <div style="margin-top: 15px;">
+                    <a class="btn btn-primary d-block" href="{{route('admin.restaurants.index')}}">VAI AL RISTORANTE</a>
+                </div>
             </div>
         </div>
     </div>

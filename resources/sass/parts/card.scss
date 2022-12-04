@@ -1,0 +1,51 @@
+.layout-card {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    .card-n {
+        display: flex;
+        flex-direction: column;
+        border: 2px #cbcbcb solid;
+        border-radius: 6px;
+        box-shadow: 3px 3px 8px gray;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.035);
+            z-index: 1;
+
+            .badge-n {
+                filter: opacity(0);
+            }
+        }
+
+        .card-img {
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            max-height: 8rem;
+
+            &:hover {
+                z-index: 1;
+                transform: scale(1.3);
+                border-radius: 5px;
+                box-shadow: 3px 3px 7px gray;
+            }
+        }
+
+        .card-default {
+            overflow: hidden;
+        }
+
+        .card-d {
+            max-height: 6rem;
+            overflow-y: auto;
+        }
+    }
+}
+
+.card-img {
+    overflow: hidden;
+    height: 20rem;
+}

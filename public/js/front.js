@@ -23367,12 +23367,12 @@ var render = function render() {
     staticClass: "hero__main mb-4"
   }, [_vm.tema ? _c("img", {
     attrs: {
-      src: __webpack_require__(/*! ../../../storage/app/public/hero_main/MainHero.webp */ "./storage/app/public/hero_main/MainHero.webp"),
+      src: "./storage/site_img/MainHero.webp",
       alt: ""
     }
   }) : _c("img", {
     attrs: {
-      src: __webpack_require__(/*! ../../../storage/app/public/hero_main/dark_hero.jpg */ "./storage/app/public/hero_main/dark_hero.jpg"),
+      src: "./storage/site_img/dark_hero.jpg",
       alt: ""
     }
   })]), _vm._v(" "), _c("div", {
@@ -68237,28 +68237,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_91ac6b5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./storage/app/public/hero_main/MainHero.webp":
-/*!****************************************************!*\
-  !*** ./storage/app/public/hero_main/MainHero.webp ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/MainHero.webp?04bb7a2143c8758c3598678bbe094148";
-
-/***/ }),
-
-/***/ "./storage/app/public/hero_main/dark_hero.jpg":
-/*!****************************************************!*\
-  !*** ./storage/app/public/hero_main/dark_hero.jpg ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/dark_hero.jpg?944b782a63c9159659905df4524d4e65";
 
 /***/ }),
 

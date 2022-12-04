@@ -1,8 +1,8 @@
 <template>
     <div class="relative mb-5" :class="[tema ? 'text-dark' : 'text-light']">
         <div class="hero__main mb-4">
-            <img v-if="tema" src="../../../storage/app/public/hero_main/MainHero.webp" alt="">
-            <img v-else src="../../../storage/app/public/hero_main/dark_hero.jpg" alt="">
+            <img v-if="tema" :src="'./storage/site_img/MainHero.webp'" alt="">
+            <img v-else :src="'./storage/site_img/dark_hero.jpg'" alt="">
         </div>
         <div class="t-center content-hero flex f-column i-center p-5 rounded-10 shadow w-80 w-50-md" :class="[
             tema ? 'bg-hero-restaurants-light' : 'bg-hero-restaurants-dark',

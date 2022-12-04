@@ -20,9 +20,9 @@
         <h1>PIATTI - <span class="text-primary">{{ strtoupper($name) }}</span></h1>
 
         @if ($plates->all() != [])
-            <ul class="p-0 layout-card mt-3 grid-12">
+            <ul class="p-0 layout-card mt-3 grid-12 grid-10-xl">
                 @foreach ($plates as $plate)
-                    <li class="card-n position-relative g-col-6">
+                    <li class="card-n position-relative g-col-6 g-col-4-md g-col-3-lg g-col-2-xl">
 
                         <a class="btn" href="{{ route('admin.plates.show', $plate) }}">
                             @if ($plate->plate_image)

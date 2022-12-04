@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <main class="container">
-            <div class="flex between pt-3">
+    <div class="flex f-column min-h-100vh">
+        <main class="grow-1">
+            <HeroPlate v-if="user" :user="user" />
+
+            <div class="container flex between py-3" :class="[mobile ? 'px-2' : '']">
                 <ButtonsLeft />
 
                 <div>
@@ -18,10 +20,9 @@
                 </div>
             </div>
 
-            <HeroPlate v-if="user" :user="user" />
-
-            <ul v-if="plates" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5 pt-3">
-                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-md g-col-2-lg g-col-2-xl p-2"
+            <ul v-if="plates" class="container list-style-none grid-12 grid-10-xl gap-5"
+                :class="[mobile ? 'px-2' : '']">
+                <li class="card flex f-column g-col-6 g-col-6-sm g-col-4-lg g-col-2-xl p-2"
                     :class="[tema ? 'bg-card-light text-dark' : 'bg-card-dark text-light']" v-for="(plate, i) in plates"
                     :key="i">
 
@@ -30,26 +31,29 @@
                         <img v-else :src="'../img/default/plate-empty.png'" alt="" />
                     </div>
 
-                    <div>
-                        <p class="t-center bold">{{ plate.plate_name }}</p>
+                    <div class="flex f-column grow-1">
+                        <h4 class="t-center fs-4 py-1"><strong>{{ plate.plate_name }}</strong></h4>
 
-                        <p class="ingredients">
-                            <strong>Ingredienti: </strong>
-                            <span>{{ plate.ingredients }}</span>
-                        </p>
+                        <div class="ingredients grow-1">
+                            <p>
+                                <strong>Ingredienti: </strong>
+                                <span>{{ plate.ingredients }}</span>
+                            </p>
+                            <p>
+                                <strong>Descritione: </strong>
+                                <span>{{ plate.plate_description }}</span>
+                            </p>
+                        </div>
 
-                        <p class="flex between">
+                        <p class="flex between i-center">
                             <strong>Prezzo: </strong>
-                            <span>
+                            <strong class="fs-4">
                                 {{ parseFloat(plate.plate_price).toFixed(2) }}€
-                            </span>
+                            </strong>
                         </p>
                     </div>
 
-                    <div :class="[
-                        'flex mt-auto',
-                        quantity(plate.plate_name) ? 'between' : 'j-flex-end',
-                    ]">
+                    <div class="flex" :class="[quantity(plate.plate_name) ? 'between' : 'j-flex-end']">
                         <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
                             :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
                             @click="removePlate(plate)">-</button>
@@ -63,7 +67,26 @@
                 </li>
             </ul>
             <LoaderC v-else />
+
+            <div v-if="(mobile && plates)" class="container flex between pt-3" :class="[mobile ? 'px-2' : '']">
+                <ButtonsLeft />
+
+                <div>
+                    <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
+                        svuota cesto
+                    </button>
+
+                    <router-link class="btn btn-success px-3 py-1" :to="{ name: 'Cart' }">
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                        <span v-if="total">
+                            {{ parseFloat(total).toFixed(2) }}€
+                        </span>
+                    </router-link>
+                </div>
+            </div>
         </main>
+
+        <FooterVue />
     </div>
 </template>
 
@@ -75,11 +98,12 @@ import ButtonsLeft from "../components/ButtonsLeft.vue";
 import HeroPlate from "../components/HeroPlate.vue";
 import store from "../store/store";
 import App from "../views/App.vue";
+import FooterVue from "../components/Footer.vue";
 
 export default {
     name: "PlatesIndex",
 
-    components: { LoaderC, ButtonsLeft, HeroPlate },
+    components: { LoaderC, ButtonsLeft, HeroPlate, FooterVue },
 
     data () {
         return {
@@ -170,21 +194,15 @@ export default {
     },
 
     computed: {
-        restaurants () {
-            return store.restaurants;
-        },
+        restaurants () { return store.restaurants; },
 
-        loadingPlates () {
-            return store.loadingPlates;
-        },
+        loadingPlates () { return store.loadingPlates; },
 
-        restaurant_Id () {
-            return this.$route.params.id;
-        },
+        restaurant_Id () { return this.$route.params.id; },
 
-        tema () {
-            return store.coloreTema;
-        },
+        tema () { return store.coloreTema; },
+
+        mobile () { return store.mobile; }
     },
 
     created () {
@@ -218,7 +236,7 @@ export default {
 }
 
 .ingredients {
-    height: 3rem;
+    height: 6rem;
     overflow-y: auto;
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
-    <div>
-        <main class="container" :class="[tema ? 'text-dark' : 'text-light']">
+    <div class="flex f-column min-h-100vh">
+        <main class="container" :class="[
+            tema ? 'text-dark' : 'text-light',
+            mobile ? 'px-1' : ''
+        ]">
             <div class="flex between i-center py-2">
 
                 <ButtonsLeft />
@@ -20,7 +23,9 @@
                 </div>
             </div>
 
-            <h1>Cesto <span v-if="!total">vuoto</span></h1>
+            <h1 class="uppercase letter-spacing-3 none block-md">
+                <strong>Cesto <span v-if="!total">vuoto</span></strong>
+            </h1>
 
             <div v-if="!loadingCart">
                 <ul v-if="(plates && !orderSuccess)" class="list-style-none grid-12 grid-10-lg grid-12-xl gap-5">
@@ -50,13 +55,15 @@
                             quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                         ]">
                             <button v-if="quantity(plate.plate_name)" class="btn px-3 py-1 bold"
-                                :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']" @click="removePlate(plate)">-</button>
+                                :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
+                                @click="removePlate(plate)">-</button>
 
                             <div v-if="quantity(plate.plate_name)" class="fs-4 bold">&Cross;{{
                                     quantity(plate.plate_name)
                             }}</div>
 
-                            <button class="btn px-3 py-1 bold" :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
+                            <button class="btn px-3 py-1 bold"
+                                :class="[tema ? 'bg-light text-dark' : 'bg-dark text-light']"
                                 @click="addPlate(plate)">+</button>
                         </div>
                     </li>
@@ -102,6 +109,8 @@
                 </button>
             </div>
         </main>
+
+        <FooterVue />
     </div>
 </template>
 
@@ -112,12 +121,13 @@ import store from "../store/store";
 import Loader from "../components/Loader.vue";
 import BraintreVue from "../components/BraintreVue.vue";
 import ButtonsLeft from "../components/ButtonsLeft.vue";
+import FooterVue from "../components/Footer.vue";
 import App from "../views/App.vue";
 
 export default {
     name: "CartVue",
 
-    components: { Loader, BraintreVue, ButtonsLeft },
+    components: { Loader, BraintreVue, ButtonsLeft, FooterVue },
 
     data () {
         return {
@@ -150,13 +160,11 @@ export default {
             else return null;
         },
 
-        prezzoTotale () {
-            return store.prezzoTotaleDaPagare
-        },
+        prezzoTotale () { return store.prezzoTotaleDaPagare },
 
-        tema () {
-            return store.coloreTema;
-        },
+        tema () { return store.coloreTema; },
+
+        mobile () { return store.mobile; }
     },
 
     methods: {

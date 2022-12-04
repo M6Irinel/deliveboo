@@ -8,10 +8,10 @@
             p-2
             rounded-3
             t-right
-            orange-H
             shadow
             decoration-none-H
-            overflow-hidden"
+            overflow-hidden
+            hover_text_custom"
             :class="[restaurant.restaurant_image ? 'white bg-brown': 'black']" v-for="(restaurant, i) in restaurants" :key="i" :to="{
                 name: 'Plates',
                 params: {
@@ -24,9 +24,9 @@
             </div>
 
             <div class="my-card-body flex f-column h-100">
-                <h3>{{ restaurant.user.name }}</h3>
+                <h3><em>{{ restaurant.user.name }}</em></h3>
                 <address>{{ restaurant.restaurant_address }}</address>
-                <div class="mt-auto">
+                <div class="mt-auto w-60 ml-auto">
                     <p class="inline-block px-1" v-for="(typology, e) in restaurant.typologies" :key="e">
                         {{ typology.name }}
                     </p>
@@ -61,6 +61,9 @@ export default {
 
 
 <style scoped lang="scss">
+.hover_text_custom:hover{
+    color: #fbffa8;
+}
 .my-card {
     height: 10rem;
     border: 3px solid #8f5221;
@@ -79,7 +82,7 @@ export default {
 .my-card::before {
     content: '';
     display: block;
-    background: linear-gradient(to left, #000000bb, #ffffff00);
+    background: linear-gradient(to left, #000000, #ffffff00);
     z-index: 1;
 }
 

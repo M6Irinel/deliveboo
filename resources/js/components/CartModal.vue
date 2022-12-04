@@ -27,13 +27,15 @@
                             quantity(plate.plate_name) ? 'between' : 'j-flex-end'
                         ]">
                             <button v-if="quantity(plate.plate_name)" class="btn border px-3 bold"
+                            :class="[tema ? 'text-dark border-dark' : 'text-light border-light']"
                                 @click="removePlate(plate)">-</button>
 
                             <strong class="fs-4">
                                 &#215;{{ quantity(plate.plate_name) }}
                             </strong>
 
-                            <button class="btn border px-3 bold" @click="addPlate(plate)">+</button>
+                            <button :class="[tema ? 'text-dark border-dark' : 'text-light border-light']"
+                             class="btn border px-3 bold" @click="addPlate(plate)">+</button>
                         </div>
                     </li>
                 </ul>

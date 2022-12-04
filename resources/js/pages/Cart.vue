@@ -10,7 +10,7 @@
 
                 <div class="flex i-center gap-5">
                     <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
-                        svuota cesto
+                        svuota carrello
                     </button>
 
                     <div class="btn-warning px-3 py-1 fs-3 rounded bold">
@@ -24,7 +24,7 @@
             </div>
 
             <h1 class="uppercase letter-spacing-3 none block-md">
-                <strong>Cesto <span v-if="!total">vuoto</span></strong>
+                <strong>Carrello <span v-if="!total">vuoto</span></strong>
             </h1>
 
             <div v-if="!loadingCart">

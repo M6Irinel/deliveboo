@@ -71,8 +71,11 @@ export default {
 
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import '../../sass/variabili.scss';
-
+*{
+    font-family: 'Montserrat', sans-serif !important;
+}
 .grow-0 {
     flex-grow: 0;
 }

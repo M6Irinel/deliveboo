@@ -20,7 +20,7 @@
                     mobile ? 'px-3' : '',
                     tema ? 'bg-button-light bg-hover-button-light text-active-button-light' :
                         'bg-button-dark bg-hover-button-dark text-active-button-dark'
-                ]" class="d-block pointer p-2 bold">
+                ]" class="d-block pointer p-2 bold  transition-bg-color duration-3 ease-in-out">
                     {{ typology.name }}
                 </label>
             </li>
@@ -87,6 +87,18 @@ export default {
 
 <style scoped lang="scss">
 @import '../../../sass/variabili.scss';
+.button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+.slide:hover,
+.slide:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
 
 .tag-wrapper2 {
     flex-basis: 20%;

@@ -1,10 +1,10 @@
 <template>
-    <div :class="[tema ? 'bg-hero-plate-light text-dark' : 'bg-hero-plate-dark text-light']">
+    <div :class="[tema ? 'bg-hero-plate-light text-dark' : 'bg-hero-plate-dark text-light']" class="shadow">
         <div class="container">
             <div class="flex between hero gap-10 overflow-hidden">
                 <div class="flex f-column pb-3 p-3 grow-1">
                     <h1 class="flex between i-center flex-sm f-column-sm j-flex-start-sm i-flex-start-sm f-row-md flex-md between-md i-center-md">
-                        <span class="fs-7 bold">{{ user.name }}</span>
+                        <span class="fs-7 bold"><em>{{ user.name }}</em></span>
                         <a :href="'tel:' + removeSpace(user.restaurant.restaurant_phone_number)" class="fs-3 bold black"
                             :class="[tema ? 'text-dark' : 'text-light']">
                             Tel : {{ user.restaurant.restaurant_phone_number }}

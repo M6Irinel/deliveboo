@@ -7,7 +7,7 @@
         <div class="t-center content-hero flex f-column i-center p-5 rounded-10 shadow w-80 w-50-md" :class="[
             tema ? 'bg-hero-restaurants-light' : 'bg-hero-restaurants-dark',
         ]">
-            <h2 class="fs-5 fs-8-md">Ordina qui il tuo Pasto Preferito!!!</h2>
+            <h2 class="fs-5 fs-8-md">Ordina qui il tuo Piatto Preferito!</h2>
             <p class="fs-3">
                 <span :class="[tema ? 'green-6' : 'green-3']">
                     <strong>online</strong>
@@ -16,11 +16,11 @@
             </p>
             <address class="fs-4 my-2 w-100 p-1 f-column f-row-xl rounded flex gap-10 between i-center-xl border-2"
                 :class="[tema ? 'border-gray-9' : 'border-gray-1']">
-                <h2 class="fs-4 p-2">Nome della città</h2>
+                <h2 class="fs-4 p-2">Sant' Antioco</h2>
                 <div class="py-2 px-4 rounded fs-4"
                     :class="[tema ? 'bg-hero-button-restaurants-light' : 'bg-hero-button-restaurants-dark']">
                     <h1 class="fs-4 inline-block">Deliveboo</h1>
-                    <span>consegna a TE</span>
+                    <span>te lo consegna!</span>
                 </div>
             </address>
             <p>

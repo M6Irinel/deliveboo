@@ -23378,7 +23378,7 @@ var render = function render() {
     "class": [_vm.tema ? "bg-hero-restaurants-light" : "bg-hero-restaurants-dark"]
   }, [_c("h2", {
     staticClass: "fs-5 fs-8-md"
-  }, [_vm._v("Ordina qui il tuo Pasto Preferito!!!")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Ordina qui il tuo Piatto Preferito!")]), _vm._v(" "), _c("p", {
     staticClass: "fs-3"
   }, [_c("span", {
     "class": [_vm.tema ? "green-6" : "green-3"]
@@ -23387,12 +23387,12 @@ var render = function render() {
     "class": [_vm.tema ? "border-gray-9" : "border-gray-1"]
   }, [_c("h2", {
     staticClass: "fs-4 p-2"
-  }, [_vm._v("Nome della città")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Sant' Antioco")]), _vm._v(" "), _c("div", {
     staticClass: "py-2 px-4 rounded fs-4",
     "class": [_vm.tema ? "bg-hero-button-restaurants-light" : "bg-hero-button-restaurants-dark"]
   }, [_c("h1", {
     staticClass: "fs-4 inline-block"
-  }, [_vm._v("Deliveboo")]), _vm._v(" "), _c("span", [_vm._v("consegna a TE")])])]), _vm._v(" "), _vm._m(0)])]);
+  }, [_vm._v("Deliveboo")]), _vm._v(" "), _c("span", [_vm._v("te lo consegna!")])])]), _vm._v(" "), _vm._m(0)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -23423,6 +23423,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
+    staticClass: "shadow",
     "class": [_vm.tema ? "bg-hero-plate-light text-dark" : "bg-hero-plate-dark text-light"]
   }, [_c("div", {
     staticClass: "container"
@@ -23434,7 +23435,7 @@ var render = function render() {
     staticClass: "flex between i-center flex-sm f-column-sm j-flex-start-sm i-flex-start-sm f-row-md flex-md between-md i-center-md"
   }, [_c("span", {
     staticClass: "fs-7 bold"
-  }, [_vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _c("a", {
+  }, [_c("em", [_vm._v(_vm._s(_vm.user.name))])]), _vm._v(" "), _c("a", {
     staticClass: "fs-3 bold black",
     "class": [_vm.tema ? "text-dark" : "text-light"],
     attrs: {
@@ -23620,7 +23621,7 @@ var render = function render() {
   }, _vm._l(_vm.restaurants, function (restaurant, i) {
     return _c("router-link", {
       key: i,
-      staticClass: "my-card relative g-col-12 g-col-6-md p-2 rounded-3 t-right orange-H shadow decoration-none-H overflow-hidden",
+      staticClass: "my-card relative g-col-12 g-col-6-md p-2 rounded-3 t-right shadow decoration-none-H overflow-hidden hover_text_custom",
       "class": [restaurant.restaurant_image ? "white bg-brown" : "black"],
       attrs: {
         to: {
@@ -23639,8 +23640,8 @@ var render = function render() {
       }
     })]) : _vm._e(), _vm._v(" "), _c("div", {
       staticClass: "my-card-body flex f-column h-100"
-    }, [_c("h3", [_vm._v(_vm._s(restaurant.user.name))]), _vm._v(" "), _c("address", [_vm._v(_vm._s(restaurant.restaurant_address))]), _vm._v(" "), _c("div", {
-      staticClass: "mt-auto"
+    }, [_c("h3", [_c("em", [_vm._v(_vm._s(restaurant.user.name))])]), _vm._v(" "), _c("address", [_vm._v(_vm._s(restaurant.restaurant_address))]), _vm._v(" "), _c("div", {
+      staticClass: "mt-auto w-60 ml-auto"
     }, _vm._l(restaurant.typologies, function (typology, e) {
       return _c("p", {
         key: e,
@@ -23763,7 +23764,7 @@ var render = function render() {
         }
       }
     }), _vm._v(" "), _c("label", {
-      staticClass: "d-block pointer p-2 bold",
+      staticClass: "d-block pointer p-2 bold transition-bg-color duration-3 ease-in-out",
       "class": [_vm.mobile ? "px-3" : "", _vm.tema ? "bg-button-light bg-hover-button-light text-active-button-light" : "bg-button-dark bg-hover-button-dark text-active-button-dark"],
       attrs: {
         "for": "typology-" + i
@@ -49405,7 +49406,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg-card-light[data-v-4c9baf12] {\n  background-color: #c97980;\n}\n.bg-card-dark[data-v-4c9baf12] {\n  background-color: #4d3133;\n}", ""]);
+exports.push([module.i, ".bg-card-light[data-v-4c9baf12] {\n  background-color: #e9c797;\n}\n.bg-card-dark[data-v-4c9baf12] {\n  background-color: #4d3133;\n}", ""]);
 
 // exports
 
@@ -49424,7 +49425,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".imd-card-pay[data-v-61a7c374] {\n  height: 2rem;\n}\n.download[data-v-61a7c374] {\n  height: 2.5rem;\n}\n.aboutUs > span[data-v-61a7c374]:last-of-type {\n  color: #2285D4;\n  opacity: 0;\n  transition: opacity 0.6s ease-in-out;\n}\n.aboutUs:hover > span[data-v-61a7c374]:last-of-type {\n  opacity: 1;\n}\n.footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  padding-top: 0.6rem;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  display: block;\n  width: 0%;\n  height: 3px;\n  background-color: #2285D4;\n  transition: width 0.6s cubic-bezier(0.51, -0.01, 0.38, 1);\n  border-radius: 10px;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container a[data-v-61a7c374] {\n  color: inherit;\n  font-size: 1.5rem;\n  padding: 0.5rem;\n  flex-grow: 1;\n  flex-basis: 0;\n  display: flex;\n  justify-content: center;\n  transition: color 0.2s ease-in-out;\n}\n.icons_container a[data-v-61a7c374]:hover {\n  color: #2285D4;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #f0c3c6;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #46393a;\n  color: #e0e0e0;\n}\n.bg-footer-bottom-light[data-v-61a7c374] {\n  background-color: #ffe1e3;\n}\n.bg-footer-bottom-dark[data-v-61a7c374] {\n  background-color: #6d5b5d;\n}", ""]);
+exports.push([module.i, ".imd-card-pay[data-v-61a7c374] {\n  height: 2rem;\n}\n.download[data-v-61a7c374] {\n  height: 2.5rem;\n}\n.aboutUs > span[data-v-61a7c374]:last-of-type {\n  color: #2285D4;\n  opacity: 0;\n  transition: opacity 0.6s ease-in-out;\n}\n.aboutUs:hover > span[data-v-61a7c374]:last-of-type {\n  opacity: 1;\n}\n.footer_container[data-v-61a7c374] {\n  margin: 0 auto;\n}\nul[data-v-61a7c374] {\n  list-style: none;\n}\nul li[data-v-61a7c374] {\n  padding-top: 0.6rem;\n}\nul li a[data-v-61a7c374] {\n  color: inherit;\n  text-decoration: none;\n}\nli[data-v-61a7c374]::after {\n  content: \"\";\n  display: block;\n  width: 0%;\n  height: 3px;\n  background-color: #2285D4;\n  transition: width 0.6s cubic-bezier(0.51, -0.01, 0.38, 1);\n  border-radius: 10px;\n}\nli[data-v-61a7c374]:hover::after {\n  width: 100%;\n}\n.download img[data-v-61a7c374] {\n  max-height: 40px;\n}\n.icons_container[data-v-61a7c374] {\n  display: flex;\n  justify-content: center;\n}\n.icons_container a[data-v-61a7c374] {\n  color: inherit;\n  font-size: 1.5rem;\n  padding: 0.5rem;\n  flex-grow: 1;\n  flex-basis: 0;\n  display: flex;\n  justify-content: center;\n  transition: color 0.2s ease-in-out;\n}\n.icons_container a[data-v-61a7c374]:hover {\n  color: #2285D4;\n}\n.bg-footer-light[data-v-61a7c374] {\n  background-color: #e9d0a4;\n  color: #373737;\n}\n.bg-footer-dark[data-v-61a7c374] {\n  background-color: #46393a;\n  color: #e0e0e0;\n}\n.bg-footer-bottom-light[data-v-61a7c374] {\n  background-color: #fff7bc;\n}\n.bg-footer-bottom-dark[data-v-61a7c374] {\n  background-color: #6d5b5d;\n}", ""]);
 
 // exports
 
@@ -49462,7 +49463,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".hero[data-v-5502b361] {\n  height: 16rem;\n}\n.hero img[data-v-5502b361] {\n  height: 100%;\n  width: 50%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.img-mobile[data-v-5502b361] {\n  height: 6rem;\n}\n.bg-hero-plate-light[data-v-5502b361] {\n  background-color: #c97980;\n}\n.bg-hero-plate-dark[data-v-5502b361] {\n  background-color: #533235;\n}", ""]);
+exports.push([module.i, ".hero[data-v-5502b361] {\n  height: 16rem;\n}\n.hero img[data-v-5502b361] {\n  height: 100%;\n  width: 50%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.img-mobile[data-v-5502b361] {\n  height: 6rem;\n}\n.bg-hero-plate-light[data-v-5502b361] {\n  background-color: #fff7c3;\n}\n.bg-hero-plate-dark[data-v-5502b361] {\n  background-color: #533235;\n}", ""]);
 
 // exports
 
@@ -49500,7 +49501,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".header-height[data-v-5dd24bca] {\n  height: 50px;\n}\n.text-button-light[data-v-5dd24bca] {\n  color: #373737;\n}\n.text-button-dark[data-v-5dd24bca] {\n  color: #e0e0e0;\n}\n.text-hover-button-light[data-v-5dd24bca]:hover {\n  color: #ce1414;\n}\n.text-hover-button-dark[data-v-5dd24bca]:hover {\n  color: #4d0505;\n}\n.border-color-light[data-v-5dd24bca] {\n  border-color: #b6b6b6;\n}\n.border-color-dark[data-v-5dd24bca] {\n  border-color: #3b3b3b;\n}\n.bg-button-header-light[data-v-5dd24bca] {\n  background-color: #f3e3e4;\n}\n.bg-button-header-dark[data-v-5dd24bca] {\n  background-color: #554e4f;\n}\n.bg-bottom-version-mobile-light[data-v-5dd24bca] {\n  background-color: #fbd7da;\n}\n.bg-bottom-version-mobile-dark[data-v-5dd24bca] {\n  background-color: #413838;\n}\n.bg-hover-button-header-light[data-v-5dd24bca]:hover {\n  background-color: #fcced1 !important;\n}\n.bg-hover-button-header-dark[data-v-5dd24bca]:hover {\n  background-color: #7c494d !important;\n}\n.bg-active-button-header-light[data-v-5dd24bca]:active {\n  background-color: #dfb5b8 !important;\n}\n.bg-active-button-header-dark[data-v-5dd24bca]:active {\n  background-color: #694a4c !important;\n}\n.light[data-v-5dd24bca] {\n  background-color: #f0c3c6;\n  min-height: 50px;\n}\n.dark[data-v-5dd24bca] {\n  background-color: #4b3c3d;\n  min-height: 50px;\n}\nbutton[data-v-5dd24bca] {\n  display: block;\n  height: 100%;\n  padding: 0 1.5rem;\n}", ""]);
+exports.push([module.i, ".header-height[data-v-5dd24bca] {\n  height: 50px;\n}\n.text-button-light[data-v-5dd24bca] {\n  color: #373737;\n}\n.text-button-dark[data-v-5dd24bca] {\n  color: #e0e0e0;\n}\n.text-hover-button-light[data-v-5dd24bca]:hover {\n  color: #725013;\n}\n.text-hover-button-dark[data-v-5dd24bca]:hover {\n  color: #ffd6d6;\n}\n.border-color-light[data-v-5dd24bca] {\n  border-color: #b6b6b6;\n}\n.border-color-dark[data-v-5dd24bca] {\n  border-color: #3b3b3b;\n}\n.bg-button-header-light[data-v-5dd24bca] {\n  background-color: #f4d295;\n}\n.bg-button-header-dark[data-v-5dd24bca] {\n  background-color: #554e4f;\n}\n.bg-bottom-version-mobile-light[data-v-5dd24bca] {\n  background-color: #fbd7da;\n}\n.bg-bottom-version-mobile-dark[data-v-5dd24bca] {\n  background-color: #413838;\n}\n.bg-hover-button-header-light[data-v-5dd24bca]:hover {\n  background-color: #faebd0 !important;\n}\n.bg-hover-button-header-dark[data-v-5dd24bca]:hover {\n  background-color: #504344 !important;\n}\n.bg-active-button-header-light[data-v-5dd24bca]:active {\n  background-color: #ceb890 !important;\n}\n.bg-active-button-header-dark[data-v-5dd24bca]:active {\n  background-color: #694a4c !important;\n}\n.light[data-v-5dd24bca] {\n  background-color: #ffe7bc;\n  min-height: 50px;\n}\n.dark[data-v-5dd24bca] {\n  background-color: #4b3c3d;\n  min-height: 50px;\n}\nbutton[data-v-5dd24bca] {\n  display: block;\n  height: 100%;\n  padding: 0 1.5rem;\n}", ""]);
 
 // exports
 
@@ -49519,7 +49520,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".my-card[data-v-3f5d1f8e] {\n  height: 10rem;\n  border: 3px solid #8f5221;\n  padding: 0;\n}\n.my-card:hover img[data-v-3f5d1f8e] {\n  scale: 1.1;\n}\n.bg-brown[data-v-3f5d1f8e] {\n  background-color: #8f5221;\n}\n.my-card[data-v-3f5d1f8e]::before {\n  content: \"\";\n  display: block;\n  background: linear-gradient(to left, rgba(0, 0, 0, 0.7333333333), rgba(255, 255, 255, 0));\n  z-index: 1;\n}\n.my-card-img[data-v-3f5d1f8e], .my-card[data-v-3f5d1f8e]::before {\n  position: absolute;\n  inset: 0;\n}\n.my-card-img > img[data-v-3f5d1f8e] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  transition: all 1s ease-in-out;\n}\n.my-card-body[data-v-3f5d1f8e] {\n  position: relative;\n  z-index: 2;\n}", ""]);
+exports.push([module.i, ".hover_text_custom[data-v-3f5d1f8e]:hover {\n  color: #fbffa8;\n}\n.my-card[data-v-3f5d1f8e] {\n  height: 10rem;\n  border: 3px solid #8f5221;\n  padding: 0;\n}\n.my-card:hover img[data-v-3f5d1f8e] {\n  scale: 1.1;\n}\n.bg-brown[data-v-3f5d1f8e] {\n  background-color: #8f5221;\n}\n.my-card[data-v-3f5d1f8e]::before {\n  content: \"\";\n  display: block;\n  background: linear-gradient(to left, #000000, rgba(255, 255, 255, 0));\n  z-index: 1;\n}\n.my-card-img[data-v-3f5d1f8e], .my-card[data-v-3f5d1f8e]::before {\n  position: absolute;\n  inset: 0;\n}\n.my-card-img > img[data-v-3f5d1f8e] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  transition: all 1s ease-in-out;\n}\n.my-card-body[data-v-3f5d1f8e] {\n  position: relative;\n  z-index: 2;\n}", ""]);
 
 // exports
 
@@ -49557,7 +49558,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".tag-wrapper2[data-v-3e874e86] {\n  flex-basis: 20%;\n}\n.tag-wrapper2 .openTab[data-v-3e874e86] {\n  border: none;\n  border-radius: 5px 0 0 5px;\n}\n.tag-wrapper2 ul[data-v-3e874e86] {\n  background-color: gray;\n  gap: 2px;\n}\n.top-height-navbar[data-v-3e874e86] {\n  top: calc(50px + 1rem);\n}\n.bg-button-light[data-v-3e874e86] {\n  background-color: #f0c3c6;\n}\n.bg-button-dark[data-v-3e874e86] {\n  background-color: #46393a;\n}\n.bg-hover-button-light[data-v-3e874e86]:hover {\n  background-color: #ffecee;\n}\n.bg-hover-button-dark[data-v-3e874e86]:hover {\n  background-color: #685456;\n}\n.bg-active-button-light:checked + label[data-v-3e874e86] {\n  background-color: #e2848a;\n}\n.bg-active-button-dark:checked + label[data-v-3e874e86] {\n  background-color: #533133;\n}\n.text-active-button-light[data-v-3e874e86] {\n  color: #141313;\n}\n.text-active-button-dark[data-v-3e874e86] {\n  color: #f0dbdd;\n}", ""]);
+exports.push([module.i, ".button[data-v-3e874e86] {\n  background: none;\n  border: 2px solid;\n  font: inherit;\n  line-height: 1;\n  margin: 0.5em;\n  padding: 1em 2em;\n}\n.slide[data-v-3e874e86]:hover,\n.slide[data-v-3e874e86]:focus {\n  box-shadow: inset 6.5em 0 0 0 var(--hover);\n}\n.tag-wrapper2[data-v-3e874e86] {\n  flex-basis: 20%;\n}\n.tag-wrapper2 .openTab[data-v-3e874e86] {\n  border: none;\n  border-radius: 5px 0 0 5px;\n}\n.tag-wrapper2 ul[data-v-3e874e86] {\n  background-color: gray;\n  gap: 2px;\n}\n.top-height-navbar[data-v-3e874e86] {\n  top: calc(50px + 1rem);\n}\n.bg-button-light[data-v-3e874e86] {\n  background-color: #f4d295;\n}\n.bg-button-dark[data-v-3e874e86] {\n  background-color: #46393a;\n}\n.bg-hover-button-light[data-v-3e874e86]:hover {\n  background-color: #ffecee;\n}\n.bg-hover-button-dark[data-v-3e874e86]:hover {\n  background-color: #685456;\n}\n.bg-active-button-light:checked + label[data-v-3e874e86] {\n  background-color: #f3b546;\n}\n.bg-active-button-dark:checked + label[data-v-3e874e86] {\n  background-color: #533133;\n}\n.text-active-button-light[data-v-3e874e86] {\n  color: #141313;\n}\n.text-active-button-dark[data-v-3e874e86] {\n  color: #f0dbdd;\n}", ""]);
 
 // exports
 
@@ -49576,7 +49577,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg-card-light[data-v-7908d3ae] {\n  background-color: #c97980;\n}\n.bg-card-dark[data-v-7908d3ae] {\n  background-color: #4d3133;\n}\n.image_plate[data-v-7908d3ae] {\n  height: 8rem;\n  overflow: hidden;\n}\n.image_plate img[data-v-7908d3ae] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
+exports.push([module.i, ".bg-card-light[data-v-7908d3ae] {\n  background-color: #e9c797;\n}\n.bg-card-dark[data-v-7908d3ae] {\n  background-color: #4d3133;\n}\n.image_plate[data-v-7908d3ae] {\n  height: 8rem;\n  overflow: hidden;\n}\n.image_plate img[data-v-7908d3ae] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
 
 // exports
 
@@ -49595,7 +49596,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".bg-card-light[data-v-11368466] {\n  background-color: #c97980;\n}\n.bg-card-dark[data-v-11368466] {\n  background-color: #4d3133;\n}\n.image_plate[data-v-11368466] {\n  height: 10rem;\n  overflow: hidden;\n}\n.image_plate img[data-v-11368466] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.ingredients[data-v-11368466] {\n  height: 6rem;\n  overflow-y: auto;\n}", ""]);
+exports.push([module.i, ".bg-card-light[data-v-11368466] {\n  background-color: #e9c797;\n}\n.bg-card-dark[data-v-11368466] {\n  background-color: #4d3133;\n}\n.image_plate[data-v-11368466] {\n  height: 10rem;\n  overflow: hidden;\n}\n.image_plate img[data-v-11368466] {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.ingredients[data-v-11368466] {\n  height: 6rem;\n  overflow-y: auto;\n}", ""]);
 
 // exports
 
@@ -49630,10 +49631,10 @@ exports.push([module.i, ".tag-distance[data-v-ccd76a46] {\n  gap: 2rem;\n}\n.car
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Montserrat&display=swap);", ""]);
 
 // module
-exports.push([module.i, ".grow-0 {\n  flex-grow: 0;\n}\n.grow-1 {\n  flex-grow: 1;\n}\n.grow-2 {\n  flex-grow: 2;\n}\n.bg-body-light {\n  background-color: #fbd7da;\n}\n.bg-body-dark {\n  background-color: #4e4344;\n}\n.padding-height-navbar {\n  padding-top: 50px;\n}", ""]);
+exports.push([module.i, "* {\n  font-family: \"Montserrat\", sans-serif !important;\n}\n.grow-0 {\n  flex-grow: 0;\n}\n.grow-1 {\n  flex-grow: 1;\n}\n.grow-2 {\n  flex-grow: 2;\n}\n.bg-body-light {\n  background-color: #fff8dc;\n}\n.bg-body-dark {\n  background-color: #4e4344;\n}\n.padding-height-navbar {\n  padding-top: 50px;\n}", ""]);
 
 // exports
 
@@ -68266,7 +68267,7 @@ module.exports = "/images/dark_hero.jpg?944b782a63c9159659905df4524d4e65";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\DeliveBoo\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

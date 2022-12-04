@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <main>
+    <div class="flex f-column min-h-100vh">
+        <main class="grow-1">
             <HeroPlate v-if="user" :user="user" />
 
-            <div class="container flex between pt-3" :class="[mobile ? 'px-2' : '']">
+            <div class="container flex between py-3" :class="[mobile ? 'px-2' : '']">
                 <ButtonsLeft />
 
                 <div>
@@ -22,7 +22,7 @@
 
             <ul v-if="plates" class="container list-style-none grid-12 grid-10-xl gap-5"
                 :class="[mobile ? 'px-2' : '']">
-                <li class="card flex f-column g-col-6 g-col-4-sm g-col-3-lg g-col-2-xl p-2"
+                <li class="card flex f-column g-col-6 g-col-6-sm g-col-4-lg g-col-2-xl p-2"
                     :class="[tema ? 'bg-card-light text-dark' : 'bg-card-dark text-light']" v-for="(plate, i) in plates"
                     :key="i">
 
@@ -67,7 +67,26 @@
                 </li>
             </ul>
             <LoaderC v-else />
+
+            <div v-if="(mobile && plates)" class="container flex between pt-3" :class="[mobile ? 'px-2' : '']">
+                <ButtonsLeft />
+
+                <div>
+                    <button class="btn btn-danger px-3 py-1" v-if="total" @click="pulisciStorage()">
+                        svuota cesto
+                    </button>
+
+                    <router-link class="btn btn-success px-3 py-1" :to="{ name: 'Cart' }">
+                        <font-awesome-icon icon="fa-solid fa-basket-shopping" />
+                        <span v-if="total">
+                            {{ parseFloat(total).toFixed(2) }}€
+                        </span>
+                    </router-link>
+                </div>
+            </div>
         </main>
+
+        <FooterVue />
     </div>
 </template>
 
@@ -79,11 +98,12 @@ import ButtonsLeft from "../components/ButtonsLeft.vue";
 import HeroPlate from "../components/HeroPlate.vue";
 import store from "../store/store";
 import App from "../views/App.vue";
+import FooterVue from "../components/Footer.vue";
 
 export default {
     name: "PlatesIndex",
 
-    components: { LoaderC, ButtonsLeft, HeroPlate },
+    components: { LoaderC, ButtonsLeft, HeroPlate, FooterVue },
 
     data () {
         return {

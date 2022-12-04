@@ -4,7 +4,6 @@
         <div class="grow-1 padding-height-navbar">
             <router-view />
         </div>
-        <FooterVue />
     </div>
 </template>
 
@@ -13,21 +12,16 @@
 // @ts-nocheck
 import store from '../store/store';
 import NavBar from '../components/NavBar.vue';
-import FooterVue from '../components/Footer.vue';
 
 export default {
     name: 'AppVue',
 
-    components: { NavBar, FooterVue },
+    components: { NavBar },
 
     computed: {
-        tema () {
-            return store.coloreTema;
-        },
+        tema () { return store.coloreTema; },
 
-        mobile () {
-            return store.mobile;
-        }
+        mobile () { return store.mobile; },
     },
 
     methods: {

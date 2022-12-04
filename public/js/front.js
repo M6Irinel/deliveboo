@@ -23093,6 +23093,7 @@ var render = function render() {
       "class": ["flex mt-auto", _vm.quantity(plate.plate_name) ? "between" : "j-flex-end"]
     }, [_vm.quantity(plate.plate_name) ? _c("button", {
       staticClass: "btn border px-3 bold",
+      "class": [_vm.tema ? "text-dark border-dark" : "text-light border-light"],
       on: {
         click: function click($event) {
           return _vm.removePlate(plate);
@@ -23102,6 +23103,7 @@ var render = function render() {
       staticClass: "fs-4"
     }, [_vm._v("\n                            ×" + _vm._s(_vm.quantity(plate.plate_name)) + "\n                        ")]), _vm._v(" "), _c("button", {
       staticClass: "btn border px-3 bold",
+      "class": [_vm.tema ? "text-dark border-dark" : "text-light border-light"],
       on: {
         click: function click($event) {
           return _vm.addPlate(plate);
@@ -23359,7 +23361,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "relative",
+    staticClass: "relative mb-5",
     "class": [_vm.tema ? "text-dark" : "text-light"]
   }, [_c("div", {
     staticClass: "hero__main mb-4"
@@ -23808,7 +23810,7 @@ var render = function render() {
         return _vm.pulisciStorage();
       }
     }
-  }, [_vm._v("\n                    svuota cesto\n                ")]) : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    svuota carrello\n                ")]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "btn-warning px-3 py-1 fs-3 rounded bold"
   }, [_c("font-awesome-icon", {
     attrs: {
@@ -23816,7 +23818,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.total ? _c("span", [_vm._v("\n                        Totale Ordine:\n                        " + _vm._s(parseFloat(_vm.total).toFixed(2)) + "€\n                    ")]) : _vm._e()], 1)])], 1), _vm._v(" "), _c("h1", {
     staticClass: "uppercase letter-spacing-3 none block-md"
-  }, [_c("strong", [_vm._v("Cesto "), !_vm.total ? _c("span", [_vm._v("vuoto")]) : _vm._e()])]), _vm._v(" "), !_vm.loadingCart ? _c("div", [_vm.plates && !_vm.orderSuccess ? _c("ul", {
+  }, [_c("strong", [_vm._v("Carrello "), !_vm.total ? _c("span", [_vm._v("vuoto")]) : _vm._e()])]), _vm._v(" "), !_vm.loadingCart ? _c("div", [_vm.plates && !_vm.orderSuccess ? _c("ul", {
     staticClass: "list-style-none grid-12 grid-10-lg grid-12-xl gap-5"
   }, _vm._l(_vm.plates, function (plate, i) {
     return _c("li", {

@@ -1,5 +1,5 @@
 <template>
-    <div class="relative" :class="[tema ? 'text-dark' : 'text-light']">
+    <div class="relative mb-5" :class="[tema ? 'text-dark' : 'text-light']">
         <div class="hero__main mb-4">
             <img v-if="tema" src="../../../storage/app/public/hero_main/MainHero.webp" alt="">
             <img v-else src="../../../storage/app/public/hero_main/dark_hero.jpg" alt="">

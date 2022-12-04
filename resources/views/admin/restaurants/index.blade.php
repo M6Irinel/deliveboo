@@ -23,7 +23,7 @@
                     <li>
                         @if ($restaurant->restaurant_image)
                             <div class="my-3 w-100 w-50-xs">
-                                <img class="img-fluid" src="{{ asset('storage/' . $restaurant->restaurant_image) }}"
+                                <img class="img-fluid" style="max-width: 300px" src="{{ asset('storage/' . $restaurant->restaurant_image) }}"
                                     alt="IMMAGINE DEL RISTORANTE">
                             </div>
                         @else

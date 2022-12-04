@@ -23535,7 +23535,7 @@ var render = function render() {
       href: "/",
       title: "home"
     }
-  }, [_vm._v("deliveboo")]), _vm._v(" "), _c("div", [_vm.mobile ? _c("button", {
+  }, [_vm._v("Deliveboo")]), _vm._v(" "), _c("div", [_vm.mobile ? _c("button", {
     staticClass: "bg-transparent border-none",
     "class": [_vm.tema ? "bg-active-button-header-light bg-hover-button-header-light text-button-light text-hover-button-light" : "bg-active-button-header-dark bg-hover-button-header-dark text-button-dark text-hover-button-dark"],
     on: {
@@ -68266,7 +68266,7 @@ module.exports = "/images/dark_hero.jpg?944b782a63c9159659905df4524d4e65";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\momol\Desktop\team_5\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\BooleanClasse70\progetto finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

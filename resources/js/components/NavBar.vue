@@ -6,7 +6,7 @@
                 :class="[mobile ? tema ? 'light shadow-1-light' : 'dark shadow-1-dark' : tema ? 'light' : 'dark']">
                 <a class="grow-1 header-height flex center i-center decoration-none-H bold"
                     :class="[mobile ? 'pl-15' : '', tema ? 'bg-active-button-header-light bg-hover-button-header-light text-button-light text-hover-button-light' : 'bg-active-button-header-dark bg-hover-button-header-dark text-button-dark text-hover-button-dark']"
-                    href="/" title="home">deliveboo</a>
+                    href="/" title="home">Deliveboo</a>
 
                 <div>
                     <button v-if="mobile" @click="openClosedNavbar()" class="bg-transparent border-none"

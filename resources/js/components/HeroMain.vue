@@ -16,7 +16,7 @@
             </p>
             <address class="fs-4 my-2 w-100 p-1 f-column f-row-xl rounded flex gap-10 between i-center-xl border-2"
                 :class="[tema ? 'border-gray-9' : 'border-gray-1']">
-                <h2 class="fs-4 p-2">Sant' Antioco</h2>
+                <div class="h2tomtom grow-1"></div>
                 <div class="py-2 px-4 rounded fs-4"
                     :class="[tema ? 'bg-hero-button-restaurants-light' : 'bg-hero-button-restaurants-dark']">
                     <h1 class="fs-4 inline-block">Deliveboo</h1>
@@ -33,14 +33,61 @@
 
 
 <script>
+// @ts-nocheck
+import { services } from '@tomtom-international/web-sdk-services';
+import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 import store from '../store/store';
 export default {
     name: 'HeroMain',
 
+    data() {
+        return {
+            keyTomTom: '',
+        }
+    },
+
     computed: {
         tema () { return store.coloreTema; },
 
-        mobile () { return store.mobile; }
+        mobile () { return store.mobile; },
+
+        optionsTomTom () {
+            return {
+                searchOptions: {
+                    key: this.keyTomTom,
+                    language: 'it-IT',
+                    limit: 5,
+                },
+                autocompleteOptions: {
+                    key: this.keyTomTom,
+                    language: 'it-IT',
+                },
+            }
+        }
+    },
+
+    methods: {
+        fetchKey_TomTom () {
+            axios.get( '/api/keytomtom' ).then( r => {
+                this.keyTomTom = r.data.keyTomTom;
+                console.log( r );
+                this.tomtom();
+            } );
+        },
+
+        tomtom () {
+            const h2tomtom = document.querySelector( 'div.h2tomtom' );
+
+            var ttSearchBox = new SearchBox( services, this.optionsTomTom );
+            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+            h2tomtom.append(searchBoxHTML);
+            console.log(h2tomtom);
+            console.log(searchBoxHTML);
+        }
+    },
+
+    mounted() {
+        this.fetchKey_TomTom();
     }
 }
 </script>

@@ -54,7 +54,6 @@ export default {
 
     data () {
         return {
-            forLogin,
             types: [],
             visibilityCart: false
         };

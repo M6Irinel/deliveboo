@@ -29,3 +29,5 @@ Route::resource('typologies', 'Api\TypologiesController')->only('index', 'show')
 
 Route::get('generate', 'Api\BraintreeController@generate');
 Route::post('make/payment', 'Api\BraintreeController@makePayment');
+
+Route::get('/keytomtom', 'Api\KeyTomTom@keyTomTom');

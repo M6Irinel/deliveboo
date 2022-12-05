@@ -131,7 +131,6 @@ export default {
 
     data () {
         return {
-            forLogin,
             total: localStorage.getItem( 'spesaTotale' ),
             tokenApi: null,
             datiUtente: {

@@ -10,6 +10,7 @@ import AppVue from "./views/App.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 // import { faHatWizard } from '@fortawesome/free-solid-svg-icons';
+
 import {
     faBasketShopping,
     faBars,

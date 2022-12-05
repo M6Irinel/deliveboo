@@ -107,7 +107,6 @@ export default {
 
     data () {
         return {
-            forLogin,
             plates: null,
             user: null,
             total: localStorage.getItem( 'spesaTotale' ),

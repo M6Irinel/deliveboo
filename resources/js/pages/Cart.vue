@@ -296,7 +296,7 @@ export default {
             }
             else alert( 'hai il pc vecchio, vai a piedi' );
 
-            if ( localStorage.length <= 2 ) this.pulisciStorage();
+            if ( localStorage.length <= 3 ) this.pulisciStorage();
         },
 
         totalprice () {
